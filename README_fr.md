@@ -1,0 +1,134 @@
+[English](README.md) | [العربية](README_ar.md) | [Deutsch](README_de.md) | **Français** | [Italiano](README_it.md) | [Русский](README_ru.md) | [Español](README_es.md) | [Português](README_pt.md) | [Türkçe](README_tr.md) | [Polski](README_pl.md) | [Nederlands](README_nl.md) | [Ελληνικά](README_el.md) | [Bahasa Indonesia](README_id.md) | [Tiếng Việt](README_vi.md) | [ไทย](README_th.md) | [中文](README_zh.md) | [日本語](README_ja.md) | [한국어](README_ko.md) | [हिन्दी](README_hi.md) | [اردو](README_ur.md) | [فارسی](README_fa.md)
+
+<div align="center">
+
+# 📺 Salsa TV Launcher v2.1
+
+![Écran d'accueil](docs/screenshots/home.png)
+
+**Un lanceur et centre multimédia moderne, ultra-rapide, léger, hautement personnalisable et 100% sans publicité pour Android TV développé avec Jetpack Compose.**  
+*La solution tout-en-un qui remplace des dizaines d'applications séparées sur votre téléviseur.*
+
+[![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
+[![Version](https://img.shields.io/badge/Version-2.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
+[![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4.svg?style=for-the-badge&logo=jetpackcompose)](https://developer.android.com/jetpack/compose)
+
+---
+
+</div>
+
+## 🚀 La solution tout-en-un
+
+La plupart des lanceurs Android TV actuels sont saturés de publicités imposées, de bandes-annonces lourdes, de suggestions indésirables et d'interfaces lentes.
+
+**Salsa TV Launcher** a été conçu pour offrir l'expérience inverse : un hub multimédia épuré, fluide, léger et totalement exempt de publicités ou de télémétrie.
+
+### ✨ 7 modules intégrés fondamentaux
+1. **🚀 Lanceur ultra-rapide et léger** : Démarrage instantané, décodage parallèle des icônes sur processeurs multi-cœurs et navigation 60 FPS sans ralentissement.
+2. **📺 Lecteur IPTV avec favoris en accueil** : Prise en charge des listes M3U et lecture en 1 clic de vos chaînes préférées depuis l'écran principal.
+3. **🎥 MiniTube** : Passerelle YouTube Leanback optimisée pour TV avec lecture fluide en mode invité.
+4. **📥 Mini Downloader** : Gestionnaire de téléchargement rapide de fichiers et d'APK avec installateur automatique intelligent.
+5. **🛒 Salsa Store** : Magasin web intégré pour découvrir et installer facilement des utilitaires Android TV.
+6. **🕹️ 4 portails de jeux en ligne** : Des milliers de jeux HTML5 instantanés sans téléchargement (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**).
+7. **🛡️ Bloqueur de publicités à l'échelle du système** : Moteur AdGuard DNS intégré bloquant les fenêtres publicitaires et traceurs sur tout le téléviseur.
+
+---
+
+## 🌟 Nouvelles fonctionnalités et améliorations récentes
+
+### 🆕 Nouveautés de la version 2.1
+* **🌐 Centre d'informations à 4 tableaux de bord en direct** : Accès rapide depuis la barre supérieure à quatre écrans animés en plein écran :
+  * **☀️ Tableau Météo** : Détection automatique de la ville, courbe 24h, humidité/vent/pression/UV, prévisions 5 jours et animations ambiantes fluides.
+  * **📰 Centre d'Actualités** : Titres RSS multilingues en direct (À la Une, Politique, Économie, Technologie, Monde) avec défilement automatique toutes les 10 secondes.
+  * **📈 Économie & Marchés** : Indices boursiers mondiaux, taux Forex, matières premières & crypto, courbes 5 jours, calendrier économique et personnalisation complète.
+  * **⚽ Centre Football (365Scores)** : Scores en direct, matchs du jour, classements, buteurs, catalogue élargi de clubs/ligues et probabilités de victoire.
+* **🖥️ Nouveaux économiseurs d'écran interactifs & rotation automatique** : Affichez **Météo**, **Actualités**, **Économie**, **Football** ou **Rotation auto** (**Actualités 30s → Météo 10s → Économie 10s → Football 10s → boucle continue**) avec fondu fluide.
+* **🎨 Réglages UI en direct & barre supérieure adaptative** : Panneau de personnalisation instantanée (recherche de fonds 4K, confort nocturne, mode léger) et barre supérieure sans icônes coupées.
+* **⚡ Moteur v2.1 plus léger et plus rapide** : APK plus compact, code nettoyé, fluidité 60 FPS sans réduire la qualité 4K, portails web par défaut épurés (**YouTube TV** & **4 portails de jeux**) et traduction complète en **21 langues**.
+
+### ⚡ Performances extrêmes et réactivité immédiate
+* **Préchargement parallèle des icônes et bannières** : Toutes les applications et leurs bannières sont décodées simultanément en arrière-plan dès le lancement, s'affichant immédiatement à l'écran.
+* **Navigation D-Pad ultra-rapide (110 ms)** : Accélération matérielle complète via `graphicsLayer` avec des transitions instantanées à 110 ms pour éliminer toute latence de la télécommande.
+* **Effet de halo ambiant optimisé GPU** : Remplacement des flous logiciels lourds par des dégradés radiaux matériels fluides, garantissant 60 FPS stables sur tous les boîtiers TV.
+* **Écran d'accueil épuré (Bouton Edit supprimé)** : La barre inférieure encombrante a été retirée pour laisser place aux applications, avec réorganisation rapide par appui long sur `OK` ou la touche `Menu`.
+
+### 🌙 Écran de veille intelligent et relais du système
+* **Passerelle intelligente vers l'écran de veille externe (`Désactivé`)** : La désactivation de la veille interne libère automatiquement le verrouillage d'écran (`FLAG_KEEP_SCREEN_ON`), permettant au veille système ou externe de fonctionner normalement.
+* **Écran de veille immersif intégré (`Activé`)** : En sélectionnant un délai d'inactivité (2, 5, 10, 15 ou 30 min), le lanceur maintient l'écran allumé et propose trois styles :
+  * **Horloge et date** : Heure lumineuse avec protection anti-brûlure de dalle.
+  * **Fond 4K avec infos en coin** : Dégradé à 45° mettant en valeur l'heure, la date et le message d'accueil.
+  * **Vidéo cinématique plein écran & flux personnalisés** : Ambiance feu de cheminée, chalet d'hiver ou cascades en boucle sans boutons ni bannières, avec possibilité d'**ajouter vos propres vidéos YouTube**, de restaurer les présélections et de lancer un **aperçu immédiat** depuis les Paramètres.
+  * **Diaporama photo (`Slideshow`)** : Affichez les photos d'un dossier local/USB, des photos sélectionnées ou des galeries 4K avec durée réglable (`5s` à `5m`), mouvement **Ken Burns / Zoom doux / Statique**, 6 transitions d'entrée, effets atmosphériques (**Neige ❄️**, **Lucioles ✨**, **Pluie 🌧️**, **Feuilles d'automne 🍂**, **Sakura 🌸**, **Étoiles ⭐**, **Bokeh 🔮**), horloge en coin et musique d'ambiance ou MP3 personnalisé.
+
+### 🕒 Personnalisation complète de l'horloge, date et salutation
+* **Typographie multilingue (21 langues)** : Traduction intégrale en **Français**, **Arabe (Police Cairo)**, **Anglais**, **Allemand**, **Espagnol**, **Italien**, **Russe**, **Portugais**, **Turc**, **Polonais**, **Néerlandais**, **Grec**, **Indonésien**, **Vietnamien**, **Thaï**, **Chinois**, **Japonais**, **Coréen**, **Hindi**, **Ourdou** et **Persan**.
+* **Options d'horloge** : Format 12h / 24h, affichage optionnel des secondes et 3 tailles réglables (Compact, Moyen, Grand).
+* **Formats de date américains et internationaux** : US numérique (`MM/dd/yyyy`), US long (`MMMM d, yyyy`), US complet (`EEEE, MMMM d, yyyy`), US compact (`EEE, MMM d`), International (`dd/MM/yyyy`), ISO (`yyyy-MM-dd`), Européen (`dd.MM.yyyy`), Complet ou Masqué.
+* **Salutations horaires** : Messages d'accueil poétiques, chaleureux, brefs, personnalisés ou masqués.
+
+### 🎛️ Personnalisation de l'affichage d'accueil
+* **Icône de la barre supérieure (Centre de contrôle / Paramètres directs / Les deux)** : Choisissez d'afficher le Centre de contrôle rapide, d'aller directement aux Paramètres en ignorant le Centre de contrôle, ou d'afficher les deux icônes ensemble sur l'écran d'accueil.
+* **Curseur par défaut sur les paramètres** : Dès le lancement, la télécommande se positionne sur l'icône Paramètres pour une configuration rapide.
+* **Décalage vertical des applications vers le bas** : Possibilité d'abaisser les rangées d'applications (6 niveaux nommés, `450` par défaut) pour admirer les fonds d'écran 4K.
+* **Densité de la grille** : Choix entre 4, 5, 6 ou 7 applications par rangée.
+* **Opacité de l'effet verre & couleurs dynamiques Material You** : Ajustement de la transparence des tuiles de 10% à 100% et activation optionnelle des **couleurs dynamiques Material You**.
+* **Affichage des applications mobiles (Sideloaded APKs)** : Basculez entre l'affichage des applications TV uniquement ou de **toutes les applications Android installées** (y compris les APK mobiles), avec restauration des applications masquées ou réinitialisation de l'ordre en 1 clic.
+
+### 🎙️ Recherche Vocale Universelle, Assistant Vocal Système & IPTV Interactif
+* **Recherche Vocale et Instantanée (`🎤`)** : Recherchez simultanément parmi vos applications TV, vos chaînes IPTV en direct et sur le Web/YouTube via le microphone de la télécommande.
+* **Assistant vocal numérique par défaut du système** : Services système intégrés (`SalsaVoiceInteractionService` et `SalsaRecognitionService`) permettant de définir **Salsa TV** comme assistant vocal par défaut du téléviseur pour utiliser le bouton micro de la télécommande nativement.
+* **Centre de Contrôle Rapide (`Control Center`)** : Panneau d'accès rapide pour basculer l'horloge 12h/24h, le fond dynamique, lancer l'écran de veille immédiatement, ouvrir la recherche vocale ou accéder au Wi-Fi et aux Paramètres.
+* **Gestionnaire multi-listes IPTV & Barre d'Infos Interactive** : Ajoutez, permutez, actualisez ou supprimez **plusieurs listes M3U** et URL EPG XMLTV. En regardant une chaîne IPTV, toucher l'écran ou appuyer sur `OK` affiche la barre d'informations avec un **carrousel horizontal de chaînes (`◀ / ▶`)**, guide EPG, minuterie de veille, format d'image, verrouillage PIN par catégorie et reprise automatique de la dernière chaîne.
+* **Démarrage Épuré en Bas d'Écran & Horloge Intelligente (240dp)** : Démarre avec les applications et chaînes en bas (6 niveaux nommés, `450` par défaut), sans curseur visible au lancement, et l'horloge se réduit dès que les icônes atteignent `240dp` du haut.
+* **Favoris Web intelligents (Icônes HD & mode YouTube TV)** : Extraction automatique des icônes haute résolution des sites ajoutés, et ouverture des favoris YouTube directement dans l'interface **YouTube TV Leanback** adaptée à la télécommande.
+* **Barre d'applications récentes & mise à jour OTA GitHub** : Rangée optionnelle des applications récentes et vérification/installation des mises à jour OTA depuis GitHub en 1 clic.
+
+### 🔒 Sécurité, Gestionnaire de Stockage, DNS Familial et Organisation
+* **Gestionnaire de stockage et d'applications intégré** : Consultez toutes les applications installées triées par taille (`Mo`), ouvrez les informations système ou **désinstallez des applications directement** pour libérer de l'espace.
+* **Grille de 8 raccourcis système rapides** : Accès direct au **Wi-Fi**, **Ethernet**, **Affichage**, **Son**, **Date et heure**, **Paramètres système**, **Infos de l'application** et **Gestionnaire de stockage**.
+* **Bouclier DNS double mode (AdBlock & Protection Familiale)** : Choisissez entre le **blocage des publicités et traqueurs** ou le **mode Protection Familiale** (bloque également les sites pour adultes sur tout le système).
+* **Verrouillage par code PIN** : Sécurisation des applications privées et catégories IPTV avec un code à 4 chiffres.
+* **Gestion des applications** : Déplacement, classement (Applications vs Jeux) ou masquage des applications système.
+* **Sécurité du bouton Retour** : Empêche la fermeture accidentelle du lanceur vers le bureau Android.
+
+---
+
+## 📥 Téléchargement et installation
+
+### Option 1 : Téléchargement direct APK
+Téléchargez directement le fichier APK prêt à l'emploi :
+
+👉 **[Télécharger le dernier APK d'Salsa TV Launcher](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)**  
+👉 **[Code court Downloader : aftv.news/7099231](https://aftv.news/7099231)**
+
+### Option 2 : Installation via ADB
+```bash
+adb connect <IP_DE_VOTRE_TV>:5555
+adb install -r salsa-tv-launcher.apk
+```
+
+---
+
+## 🎮 Raccourcis télécommande
+
+| Touche | Action |
+| :--- | :--- |
+| **Flèches directionnelles** | Navigation rapide et fluide entre applications et chaînes. |
+| **Bouton OK / Centre** | Lance l'application ou la chaîne sélectionnée. |
+| **Appui long OK / Menu (`☰` Trois lignes)** | Ouvre les options d'application/chaîne (Réorganiser, Verrouiller par PIN, Masquer) ou saute directement aux applications depuis la barre supérieure. |
+| **Bouton Voix / Google Assistant (`🎤`)** | Ouvre la recherche vocale intégrée pour trouver des applications ou des chaînes IPTV. |
+| **Bouton Retour** | Retourne à l'écran précédent ou à l'accueil en toute sécurité. |
+
+---
+
+## 📄 Licence et droits d'auteur
+
+Conçu et développé par **© Osama Salsa**.  
+Tous droits réservés.
+
+<div align="center">
+  <sub>Fait avec ❤️ pour une expérience Android TV rapide, épurée et sans publicité dans le monde entier.</sub>
+</div>

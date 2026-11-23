@@ -1,0 +1,678 @@
+<resources>
+    <string name="app_name">Salsa TV</string>
+    <string name="title_favorite_channels">پسندیدہ چینلز</string>
+    <string name="title_apps">ایپس</string>
+    <string name="title_web">ویب</string>
+    <string name="title_games">گیمز</string>
+
+    <string name="iptv_title">لائیو IPTV</string>
+    <string name="iptv_subtitle">عالمی لائیو ٹی وی چینلز دیکھیں</string>
+
+    <string name="settings_title">ترتیبات</string>
+
+    <!-- Top Bar -->
+    <string name="network_connected_wifi">وائی فائی متصل ہے</string>
+    <string name="network_connected_ethernet">ایتھرنیٹ متصل ہے</string>
+    <string name="network_disconnected">انٹرنیٹ منقطع ہے</string>
+
+    <!-- App actions -->
+    <string name="action_open">کھولیں</string>
+    <string name="action_move">منتقل کریں</string>
+    <string name="action_move_to_games">گیمز میں منتقل کریں</string>
+    <string name="action_move_to_web">ویب میں منتقل کریں</string>
+    <string name="action_move_to_apps">ایپس میں منتقل کریں</string>
+    <string name="action_hide">چھپائیں</string>
+    <string name="action_info">ایپ کی معلومات / غیر فعال کریں</string>
+    <string name="action_uninstall">ان انسٹال کریں</string>
+    <string name="action_cancel">منسوخ کریں</string>
+    <string name="action_save">محفوظ کریں</string>
+    <string name="action_reset">ری سیٹ کریں</string>
+
+    <string name="action_delete">حذف کریں</string>
+    <string name="action_play">چلائیں</string>
+    <string name="action_retry">دوبارہ کوشش کریں</string>
+    <string name="action_unhide">ظاہر کریں</string>
+    <string name="reorder_mode_hint">ترتیب موڈ: منتقل کرنے کے لیے تیر کے بٹن دبائیں • اختیارات کے لیے OK دبائیں</string>
+    <string name="action_confirm_move">جگہ کی تصدیق کریں</string>
+
+    <!-- IPTV -->
+    <string name="iptv_favorites">پسندیدہ</string>
+    <string name="iptv_all_categories">تمام زمرے</string>
+    <string name="iptv_search_hint">چینلز تلاش کریں…</string>
+    <string name="iptv_empty">اس گروپ میں کوئی چینل نہیں ملا</string>
+    <string name="iptv_loading">پلے لسٹ چینلز لوڈ ہو رہے ہیں…</string>
+    <string name="iptv_error_playback">نشریات چلانے میں خرابی۔ دوبارہ کوشش کریں یا دوسرا چینل منتخب کریں۔</string>
+
+    <string name="iptv_quick_channels">فوری چینلز</string>
+
+    <string name="iptv_toggle_favorite">پسندیدہ</string>
+    <string name="iptv_added_to_favorites">پسندیدہ میں شامل کر دیا گیا ★</string>
+    <string name="iptv_removed_from_favorites">پسندیدہ سے ہٹا دیا گیا</string>
+
+    <string name="iptv_no_playlist">ابھی کوئی IPTV پلے لسٹ شامل نہیں کی گئی۔ ترتیبات میں M3U لنک درج کریں۔</string>
+    <string name="settings_open_iptv_settings">IPTV ترتیبات کھولیں</string>
+
+
+    <!-- YouTube -->
+
+
+    <!-- Settings -->
+    <string name="settings_category_network">نیٹ ورک اور انٹرنیٹ</string>
+    <string name="settings_open_wifi">وائی فائی ترتیبات</string>
+    <string name="settings_open_ethernet">نیٹ ورک ترتیبات</string>
+    <string name="settings_category_system">سسٹم اور ٹی وی شارٹ کٹس</string>
+    <string name="settings_open_display">ڈسپلے اور اسکرین</string>
+    <string name="settings_open_sound">آواز اور آڈیو</string>
+    <string name="settings_open_datetime">تاریخ اور وقت</string>
+
+    <string name="settings_open_all_settings">تمام Android TV ترتیبات</string>
+
+    <string name="settings_category_launcher">لانچر کی تخصیص</string>
+    <string name="settings_wallpaper_style">وال پیپر اور پس منظر کا انداز</string>
+    <string name="settings_wallpaper_style_desc">متحرک رنگوں، اپنی مرضی کی تصویر، یا ڈارک تھیم کے درمیان انتخاب کریں</string>
+    <string name="settings_wallpaper_dynamic">متحرک پیلیٹ رنگ</string>
+    <string name="settings_wallpaper_custom">اپنی تصویر / فوٹو</string>
+    <string name="settings_wallpaper_default">ڈیفالٹ ڈارک تھیم</string>
+
+    <string name="settings_wallpaper_presets">4K تیار شدہ وال پیپرز</string>
+    <string name="settings_wallpaper_pick_device">ڈیوائس سے تصویر منتخب کریں</string>
+    <string name="settings_wallpaper_visibility">پس منظر کی نمائش</string>
+    <string name="settings_wallpaper_visibility_desc" formatted="false">آنکھوں کے آرام کے لیے متحرک اور تصویری پس منظر کی روشنی ایڈجسٹ کریں (100% بغیر مدھم، 50% نصف مدھم)</string>
+    <string name="settings_wallpaper_visibility_100">100% (بغیر مدھم)</string>
+    <string name="settings_wallpaper_visibility_50">50% (نصف مدھم)</string>
+
+    <string name="settings_apps_per_row">فی قطار ایپس کی تعداد</string>
+    <string name="settings_apps_per_row_desc">ہوم اسکرین پر ہر قطار میں نظر آنے والے ایپ کارڈز کی تعداد</string>
+    <string name="settings_glass_opacity">کارڈز کے شیشے کی شفافیت</string>
+    <string name="settings_glass_opacity_desc">چینل اور ایپ کارڈز کی شفافیت کی سطح مقرر کریں (ڈیفالٹ: 75%)</string>
+
+    <string name="settings_show_only_tv_apps">ظاہر ہونے والی ایپس کا فلٹر</string>
+    <string name="settings_show_only_tv_apps_desc">تمام انسٹال کردہ ایپس دکھائیں یا صرف ٹی وی کے لیے مخصوص ایپس</string>
+    <string name="settings_app_filter_all">تمام انسٹال کردہ ایپس</string>
+    <string name="settings_app_filter_tv_only">صرف ٹی وی ایپس</string>
+    <string name="settings_reset_order">ایپس کی ترتیب ری سیٹ کریں</string>
+    <string name="settings_reset_order_desc">حروف تہجی کے مطابق ڈیفالٹ ترتیب بحال کریں</string>
+    <string name="settings_hidden_apps">چھپائی گئی ایپس کا انتظام</string>
+    <string name="settings_no_hidden_apps">اس وقت کوئی چھپائی گئی ایپ نہیں ہے</string>
+
+    <string name="settings_set_default_launcher">ڈیفالٹ ٹی وی لانچر کے طور پر سیٹ کریں</string>
+    <string name="settings_set_default_launcher_desc">ریموٹ پر HOME بٹن دبانے پر Salsa TV کو اپنا ڈیفالٹ لانچر بنائیں</string>
+    <string name="settings_default_launcher_active">فعال ڈیفالٹ لانچر ✓</string>
+    <string name="settings_default_launcher_not_active">ڈیفالٹ لانچر کے طور پر سیٹ نہیں ہے</string>
+    <string name="settings_default_launcher_card_title">ڈیفالٹ ٹی وی لانچر</string>
+    <string name="settings_default_launcher_status_desc">ریموٹ پر HOME دبانے پر ڈیفالٹ ہوم اسکرین کا نظم کریں</string>
+    <string name="settings_open_app_info">ایپ کی معلومات (ترتیبات)</string>
+    <string name="settings_open_app_info_desc">اینڈرائیڈ سسٹم کی ترتیبات میں Salsa TV کی تفصیلات کھولیں</string>
+    <string name="settings_category_iptv">IPTV کی ترتیبات</string>
+
+
+
+    <string name="settings_language">زبان / Language</string>
+    <string name="launcher_prompt_title">ڈیفالٹ لانچر کے طور پر سیٹ کریں</string>
+    <string name="launcher_prompt_desc">مکمل سنیما تجربے سے لطف اندوز ہونے کے لیے، براہ کرم Salsa TV کو اپنی ڈیفالٹ ہوم اسکرین بنائیں۔</string>
+    <string name="action_set_default">ڈیفالٹ بنائیں</string>
+    <string name="action_later">بعد میں</string>
+
+    <string name="action_edit">ترمیم</string>
+
+    <string name="action_stop_editing">مکمل</string>
+    <string name="edit_mode_move_hint">منتقل کرنے یا اختیارات کے لیے کسی ایپ یا چینل پر کلک کریں</string>
+
+
+    <!-- Mini Downloader -->
+    <string name="mini_downloader_title">Mini Downloader</string>
+    <string name="mini_downloader_subtitle">ایپس انسٹال کرنے کے لیے ڈاؤن لوڈ کوڈ یا لنک درج کریں</string>
+
+    <string name="mini_downloader_go">جائیں / GO</string>
+    <string name="mini_downloader_delete_prompt_title">ڈاؤن لوڈ مکمل ہو گیا</string>
+    <string name="mini_downloader_delete_prompt_desc">کیا آپ اسٹوریج بچانے کے لیے ڈاؤن لوڈ کردہ APK فائل کو حذف کرنا چاہتے ہیں؟</string>
+    <string name="mini_downloader_delete_file">فائل حذف کریں</string>
+    <string name="mini_downloader_keep_file">فائل رکھیں</string>
+    <string name="mini_downloader_install_again">دوبارہ انسٹال کریں</string>
+    <string name="mini_downloader_downloading">ڈاؤن لوڈ ہو رہا ہے…</string>
+    <string name="mini_downloader_connecting">ڈاؤن لوڈر • رابطہ اور ڈاؤن لوڈ ہو رہا ہے…</string>
+    <string name="mini_downloader_quick_title">فوری ڈاؤن لوڈر</string>
+    <string name="mini_downloader_hint_code">کوڈ نمبر درج کریں اور GO پر کلک کریں</string>
+    <string name="mini_downloader_download_error">ڈاؤن لوڈ میں خرابی</string>
+    <string name="mini_downloader_open_in_browser">براؤزر میں کھولیں</string>
+    <string name="mini_downloader_file_deleted">فائل حذف کر دی گئی</string>
+
+    <string name="mini_downloader_downloads_title">ڈاؤن لوڈ کردہ فائلیں</string>
+    <string name="mini_downloader_downloads_subtitle">ڈاؤن لوڈ کردہ APK فائلوں کا جائزہ لیں، انسٹال کریں، یا جگہ خالی کرنے کے لیے حذف کریں</string>
+    <string name="mini_downloader_downloads_btn">ڈاؤن لوڈز</string>
+    <string name="mini_downloader_no_files">ابھی کوئی فائل ڈاؤن لوڈ نہیں ہوئی</string>
+    <string name="mini_downloader_no_files_desc">Mini Downloader کے ذریعے ڈاؤن لوڈ کی گئی فائلیں اور APKs یہاں ظاہر ہوں گی۔</string>
+    <string name="mini_downloader_install_now">انسٹال کریں</string>
+    <string name="mini_downloader_redownload">دوبارہ ڈاؤن لوڈ کریں</string>
+
+    <string name="mini_downloader_clear_all">سب صاف کریں</string>
+    <string name="mini_downloader_all_cleared">تمام ڈاؤن لوڈ کردہ فائلیں ہٹا دی گئیں</string>
+    <string name="mini_downloader_redownloading">دوبارہ ڈاؤن لوڈ شروع ہو رہا ہے…</string>
+    <string name="mini_downloader_view_downloads">ڈاؤن لوڈز دیکھیں</string>
+
+    <string name="aurastore_downloads_btn">ڈاؤن لوڈز</string>
+    <string name="aurastore_downloading">ایپ ڈاؤن لوڈ ہو رہی ہے…</string>
+    <string name="aurastore_connecting">لنک سے رابطہ ہو رہا ہے…</string>
+    <string name="aurastore_download_failed">ڈاؤن لوڈ لنک سے رابطہ نہیں ہو سکا</string>
+    <string name="aurastore_download_error">ڈاؤن لوڈ میں خرابی</string>
+    <string name="aurastore_download_error_generic">فائل ڈاؤن لوڈ کرتے وقت خرابی پیش آئی</string>
+    <string name="aurastore_download_complete">ڈاؤن لوڈ مکمل!</string>
+    <string name="aurastore_post_download_desc">سسٹم انسٹالر کھول دیا گیا ہے۔ کیا آپ جگہ بچانے کے لیے APK فائل حذف کرنا چاہتے ہیں؟</string>
+    <string name="aurastore_delete_file">فائل حذف کریں</string>
+    <string name="aurastore_keep_file">رکھیں</string>
+    <string name="aurastore_install_again">دوبارہ انسٹال کریں</string>
+    <string name="aurastore_file_deleted">انسٹالر فائل حذف کر دی گئی</string>
+    <string name="aurastore_all_cleared">تمام ڈاؤن لوڈ کردہ فائلیں حذف کر دی گئیں</string>
+    <string name="aurastore_no_files">ابھی کوئی فائل ڈاؤن لوڈ نہیں ہوئی</string>
+    <string name="aurastore_no_files_desc">Salsa Store سے ڈاؤن لوڈ کردہ کوئی بھی ایپ یا فائل یہاں نظر آئے گی۔</string>
+    <string name="aurastore_browse_now">ابھی اسٹور دیکھیں</string>
+    <string name="aurastore_manager_title">ڈاؤن لوڈ کردہ ایپس اور فائلیں</string>
+    <string name="aurastore_manager_desc">ڈاؤن لوڈ کردہ APKs کا نظم کریں، انسٹال کریں یا حذف کریں</string>
+    <string name="aurastore_clear_all">سب صاف کریں</string>
+    <string name="aurastore_cancel_download">ڈاؤن لوڈ منسوخ کریں</string>
+    <string name="aurastore_installer_error">انسٹالر شروع نہیں ہو سکا: %s</string>
+    <string name="aurastore_back_to_store">اسٹور پر واپس جائیں</string>
+    <string name="aurastore_install">انسٹال کریں</string>
+    <string name="aurastore_delete">حذف کریں</string>
+    <string name="aurastore_ok">ٹھیک ہے</string>
+    <string name="settings_language_system">سسٹم ڈیفالٹ</string>
+
+
+    <!-- Privacy -->
+    <string name="settings_privacy_title">رازداری اور تحفظ</string>
+    <string name="settings_privacy_desc">پورے سسٹم میں اشتہارات اور غیر اخلاقی مواد کو بلاک کریں</string>
+    <string name="settings_filter_mode">فلٹر موڈ</string>
+    <string name="settings_filter_off">بند</string>
+    <string name="settings_filter_ads">اشتہارات بلاکر</string>
+    <string name="settings_filter_family">خاندانی تحفظ</string>
+
+    <!-- UI Labels -->
+    <string name="settings_clock_format">گھڑی کا فارمیٹ</string>
+    <string name="settings_items_count">آئٹمز کی تعداد</string>
+    <string name="settings_opacity_level">شفافیت کی سطح</string>
+    <string name="settings_display_preference">ڈسپلے ترجیح</string>
+
+    <string name="settings_apps_suffix">ایپس</string>
+
+    <!-- IPTV Management -->
+    <string name="settings_iptv_add_new">نئی IPTV پلے لسٹ شامل کریں</string>
+    <string name="settings_iptv_name_placeholder">پلے لسٹ کا نام (مثلاً کھیل، خبریں)</string>
+    <string name="settings_iptv_url_placeholder">M3U / M3U8 لنک (https://…)</string>
+    <string name="settings_iptv_add_button">پلے لسٹ شامل کریں</string>
+    <string name="settings_iptv_load_presets">تمام تیار فہرستیں لوڈ کریں</string>
+    <string name="settings_iptv_saved_header">محفوظ شدہ IPTV پلے لسٹس (%d)</string>
+    <string name="settings_iptv_no_saved">کوئی محفوظ پلے لسٹ نہیں۔ اوپر M3U لنک شامل کریں۔</string>
+    <plurals name="settings_iptv_channels_count">
+        <item quantity="one">%d چینل</item>
+        <item quantity="other">%d چینلز</item>
+    </plurals>
+    <string name="settings_iptv_active_tag">فعال</string>
+    <string name="settings_iptv_activate_button">فعال کریں</string>
+    <string name="settings_iptv_sync_button">سنک کریں</string>
+
+    <!-- Extra UI -->
+
+    <plurals name="iptv_channels_plural">
+        <item quantity="one">%d چینل</item>
+        <item quantity="other">%d چینلز</item>
+    </plurals>
+    <string name="youtube_renderer_crash">یوٹیوب رینڈرر کریش ہو گیا۔ دوبارہ لوڈ ہو رہا ہے…</string>
+    <string name="mini_downloader_status_format">%1$d%% (%2$.1f MB / %3$.1f MB)</string>
+    <string name="mini_downloader_downloaded_mb">%.1f MB ڈاؤن لوڈ ہو چکا</string>
+    <string name="mini_downloader_error_installer">انسٹالر نہیں کھل سکا: %s</string>
+    <string name="mini_downloader_browser_crash">براؤزر کریش ہو گیا۔ دوبارہ لوڈ ہو رہا ہے…</string>
+
+    <!-- Status Messages -->
+    <plurals name="status_apps_per_row_updated">
+        <item quantity="one">فی قطار %d ایپ پر اپ ڈیٹ کر دیا گیا</item>
+        <item quantity="other">فی قطار %d ایپس پر اپ ڈیٹ کر دیا گیا</item>
+    </plurals>
+    <string name="status_wallpaper_style_updated">وال پیپر کا انداز اپ ڈیٹ ہو گیا</string>
+    <string name="status_custom_wallpaper_applied">کسٹم وال پیپر لاگو کر دیا گیا</string>
+    <string name="status_language_saved">زبان کی ترجیح محفوظ ہو گئی</string>
+    <string name="status_vpn_permission_required">VPN کی اجازت درکار ہے</string>
+    <string name="status_family_protection_enabled">خاندانی تحفظ فعال کر دیا گیا</string>
+    <string name="status_ads_blocker_enabled">اشتہارات بلاکر فعال کر دیا گیا</string>
+    <string name="status_protection_disabled">تحفظ غیر فعال کر دیا گیا</string>
+    <string name="status_app_unhidden">ایپ دوبارہ ظاہر کر دی گئی</string>
+    <string name="status_all_apps_restored">تمام ایپس بحال کر دی گئیں</string>
+    <string name="status_app_order_reset">ایپس کی ترتیب ڈیفالٹ پر ری سیٹ کر دی گئی</string>
+    <plurals name="status_playlist_added">
+        <item quantity="one">پلے لسٹ شامل ہو گئی: %d چینل لوڈ ہوا</item>
+        <item quantity="other">پلے لسٹ شامل ہو گئی: %d چینلز لوڈ ہوئے</item>
+    </plurals>
+    <plurals name="status_playlist_switch_success">
+        <item quantity="one">فعال پلے لسٹ تبدیل ہو گئی: %d چینل</item>
+        <item quantity="other">فعال پلے لسٹ تبدیل ہو گئی: %d چینلز</item>
+    </plurals>
+    <plurals name="status_playlist_synced">
+        <item quantity="one">پلے لسٹ سنک ہو گئی: %d چینل اپ ڈیٹ ہوا</item>
+        <item quantity="other">پلے لسٹ سنک ہو گئی: %d چینلز اپ ڈیٹ ہوئے</item>
+    </plurals>
+    <string name="status_playlist_removed">پلے لسٹ ہٹا دی گئی</string>
+    <plurals name="status_presets_loaded">
+        <item quantity="one">%d تیار پلے لسٹ لوڈ ہو گئی</item>
+        <item quantity="other">%d تیار پلے لسٹس لوڈ ہو گئیں</item>
+    </plurals>
+    <string name="status_presets_already_loaded">تمام تیار پلے لسٹس پہلے ہی لوڈ ہیں</string>
+    <string name="status_select_default_launcher">Salsa TV کو ڈیفالٹ لانچر کے طور پر منتخب کریں</string>
+    <string name="status_already_default_launcher">Salsa TV پہلے ہی آپ کا ڈیفالٹ لانچر ہے</string>
+    <string name="status_opening_home_settings">ہوم ترتیبات کھل رہی ہیں…</string>
+    <string name="status_opening_default_apps">ڈیفالٹ ایپس کی ترتیبات کھل رہی ہیں…</string>
+    <string name="status_opening_app_details">ایپ کی تفصیلات کھل رہی ہیں…</string>
+    <string name="status_opening_system_settings">سسٹم ترتیبات کھل رہی ہیں…</string>
+    <string name="status_select_from_list">فہرست سے Salsa TV منتخب کریں</string>
+    <string name="status_manual_default_launcher_hint">لانچر سیٹ کرنے کے لیے اینڈرائیڈ ترتیبات > ایپس > ڈیفالٹ ایپس میں جائیں</string>
+    <string name="status_cleared_defaults">پرانے لانچر ڈیفالٹس صاف ہو گئے۔ Salsa TV منتخب کریں</string>
+    <string name="iptv_error_404">نشریات دستیاب نہیں (HTTP 404)</string>
+    <string name="iptv_error_403">نشریات تک رسائی ممنوع ہے (HTTP 403)</string>
+    <string name="iptv_error_generic">نشریات چلانے میں ناکامی</string>
+    <string name="iptv_error_http">HTTP خرابی %d</string>
+    <string name="iptv_next_channel">اگلا چینل</string>
+    <string name="iptv_prev_channel">پچھلا چینل</string>
+    <string name="iptv_live_tag">براہِ راست</string>
+    <string name="settings_file_access_title">اسٹوریج اور فائلوں تک رسائی</string>
+    <string name="settings_file_access_desc">APK انسٹال کرنے، ڈاؤن لوڈ محفوظ کرنے اور کسٹم وال پیپر لگانے کے لیے مکمل رسائی دیں</string>
+    <string name="settings_file_access_btn">فائل کی اجازت دیں</string>
+    <string name="settings_file_access_granted">اسٹوریج تک رسائی حاصل ہے ✓</string>
+    <string name="settings_file_access_not_granted">اسٹوریج رسائی درکار ہے - اجازت کے لیے کلک کریں ⚠️</string>
+    <string name="file_permission_dialog_title">فائل اور اسٹوریج تک رسائی کی اجازت دیں</string>
+    <string name="file_permission_dialog_desc">Salsa TV کو ڈاؤن لوڈ کردہ APK انسٹال کرنے، فائلیں محفوظ کرنے اور وال پیپر لوڈ کرنے کے لیے اسٹوریج کی اجازت درکار ہے۔</string>
+    <string name="action_grant_permission">اجازت دیں</string>
+
+    <!-- Control Center, Universal Search, Ambient Mode, App Lock & Player Enhancements -->
+    <string name="control_center_title">لانچر کنٹرول سینٹر</string>
+    <string name="control_center_subtitle">لے آؤٹ، گھڑی، وال پیپر اور اسکرین سیور کی ترتیبات تک فوری رسائی</string>
+
+    <string name="control_center_storage">اندرونی اسٹوریج</string>
+    <string name="control_center_boost_btn">تیز کریں اور کیشے صاف کریں</string>
+    <string name="control_center_boost_desc">RAM خالی کریں اور عارضی کیشے صاف کریں</string>
+    <string name="control_center_boosting">ٹی وی کو بہتر بنایا جا رہا ہے…</string>
+    <string name="control_center_boost_done">بہتر ہو گیا (+%d MB)</string>
+
+    <string name="control_center_search">جامع تلاش</string>
+    <string name="control_center_search_sub">ایپس، گیمز اور لائیو ٹی وی</string>
+
+    <string name="control_center_gb_format">%1$.1f / %2$.1f GB</string>
+
+
+    <string name="universal_search_hint">ایپس، گیمز اور لائیو ٹی وی چینلز تلاش کریں…</string>
+    <string name="universal_search_all">سب</string>
+
+    <string name="ambient_press_any_key">Salsa TV پر واپس جانے کے لیے ریموٹ کا کوئی بھی بٹن دبائیں</string>
+
+    <string name="action_lock_app">ایپ لاک کریں (PIN)</string>
+    <string name="action_unlock_app">ایپ ان لاک کریں</string>
+    <string name="pin_enter_to_open">اس ایپ کو کھولنے کے لیے 4 ہندسوں کا PIN کوڈ درج کریں</string>
+    <string name="pin_enter_to_confirm">تصدیق کے لیے 4 ہندسوں کا PIN کوڈ درج کریں</string>
+    <string name="pin_wrong_error">غلط PIN کوڈ۔ براہ کرم دوبارہ کوشش کریں۔</string>
+    <string name="pin_default_hint">ڈیفالٹ PIN: 1234</string>
+
+    <string name="iptv_aspect_fit">فٹ (16:9)</string>
+    <string name="iptv_aspect_fill">پوری اسکرین</string>
+    <string name="iptv_aspect_zoom">کراپ زوم</string>
+    <string name="iptv_sleep_off">سلیپ ٹائمر: بند</string>
+
+    <string name="voice_search_button">آواز سے تلاش</string>
+    <string name="voice_search_listening">سن رہا ہے… اب بولیں</string>
+    <string name="voice_search_speak_now">آپ کی آواز سنی جا رہی ہے…</string>
+    <string name="voice_search_try_again">سمجھ نہیں آیا۔ دوبارہ کوشش کرنے کے لیے مائیک یا ریموٹ پر وائس بٹن دبائیں۔</string>
+    <string name="voice_search_permission_needed">آواز سے تلاش کے لیے مائیکروفون کی اجازت ضروری ہے</string>
+    <string name="voice_search_example_hint">کسی ایپ، گیم یا لائیو ٹی وی چینل کا نام بولیں…</string>
+
+    <!-- In-App Screensaver & Sleep Settings -->
+    <string name="settings_category_screensaver">اسکرین سیور اور سلیپ</string>
+    <string name="settings_screensaver_timeout">عدم فعالیت سلیپ ٹائمر</string>
+    <string name="settings_screensaver_timeout_desc">فعال ہونے پر بیرونی اسکرین سیور کو روکتا ہے اور بلٹ ان اسکرین سیور چلاتا ہے۔ غیر فعال ہونے پر سسٹم اسکرین سیور کو چلنے دیتا ہے۔</string>
+    <string name="settings_screensaver_mode">اسکرین سیور کا انداز</string>
+    <string name="settings_screensaver_mode_desc">گھڑی، وال پیپر، سلائیڈ شو، ویڈیو یا لائیو ڈیش بورڈز (موسم، خبریں، معیشت، فٹ بال یا خودکار تبدیلی) میں سے منتخب کریں</string>
+    <string name="screensaver_mode_clock">گھڑی اور تاریخ (درمیان میں)</string>
+    <string name="screensaver_mode_wallpaper">وال پیپر اور معلومات (نیچے کونے میں)</string>
+    <string name="screensaver_mode_video">سنیما ویڈیو فل اسکرین (صاف، بغیر متن)</string>
+    <string name="screensaver_mode_weather">موسم کی اسکرین</string>
+    <string name="screensaver_mode_news">خبروں کی اسکرین</string>
+    <string name="screensaver_mode_economic">معیشت اور مارکیٹ اسکرین</string>
+    <string name="screensaver_mode_football">فٹ بال اسکرین</string>
+    <string name="screensaver_mode_all_cycle">سب باری باری دکھائیں (خبریں 1 منٹ • موسم 10س • معیشت 10س • فٹ بال 10س)</string>
+    <string name="settings_screensaver_preview_btn">ابھی اسکرین سیور کا مشاہدہ کریں</string>
+    <string name="settings_screensaver_preview_desc">منتخب کردہ اسکرین سیور کو فوراً ٹیسٹ کریں۔ واپس آنے کے لیے کوئی بھی بٹن دبائیں۔</string>
+    <string name="timeout_2min">2 منٹ</string>
+    <string name="timeout_5min">5 منٹ (تجویز کردہ)</string>
+    <string name="timeout_10min">10 منٹ</string>
+    <string name="timeout_15min">15 منٹ</string>
+    <string name="timeout_30min">30 منٹ</string>
+    <string name="timeout_never">غیر فعال / کبھی نہیں</string>
+
+    <string name="screensaver_video_choice">ایمبیئنٹ ویڈیو کا انتخاب</string>
+    <string name="screensaver_video_choice_desc">اپنی پسندیدہ پرسکون ویڈیو منتخب کریں یا کسٹم یوٹیوب لنک درج کریں</string>
+    <string name="screensaver_video_rain_fireplace">آتش دان کا پرسکون ماحول 4K</string>
+    <string name="screensaver_video_rain_fireplace_sub">پرسکون نیند اور آرام کے لیے 8 گھنٹے کا آتش دان</string>
+    <string name="screensaver_video_winter_cabin">جدید مشرقی کیفے موسیقی</string>
+    <string name="screensaver_video_winter_cabin_sub">کام، مطالعہ اور توجہ کے لیے پرسکون دھنیں</string>
+    <string name="screensaver_video_nature_waterfalls">آتش دان اور لکڑی جلنے کی قدرتی آواز</string>
+    <string name="screensaver_video_nature_waterfalls_sub">قدرتی آگ کی آواز کے ساتھ 8 گھنٹے کا 4K آتش دان (بغیر موسیقی)</string>
+    <string name="screensaver_video_custom_title">کسٹم یوٹیوب ویڈیو</string>
+    <string name="screensaver_video_custom_desc">کسی بھی یوٹیوب ویڈیو لنک یا آئی ڈی کو بطور اسکرین سیور چلائیں</string>
+    <string name="screensaver_video_custom_hint">یوٹیوب لنک یا آئی ڈی پیسٹ کریں (مثال: EG_g7BFaL5s)</string>
+    <string name="screensaver_video_custom_save">ویڈیو لاگو کریں</string>
+    <string name="settings_apps_top_position">ایپس کے آغاز کی پوزیشن (وال پیپر ویو)</string>
+    <string name="settings_apps_top_position_desc">پس منظر کا وال پیپر زیادہ دکھانے کے لیے ایپس کی قطاروں کو نیچے منتقل کریں</string>
+    <string name="settings_apps_position_high">اونچا</string>
+    <string name="settings_apps_position_compact">معیاری</string>
+    <string name="settings_apps_position_balanced">متوازن</string>
+    <string name="settings_apps_position_medium_low">نیچے</string>
+    <string name="settings_apps_position_lower">نیچے - وال پیپر دکھائیں</string>
+    <string name="settings_apps_position_ultra">انتہائی نیچے</string>
+    <string name="settings_clock_settings">گھڑی کے ڈسپلے کی ترتیبات</string>
+    <string name="settings_clock_settings_desc">وقت کا فارمیٹ، سیکنڈز اور گھڑی کا سائز تبدیل کریں</string>
+    <string name="settings_clock_seconds">سیکنڈز دکھائیں</string>
+
+    <string name="settings_seconds_disabled">غیر فعال</string>
+    <string name="settings_seconds_enabled">فعال</string>
+    <string name="settings_clock_size">گھڑی کا سائز</string>
+
+    <string name="settings_clock_size_large">بڑا (60sp)</string>
+    <string name="settings_clock_size_medium">درمیانہ (48sp)</string>
+    <string name="settings_clock_size_compact">چھوٹا (36sp)</string>
+    <string name="settings_date_settings">تاریخ کے ڈسپلے کی ترتیبات</string>
+    <string name="settings_date_settings_desc">تاریخ کا فارمیٹ منتخب کریں یا تاریخ چھپائیں</string>
+    <string name="settings_date_format">تاریخ کا فارمیٹ</string>
+    <string name="settings_date_format_full">مکمل (دن اور تاریخ)</string>
+    <string name="settings_date_format_medium">دن اور مہینہ</string>
+    <string name="settings_date_format_numeric">عددی (dd/MM/yyyy)</string>
+    <string name="settings_date_format_full_year">سال کے ساتھ مکمل (دن، تاریخ اور سال)</string>
+    <string name="settings_date_format_us_full">امریکی مکمل (دن، مہینہ دن، سال)</string>
+    <string name="settings_date_format_us_written">امریکی تحریری (مہینہ دن، سال)</string>
+    <string name="settings_date_format_us_short">امریکی مختصر (دن، مہینہ دن)</string>
+    <string name="settings_date_format_numeric_us">امریکی عددی (MM/dd/yyyy)</string>
+    <string name="settings_date_format_numeric_iso">معیاری ISO عددی (yyyy-MM-dd)</string>
+    <string name="settings_date_format_numeric_dots">نقطوں کے ساتھ عددی (dd.MM.yyyy)</string>
+    <string name="settings_date_format_hidden">چھپا ہوا</string>
+    <string name="settings_greeting_settings">خوش آمدید جملے کی ترتیبات</string>
+    <string name="settings_greeting_settings_desc">گھڑی کے اوپر ظاہر ہونے والے تہنیتی جملے کو کنٹرول کریں</string>
+    <string name="settings_greeting_mode">خوش آمدید کا انداز</string>
+    <string name="settings_greeting_mode_poetic">شاعرانہ اور گھنٹہ وار</string>
+    <string name="settings_greeting_mode_classic">کلاسک (دن کا وقت)</string>
+    <string name="settings_greeting_mode_custom">اپنا جملہ / نام</string>
+    <string name="settings_greeting_mode_hidden">چھپا ہوا</string>
+    <string name="settings_custom_greeting_title">اپنی مرضی کا استقبالیہ متن</string>
+    <string name="settings_custom_greeting_desc">اپنا ذاتی خوش آمدید پیغام یا نام درج کریں</string>
+    <string name="settings_custom_greeting_hint">مثال: خوش آمدید</string>
+    <string name="settings_custom_greeting_save">محفوظ کریں</string>
+    <string name="settings_iptv_delete_all">تمام فہرستیں حذف کریں</string>
+    <string name="status_all_playlists_removed">تمام IPTV پلے لسٹس ہٹا دی گئیں</string>
+    <string name="screensaver_video_custom_item_title">کسٹم یوٹیوب ویڈیو (%s)</string>
+    <string name="screensaver_video_custom_item_sub">شامل کردہ ویڈیو • آئی ڈی: %s</string>
+    <string name="screensaver_video_restore_defaults">ڈیفالٹ ویڈیوز بحال کریں</string>
+    <string name="status_screensaver_video_added">اسکرین سیور ویڈیو شامل اور لاگو کر دی گئی</string>
+    <string name="status_screensaver_video_removed">ویڈیو اسکرین سیور سے ہٹا دی گئی</string>
+    <string name="status_screensaver_videos_restored">ڈیفالٹ اسکرین سیور ویڈیوز بحال ہو گئیں</string>
+    <string name="screensaver_no_videos">فہرست میں کوئی ویڈیو نہیں۔ نیچے یوٹیوب لنک شامل کریں یا ڈیفالٹ بحال کریں۔</string>
+    <string name="settings_app_lock_pin_title">ایپ لاک PIN کوڈ</string>
+    <string name="settings_app_lock_pin_desc">محفوظ ایپس کو لاک اور ان لاک کرنے کے لیے 4 ہندسوں کا PIN کوڈ مقرر کریں (ڈیفالٹ: 1234)</string>
+    <string name="settings_app_lock_pin_placeholder">4 ہندسوں کا PIN درج کریں (مثال: 1234)</string>
+    <string name="status_app_lock_pin_saved">ایپ لاک PIN کامیابی سے اپ ڈیٹ ہو گیا</string>
+    <string name="status_app_lock_pin_invalid">PIN بالکل 4 ہندسوں پر مشتمل ہونا چاہیے</string>
+
+    <!-- App Updates -->
+    <string name="update_dialog_title">نئی اپ ڈیٹ دستیاب ہے</string>
+    <string name="update_default_changelog">Salsa TV Launcher کا نیا ورژن بہتری اور اصلاحات کے ساتھ تیار ہے۔</string>
+    <string name="update_now">ابھی اپ ڈیٹ کریں</string>
+    <string name="update_install_now">اپ ڈیٹ انسٹال کریں</string>
+    <string name="update_downloading">اپ ڈیٹ ڈاؤن لوڈ ہو رہی ہے…</string>
+    <string name="update_ready_to_install">ڈاؤن لوڈ مکمل! اسکرین پر انسٹالیشن کی تصدیق کریں۔</string>
+    <string name="update_permission_hint">براہ کرم سسٹم ترتیبات میں Salsa TV کو اپ ڈیٹس انسٹال کرنے کی اجازت دیں۔</string>
+    <string name="update_open_permission_settings">انسٹال کی اجازت دیں</string>
+    <string name="update_download_failed">اپ ڈیٹ ڈاؤن لوڈ کرنے میں ناکامی۔ اپنا انٹرنیٹ چیک کریں۔</string>
+    <string name="update_install_launch_failed">پیکیج انسٹالر نہیں کھل سکا۔</string>
+    <string name="settings_updates_title">ایپ اپ ڈیٹس (خودکار اپ ڈیٹ)</string>
+    <string name="settings_updates_desc">موجودہ ورژن: v%1$s (بلڈ %2$d) • GitHub پر نئی ریلیز چیک کرتا ہے</string>
+    <string name="settings_updates_auto_check">اپ ڈیٹس خودکار طور پر چیک کریں</string>
+    <string name="settings_updates_check_now">ابھی چیک کریں</string>
+    <string name="settings_updates_checking">اپ ڈیٹس چیک کی جا رہی ہیں…</string>
+    <string name="status_update_up_to_date">آپ پہلے ہی تازہ ترین ورژن استعمال کر رہے ہیں (v%1$s)</string>
+    <string name="status_update_check_failed">اپ ڈیٹس چیک نہیں ہو سکیں: %1$s</string>
+    <string name="action_pause">روکیں</string>
+    <string name="iptv_paused_tag">رکا ہوا</string>
+
+    <string name="iptv_hide_menu">مینو چھپائیں</string>
+    <string name="iptv_audio_unsupported_codec">چینل آڈیو (%1$s) سپورٹ نہیں ہے — صرف ویڈیو چل رہی ہے</string>
+    <string name="iptv_audio_unsupported_generic">اس ڈیوائس پر چینل آڈیو سپورٹ نہیں ہے — صرف ویڈیو چل رہی ہے</string>
+    <string name="control_center_selected_label">منتخب شدہ</string>
+    <string name="settings_voice_assist_title">ریموٹ اسسٹنٹ بٹن</string>
+    <string name="settings_voice_assist_desc">ریموٹ کے Google Assistant بٹن کو Salsa آواز سے تلاش کے ساتھ مربوط کریں</string>
+    <string name="settings_voice_assist_active">Salsa TV سے مربوط ہے</string>
+    <string name="settings_voice_assist_not_active">سسٹم ڈیفالٹ زیر استعمال ہے</string>
+    <string name="settings_voice_assist_set_btn">اسسٹنٹ بٹن کے لیے Salsa TV سیٹ کریں</string>
+    <string name="settings_voice_assist_hint">اگر ریموٹ کا رنگین Google Assistant بٹن اب بھی سسٹم اسسٹنٹ کھولتا ہے تو ڈیجیٹل اسسٹنٹ ایپ کے طور پر Salsa TV Launcher منتخب کریں۔</string>
+    <string name="status_select_default_assistant">ڈیجیٹل اسسٹنٹ کے طور پر Salsa TV Launcher منتخب کریں</string>
+    <string name="status_already_default_assistant">Salsa TV پہلے ہی اسسٹنٹ بٹن کے لیے سیٹ ہے</string>
+    <string name="status_opening_assistant_settings">ڈیجیٹل اسسٹنٹ ایپ میں Salsa TV منتخب کریں</string>
+    <string name="settings_category_remote">ریموٹ بٹنوں کی گائیڈ</string>
+    <string name="settings_remote_intro_title">ٹی وی ریموٹ شارٹ کٹس اور بٹن گائیڈ</string>
+    <string name="settings_remote_intro_desc">جانیں کہ آپ کے ٹی وی ریموٹ کا ہر بٹن ہوم اسکرین، ترتیب موڈ اور IPTV پلیئر میں کیا کام کرتا ہے۔</string>
+    <string name="remote_menu_btn_title">تین لکیروں والا بٹن (☰ مینو)</string>
+    <string name="remote_menu_btn_badge">مرکزی آپشنز بٹن</string>
+    <string name="remote_menu_btn_subtitle">یہ کیا کرتا ہے اور کب کام کرتا ہے:</string>
+    <string name="remote_menu_when_home_card_title">کسی بھی ایپ یا پسندیدہ چینل پر (ہوم اسکرین)</string>
+    <string name="remote_menu_when_home_card_desc">انتظامی مینو کھولتا ہے (منتقل کریں، PIN لاک لگائیں، ایپ یا گیم میں رکھیں، چھپائیں، ایپ معلومات، یا ان انسٹال کریں)۔</string>
+    <string name="remote_menu_when_home_top_title">اوپر والی بار میں (ہوم اسکرین)</string>
+    <string name="remote_menu_when_home_top_desc">تیز نیویگیشن کے لیے کرسر کو براہ راست پہلے پسندیدہ چینل یا ایپ کارڈ پر لے آتا ہے۔</string>
+    <string name="remote_menu_when_iptv_title">IPTV پلیئر کے اندر (لائیو ٹی وی دیکھتے ہوئے)</string>
+    <string name="remote_menu_when_iptv_desc">لائیو چینل روکے بغیر چینل کی معلومات اور کنٹرول مینو دکھاتا یا چھپاتا ہے۔</string>
+    <string name="remote_menu_when_settings_key_title">سیٹنگز / گیئر بٹن شارٹ کٹ</string>
+    <string name="remote_menu_when_settings_key_desc">ہوم اسکرین پر ریموٹ کا سیٹنگز بٹن دبانے سے براہ راست فوری کنٹرول سینٹر کھل جاتا ہے۔</string>
+    <string name="remote_btn_dpad_title">تیر کے بٹن (اوپر / نیچے / بائیں / دائیں)</string>
+    <string name="remote_btn_dpad_when">ہوم • ترتیب موڈ • IPTV پلیئر</string>
+    <string name="remote_btn_dpad_desc">ایپس اور مینو میں حرکت کرتا ہے۔ ترتیب موڈ میں منتخب ایپ یا چینل کو منتقل کرتا ہے۔ فل اسکرین IPTV میں: اوپر/نیچے چینل بدلتا ہے اور بائیں/دائیں فوری چینل لسٹ کھولتا ہے۔</string>
+    <string name="remote_btn_ok_title">OK / درمیانی بٹن (ایک بار دبانا)</string>
+    <string name="remote_btn_ok_when">ہوم • ترتیب موڈ • IPTV پلیئر</string>
+    <string name="remote_btn_ok_desc">منتخب ایپ یا چینل چلاتا ہے، ترتیب موڈ میں جگہ پکی کرتا ہے، یا IPTV پلیئر میں معلومات کا مینو کھولتا ہے۔</string>
+    <string name="remote_btn_ok_long_title">OK بٹن (دبا کر رکھنا / Long Press)</string>
+    <string name="remote_btn_ok_long_when">ایپ یا پسندیدہ چینل پر</string>
+    <string name="remote_btn_ok_long_desc">تین لکیروں والے بٹن (☰) کا متبادل: منتقل کرنے، لاک لگانے یا چھپانے کے لیے انتظامی مینو کھولتا ہے۔</string>
+    <string name="remote_btn_back_title">واپسی کا بٹن (Back)</string>
+    <string name="remote_btn_back_when">Salsa TV میں ہر جگہ</string>
+    <string name="remote_btn_back_desc">ڈائیلاگ اور مینو بند کرتا ہے، ترتیب محفوظ کرتا ہے، یا پلیئر سے باہر نکلتا ہے۔ ہوم اسکرین پر آپ کو حادثاتی طور پر سسٹم میں باہر نکلنے سے بچاتا ہے۔</string>
+    <string name="remote_btn_assistant_title">Google Assistant / مائیک / تلاش بٹن</string>
+    <string name="remote_btn_assistant_when">کوئی بھی اسکرین • اسکرین سیور • ڈائیلاگ</string>
+    <string name="remote_btn_assistant_desc">آواز کے ذریعے ایپس، گیمز اور لائیو چینلز تلاش کرنے کے لیے فوری طور پر Salsa جامع تلاش کھولتا ہے۔</string>
+    <string name="remote_btn_iptv_player_title">IPTV پلے بیک بٹن (Play/Pause • INFO • GUIDE • CH +/-)</string>
+    <string name="remote_btn_iptv_player_when">لائیو IPTV پلیئر کے اندر</string>
+    <string name="remote_btn_iptv_player_desc">Play/Pause نشریات کو روکتا یا چلاتا ہے؛ INFO/GUIDE چینل بار دکھاتا ہے؛ CH +/- چینل تبدیل کرتا ہے۔</string>
+
+    <!-- v1.1 Launcher & IPTV Upgrades -->
+    <string name="bookmark_toggle_mouse">ریموٹ ماؤس</string>
+    <string name="storage_manager_title">ایپس اور اسٹوریج انسپکٹر</string>
+    <string name="storage_manager_desc">سائز کے لحاظ سے ترتیب دی گئی انسٹال کردہ ایپس</string>
+    <string name="storage_manager_empty">صارف کی انسٹال کردہ کوئی ایپ نہیں ملی۔</string>
+    <string name="iptv_category_locked">مقفل</string>
+    <string name="iptv_lock_category">زمرہ لاک کریں (PIN)</string>
+    <string name="iptv_unlock_category">زمرہ ان لاک کریں</string>
+    <string name="iptv_resume_last">آخری چینل چلائیں</string>
+
+    <string name="iptv_epg_next">اگلا</string>
+    <string name="iptv_sleep_toast_set">سلیپ ٹائمر سیٹ ہو گیا: %d منٹ</string>
+    <string name="iptv_sleep_toast_off">سلیپ ٹائمر غیر فعال کر دیا گیا</string>
+    <string name="control_center_network_offline">آف لائن</string>
+    <string name="voice_command_opening">کھولا جا رہا ہے</string>
+    <string name="home_recent_apps">حال ہی میں استعمال شدہ</string>
+    <string name="settings_storage_manager_title">ایپس اور اسٹوریج انسپکٹر</string>
+    <string name="settings_storage_manager_desc">APK سائز چیک کریں اور غیر ضروری ایپس ان انسٹال کریں</string>
+    <string name="settings_dynamic_color_title">Material 3 متحرک رنگ</string>
+    <string name="settings_dynamic_color_desc">سسٹم وال پیپر سے رنگ اپنائیں (Android 12+)</string>
+    <string name="settings_recent_apps_title">حالیہ ایپس کی پٹی</string>
+    <string name="settings_recent_apps_desc">حال ہی میں چلائی گئی ایپس کی فوری افقی قطار دکھائیں</string>
+    <string name="settings_web_bookmarks_title">کسٹم ویب بک مارکس</string>
+    <string name="settings_web_bookmarks_desc">ویب سائٹس یا ٹی وی ویب پورٹلز کو براہ راست ہوم اسکرین پر پن کریں</string>
+    <string name="settings_web_bookmark_name_hint">پورٹل کا نام (مثلاً خبریں)</string>
+    <string name="settings_web_bookmark_url_hint">لنک (مثلاً https://example.com)</string>
+    <string name="settings_web_bookmark_add">پورٹل شامل کریں</string>
+    <string name="settings_web_bookmark_empty">ابھی کوئی کسٹم ویب پورٹل شامل نہیں کیا گیا۔</string>
+    <string name="settings_iptv_auto_resume_title">آخری چینل خودکار طور پر چلائیں</string>
+    <string name="settings_iptv_auto_resume_desc">IPTV کھولنے پر آخری دیکھا گیا چینل خودکار طور پر چلائیں</string>
+    <string name="settings_iptv_epg_title">پروگرام گائیڈ (EPG XMLTV)</string>
+    <string name="settings_iptv_epg_desc">اختیاری XMLTV گائیڈ لنک (پلے لسٹ url-tvg کی جگہ لیتا ہے)</string>
+    <string name="settings_iptv_epg_hint">https://example.com/epg.xml</string>
+    <string name="settings_iptv_epg_save">EPG محفوظ کریں</string>
+    <string name="settings_iptv_epg_reload">EPG ری لوڈ کریں</string>
+    <string name="status_epg_refreshed">پروگرام گائیڈ (EPG) اپ ڈیٹ ہو گئی</string>
+    <string name="status_bookmark_added">ویب پورٹل ہوم اسکرین پر شامل ہو گیا</string>
+    <string name="status_bookmark_removed">ویب پورٹل ہٹا دیا گیا</string>
+    <string name="screensaver_mode_slideshow">فوٹو سلائیڈ شو (فولڈر + موسیقی + اثرات)</string>
+    <string name="slideshow_source_title">تصاویر کا ذریعہ اور فولڈر</string>
+    <string name="slideshow_source_desc">ڈیوائس/USB سے مخصوص فولڈر، منتخب تصاویر یا 4K گیلری منتخب کریں</string>
+    <string name="slideshow_source_folder">مخصوص فولڈر (ڈیوائس / USB ڈرائیو)</string>
+    <string name="slideshow_source_custom_photos">ڈیوائس سے منتخب تصاویر</string>
+    <string name="slideshow_source_online_all">4K گیلری: تمام مجموعے</string>
+    <string name="slideshow_source_online_nature">4K گیلری: فطرت اور پہاڑ</string>
+    <string name="slideshow_source_online_space">4K گیلری: خلا اور کہکشاں</string>
+    <string name="slideshow_source_online_cities">4K گیلری: رات کے شہر اور فن تعمیر</string>
+    <string name="slideshow_select_folder_btn">تصاویر کا فولڈر منتخب کریں (TV / USB)</string>
+    <string name="slideshow_system_folder_picker">سسٹم فولڈر منتخب کنندہ</string>
+    <string name="slideshow_no_folder_selected">کوئی فولڈر منتخب نہیں — منتخب کرنے کے لیے اوپر کلک کریں</string>
+    <string name="slideshow_pick_photos_btn">گیلری سے تصاویر منتخب کریں</string>
+    <string name="slideshow_order_label">چلانے کی ترتیب</string>
+    <string name="slideshow_order_shuffle">بے ترتیب (شفل)</string>
+    <string name="slideshow_order_sequential">ترتیب وار (A–Z)</string>
+    <string name="slideshow_display_title">وقت، حرکت اور ٹرانزیشن اثرات</string>
+    <string name="slideshow_display_desc">ہر تصویر کا وقت، ہلکی حرکت اور داخلے کے اثرات طے کریں</string>
+    <string name="slideshow_interval_label">ہر تصویر کا دورانیہ</string>
+    <string name="slideshow_interval_5s">5 سیکنڈ</string>
+    <string name="slideshow_interval_10s">10 سیکنڈ</string>
+    <string name="slideshow_interval_15s">15 سیکنڈ</string>
+    <string name="slideshow_interval_30s">30 سیکنڈ</string>
+    <string name="slideshow_interval_1m">1 منٹ</string>
+    <string name="slideshow_interval_2m">2 منٹ</string>
+    <string name="slideshow_interval_5m">5 منٹ</string>
+    <string name="slideshow_motion_label">نمائش کے دوران تصویر کی حرکت</string>
+    <string name="slideshow_motion_ken_burns">سینمائی پین اور زوم (Ken Burns)</string>
+    <string name="slideshow_motion_gentle_zoom">ہلکا زوم</string>
+    <string name="slideshow_motion_static">ساکن (بغیر حرکت)</string>
+    <string name="slideshow_transition_label">تصویر کے داخلے کا اثر</string>
+    <string name="slideshow_transition_crossfade">نرم کراس فیڈ (Crossfade)</string>
+    <string name="slideshow_transition_slide">سینمائی سلائیڈ</string>
+    <string name="slideshow_transition_zoom_fade">زوم اور فیڈ</string>
+    <string name="slideshow_transition_blur_reveal">نرم اسکیل نمودار ہونا</string>
+    <string name="slideshow_transition_flip_3d">تھری ڈی زاویہ</string>
+    <string name="slideshow_transition_random">ہر تصویر کے لیے مختلف اثر</string>
+    <string name="slideshow_effects_title">موسمی اثرات اور گھڑی</string>
+    <string name="slideshow_effects_desc">برف باری، جگنو، ساکورا پھول اور کونے کی گھڑی شامل کریں</string>
+    <string name="slideshow_effect_label">بصری اثرات</string>
+    <string name="slideshow_effect_snow">برف باری (Snowflakes) ❄️</string>
+    <string name="slideshow_effect_fireflies">سنہری جگنو اور ستارے ✨</string>
+    <string name="slideshow_effect_rain">سینمائی بارش 🌧️</string>
+    <string name="slideshow_effect_autumn">خزاں کے گرتے پتے 🍂</string>
+    <string name="slideshow_effect_sakura">چیری بلاسم کی پتیاں 🌸</string>
+    <string name="slideshow_effect_stars">چمکتے رات کے ستارے ⭐</string>
+    <string name="slideshow_effect_bokeh">خوابیدہ بوکیہ روشنیاں 🔮</string>
+    <string name="slideshow_effect_none">بغیر کسی اثر کے</string>
+    <string name="slideshow_clock_label">گھڑی اور تاریخ کا انداز</string>
+    <string name="slideshow_clock_corner_full">مکمل کونے والی گھڑی (ساکن وال پیپر جیسی)</string>
+    <string name="slideshow_clock_minimal">مختصر گھڑی اور تاریخ</string>
+    <string name="slideshow_clock_hidden">گھڑی چھپائیں (صرف فوٹو فریم)</string>
+    <string name="slideshow_dim_label">رات کی مدہم روشنی</string>
+    <string name="slideshow_music_title">پس منظر کی پرسکون موسیقی</string>
+    <string name="slideshow_music_desc">سلائیڈ شو کے دوران پرسکون موسیقی یا اپنی آڈیو فائل چلائیں</string>
+    <string name="slideshow_music_label">پس منظر کا آڈیو ٹریک</string>
+    <string name="slideshow_music_off">موسیقی بند (خاموش)</string>
+    <string name="slideshow_music_lofi">پرسکون Lo-Fi پیانو</string>
+    <string name="slideshow_music_nature">رات کی بارش اور قدرتی آوازیں</string>
+    <string name="slideshow_music_space">خلائی پرسکون موسیقی</string>
+    <string name="slideshow_music_oriental">کیفے لاؤنج موسیقی</string>
+    <string name="slideshow_music_custom">اپنی آڈیو فائل (MP3 / ڈیوائس آڈیو)</string>
+    <string name="slideshow_music_pick_btn">ڈیوائس / USB سے آڈیو فائل منتخب کریں</string>
+    <string name="slideshow_music_volume_label">موسیقی کی آواز</string>
+    <string name="settings_header_control_title">ہوم اسکرین پر کنٹرول سینٹر اور ترتیبات کا آئیکن</string>
+    <string name="settings_header_control_desc">کنٹرول سینٹر آئیکن دکھائیں، براہ راست ترتیبات کا آئیکن رکھیں، یا دونوں آئیکن ایک ساتھ دکھائیں</string>
+    <string name="settings_header_control_label">ہوم اسکرین بالائی بٹن</string>
+    <string name="settings_header_mode_control_center">فوری کنٹرول سینٹر آئیکن (ڈیفالٹ)</string>
+    <string name="settings_header_mode_direct_settings">کنٹرول سینٹر نظر انداز کریں — براہ راست ترتیبات آئیکن</string>
+    <string name="settings_header_mode_both">دونوں ایک ساتھ دکھائیں (کنٹرول سینٹر + ترتیبات)</string>
+    <string name="screensaver_video_loading">ویڈیو لوڈ ہو رہی ہے…</string>
+    <string name="screensaver_video_load_failed">ویڈیو نہیں چل سکی • کنکشن چیک کریں یا ڈیوائس / USB سے مقامی ویڈیو منتخب کریں</string>
+    <string name="screensaver_video_pick_local_btn">ڈیوائس / USB سے ویڈیو منتخب کریں</string>
+    <string name="screensaver_video_local_sub">مقامی ویڈیو فائل (ڈیوائس / USB)</string>
+    <string name="screensaver_video_direct_sub">براہ راست ویڈیو اسٹریم لنک</string>
+    <string name="screensaver_video_local_default_title">مقامی ویڈیو</string>
+    <string name="screensaver_yt_retry_btn">دوبارہ کوشش کریں</string>
+    <string name="screensaver_yt_close_btn">بند کریں</string>
+    <string name="web_portal_download_saved_desc">ڈاؤن لوڈز فولڈر میں محفوظ ہو گیا۔ آپ فائل ابھی کھول سکتے ہیں یا بعد کے لیے رکھ سکتے ہیں۔</string>
+    <string name="web_portal_open_file">فائل کھولیں</string>
+    <string name="web_portal_no_viewer_app">ڈاؤن لوڈز میں محفوظ ہو گیا۔ اس فائل کو کھولنے کے لیے کوئی ایپ موجود نہیں۔</string>
+    <string name="web_portal_allow_unknown_apps">براہ کرم اس ماخذ سے ایپس انسٹال کرنے کی اجازت دیں، پھر دوبارہ انسٹال دبائیں۔</string>
+    <string name="settings_preset_web_bookmarks_title">تیار ویب سائٹس</string>
+    <string name="settings_preset_web_bookmarks_desc">پہلے سے غیر فعال ہیں — ہوم اسکرین پر دکھانے کے لیے کسی بھی ویب سائٹ کو فعال کریں</string>
+    <string name="action_enable">فعال کریں</string>
+    <string name="action_enabled">فعال</string>
+    <string name="status_preset_bookmark_enabled">ویب سائٹ ہوم اسکرین پر فعال ہو گئی</string>
+    <string name="status_preset_bookmark_disabled">ویب سائٹ ہوم اسکرین سے چھپا دی گئی</string>
+    <string name="settings_category_web_sites">ویب سائٹس</string>
+    <string name="settings_web_section_subtitle">تیار ویب سائٹس کا نظم کریں اور ہوم اسکرین پر کسٹم ویب لنکس شامل کریں</string>
+    <string name="settings_custom_web_bookmarks_list_title">شامل کردہ کسٹم ویب سائٹس</string>
+    <string name="settings_preset_web_games_title">تیار ویب گیمز</string>
+    <string name="settings_preset_web_games_desc">گیمز سیکشن میں دکھانے کے لیے کسی بھی ویب گیم کو فعال یا غیر فعال کریں</string>
+    <string name="settings_restore_deleted_web_presets">حذف شدہ ویب سائٹس اور گیمز بحال کریں</string>
+    <string name="status_preset_bookmarks_restored">حذف شدہ ویب سائٹس اور گیمز بحال ہو گئیں</string>
+    <string name="live_ui_settings_title">لائیو انٹرفیس ترتیبات (Live)</string>
+    <string name="live_ui_settings_desc">ہوم اسکرین پر براہ راست ترتیبات تبدیل کریں اور ہر تبدیلی لائیو دیکھیں</string>
+    <string name="live_ui_settings_btn">لائیو ترتیبات کھولیں</string>
+    <string name="live_ui_settings_badge">LIVE</string>
+    <string name="live_ui_settings_hint">▲▼ مینو  •  ◀▶ آپشن  •  OK ذیلی اختیارات</string>
+    <string name="live_ui_settings_press_ok">OK ذیلی مینو</string>
+    <string name="live_ui_secondary_hint">▲▼◀▶ منتخب کریں  •  باہر نکلنے کے لیے OK / واپس</string>
+    <string name="live_ui_enter_sub_images">OK: تصویر منتخب کریں</string>
+    <string name="live_ui_enter_sub_options">OK: ذیلی اختیارات</string>
+    <string name="live_ui_wallpaper_preset_image">4K وال پیپر گیلری تصویر</string>
+    <string name="wallpaper_online_gallery_title">4K آن لائن وال پیپر گیلری</string>
+    <string name="wallpaper_search_placeholder">نئے 4K وال پیپرز تلاش کریں (مثلاً nature, cars, space یا تصویر کا لنک)…</string>
+    <string name="wallpaper_search_btn">تلاش کریں</string>
+    <string name="wallpaper_searching">تلاش جاری ہے…</string>
+    <string name="wallpaper_search_results_title">تلاش کے نتائج (شامل اور لاگو کرنے کے لیے کلک کریں)</string>
+    <string name="wallpaper_search_no_results">کوئی وال پیپر نہیں ملا۔ دوسرا لفظ آزمائیں یا براہ راست تصویر کا لنک پیسٹ کریں۔</string>
+    <string name="wallpaper_add_and_apply">شامل اور لاگو کریں</string>
+    <string name="wallpaper_added_category">شامل کردہ وال پیپرز</string>
+    <string name="wallpaper_delete_btn_desc">وال پیپر فہرست سے ہٹائیں</string>
+    <string name="wallpaper_restore_deleted_btn">حذف شدہ وال پیپرز بحال کریں (%1$d)</string>
+    <string name="wallpaper_active_badge">فعال</string>
+    <string name="live_ui_wallpaper_category">↳ 4K وال پیپر کیٹیگری</string>
+    <string name="live_ui_wallpaper_all_categories">تمام اقسام</string>
+    <string name="live_ui_pick_custom_image">↳ ڈیوائس / USB سے تصویر منتخب کریں</string>
+    <string name="live_ui_pick_custom_image_action">تصویر منتخب کرنے کے لیے OK دبائیں</string>
+    <string name="live_ui_type_custom_greeting">اپنا پیغام خود لکھیں</string>
+    <string name="live_ui_quick_preset_greetings">تیار مختصر جملے</string>
+    <string name="live_ui_greeting_preset_1">Salsa Smart TV میں خوش آمدید</string>
+    <string name="live_ui_greeting_preset_2">آرام سے بیٹھیں اور شو کا لطف اٹھائیں</string>
+    <string name="live_ui_greeting_preset_3">ہوم سنیما کا بہترین تجربہ</string>
+    <string name="live_ui_greeting_preset_4">آپ کا دن خوشگوار گزرے</string>
+    <string name="live_ui_greeting_preset_5">اپنے وقت کا لطف اٹھائیں</string>
+    <string name="live_ui_greeting_done_btn">محفوظ ✓</string>
+    <string name="live_ui_greeting_ok_to_type">لکھنے کے لیے OK ✎</string>
+    <string name="live_ui_greeting_input_placeholder">اپنا استقبالیہ پیغام یہاں لکھیں…</string>
+    <string name="live_ui_device_short">ڈیوائس</string>
+    <string name="live_ui_night_comfort_title">نائٹ آئی کمفرٹ فلٹر</string>
+    <string name="live_ui_night_comfort_auto">خودکار رات (22:00–06:00)</string>
+    <string name="live_ui_low_ram_mode">ہلکا پرفارمنس موڈ (Low-RAM)</string>
+    <string name="live_ui_video_scene_4k">4K ویڈیو منظر</string>
+    <string name="settings_backup_restore_title">بیک اپ اور بحالی (Backup &amp; Restore)</string>
+    <string name="settings_backup_restore_desc">تمام لانچر ترتیبات، بک مارکس اور IPTV فہرستیں محفوظ یا بحال کریں (Downloads/salsa_tv_backup.json)</string>
+    <string name="settings_backup_export_btn">بیک اپ محفوظ کریں</string>
+    <string name="settings_backup_restore_btn">بیک اپ بحال کریں</string>
+    <string name="screensaver_mode_broadcast_text">میڈیا براڈکاسٹ ٹیکسٹ</string>
+    <string name="broadcast_text_card_title">نشریاتی متن کی سطریں</string>
+    <string name="broadcast_text_card_desc">متعدد سطریں لکھیں (ایک وقت میں ایک سطر)۔ ہر سطر 60% مدھم ڈائنامک پس منظر پر سفید اور پیلے رنگ میں نشریاتی انداز کے ساتھ ترتیب وار دکھائی دیتی ہے</string>
+    <string name="broadcast_text_editor_hint">متعدد سطریں درج کریں (نئی سطر کے لیے Enter دبائیں)…</string>
+    <string name="broadcast_text_add_line_hint">نئی سرخی فوری شامل کریں…</string>
+    <string name="broadcast_text_add_line_btn">سطر شامل کریں</string>
+    <string name="broadcast_text_save_btn">متن محفوظ کریں</string>
+    <string name="broadcast_text_reset_btn">ڈیفالٹ بحال کریں</string>
+    <string name="broadcast_text_duration_title">ہر سطر کا دورانیہ</string>
+    <string name="broadcast_text_duration_desc">اگلی سطر پر جانے سے پہلے ہر سرخی اسکرین پر کتنی دیر رہے</string>
+    <string name="broadcast_text_duration_label">سیکنڈ فی سطر</string>
+    <string name="broadcast_text_interval_3s">3 سیکنڈ</string>
+    <string name="broadcast_text_interval_4s">4 سیکنڈ</string>
+    <string name="broadcast_text_interval_7s">7 سیکنڈ</string>
+    <string name="broadcast_text_default_lines">Salsa اسمارٹ ٹی وی میں خوش آمدید\nخبریں، موسم، کھیل اور معیشت ایک ہی اسکرین پر\nبڑی اسکرین کے لیے سنیمائی اور رواں ڈیزائن\nٹی وی پر آپ کی پسندیدہ ہر چیز، ہمیشہ تیار</string>
+    <string name="broadcast_text_badge_live">آن ایئر</string>
+    <string name="broadcast_text_lines_preview_label">سطروں کی ترتیب (سفید اور پیلا باری باری):</string>
+</resources>
