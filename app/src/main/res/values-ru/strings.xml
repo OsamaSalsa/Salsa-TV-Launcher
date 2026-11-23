@@ -687,4 +687,6 @@
     <string name="broadcast_text_default_lines">Добро пожаловать в Salsa Smart TV\nНовости, погода, спорт и рынки на одном экране\nКинематографичный дизайн для большого экрана\nВсё, что вы любите на ТВ, всегда под рукой</string>
     <string name="broadcast_text_badge_live">В ЭФИРЕ</string>
     <string name="broadcast_text_lines_preview_label">Предпросмотр строк (чередование белого и жёлтого):</string>
+    <string name="settings_news_voice_title">Голосовое чтение новостей</string>
+    <string name="settings_news_voice_desc">Озвучивает новость на экране без даты публикации и ждёт окончания чтения перед переключением</string>
 </resources>

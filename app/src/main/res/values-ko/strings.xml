@@ -634,4 +634,6 @@
     <string name="broadcast_text_default_lines">Salsa Smart TV에 오신 것을 환영합니다\n뉴스, 날씨, 스포츠, 경제를 한 화면에서\n대화면 TV에 맞춘 시네마틱 디자인\nTV에서 사랑하는 모든 것, 언제나 준비 완료</string>
     <string name="broadcast_text_badge_live">방송 중</string>
     <string name="broadcast_text_lines_preview_label">순서 미리보기 (흰색과 노란색 교대):</string>
+    <string name="settings_news_voice_title">뉴스 음성 읽기</string>
+    <string name="settings_news_voice_desc">화면에 표시된 뉴스를 게시 날짜 없이 읽어주며, 읽기가 끝날 때까지 다음 뉴스로 넘어가지 않습니다</string>
 </resources>

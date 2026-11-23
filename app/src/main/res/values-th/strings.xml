@@ -668,4 +668,6 @@
     <string name="broadcast_text_default_lines">ยินดีต้อนรับสู่ Salsa Smart TV\nข่าว สภาพอากาศ กีฬา และเศรษฐกิจครบในหน้าจอเดียว\nดีไซน์ลื่นไหลระดับภาพยนตร์สำหรับจอใหญ่\nทุกสิ่งที่คุณชื่นชอบบนทีวี พร้อมเสมอ</string>
     <string name="broadcast_text_badge_live">ออกอากาศ</string>
     <string name="broadcast_text_lines_preview_label">ตัวอย่างลำดับข้อความ (สลับสีขาวและสีเหลือง):</string>
+    <string name="settings_news_voice_title">อ่านข่าวด้วยเสียง</string>
+    <string name="settings_news_voice_desc">อ่านข่าวที่แสดงบนหน้าจอโดยไม่อ่านวันที่เผยแพร่ และรอจนกว่าจะอ่านจบก่อนเปลี่ยนข่าว</string>
 </resources>

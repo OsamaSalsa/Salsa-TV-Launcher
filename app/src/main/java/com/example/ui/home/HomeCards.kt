@@ -107,7 +107,7 @@ fun AppItemCard(
             if (app.packageName == "com.minidownloader.portal") {
                 Image(painter = painterResource(R.drawable.ic_minidownloader_banner), "Mini Downloader", modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
             } else if (app.packageName == "com.aurastore.portal") {
-                Image(painter = painterResource(R.drawable.ic_aurastore_banner), "Salsa Store", modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+                Image(painter = painterResource(R.drawable.ic_salsa_store_banner), "Salsa Store", modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
             } else {
                 val bannerImageBitmap = app.bannerBitmap ?: remember(app.banner) {
                     app.banner?.let { drawableToBitmapSafe(it).asImageBitmap() }

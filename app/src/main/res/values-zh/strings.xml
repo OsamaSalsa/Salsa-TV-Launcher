@@ -668,4 +668,6 @@
     <string name="broadcast_text_default_lines">欢迎来到 Salsa 智能电视\n新闻、天气、体育与财经尽在一屏\n专为大屏打造的影院级流畅视觉\n电视上你热爱的一切，时刻准备就绪</string>
     <string name="broadcast_text_badge_live">正在播报</string>
     <string name="broadcast_text_lines_preview_label">播报顺序预览（白色与黄色交替）：</string>
+    <string name="settings_news_voice_title">新闻语音朗读</string>
+    <string name="settings_news_voice_desc">朗读屏幕当前新闻且不读发布日期，并在朗读完成后再切换下一条</string>
 </resources>

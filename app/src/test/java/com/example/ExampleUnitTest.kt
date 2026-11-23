@@ -219,4 +219,47 @@ class ExampleUnitTest {
             assertEquals("Baseline for $lang must have 30 distinct articles across 5 sections", 30, headlines.toSet().size)
         }
     }
+
+    @Test
+    fun `news voice reader builds spoken text without publication date or duplicate headline`() {
+        val storyWithDate = com.example.data.news.NewsArticleItem(
+            id = "ar_top_1",
+            section = com.example.data.news.NewsSectionType.TOP_STORIES,
+            categoryLabel = "أهم الأخبار",
+            headline = "إطلاق مبادرة اقتصادية جديدة لتعزيز الاستثمار",
+            summary = "تتضمن المبادرة حزمة تسهيلات للقطاع الصناعي والتقني • منذ 15 دقيقة • 2026-11-23",
+            sourceName = "الجزيرة",
+            timeAgo = "منذ 6 دقائق",
+            imageUrl = ""
+        )
+        val spoken = com.example.ui.news.buildSpokenNewsText(storyWithDate)
+        assertTrue(spoken.contains("إطلاق مبادرة اقتصادية جديدة لتعزيز الاستثمار"))
+        assertTrue(spoken.contains("تتضمن المبادرة حزمة تسهيلات للقطاع الصناعي والتقني"))
+        assertFalse("Must not speak timeAgo", spoken.contains("منذ 6 دقائق"))
+        assertFalse("Must not speak embedded relative time", spoken.contains("منذ 15 دقيقة"))
+        assertFalse("Must not speak embedded ISO date", spoken.contains("2026-11-23"))
+
+        val storyWithRedundantSummary = com.example.data.news.NewsArticleItem(
+            id = "fr_top_1",
+            section = com.example.data.news.NewsSectionType.WORLD,
+            categoryLabel = "Monde",
+            headline = "Accord historique sur le climat",
+            summary = "Actualités en direct : Accord historique sur le climat.",
+            sourceName = "France 24",
+            timeAgo = "12 min ago",
+            imageUrl = ""
+        )
+        val spokenFrench = com.example.ui.news.buildSpokenNewsText(storyWithRedundantSummary)
+        assertEquals("Accord historique sur le climat", spokenFrench)
+
+        val effectiveLanguages = LocaleHelper.SUPPORTED_LANGUAGES
+            .map { LocaleHelper.getEffectiveLanguage(it) }
+            .distinct()
+        for (lang in effectiveLanguages) {
+            val strings = com.example.data.news.NewsRepository.getLocalizedStrings(lang)
+            assertTrue("voiceOnLabel missing for $lang", strings.voiceOnLabel.isNotBlank())
+            assertTrue("voiceOffLabel missing for $lang", strings.voiceOffLabel.isNotBlank())
+            assertTrue("voiceSpeakingLabel missing for $lang", strings.voiceSpeakingLabel.isNotBlank())
+        }
+    }
 }

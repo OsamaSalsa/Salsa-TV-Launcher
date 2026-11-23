@@ -648,4 +648,6 @@
     <string name="broadcast_text_default_lines">Benvenuto su Salsa Smart TV\nNotizie, Meteo, Sport e Mercati in un solo posto\nDesign cinematografico fluido per il grande schermo\nTutto ciò che ami in TV, sempre pronto</string>
     <string name="broadcast_text_badge_live">IN ONDA</string>
     <string name="broadcast_text_lines_preview_label">Anteprima sequenza (bianco e giallo alternati):</string>
+    <string name="settings_news_voice_title">Lettore vocale notizie</string>
+    <string name="settings_news_voice_desc">Legge la notizia sullo schermo senza la data di pubblicazione e attende la fine prima di cambiare</string>
 </resources>

@@ -675,4 +675,6 @@
     <string name="broadcast_text_default_lines">Salsa Smart TV में आपका स्वागत है\nसमाचार, मौसम, खेल और बाज़ार एक ही स्क्रीन पर\nबड़ी स्क्रीन के लिए सिनेमाई और स्मूथ डिज़ाइन\nटीवी पर आपका पसंदीदा सब कुछ, हमेशा तैयार</string>
     <string name="broadcast_text_badge_live">ऑन एयर</string>
     <string name="broadcast_text_lines_preview_label">पंक्तियों का पूर्वावलोकन (सफेद और पीला क्रमशः):</string>
+    <string name="settings_news_voice_title">समाचार वॉइस रीडर</string>
+    <string name="settings_news_voice_desc">स्क्रीन पर दिख रही खबर को बिना प्रकाशन तिथि के पढ़ता है और अगली खबर पर जाने से पहले पढ़ने के पूरा होने तक रुकता है</string>
 </resources>

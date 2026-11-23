@@ -178,6 +178,7 @@ fun SettingsScreen(
     val showRecentApps by viewModel.showRecentApps.collectAsState()
     val lowRamMode by viewModel.lowRamMode.collectAsState()
     val nightComfortMode by viewModel.nightComfortMode.collectAsState()
+    val newsVoiceEnabled by viewModel.newsVoiceEnabled.collectAsState()
     val customWebBookmarks by viewModel.customWebBookmarks.collectAsState()
     val presetWebBookmarks by viewModel.presetWebBookmarks.collectAsState()
     val deletedPresetWebBookmarks by viewModel.deletedPresetWebBookmarks.collectAsState()
@@ -801,6 +802,17 @@ fun SettingsScreen(
                                 }
                             }
 
+                            // News Voice Reader Toggle Card
+                            item {
+                                SettingToggleTile(
+                                    title = stringResource(R.string.settings_news_voice_title),
+                                    desc = stringResource(R.string.settings_news_voice_desc),
+                                    isChecked = newsVoiceEnabled,
+                                    onToggle = { viewModel.setNewsVoiceEnabled(!newsVoiceEnabled) },
+                                    modifier = Modifier.testTag("settings_news_voice_toggle")
+                                )
+                            }
+
                             // System Shortcuts in compact 2-column grid for quick TV D-Pad navigation
                             items(systemShortcuts.chunked(2)) { rowShortcuts ->
                                 Row(
@@ -1310,6 +1322,7 @@ fun SettingsScreen(
                             viewModel = viewModel,
                             screensaverTimeout = screensaverTimeout,
                             screensaverMode = screensaverMode,
+                            newsVoiceEnabled = newsVoiceEnabled,
                             screensaverVideo = screensaverVideo,
                             customScreensaverVideos = customScreensaverVideos,
                             deletedScreensaverPresets = deletedScreensaverPresets,

@@ -77,7 +77,10 @@ data class NewsLocalizedStrings(
     val breakingBadge: String,
     val sourceLabel: String,
     val refreshAction: String,
-    val backToHomeHint: String
+    val backToHomeHint: String,
+    val voiceOnLabel: String,
+    val voiceOffLabel: String,
+    val voiceSpeakingLabel: String
 )
 
 object NewsRepository {
@@ -2049,7 +2052,10 @@ object NewsRepository {
                 breakingBadge = "عاجل",
                 sourceLabel = "المصدر التلقائي: ",
                 refreshAction = "تحديث الأخبار",
-                backToHomeHint = "رجوع للشاشة الرئيسية"
+                backToHomeHint = "رجوع للشاشة الرئيسية",
+                voiceOnLabel = "القراءة: مفعّلة",
+                voiceOffLabel = "القراءة: متوقفة",
+                voiceSpeakingLabel = "جاري القراءة…"
             )
             "fa" -> NewsLocalizedStrings(
                 newsCenterTitle = "مرکز خبر",
@@ -2066,7 +2072,10 @@ object NewsRepository {
                 breakingBadge = "فوری",
                 sourceLabel = "منبع خودکار: ",
                 refreshAction = "بروزرسانی اخبار",
-                backToHomeHint = "بازگشت به خانه"
+                backToHomeHint = "بازگشت به خانه",
+                voiceOnLabel = "خواندن: روشن",
+                voiceOffLabel = "خواندن: خاموش",
+                voiceSpeakingLabel = "در حال خواندن…"
             )
             "ur" -> NewsLocalizedStrings(
                 newsCenterTitle = "نیوز سینٹر",
@@ -2083,7 +2092,10 @@ object NewsRepository {
                 breakingBadge = "بریکنگ",
                 sourceLabel = "خودکار ذریعہ: ",
                 refreshAction = "خبریں تازہ کریں",
-                backToHomeHint = "ہوم پر واپس"
+                backToHomeHint = "ہوم پر واپس",
+                voiceOnLabel = "پڑھائی: آن",
+                voiceOffLabel = "پڑھائی: آف",
+                voiceSpeakingLabel = "پڑھ رہا ہے…"
             )
             "fr" -> NewsLocalizedStrings(
                 newsCenterTitle = "CENTRE D'ACTUALITÉS",
@@ -2100,7 +2112,10 @@ object NewsRepository {
                 breakingBadge = "URGENT",
                 sourceLabel = "Source : ",
                 refreshAction = "Actualiser",
-                backToHomeHint = "Retour à l'accueil"
+                backToHomeHint = "Retour à l'accueil",
+                voiceOnLabel = "Voix : Activée",
+                voiceOffLabel = "Voix : Désactivée",
+                voiceSpeakingLabel = "Lecture…"
             )
             "es" -> NewsLocalizedStrings(
                 newsCenterTitle = "CENTRO DE NOTICIAS",
@@ -2117,7 +2132,10 @@ object NewsRepository {
                 breakingBadge = "ÚLTIMA HORA",
                 sourceLabel = "Fuente: ",
                 refreshAction = "Actualizar",
-                backToHomeHint = "Volver al inicio"
+                backToHomeHint = "Volver al inicio",
+                voiceOnLabel = "Voz: Activa",
+                voiceOffLabel = "Voz: Apagada",
+                voiceSpeakingLabel = "Leyendo…"
             )
             "tr" -> NewsLocalizedStrings(
                 newsCenterTitle = "HABER MERKEZİ",
@@ -2134,7 +2152,10 @@ object NewsRepository {
                 breakingBadge = "SON DAKİKA",
                 sourceLabel = "Kaynak: ",
                 refreshAction = "Yenile",
-                backToHomeHint = "Ana ekrana dön"
+                backToHomeHint = "Ana ekrana dön",
+                voiceOnLabel = "Sesli: Açık",
+                voiceOffLabel = "Sesli: Kapalı",
+                voiceSpeakingLabel = "Okunuyor…"
             )
             "de" -> NewsLocalizedStrings(
                 newsCenterTitle = "NACHRICHTENZENTRUM",
@@ -2151,7 +2172,10 @@ object NewsRepository {
                 breakingBadge = "EILMELDUNG",
                 sourceLabel = "Quelle: ",
                 refreshAction = "Aktualisieren",
-                backToHomeHint = "Zurück zum Start"
+                backToHomeHint = "Zurück zum Start",
+                voiceOnLabel = "Sprache: An",
+                voiceOffLabel = "Sprache: Aus",
+                voiceSpeakingLabel = "Liest vor…"
             )
             "it" -> NewsLocalizedStrings(
                 newsCenterTitle = "CENTRO NOTIZIE",
@@ -2168,7 +2192,10 @@ object NewsRepository {
                 breakingBadge = "ULTIM'ORA",
                 sourceLabel = "Fonte: ",
                 refreshAction = "Aggiorna",
-                backToHomeHint = "Torna alla Home"
+                backToHomeHint = "Torna alla Home",
+                voiceOnLabel = "Voce: Attiva",
+                voiceOffLabel = "Voce: Spenta",
+                voiceSpeakingLabel = "Lettura…"
             )
             "ru" -> NewsLocalizedStrings(
                 newsCenterTitle = "ЦЕНТР НОВОСТЕЙ",
@@ -2185,7 +2212,10 @@ object NewsRepository {
                 breakingBadge = "СРОЧНО",
                 sourceLabel = "Источник: ",
                 refreshAction = "Обновить",
-                backToHomeHint = "На главную"
+                backToHomeHint = "На главную",
+                voiceOnLabel = "Озвучка: Вкл",
+                voiceOffLabel = "Озвучка: Выкл",
+                voiceSpeakingLabel = "Чтение…"
             )
             "pt" -> NewsLocalizedStrings(
                 newsCenterTitle = "CENTRAL DE NOTÍCIAS",
@@ -2202,7 +2232,10 @@ object NewsRepository {
                 breakingBadge = "URGENTE",
                 sourceLabel = "Fonte: ",
                 refreshAction = "Atualizar",
-                backToHomeHint = "Voltar ao Início"
+                backToHomeHint = "Voltar ao Início",
+                voiceOnLabel = "Voz: Ligada",
+                voiceOffLabel = "Voz: Desligada",
+                voiceSpeakingLabel = "Lendo…"
             )
             "pl" -> NewsLocalizedStrings(
                 newsCenterTitle = "CENTRUM WIADOMOŚCI",
@@ -2219,7 +2252,10 @@ object NewsRepository {
                 breakingBadge = "PILNE",
                 sourceLabel = "Źródło: ",
                 refreshAction = "Odśwież",
-                backToHomeHint = "Powrót"
+                backToHomeHint = "Powrót",
+                voiceOnLabel = "Lektor: Wł.",
+                voiceOffLabel = "Lektor: Wył.",
+                voiceSpeakingLabel = "Czytanie…"
             )
             "nl" -> NewsLocalizedStrings(
                 newsCenterTitle = "NIEUWSCENTRUM",
@@ -2236,7 +2272,10 @@ object NewsRepository {
                 breakingBadge = "BREAKING",
                 sourceLabel = "Bron: ",
                 refreshAction = "Vernieuwen",
-                backToHomeHint = "Terug naar start"
+                backToHomeHint = "Terug naar start",
+                voiceOnLabel = "Spraak: Aan",
+                voiceOffLabel = "Spraak: Uit",
+                voiceSpeakingLabel = "Voorlezen…"
             )
             "el" -> NewsLocalizedStrings(
                 newsCenterTitle = "ΚΕΝΤΡΟ ΕΙΔΗΣΕΩΝ",
@@ -2253,7 +2292,10 @@ object NewsRepository {
                 breakingBadge = "ΕΚΤΑΚΤΟ",
                 sourceLabel = "Πηγή: ",
                 refreshAction = "Ανανέωση",
-                backToHomeHint = "Επιστροφή"
+                backToHomeHint = "Επιστροφή",
+                voiceOnLabel = "Φωνή: Ενεργή",
+                voiceOffLabel = "Φωνή: Κλειστή",
+                voiceSpeakingLabel = "Ανάγνωση…"
             )
             "id", "in" -> NewsLocalizedStrings(
                 newsCenterTitle = "PUSAT BERITA",
@@ -2270,7 +2312,10 @@ object NewsRepository {
                 breakingBadge = "TERKINI",
                 sourceLabel = "Sumber: ",
                 refreshAction = "Muat ulang",
-                backToHomeHint = "Kembali ke Beranda"
+                backToHomeHint = "Kembali ke Beranda",
+                voiceOnLabel = "Suara: Aktif",
+                voiceOffLabel = "Suara: Mati",
+                voiceSpeakingLabel = "Membacakan…"
             )
             "vi" -> NewsLocalizedStrings(
                 newsCenterTitle = "TRUNG TÂM TIN TỨC",
@@ -2287,7 +2332,10 @@ object NewsRepository {
                 breakingBadge = "TIN NÓNG",
                 sourceLabel = "Nguồn: ",
                 refreshAction = "Làm mới",
-                backToHomeHint = "Về trang chủ"
+                backToHomeHint = "Về trang chủ",
+                voiceOnLabel = "Đọc tin: Bật",
+                voiceOffLabel = "Đọc tin: Tắt",
+                voiceSpeakingLabel = "Đang đọc…"
             )
             "th" -> NewsLocalizedStrings(
                 newsCenterTitle = "ศูนย์ข่าวสาร",
@@ -2304,7 +2352,10 @@ object NewsRepository {
                 breakingBadge = "ข่าวด่วน",
                 sourceLabel = "ที่มา: ",
                 refreshAction = "รีเฟรช",
-                backToHomeHint = "กลับหน้าหลัก"
+                backToHomeHint = "กลับหน้าหลัก",
+                voiceOnLabel = "เสียงอ่าน: เปิด",
+                voiceOffLabel = "เสียงอ่าน: ปิด",
+                voiceSpeakingLabel = "กำลังอ่าน…"
             )
             "zh" -> NewsLocalizedStrings(
                 newsCenterTitle = "新闻中心",
@@ -2321,7 +2372,10 @@ object NewsRepository {
                 breakingBadge = "快讯",
                 sourceLabel = "来源: ",
                 refreshAction = "刷新",
-                backToHomeHint = "返回首页"
+                backToHomeHint = "返回首页",
+                voiceOnLabel = "语音朗读：开",
+                voiceOffLabel = "语音朗读：关",
+                voiceSpeakingLabel = "正在朗读…"
             )
             "ja" -> NewsLocalizedStrings(
                 newsCenterTitle = "ニュースセンター",
@@ -2338,7 +2392,10 @@ object NewsRepository {
                 breakingBadge = "速報",
                 sourceLabel = "出典: ",
                 refreshAction = "更新",
-                backToHomeHint = "ホームへ戻る"
+                backToHomeHint = "ホームへ戻る",
+                voiceOnLabel = "音声: オン",
+                voiceOffLabel = "音声: オフ",
+                voiceSpeakingLabel = "読み上げ中…"
             )
             "ko" -> NewsLocalizedStrings(
                 newsCenterTitle = "뉴스 센터",
@@ -2355,7 +2412,10 @@ object NewsRepository {
                 breakingBadge = "속보",
                 sourceLabel = "출처: ",
                 refreshAction = "새로고침",
-                backToHomeHint = "홈으로"
+                backToHomeHint = "홈으로",
+                voiceOnLabel = "음성: 켜짐",
+                voiceOffLabel = "음성: 꺼짐",
+                voiceSpeakingLabel = "읽는 중…"
             )
             "hi" -> NewsLocalizedStrings(
                 newsCenterTitle = "समाचार केंद्र",
@@ -2372,7 +2432,10 @@ object NewsRepository {
                 breakingBadge = "ब्रेकिंग",
                 sourceLabel = "स्रोत: ",
                 refreshAction = "रिफ्रेश",
-                backToHomeHint = "होम पर लौटें"
+                backToHomeHint = "होम पर लौटें",
+                voiceOnLabel = "आवाज़: चालू",
+                voiceOffLabel = "आवाज़: बंद",
+                voiceSpeakingLabel = "पढ़ रहा है…"
             )
             else -> NewsLocalizedStrings(
                 newsCenterTitle = "NEWS CENTER",
@@ -2389,7 +2452,10 @@ object NewsRepository {
                 breakingBadge = "BREAKING",
                 sourceLabel = "Source: ",
                 refreshAction = "Refresh",
-                backToHomeHint = "Back to Home"
+                backToHomeHint = "Back to Home",
+                voiceOnLabel = "Voice: On",
+                voiceOffLabel = "Voice: Off",
+                voiceSpeakingLabel = "Reading…"
             )
         }
     }

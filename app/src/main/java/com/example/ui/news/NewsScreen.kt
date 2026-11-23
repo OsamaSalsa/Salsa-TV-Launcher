@@ -41,6 +41,8 @@ import androidx.compose.material.icons.filled.RecordVoiceOver
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.Timer
+import androidx.compose.material.icons.filled.VolumeOff
+import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -85,6 +87,7 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontWeight
@@ -138,6 +141,8 @@ fun NewsScreen(
     val strings = remember(effectiveLang) { NewsRepository.getLocalizedStrings(effectiveLang) }
 
     val newsState by NewsRepository.newsState.collectAsState()
+    val isVoiceReaderEnabled by prefs.newsVoiceEnabledFlow.collectAsState(initial = false)
+    val voiceReader = rememberNewsVoiceReader()
 
     val allSections = remember { NewsSectionType.entries }
     var activeSection by remember { mutableStateOf(initialSection) }
@@ -191,6 +196,9 @@ fun NewsScreen(
     val storyCount = currentSectionStories.size.coerceAtLeast(1)
     val safeIndex = ((activeStoryIndex % storyCount) + storyCount) % storyCount
     val currentStory = currentSectionStories.getOrNull(safeIndex)
+    val currentStoryKey = remember(activeSection, safeIndex, currentStory?.id, currentStory?.headline) {
+        currentStory?.let { "${activeSection.id}_${safeIndex}_${it.id}_${it.headline.hashCode()}" } ?: ""
+    }
     val nextSection = remember(activeSection, allSections) {
         val secIdx = allSections.indexOf(activeSection).coerceAtLeast(0)
         allSections[(secIdx + 1) % allSections.size]
@@ -205,18 +213,47 @@ fun NewsScreen(
         currentSectionStories.getOrNull((safeIndex + 1) % storyCount)
     }
 
-    // Auto-cycle stories every 10 seconds with live progress bar animation.
-    // In screensaver mode (autoAdvanceSections = true), automatically transitions to the next section once all stories finish.
-    LaunchedEffect(activeSection, safeIndex, storyCount, autoAdvanceSections, cycleRefreshNonce) {
+    // Speak the currently displayed news article (headline + summary, NEVER publication date/time)
+    // whenever Voice Reader is enabled and the visible story changes.
+    LaunchedEffect(isVoiceReaderEnabled, currentStoryKey, effectiveLang) {
+        if (!isVoiceReaderEnabled || currentStory == null || currentStoryKey.isBlank()) {
+            voiceReader.stop()
+        } else {
+            val spokenText = buildSpokenNewsText(currentStory)
+            voiceReader.speakStory(
+                storyKey = currentStoryKey,
+                text = spokenText,
+                effectiveLang = effectiveLang
+            )
+        }
+    }
+
+    // Auto-cycle stories every 6 seconds.
+    // If Voice Reader is enabled and still reading after 6 seconds, hold on the current story until reading finishes.
+    LaunchedEffect(activeSection, safeIndex, currentStoryKey, storyCount, autoAdvanceSections, cycleRefreshNonce) {
         if (storyCount <= 1 && !autoAdvanceSections) return@LaunchedEffect
-        val durationMs = 10_000L
+        val minDurationMs = 6_000L
         val stepMs = 100L
         var elapsed = 0L
-        while (elapsed < durationMs) {
-            storyProgressRatio = (elapsed.toFloat() / durationMs).coerceIn(0.12f, 1f)
+        while (elapsed < minDurationMs) {
+            storyProgressRatio = (elapsed.toFloat() / minDurationMs).coerceIn(0.12f, 1f)
             delay(stepMs)
             elapsed += stepMs
         }
+        storyProgressRatio = 1f
+
+        if (isVoiceReaderEnabled && currentStoryKey.isNotBlank()) {
+            var extraWaitMs = 0L
+            val maxExtraWaitMs = 60_000L
+            while (isVoiceReaderEnabled &&
+                !voiceReader.hasCompletedStory(currentStoryKey) &&
+                extraWaitMs < maxExtraWaitMs
+            ) {
+                delay(stepMs)
+                extraWaitMs += stepMs
+            }
+        }
+
         val nextViewedCount = storiesViewedInSection + 1
         if (autoAdvanceSections && nextViewedCount >= storyCount) {
             activeSection = nextSection
@@ -263,6 +300,15 @@ fun NewsScreen(
                     isArabicFont = isArabicFont,
                     activeSourceName = newsState.activeSourceName,
                     currentTimeStr = currentTimeStr,
+                    isVoiceReaderEnabled = isVoiceReaderEnabled,
+                    isVoiceSpeaking = voiceReader.isSpeaking,
+                    isScreensaverMode = isScreensaverMode,
+                    onToggleVoiceReader = {
+                        val next = !isVoiceReaderEnabled
+                        coroutineScope.launch {
+                            prefs.setNewsVoiceEnabled(next)
+                        }
+                    },
                     onRefresh = {
                         coroutineScope.launch {
                             NewsRepository.refreshNewsForLanguage(effectiveLang, force = true)
@@ -312,6 +358,7 @@ fun NewsScreen(
                             updatedTime = newsState.updatedTime,
                             strings = strings,
                             isArabicFont = isArabicFont,
+                            isVoiceSpeaking = isVoiceReaderEnabled && voiceReader.isSpeaking,
                             onNextStory = {
                                 activeStoryIndex = (safeIndex + 1) % storyCount
                             },
@@ -504,6 +551,10 @@ private fun NewsHeaderBar(
     isArabicFont: Boolean,
     activeSourceName: String,
     currentTimeStr: String,
+    isVoiceReaderEnabled: Boolean,
+    isVoiceSpeaking: Boolean,
+    isScreensaverMode: Boolean,
+    onToggleVoiceReader: () -> Unit,
     onRefresh: () -> Unit,
     onBackToHome: () -> Unit
 ) {
@@ -596,10 +647,10 @@ private fun NewsHeaderBar(
             }
         }
 
-        // Right: Auto-Selected Language Source Pill + Refresh + • Live + Date + Clock
+        // Right: Auto-Selected Language Source Pill + Voice Reader Pill + Refresh + • Live + Clock
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             // Auto-selected language news source badge
             Row(
@@ -618,6 +669,74 @@ private fun NewsHeaderBar(
                     fontWeight = FontWeight.SemiBold,
                     fontFamily = if (isArabicFont) CairoFontFamily else null
                 )
+            }
+
+            // Voice Reader Toggle / Live Reading Pill
+            if (!isScreensaverMode || isVoiceReaderEnabled) {
+                var voiceFocused by remember { mutableStateOf(false) }
+                val activeBorderColor = when {
+                    voiceFocused -> Color(0xFFFBBF24)
+                    isVoiceSpeaking -> Color(0xFFF97316)
+                    isVoiceReaderEnabled -> Color(0xFF38BDF8).copy(alpha = 0.65f)
+                    else -> Color.White.copy(alpha = 0.16f)
+                }
+                val pillBgColor = when {
+                    voiceFocused -> Color(0xFFF97316).copy(alpha = 0.34f)
+                    isVoiceSpeaking -> Color(0xFF9A3412).copy(alpha = 0.62f)
+                    isVoiceReaderEnabled -> Color(0xFF0C4A6E).copy(alpha = 0.68f)
+                    else -> Color(0xFF1E293B).copy(alpha = 0.72f)
+                }
+                Row(
+                    modifier = Modifier
+                        .testTag("news_voice_toggle_button")
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(pillBgColor)
+                        .border(
+                            width = if (voiceFocused || isVoiceSpeaking) 1.5.dp else 1.dp,
+                            color = activeBorderColor,
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .then(
+                            if (!isScreensaverMode) {
+                                Modifier
+                                    .onFocusChanged { voiceFocused = it.isFocused }
+                                    .focusable()
+                                    .clickable { onToggleVoiceReader() }
+                            } else {
+                                Modifier
+                            }
+                        )
+                        .padding(horizontal = 10.dp, vertical = 5.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(5.dp)
+                ) {
+                    Icon(
+                        imageVector = if (isVoiceReaderEnabled) Icons.Default.VolumeUp else Icons.Default.VolumeOff,
+                        contentDescription = if (isVoiceReaderEnabled) strings.voiceOnLabel else strings.voiceOffLabel,
+                        tint = when {
+                            isVoiceSpeaking -> Color(0xFFFDBA74)
+                            isVoiceReaderEnabled -> Color(0xFF7DD3FC)
+                            else -> Color.White.copy(alpha = 0.65f)
+                        },
+                        modifier = Modifier.size(15.dp)
+                    )
+                    Text(
+                        text = when {
+                            isVoiceSpeaking -> strings.voiceSpeakingLabel
+                            isVoiceReaderEnabled -> strings.voiceOnLabel
+                            else -> strings.voiceOffLabel
+                        },
+                        color = when {
+                            isVoiceSpeaking -> Color(0xFFFED7AA)
+                            isVoiceReaderEnabled -> Color(0xFFE0F2FE)
+                            else -> Color.White.copy(alpha = 0.75f)
+                        },
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        fontFamily = if (isArabicFont) CairoFontFamily else null,
+                        maxLines = 1
+                    )
+                }
             }
 
             // Refresh button
@@ -901,6 +1020,7 @@ private fun NewsFeaturedStoryPanel(
     updatedTime: String,
     strings: NewsLocalizedStrings,
     isArabicFont: Boolean,
+    isVoiceSpeaking: Boolean,
     onNextStory: () -> Unit,
     onPrevStory: () -> Unit,
     onSelectStoryIndex: (Int) -> Unit,
@@ -1102,12 +1222,25 @@ private fun NewsFeaturedStoryPanel(
                     )
                 }
 
-                Icon(
-                    imageVector = Icons.Default.Timer,
-                    contentDescription = null,
-                    tint = Color.White.copy(alpha = 0.55f),
-                    modifier = Modifier.size(16.dp)
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    if (isVoiceSpeaking) {
+                        Icon(
+                            imageVector = Icons.Default.VolumeUp,
+                            contentDescription = strings.voiceSpeakingLabel,
+                            tint = Color(0xFFFDBA74),
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
+                    Icon(
+                        imageVector = Icons.Default.Timer,
+                        contentDescription = null,
+                        tint = Color.White.copy(alpha = 0.55f),
+                        modifier = Modifier.size(16.dp)
+                    )
+                }
             }
         }
 

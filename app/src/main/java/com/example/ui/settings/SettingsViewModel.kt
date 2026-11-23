@@ -95,6 +95,15 @@ class SettingsViewModel(
         }
     }
 
+    val newsVoiceEnabled: StateFlow<Boolean> = preferences.newsVoiceEnabledFlow
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+
+    fun setNewsVoiceEnabled(enabled: Boolean) {
+        viewModelScope.launch {
+            preferences.setNewsVoiceEnabled(enabled)
+        }
+    }
+
     fun exportBackup(context: Context) {
         viewModelScope.launch {
             val result = com.example.util.BackupRestoreManager.exportBackupToFile(

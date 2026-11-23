@@ -675,4 +675,6 @@
     <string name="broadcast_text_default_lines">Salsa Smart TV dünyasına hoş geldiniz\nHaber, Hava Durumu, Spor ve Ekonomi Tek Ekranda\nBüyük Ekran İçin Sinematik ve Akıcı Tasarım\nTV\'de Sevdiğiniz Her Şey Her An Hazır</string>
     <string name="broadcast_text_badge_live">YAYINDA</string>
     <string name="broadcast_text_lines_preview_label">Satır Sırası Önizlemesi (Sırayla Beyaz ve Sarı):</string>
+    <string name="settings_news_voice_title">Sesli Haber Okuyucu</string>
+    <string name="settings_news_voice_desc">Ekrandaki haberi yayın tarihi olmadan sesli okur ve okuma bitene kadar diğer habere geçmez</string>
 </resources>

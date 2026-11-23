@@ -1161,7 +1161,7 @@ private fun SearchResultAppTile(
             ) {
                 when (app.packageName) {
                     "com.minidownloader.portal" -> Image(painterResource(R.drawable.ic_minidownloader_banner), null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
-                    "com.aurastore.portal" -> Image(painterResource(R.drawable.ic_aurastore_banner), null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+                    "com.aurastore.portal" -> Image(painterResource(R.drawable.ic_salsa_store_banner), "Salsa Store", Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
                     else -> {
                         if (iconBmp != null) {
                             Image(

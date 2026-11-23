@@ -52,6 +52,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -121,6 +122,7 @@ internal fun ScreensaverSettingsSection(
     viewModel: SettingsViewModel,
     screensaverTimeout: String,
     screensaverMode: String,
+    newsVoiceEnabled: Boolean,
     screensaverVideo: String,
     customScreensaverVideos: Set<String>,
     deletedScreensaverPresets: Set<String>,
@@ -206,6 +208,18 @@ internal fun ScreensaverSettingsSection(
                     ),
                     selectedOption = screensaverMode,
                     onOptionSelected = { viewModel.setScreensaverMode(it) }
+                )
+            }
+        }
+
+        if (screensaverMode == "news_dashboard" || screensaverMode == "all_dashboards_cycle") {
+            item {
+                SettingToggleTile(
+                    title = stringResource(R.string.settings_news_voice_title),
+                    desc = stringResource(R.string.settings_news_voice_desc),
+                    isChecked = newsVoiceEnabled,
+                    onToggle = { viewModel.setNewsVoiceEnabled(!newsVoiceEnabled) },
+                    modifier = Modifier.testTag("screensaver_news_voice_toggle")
                 )
             }
         }

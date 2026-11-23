@@ -668,4 +668,6 @@
     <string name="broadcast_text_default_lines">Chào mừng đến với Salsa Smart TV\nTin tức, Thời tiết, Thể thao &amp; Thị trường trên một màn hình\nThiết kế điện ảnh mượt mà dành cho màn hình lớn\nMọi thứ bạn yêu thích trên TV, luôn sẵn sàng</string>
     <string name="broadcast_text_badge_live">PHÁT SÓNG</string>
     <string name="broadcast_text_lines_preview_label">Xem trước thứ tự dòng (Trắng &amp; Vàng xen kẽ):</string>
+    <string name="settings_news_voice_title">Đọc tin tức bằng giọng nói</string>
+    <string name="settings_news_voice_desc">Đọc tin đang hiển thị không kèm ngày đăng và chờ đọc xong mới chuyển sang tin tiếp theo</string>
 </resources>

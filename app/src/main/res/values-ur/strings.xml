@@ -675,4 +675,6 @@
     <string name="broadcast_text_default_lines">Salsa اسمارٹ ٹی وی میں خوش آمدید\nخبریں، موسم، کھیل اور معیشت ایک ہی اسکرین پر\nبڑی اسکرین کے لیے سنیمائی اور رواں ڈیزائن\nٹی وی پر آپ کی پسندیدہ ہر چیز، ہمیشہ تیار</string>
     <string name="broadcast_text_badge_live">آن ایئر</string>
     <string name="broadcast_text_lines_preview_label">سطروں کی ترتیب (سفید اور پیلا باری باری):</string>
+    <string name="settings_news_voice_title">خبروں کا صوتی قاری</string>
+    <string name="settings_news_voice_desc">اسکرین پر موجود خبر کو اشاعت کی تاریخ کے بغیر پڑھتا ہے اور پڑھنا مکمل ہونے تک اگلی خبر پر نہیں جاتا</string>
 </resources>

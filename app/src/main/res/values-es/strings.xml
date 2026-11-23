@@ -646,4 +646,6 @@
     <string name="broadcast_text_default_lines">Bienvenido a Salsa Smart TV\nNoticias, Clima, Deportes y Mercados en un solo lugar\nDiseño cinematográfico creado para la gran pantalla\nTodo lo que amas en tu TV, siempre listo</string>
     <string name="broadcast_text_badge_live">EN EL AIRE</string>
     <string name="broadcast_text_lines_preview_label">Vista previa de secuencia (blanco y amarillo alternados):</string>
+    <string name="settings_news_voice_title">Lector de noticias por voz</string>
+    <string name="settings_news_voice_desc">Lee la noticia en pantalla sin fecha de publicación y espera a terminar antes de pasar a la siguiente</string>
 </resources>

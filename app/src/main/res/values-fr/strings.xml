@@ -646,4 +646,6 @@
     <string name="broadcast_text_default_lines">Bienvenue sur Salsa Smart TV\nActualités, Météo, Sports &amp; Marchés au même endroit\nDesign cinématographique fluide pour grand écran\nTout ce que vous aimez à la TV, toujours prêt</string>
     <string name="broadcast_text_badge_live">À L\'ANTENNE</string>
     <string name="broadcast_text_lines_preview_label">Aperçu de la séquence (blanc et jaune alternés) :</string>
+    <string name="settings_news_voice_title">Lecteur vocal des actualités</string>
+    <string name="settings_news_voice_desc">Lit l’actualité affichée sans la date de publication et attend la fin de la lecture avant de changer</string>
 </resources>

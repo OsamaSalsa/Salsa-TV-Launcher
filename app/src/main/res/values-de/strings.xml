@@ -641,4 +641,6 @@
     <string name="broadcast_text_default_lines">Willkommen bei Salsa Smart TV\nNachrichten, Wetter, Sport &amp; Märkte an einem Ort\nKinoreifes Design für den großen Bildschirm\nAlles, was du am TV liebst – immer bereit</string>
     <string name="broadcast_text_badge_live">AUF SENDUNG</string>
     <string name="broadcast_text_lines_preview_label">Zeilen-Vorschau (abwechselnd Weiß &amp; Gelb):</string>
+    <string name="settings_news_voice_title">Nachrichten-Vorlesefunktion</string>
+    <string name="settings_news_voice_desc">Liest die angezeigte Nachricht ohne Veröffentlichungsdatum vor und wartet bis zum Ende, bevor gewechselt wird</string>
 </resources>

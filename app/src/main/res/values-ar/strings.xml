@@ -669,4 +669,6 @@
     <string name="broadcast_text_default_lines">أهلاً بكم في عالم Salsa الذكي\nأخبار، طقس، رياضة واقتصاد في شاشة واحدة\nتصميم سينمائي هادئ وأداء فائق السلاسة\nكل ما تحبه على التلفاز.. في مكان واحد</string>
     <string name="broadcast_text_badge_live">على الهواء</string>
     <string name="broadcast_text_lines_preview_label">معاينة تتابع الأسطر (أبيض وأصفر بالتوالي):</string>
+    <string name="settings_news_voice_title">قراءة الأخبار صوتياً</string>
+    <string name="settings_news_voice_desc">قراءة الخبر المعروض على الشاشة صوتياً بدون تاريخ النشر، مع الانتظار حتى انتهاء القراءة قبل الانتقال للخبر التالي</string>
 </resources>

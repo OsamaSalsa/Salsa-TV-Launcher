@@ -689,4 +689,6 @@
     <string name="broadcast_text_default_lines">Witamy w Salsa Smart TV\nWiadomości, Pogoda, Sport i Rynki w jednym miejscu\nKinowy, płynny styl dla dużego ekranu\nWszystko, co kochasz w TV, zawsze gotowe</string>
     <string name="broadcast_text_badge_live">NA ANTENIE</string>
     <string name="broadcast_text_lines_preview_label">Podgląd kolejności (naprzemiennie biały i żółty):</string>
+    <string name="settings_news_voice_title">Lektor wiadomości</string>
+    <string name="settings_news_voice_desc">Czyta wyświetlaną wiadomość bez daty publikacji i czeka z przełączeniem do zakończenia czytania</string>
 </resources>

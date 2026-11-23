@@ -641,4 +641,6 @@
     <string name="broadcast_text_default_lines">Καλώς ήρθατε στο Salsa Smart TV\nΕιδήσεις, Καιρός, Αθλητικά &amp; Αγορές σε μία οθόνη\nΚινηματογραφικός σχεδιασμός για μεγάλη οθόνη\nΌλα όσα αγαπάτε στην τηλεόραση, πάντα έτοιμα</string>
     <string name="broadcast_text_badge_live">ΣΤΟΝ ΑΕΡΑ</string>
     <string name="broadcast_text_lines_preview_label">Προεπισκόπηση σειράς (εναλλαγή λευκού &amp; κίτρινου):</string>
+    <string name="settings_news_voice_title">Φωνητικός αναγνώστης ειδήσεων</string>
+    <string name="settings_news_voice_desc">Ανάγνωση της εμφανιζόμενης είδησης χωρίς ημερομηνία δημοσίευσης, με αναμονή έως το τέλος πριν την αλλαγή</string>
 </resources>

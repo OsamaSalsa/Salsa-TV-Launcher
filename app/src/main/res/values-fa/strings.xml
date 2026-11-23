@@ -641,4 +641,6 @@
     <string name="broadcast_text_default_lines">به دنیای هوشمند Salsa خوش آمدید\nاخبار، آب‌وهوا، ورزش و اقتصاد در یک صفحه\nطراحی سینمایی روان برای نمایشگر بزرگ\nهر آنچه در تلویزیون دوست دارید، همیشه آماده</string>
     <string name="broadcast_text_badge_live">روی آنتن</string>
     <string name="broadcast_text_lines_preview_label">پیش‌نمایش ترتیب خطوط (سفید و زرد متناوب):</string>
+    <string name="settings_news_voice_title">خواندن صوتی اخبار</string>
+    <string name="settings_news_voice_desc">خبر نمایش داده‌شده را بدون تاریخ انتشار می‌خواند و تا پایان خواندن به خبر بعدی نمی‌رود</string>
 </resources>

@@ -94,6 +94,7 @@ class LauncherPreferences(private val context: Context) {
         val KEY_DELETED_ONLINE_WALLPAPERS = stringSetPreferencesKey("deleted_online_wallpapers")
         val KEY_CUSTOM_ONLINE_WALLPAPERS = stringSetPreferencesKey("custom_online_wallpapers")
         val KEY_WEATHER_ENABLED = booleanPreferencesKey("weather_home_enabled")
+        val KEY_NEWS_VOICE_ENABLED = booleanPreferencesKey("news_voice_reader_enabled")
         val KEY_ECONOMIC_INDICES = stringPreferencesKey("economic_selected_indices")
         val KEY_ECONOMIC_COMMODITIES = stringPreferencesKey("economic_selected_commodities")
         val KEY_ECONOMIC_FOREX = stringPreferencesKey("economic_selected_forex")
@@ -1118,6 +1119,16 @@ class LauncherPreferences(private val context: Context) {
         }
     }
 
+    val newsVoiceEnabledFlow: Flow<Boolean> = prefFlow { prefs ->
+        prefs[KEY_NEWS_VOICE_ENABLED] ?: false
+    }
+
+    suspend fun setNewsVoiceEnabled(enabled: Boolean) {
+        context.dataStore.edit { prefs ->
+            prefs[KEY_NEWS_VOICE_ENABLED] = enabled
+        }
+    }
+
     val economicIndicesFlow: Flow<List<String>> = prefFlow { prefs ->
         val raw = prefs[KEY_ECONOMIC_INDICES] ?: "sp500,nasdaq,dow,dxy"
         raw.split(",").map { it.trim() }.filter { it.isNotBlank() }.ifEmpty {
@@ -1269,7 +1280,7 @@ class LauncherPreferences(private val context: Context) {
                 KEY_ADS_BLOCKER_ENABLED, KEY_SHOW_ONLY_TV_APPS, KEY_CLOCK_SHOW_SECONDS,
                 KEY_IPTV_PRESETS_INITIALIZED, KEY_AUTO_CHECK_UPDATES, KEY_AUTO_RESUME_LAST_CHANNEL,
                 KEY_SHOW_RECENT_APPS, KEY_USE_DYNAMIC_COLOR, KEY_SLIDESHOW_SHUFFLE,
-                KEY_LOW_RAM_MODE, KEY_WEATHER_ENABLED
+                KEY_LOW_RAM_MODE, KEY_WEATHER_ENABLED, KEY_NEWS_VOICE_ENABLED
             )
             val intKeys = listOf(
                 KEY_APPS_PER_ROW, KEY_GLASS_OPACITY, KEY_APPS_TOP_OFFSET, KEY_WALLPAPER_VISIBILITY,

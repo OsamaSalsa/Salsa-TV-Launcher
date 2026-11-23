@@ -641,4 +641,6 @@
     <string name="broadcast_text_default_lines">Welcome to Salsa Smart TV\nLive News, Weather, Sports &amp; Markets in One Place\nCinematic Fluid Design Crafted for the Big Screen\nEverything You Love on TV, Always Ready</string>
     <string name="broadcast_text_badge_live">ON AIR</string>
     <string name="broadcast_text_lines_preview_label">Headline Sequence Preview (Alternating White &amp; Yellow):</string>
+    <string name="settings_news_voice_title">Voice News Reader</string>
+    <string name="settings_news_voice_desc">Read the displayed news headline and summary aloud without publish date, waiting until reading finishes before switching</string>
 </resources>

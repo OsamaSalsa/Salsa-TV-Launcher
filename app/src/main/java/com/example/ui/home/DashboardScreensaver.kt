@@ -182,6 +182,13 @@ internal fun DashboardScreensaver(
             elapsed += stepMs
             slideProgress = (elapsed.toFloat() / durationMs.toFloat()).coerceIn(0f, 1f)
         }
+        if (slide == DashboardScreensaverSlide.NEWS) {
+            var extraWaitMs = 0L
+            while (com.example.ui.news.NewsVoicePlaybackTracker.isSpeakingFlow.value && extraWaitMs < 35_000L) {
+                delay(stepMs)
+                extraWaitMs += stepMs
+            }
+        }
         val nextSlideIndex = (currentSlideIndex + 1) % cycleSlides.size
         if (nextSlideIndex == 0) {
             newsCycleCount = DashboardScreensaverCycleTracker.advanceNextNewsCycle()

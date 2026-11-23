@@ -634,4 +634,6 @@
     <string name="broadcast_text_default_lines">Selamat Datang di Salsa Smart TV\nBerita, Cuaca, Olahraga &amp; Pasar dalam Satu Layar\nDesain Sinematik Halus untuk Layar Besar\nSemua yang Anda Suka di TV, Selalu Siap</string>
     <string name="broadcast_text_badge_live">SIARAN</string>
     <string name="broadcast_text_lines_preview_label">Pratinjau Urutan Baris (Putih &amp; Kuning Bergantian):</string>
+    <string name="settings_news_voice_title">Pembaca Berita Suara</string>
+    <string name="settings_news_voice_desc">Membacakan berita di layar tanpa tanggal terbit, dan menunggu hingga selesai sebelum berpindah</string>
 </resources>

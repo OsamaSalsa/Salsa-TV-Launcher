@@ -634,4 +634,6 @@
     <string name="broadcast_text_default_lines">Salsa Smart TV へようこそ\nニュース・天気・スポーツ・経済をひとつの画面に\n大画面のために磨かれたシネマティック体験\nテレビの好きなすべてを、いつでも手元に</string>
     <string name="broadcast_text_badge_live">ON AIR</string>
     <string name="broadcast_text_lines_preview_label">表示順プレビュー（白と黄色を交互に表示）:</string>
+    <string name="settings_news_voice_title">ニュース音声読み上げ</string>
+    <string name="settings_news_voice_desc">表示中のニュースを公開日時なしで読み上げ、読み終わるまで次のニュースへ移動しません</string>
 </resources>
