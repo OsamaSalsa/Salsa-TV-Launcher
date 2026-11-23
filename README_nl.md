@@ -11,11 +11,11 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest)
+[![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
 
-### 📥 [Klik hier om de nieuwste APK-versie te downloaden (Klaar voor installatie)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest/download/salsa-tv-launcher.apk)
+### 📥 [Klik hier om de nieuwste APK-versie te downloaden (Klaar voor installatie)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
 
@@ -36,14 +36,16 @@ Speciaal ontworpen voor tv-afstandsbedieningen (D-Pad-navigatie), waarbij elke a
 ## 🚀 Belangrijkste Functies
 
 ### 🆕 Nieuw in Versie 2.1
-* **🌐 Live 4-Dashboard Informatiecentrum**: Directe toegang vanuit de bovenbalk tot vier vloeiend geanimeerde schermen:
-  * **☀️ Weer-dashboard**: Automatische staddetectie, 24-uursgrafiek, luchtvochtigheid/wind/druk/UV en 5-daagse voorspelling.
-  * **📰 Nieuws-centrum**: Meertalige live RSS-koppen met automatische wissel elke 10 seconden.
-  * **📈 Economie & Markten**: Wereldwijde indices, Forex-koersen, grondstoffen & crypto, 5-daagse trends en aanpasbare economische kalender.
-  * **⚽ Voetbalcentrum (365Scores)**: Live standen, wedstrijden van vandaag, ranglijsten, topscorers, uitgebreide clubselectie en winkansen.
-* **🖥️ Slimme Dashboard-screensavers & Automatisch Wisselen**: Kies **Weer**, **Nieuws**, **Economie**, **Voetbal** of **Alles automatisch wisselen** (**Nieuws 30s → Weer 10s → Economie 10s → Voetbal 10s → herhalen**).
-* **🎨 Live UI-instellingen & Responsieve Bovenbalk**: Realtime aanpassingen, nachtfilter en alle bovenbalkpictogrammen zichtbaar zonder afsnijding.
-* **⚡ Lichtere & Snellere v2.1-engine**: Kleinere APK, opgeschoonde code, vloeiende 60 FPS met behoud van 4K-kwaliteit, standaard webportalen gericht op **YouTube TV** en **4 gameportalen**, en volledige vertaling in **21 talen**.
+* **🌐 Live 4-Dashboard Informatiecentrum**: Directe toegang vanaf de bovenbalk tot vier vloeiend geanimeerde schermen:
+  * **☀️ Weer-dashboard**: Automatische **GPS**-locatiedetectie en stadzoeken, 24-uurscurve, vochtigheid/wind/druk/UV en 5-daagse voorspelling.
+  * **📰 Nieuws-centrum**: Aparte RSS-feeds voor alle **21 talen** verdeeld over 5 rubrieken (**Hoofdpunten, Politiek, Economie, Technologie, Wereld**) zonder dubbele koppen en met automatische wissel elke 10s.
+  * **📈 Economie & Markten**: Wereldwijde beursindices, Forex, grondstoffen & crypto, 5-daagse grafieken en aanpasbare economische kalender.
+  * **⚽ Voetbalcentrum (365Scores)**: Live standen, wedstrijden van vandaag, ranglijsten, topscorers, uitgebreid club-/competitieoverzicht en winkansen.
+* **🖥️ Slimme Dashboard-screensavers & Automatisch Wisselen**: Toon **Weer**, **Nieuws**, **Economie**, **Voetbal** of **Alles automatisch wisselen** (**Nieuws 60s → Weer 10s → Economie 10s → Voetbal 10s → terug naar Nieuws in de volgende rubriek**). De losse Nieuws-screensaver wisselt ook automatisch tussen alle 5 rubrieken.
+* **📡 Nieuwsticker-tekstscreensaver (`Broadcast Text Showcase`)**: Dynamische tv-studioregels op een 60% gedimde Aurora-achtergrond met afwisselend **witte en gele** koppen, `ON AIR`-badge, bewerkbare regels, instelbare duur (`3–15s`) en optionele achtergrondmuziek of lokale MP3.
+* **🎨 Live UI-instellingen (`Live UI Settings HUD`)**: Zwevend menu direct op het startscherm om 4K-achtergronden, helderheid, rijhoogte, rasterdichtheid, glastransparantie, klok/datum/begroeting, bovenbalk, weer, nachtfilter, Material You en Lite-modus aan te passen **terwijl u elk resultaat direct live ziet**.
+* **🧭 Responsieve Bovenbalk & Snellere v2.1-engine**: Geen afgesneden pictogrammen, compactere APK en vloeiende 60 FPS met 4K-kwaliteit.
+* **🌍 Standaard Webportalen & 21 Talen**: Bevat **YouTube TV**, **Google (`google.com`)** en **4 gameportalen** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**), volledig vertaald in **21 talen**.
 
 ### 🖥️ 1. Filmisch en Dynamisch Startscherm
 * **Slimme Focus met Zoom:** Kaarten komen tot leven wanneer ze worden geselecteerd met oplichtende randen, zachte schaduwen en dynamische schaling.
@@ -143,7 +145,8 @@ Salsa TV Launcher is ontworpen om moeiteloos te worden bediend met elke standaar
 ## 📦 Installatie
 
 ### Methode 1: Directe APK Download (Aanbevolen)
-1. Download het bestand [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest/download/salsa-tv-launcher.apk) bij Releases.
+1. Download het bestand [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk) bij Releases.
+   👉 **[Downloader Korte Code / Directe Link: aftv.news/5157967](http://aftv.news/5157967)**
 2. Zet het bestand over naar uw Android TV via een USB-stick, *Send Files to TV* of de *Downloader*-app.
 3. Installeer de APK en verleen de gevraagde machtigingen.
 4. Druk op de **Home-knop** op uw afstandsbediening en selecteer **Salsa TV Launcher** als uw standaard startscherm (**"Altijd"**).

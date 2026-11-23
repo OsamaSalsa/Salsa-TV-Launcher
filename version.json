@@ -1,7 +1,7 @@
 {
   "versionCode": 7,
   "versionName": "2.1",
-  "apkUrl": "https://raw.githubusercontent.com/OsamaSalsa/Salsa-TV-Launcher/main/salsa-tv-launcher.apk",
+  "apkUrl": "https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk",
   "changelog": "Salsa TV Launcher v2.1 - Broadcast Text Screensaver with Dynamic Dimmed Backdrop & Ambient Audio, GPS Weather City Detection, Live Weather, News, Economy & Football Dashboards with Smooth Ambient Motion, Auto-Cycling Dashboard Screensaver (News 1m with Auto-Rotating Sections, Weather 10s, Economy 10s, Football 10s), Non-Clipping Top Bar, Lighter & Faster Engine, Default Web Portals (YouTube, Google & Games), and Complete 21-Language Localization",
   "mandatory": false
 }

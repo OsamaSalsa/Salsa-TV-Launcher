@@ -184,7 +184,6 @@ object NewsRepository {
 
             val sourceConfig = getBestSourceConfigForLanguage(effLang)
             val strings = getLocalizedStrings(effLang)
-            val updatedSections = baseline.articlesBySection.toMutableMap()
 
             // Fetch all 5 sections concurrently so real news and images appear quickly
             val sectionResults = coroutineScope {
@@ -193,35 +192,34 @@ object NewsRepository {
                         val feedUrls = sourceConfig.sectionFeeds[section].orEmpty()
                         val fetchedArticles = mutableListOf<NewsArticleItem>()
                         for (feedUrl in feedUrls) {
-                            if (fetchedArticles.size >= 6) break
+                            if (fetchedArticles.size >= 16) break
                             val parsed = fetchAndParseRssFeed(
                                 feedUrl = feedUrl,
                                 section = section,
                                 defaultCategoryLabel = getSectionCategoryBadge(section, strings),
                                 defaultSourceName = resolveFeedSourceName(feedUrl, sourceConfig.primarySourceName, effLang),
-                                effLang = effLang
+                                effLang = effLang,
+                                maxItems = 16
                             )
                             for (item in parsed) {
-                                if (fetchedArticles.none { it.headline.equals(item.headline, ignoreCase = true) }) {
+                                val norm = normalizeHeadlineKey(item.headline)
+                                if (fetchedArticles.none { normalizeHeadlineKey(it.headline) == norm }) {
                                     fetchedArticles.add(item)
                                 }
-                                if (fetchedArticles.size >= 6) break
+                                if (fetchedArticles.size >= 16) break
                             }
                         }
                         section to fetchedArticles
                     }
                 }.awaitAll()
-            }
+            }.toMap()
 
-            for ((section, fetchedArticles) in sectionResults) {
-                if (fetchedArticles.isNotEmpty()) {
-                    val fallbackList = baseline.articlesBySection[section].orEmpty()
-                    val combined = (fetchedArticles + fallbackList)
-                        .distinctBy { it.headline }
-                        .take(6)
-                    updatedSections[section] = combined
-                }
-            }
+            val updatedSections = assignDistinctSectionArticles(
+                candidatesBySection = sectionResults,
+                baselineBySection = baseline.articlesBySection,
+                strings = strings,
+                effLang = effLang
+            )
 
             // Build breaking news ticker from the top headlines across sections
             val liveTicker = updatedSections[NewsSectionType.TOP_STORIES]
@@ -243,19 +241,113 @@ object NewsRepository {
         }
     }
 
+    internal fun normalizeHeadlineKey(headline: String): String {
+        return headline
+            .lowercase(Locale.US)
+            .replace(Regex("[\\p{Punct}«»“”‘’—–…]+"), " ")
+            .replace(Regex("\\s+"), " ")
+            .trim()
+    }
+
+    internal fun assignDistinctSectionArticles(
+        candidatesBySection: Map<NewsSectionType, List<NewsArticleItem>>,
+        baselineBySection: Map<NewsSectionType, List<NewsArticleItem>>,
+        strings: NewsLocalizedStrings,
+        effLang: String
+    ): Map<NewsSectionType, List<NewsArticleItem>> {
+        val usedHeadlines = HashSet<String>()
+        val result = linkedMapOf<NewsSectionType, List<NewsArticleItem>>()
+
+        for (section in NewsSectionType.entries) {
+            val candidates = candidatesBySection[section].orEmpty()
+            val picked = mutableListOf<NewsArticleItem>()
+
+            for (item in candidates) {
+                val key = normalizeHeadlineKey(item.headline)
+                if (key.isNotEmpty() && usedHeadlines.add(key)) {
+                    picked.add(item)
+                }
+                if (picked.size >= 6) break
+            }
+
+            if (picked.isEmpty() && candidates.isNotEmpty()) {
+                for (item in candidates) {
+                    val key = normalizeHeadlineKey(item.headline)
+                    if (picked.none { normalizeHeadlineKey(it.headline) == key }) {
+                        picked.add(item)
+                        if (key.isNotEmpty()) usedHeadlines.add(key)
+                    }
+                    if (picked.size >= 6) break
+                }
+            }
+
+            if (picked.isEmpty()) {
+                val fallback = baselineBySection[section].orEmpty()
+                for (item in fallback) {
+                    val key = normalizeHeadlineKey(item.headline)
+                    if (key.isEmpty() || usedHeadlines.add(key)) {
+                        picked.add(item)
+                    }
+                    if (picked.size >= 6) break
+                }
+                if (picked.isEmpty()) {
+                    picked.addAll(fallback.take(6))
+                }
+            }
+
+            val badge = getSectionCategoryBadge(section, strings)
+            result[section] = picked.mapIndexed { idx, article ->
+                if (article.id.startsWith("${section.id}_live_")) {
+                    article.copy(
+                        id = "${section.id}_live_$idx",
+                        section = section,
+                        categoryLabel = badge,
+                        timeAgo = getRelativeTimeLabel(effLang, (idx + 1) * 6)
+                    )
+                } else {
+                    article.copy(section = section)
+                }
+            }
+        }
+        return result
+    }
+
     private fun resolveFeedSourceName(feedUrl: String, fallback: String, effLang: String): String {
         val lower = feedUrl.lowercase(Locale.US)
-        val isAr = effLang in setOf("ar", "fa", "ur")
+        val isRtl = effLang in setOf("ar", "fa", "ur")
         return when {
-            lower.contains("france24.com") -> if (isAr) "فرانس 24" else "France 24"
-            lower.contains("skynewsarabia.com") -> if (isAr) "سكاي نيوز عربية" else "Sky News Arabia"
+            lower.contains("france24.com") -> if (isRtl) "فرانس 24" else "France 24"
+            lower.contains("skynewsarabia.com") -> if (isRtl) "سكاي نيوز عربية" else "Sky News Arabia"
             lower.contains("bbci.co.uk/arabic") -> "BBC عربي"
-            lower.contains("arabic.rt.com") -> if (isAr) "RT عربي" else "RT Arabic"
-            lower.contains("aljazeera.net") -> if (isAr) "الجزيرة" else "Al Jazeera"
+            lower.contains("bbci.co.uk/persian") -> "BBC فارسی"
+            lower.contains("bbci.co.uk/urdu") -> "BBC اردو"
+            lower.contains("bbci.co.uk/russian") -> "BBC Русский"
+            lower.contains("bbci.co.uk/mundo") -> "BBC Mundo"
+            lower.contains("bbci.co.uk/turkce") -> "BBC Türkçe"
+            lower.contains("arabic.rt.com") -> if (isRtl) "RT عربي" else "RT Arabic"
+            lower.contains("aljazeera.net") -> if (isRtl) "الجزيرة" else "Al Jazeera"
             lower.contains("aljazeera.com") -> "Al Jazeera"
             lower.contains("bbci.co.uk") -> "BBC News"
             lower.contains("trthaber.com") -> "TRT Haber"
             lower.contains("tagesschau.de") -> "Tagesschau"
+            lower.contains("lemonde.fr") -> "Le Monde"
+            lower.contains("elpais.com") -> "El País"
+            lower.contains("ansa.it") -> "ANSA"
+            lower.contains("g1.globo.com") -> "G1 Globo"
+            lower.contains("lenta.ru") -> "Lenta.ru"
+            lower.contains("nos.nl") -> "NOS Nieuws"
+            lower.contains("vnexpress.net") -> "VnExpress"
+            lower.contains("antaranews.com") -> "Antara News"
+            lower.contains("nhk.or.jp") -> "NHK"
+            lower.contains("yna.co.kr") -> "연합뉴스"
+            lower.contains("aajtak.in") -> "Aaj Tak"
+            lower.contains("wiadomosci.wp.pl") -> "Wirtualna Polska"
+            lower.contains("in.gr") -> "in.gr"
+            lower.contains("rfi.fr") -> if (effLang == "fa") "RFI فارسی" else "RFI"
+            lower.contains("isna.ir") -> "ایسنا"
+            lower.contains("independentpersian.com") -> "ایندیپندنت فارسی"
+            lower.contains("express.pk") -> "ایکسپریس نیوز"
+            lower.contains("news.google.com") -> "Google News"
             else -> fallback.substringBefore("•").trim()
         }
     }
@@ -264,7 +356,7 @@ object NewsRepository {
      * Automatically selects the best native, image-rich news source and RSS feeds for each language.
      */
     fun getBestSourceConfigForLanguage(effLang: String): LanguageNewsSourceConfig {
-        return when (effLang) {
+        return when (LocaleHelper.getEffectiveLanguage(effLang)) {
             "ar" -> LanguageNewsSourceConfig(
                 langCode = "ar",
                 primarySourceName = "فرانس 24 • سكاي نيوز • BBC عربي",
@@ -273,128 +365,526 @@ object NewsRepository {
                     NewsSectionType.TOP_STORIES to listOf(
                         "https://www.france24.com/ar/rss",
                         "https://www.skynewsarabia.com/rss.xml",
-                        "https://feeds.bbci.co.uk/arabic/rss.xml",
-                        "https://arabic.rt.com/rss/"
+                        "https://feeds.bbci.co.uk/arabic/rss.xml"
                     ),
                     NewsSectionType.POLITICS to listOf(
                         "https://www.france24.com/ar/middle-east/rss",
                         "https://www.skynewsarabia.com/web/rss/middle-east.xml",
-                        "https://feeds.bbci.co.uk/arabic/middleeast/rss.xml"
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=ar&gl=AE&ceid=AE:ar"
                     ),
                     NewsSectionType.ECONOMY to listOf(
+                        "https://www.france24.com/ar/%D8%A7%D9%82%D8%AA%D8%B5%D8%A7%D8%AF/rss",
                         "https://www.skynewsarabia.com/web/rss/business.xml",
-                        "https://www.france24.com/ar/top-stories/rss",
-                        "https://feeds.bbci.co.uk/arabic/rss.xml"
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=ar&gl=AE&ceid=AE:ar"
                     ),
                     NewsSectionType.TECHNOLOGY to listOf(
                         "https://www.skynewsarabia.com/web/rss/technology.xml",
-                        "https://arabic.rt.com/rss/",
-                        "https://www.france24.com/ar/rss"
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=ar&gl=AE&ceid=AE:ar"
                     ),
                     NewsSectionType.WORLD to listOf(
                         "https://www.skynewsarabia.com/web/rss/world.xml",
-                        "https://www.france24.com/ar/rss",
-                        "https://feeds.bbci.co.uk/arabic/rss.xml"
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=ar&gl=AE&ceid=AE:ar",
+                        "https://www.france24.com/ar/rss"
                     )
                 )
             )
             "fr" -> LanguageNewsSourceConfig(
                 langCode = "fr",
                 primarySourceName = "France 24 • Le Monde",
-                secondarySourceName = "France Info",
+                secondarySourceName = "Google Actualités",
                 sectionFeeds = mapOf(
-                    NewsSectionType.TOP_STORIES to listOf("https://www.france24.com/fr/rss"),
-                    NewsSectionType.POLITICS to listOf("https://www.france24.com/fr/france/rss"),
-                    NewsSectionType.ECONOMY to listOf("https://www.france24.com/fr/%C3%A9co-tech/rss"),
-                    NewsSectionType.TECHNOLOGY to listOf("https://www.france24.com/fr/%C3%A9co-tech/rss"),
-                    NewsSectionType.WORLD to listOf("https://www.france24.com/fr/monde/rss")
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://www.france24.com/fr/rss",
+                        "https://www.lemonde.fr/rss/une.xml"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://www.lemonde.fr/politique/rss_full.xml",
+                        "https://www.france24.com/fr/france/rss",
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=fr&gl=FR&ceid=FR:fr"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://www.lemonde.fr/economie/rss_full.xml",
+                        "https://www.france24.com/fr/%C3%A9co-tech/rss",
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=fr&gl=FR&ceid=FR:fr"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://www.lemonde.fr/pixels/rss_full.xml",
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=fr&gl=FR&ceid=FR:fr"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://www.lemonde.fr/international/rss_full.xml",
+                        "https://www.france24.com/fr/monde/rss",
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=fr&gl=FR&ceid=FR:fr"
+                    )
                 )
             )
             "es" -> LanguageNewsSourceConfig(
                 langCode = "es",
-                primarySourceName = "BBC Mundo • France 24 ES",
-                secondarySourceName = "El País",
+                primarySourceName = "El País • France 24 ES • BBC Mundo",
+                secondarySourceName = "Google Noticias",
                 sectionFeeds = mapOf(
-                    NewsSectionType.TOP_STORIES to listOf("https://feeds.bbci.co.uk/mundo/rss.xml", "https://www.france24.com/es/rss"),
-                    NewsSectionType.POLITICS to listOf("https://www.france24.com/es/am%C3%A9rica-latina/rss"),
-                    NewsSectionType.ECONOMY to listOf("https://www.france24.com/es/econom%C3%ADa-y-tecnolog%C3%ADa/rss"),
-                    NewsSectionType.TECHNOLOGY to listOf("https://www.france24.com/es/econom%C3%ADa-y-tecnolog%C3%ADa/rss"),
-                    NewsSectionType.WORLD to listOf("https://www.france24.com/es/rss")
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://feeds.bbci.co.uk/mundo/rss.xml",
+                        "https://www.france24.com/es/rss"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://www.france24.com/es/am%C3%A9rica-latina/rss",
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=es&gl=ES&ceid=ES:es"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/economia/portada",
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=es&gl=ES&ceid=ES:es"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/tecnologia/portada",
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=es&gl=ES&ceid=ES:es"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada",
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=es&gl=ES&ceid=ES:es"
+                    )
                 )
             )
             "tr" -> LanguageNewsSourceConfig(
                 langCode = "tr",
                 primarySourceName = "TRT Haber • BBC Türkçe",
-                secondarySourceName = "Anadolu Ajansı",
+                secondarySourceName = "Google Haberler",
                 sectionFeeds = mapOf(
-                    NewsSectionType.TOP_STORIES to listOf("https://www.trthaber.com/sondakika.rss", "https://feeds.bbci.co.uk/turkce/rss.xml"),
-                    NewsSectionType.POLITICS to listOf("https://www.trthaber.com/gundem_articles.rss"),
-                    NewsSectionType.ECONOMY to listOf("https://www.trthaber.com/ekonomi_articles.rss"),
-                    NewsSectionType.TECHNOLOGY to listOf("https://www.trthaber.com/bilim_teknoloji_articles.rss"),
-                    NewsSectionType.WORLD to listOf("https://www.trthaber.com/dunya_articles.rss")
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://www.trthaber.com/sondakika.rss",
+                        "https://feeds.bbci.co.uk/turkce/rss.xml"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://www.trthaber.com/gundem_articles.rss",
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=tr&gl=TR&ceid=TR:tr"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://www.trthaber.com/ekonomi_articles.rss",
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=tr&gl=TR&ceid=TR:tr"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://www.trthaber.com/bilim_teknoloji_articles.rss",
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=tr&gl=TR&ceid=TR:tr"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://www.trthaber.com/dunya_articles.rss",
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=tr&gl=TR&ceid=TR:tr"
+                    )
                 )
             )
             "de" -> LanguageNewsSourceConfig(
                 langCode = "de",
                 primarySourceName = "Tagesschau • DW",
-                secondarySourceName = "Spiegel",
+                secondarySourceName = "Google News DE",
                 sectionFeeds = mapOf(
-                    NewsSectionType.TOP_STORIES to listOf("https://www.tagesschau.de/infoservices/alle-meldungen-100~rss2.xml"),
-                    NewsSectionType.POLITICS to listOf("https://www.tagesschau.de/inland/index~rss2.xml"),
-                    NewsSectionType.ECONOMY to listOf("https://www.tagesschau.de/wirtschaft/index~rss2.xml"),
-                    NewsSectionType.TECHNOLOGY to listOf("https://www.tagesschau.de/wissen/index~rss2.xml"),
-                    NewsSectionType.WORLD to listOf("https://www.tagesschau.de/ausland/index~rss2.xml")
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://www.tagesschau.de/infoservices/alle-meldungen-100~rss2.xml",
+                        "https://news.google.com/rss?hl=de&gl=DE&ceid=DE:de"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://www.tagesschau.de/inland/index~rss2.xml",
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=de&gl=DE&ceid=DE:de"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://www.tagesschau.de/wirtschaft/index~rss2.xml",
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=de&gl=DE&ceid=DE:de"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://www.tagesschau.de/wissen/index~rss2.xml",
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=de&gl=DE&ceid=DE:de"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://www.tagesschau.de/ausland/index~rss2.xml",
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=de&gl=DE&ceid=DE:de"
+                    )
+                )
+            )
+            "it" -> LanguageNewsSourceConfig(
+                langCode = "it",
+                primarySourceName = "ANSA • Google News IT",
+                secondarySourceName = "ANSA",
+                sectionFeeds = mapOf(
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://www.ansa.it/sito/ansait_rss.xml",
+                        "https://news.google.com/rss?hl=it&gl=IT&ceid=IT:it"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://www.ansa.it/sito/notizie/politica/politica_rss.xml",
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=it&gl=IT&ceid=IT:it"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://www.ansa.it/sito/notizie/economia/economia_rss.xml",
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=it&gl=IT&ceid=IT:it"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://www.ansa.it/sito/notizie/tecnologia/tecnologia_rss.xml",
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=it&gl=IT&ceid=IT:it"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://www.ansa.it/sito/notizie/mondo/mondo_rss.xml",
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=it&gl=IT&ceid=IT:it"
+                    )
+                )
+            )
+            "pt" -> LanguageNewsSourceConfig(
+                langCode = "pt",
+                primarySourceName = "G1 Globo • Google Notícias",
+                secondarySourceName = "G1",
+                sectionFeeds = mapOf(
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://g1.globo.com/rss/g1/",
+                        "https://news.google.com/rss?hl=pt-BR&gl=BR&ceid=BR:pt-419"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://g1.globo.com/rss/g1/politica/",
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=pt-BR&gl=BR&ceid=BR:pt-419"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://g1.globo.com/rss/g1/economia/",
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=pt-BR&gl=BR&ceid=BR:pt-419"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://g1.globo.com/rss/g1/tecnologia/",
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=pt-BR&gl=BR&ceid=BR:pt-419"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://g1.globo.com/rss/g1/mundo/",
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=pt-BR&gl=BR&ceid=BR:pt-419"
+                    )
                 )
             )
             "ru" -> LanguageNewsSourceConfig(
                 langCode = "ru",
-                primarySourceName = "BBC News Русский",
-                secondarySourceName = "Euronews RU",
+                primarySourceName = "Lenta.ru • BBC Русский",
+                secondarySourceName = "Google Новости",
                 sectionFeeds = mapOf(
-                    NewsSectionType.TOP_STORIES to listOf("https://feeds.bbci.co.uk/russian/rss.xml"),
-                    NewsSectionType.POLITICS to listOf("https://feeds.bbci.co.uk/russian/rss.xml"),
-                    NewsSectionType.ECONOMY to listOf("https://feeds.bbci.co.uk/russian/rss.xml"),
-                    NewsSectionType.TECHNOLOGY to listOf("https://feeds.bbci.co.uk/russian/rss.xml"),
-                    NewsSectionType.WORLD to listOf("https://feeds.bbci.co.uk/russian/rss.xml")
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://feeds.bbci.co.uk/russian/rss.xml",
+                        "https://lenta.ru/rss/news"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://lenta.ru/rss/news/russia",
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=ru&gl=RU&ceid=RU:ru"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://lenta.ru/rss/news/economics",
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=ru&gl=RU&ceid=RU:ru"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://lenta.ru/rss/news/science",
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=ru&gl=RU&ceid=RU:ru"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://lenta.ru/rss/news/world",
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=ru&gl=RU&ceid=RU:ru"
+                    )
+                )
+            )
+            "nl" -> LanguageNewsSourceConfig(
+                langCode = "nl",
+                primarySourceName = "NOS Nieuws • Google Nieuws",
+                secondarySourceName = "NOS",
+                sectionFeeds = mapOf(
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://feeds.nos.nl/nosnieuwsalgemeen",
+                        "https://news.google.com/rss?hl=nl&gl=NL&ceid=NL:nl"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://feeds.nos.nl/nosnieuwspolitiek",
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=nl&gl=NL&ceid=NL:nl"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://feeds.nos.nl/nosnieuwseconomie",
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=nl&gl=NL&ceid=NL:nl"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://feeds.nos.nl/nosnieuwstech",
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=nl&gl=NL&ceid=NL:nl"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://feeds.nos.nl/nosnieuwsbuitenland",
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=nl&gl=NL&ceid=NL:nl"
+                    )
+                )
+            )
+            "pl" -> LanguageNewsSourceConfig(
+                langCode = "pl",
+                primarySourceName = "Wirtualna Polska • Google Wiadomości",
+                secondarySourceName = "Google News PL",
+                sectionFeeds = mapOf(
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://wiadomosci.wp.pl/rss.xml",
+                        "https://news.google.com/rss?hl=pl&gl=PL&ceid=PL:pl"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=pl&gl=PL&ceid=PL:pl"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=pl&gl=PL&ceid=PL:pl"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=pl&gl=PL&ceid=PL:pl"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=pl&gl=PL&ceid=PL:pl"
+                    )
+                )
+            )
+            "el" -> LanguageNewsSourceConfig(
+                langCode = "el",
+                primarySourceName = "in.gr • Google Ειδήσεις",
+                secondarySourceName = "Google News GR",
+                sectionFeeds = mapOf(
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://www.in.gr/feed/",
+                        "https://news.google.com/rss?hl=el&gl=GR&ceid=GR:el"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=el&gl=GR&ceid=GR:el"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=el&gl=GR&ceid=GR:el"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=el&gl=GR&ceid=GR:el"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=el&gl=GR&ceid=GR:el"
+                    )
+                )
+            )
+            "id" -> LanguageNewsSourceConfig(
+                langCode = "id",
+                primarySourceName = "Antara News • Google Berita",
+                secondarySourceName = "Antara",
+                sectionFeeds = mapOf(
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://news.google.com/rss?hl=id&gl=ID&ceid=ID:id"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=id&gl=ID&ceid=ID:id"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://www.antaranews.com/rss/ekonomi.xml",
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=id&gl=ID&ceid=ID:id"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://www.antaranews.com/rss/tekno.xml",
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=id&gl=ID&ceid=ID:id"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://www.antaranews.com/rss/dunia.xml",
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=id&gl=ID&ceid=ID:id"
+                    )
+                )
+            )
+            "vi" -> LanguageNewsSourceConfig(
+                langCode = "vi",
+                primarySourceName = "VnExpress • Google Tin tức",
+                secondarySourceName = "VnExpress",
+                sectionFeeds = mapOf(
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://vnexpress.net/rss/tin-moi-nhat.rss",
+                        "https://news.google.com/rss?hl=vi&gl=VN&ceid=VN:vi"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://vnexpress.net/rss/thoi-su.rss",
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=vi&gl=VN&ceid=VN:vi"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://vnexpress.net/rss/kinh-doanh.rss",
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=vi&gl=VN&ceid=VN:vi"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://vnexpress.net/rss/khoa-hoc.rss",
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=vi&gl=VN&ceid=VN:vi"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://vnexpress.net/rss/the-gioi.rss",
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=vi&gl=VN&ceid=VN:vi"
+                    )
+                )
+            )
+            "th" -> LanguageNewsSourceConfig(
+                langCode = "th",
+                primarySourceName = "Google News ไทย",
+                secondarySourceName = "Google News TH",
+                sectionFeeds = mapOf(
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://news.google.com/rss?hl=th&gl=TH&ceid=TH:th"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=th&gl=TH&ceid=TH:th"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=th&gl=TH&ceid=TH:th"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=th&gl=TH&ceid=TH:th"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=th&gl=TH&ceid=TH:th"
+                    )
+                )
+            )
+            "zh" -> LanguageNewsSourceConfig(
+                langCode = "zh",
+                primarySourceName = "Google 新闻",
+                secondarySourceName = "Google News CN",
+                sectionFeeds = mapOf(
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://news.google.com/rss?hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
+                    )
+                )
+            )
+            "ja" -> LanguageNewsSourceConfig(
+                langCode = "ja",
+                primarySourceName = "NHK • Google ニュース",
+                secondarySourceName = "NHK",
+                sectionFeeds = mapOf(
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://www3.nhk.or.jp/rss/news/cat0.xml",
+                        "https://news.google.com/rss?hl=ja&gl=JP&ceid=JP:ja"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://www3.nhk.or.jp/rss/news/cat4.xml",
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=ja&gl=JP&ceid=JP:ja"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://www3.nhk.or.jp/rss/news/cat5.xml",
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=ja&gl=JP&ceid=JP:ja"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://www3.nhk.or.jp/rss/news/cat3.xml",
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=ja&gl=JP&ceid=JP:ja"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=ja&gl=JP&ceid=JP:ja"
+                    )
+                )
+            )
+            "ko" -> LanguageNewsSourceConfig(
+                langCode = "ko",
+                primarySourceName = "연합뉴스 • Google 뉴스",
+                secondarySourceName = "연합뉴스",
+                sectionFeeds = mapOf(
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://news.google.com/rss?hl=ko&gl=KR&ceid=KR:ko"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://www.yna.co.kr/rss/politics.xml",
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=ko&gl=KR&ceid=KR:ko"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://www.yna.co.kr/rss/economy.xml",
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=ko&gl=KR&ceid=KR:ko"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://www.yna.co.kr/rss/industry.xml",
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=ko&gl=KR&ceid=KR:ko"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=ko&gl=KR&ceid=KR:ko"
+                    )
+                )
+            )
+            "hi" -> LanguageNewsSourceConfig(
+                langCode = "hi",
+                primarySourceName = "Aaj Tak • Google समाचार",
+                secondarySourceName = "Aaj Tak",
+                sectionFeeds = mapOf(
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://www.aajtak.in/rssfeeds/?id=home",
+                        "https://news.google.com/rss?hl=hi&gl=IN&ceid=IN:hi"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=hi&gl=IN&ceid=IN:hi"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=hi&gl=IN&ceid=IN:hi"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=hi&gl=IN&ceid=IN:hi"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://news.google.com/rss/headlines/section/topic/WORLD?hl=hi&gl=IN&ceid=IN:hi"
+                    )
                 )
             )
             "ur" -> LanguageNewsSourceConfig(
                 langCode = "ur",
-                primarySourceName = "BBC News اردو",
-                secondarySourceName = "GEO News",
+                primarySourceName = "ایکسپریس نیوز • BBC اردو",
+                secondarySourceName = "Express News",
                 sectionFeeds = mapOf(
-                    NewsSectionType.TOP_STORIES to listOf("https://feeds.bbci.co.uk/urdu/rss.xml"),
-                    NewsSectionType.POLITICS to listOf("https://feeds.bbci.co.uk/urdu/rss.xml"),
-                    NewsSectionType.ECONOMY to listOf("https://feeds.bbci.co.uk/urdu/rss.xml"),
-                    NewsSectionType.TECHNOLOGY to listOf("https://feeds.bbci.co.uk/urdu/rss.xml"),
-                    NewsSectionType.WORLD to listOf("https://feeds.bbci.co.uk/urdu/rss.xml")
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://www.express.pk/feed/",
+                        "https://feeds.bbci.co.uk/urdu/rss.xml"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://www.express.pk/pakistan/feed/"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://www.express.pk/business/feed/"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://www.express.pk/science/feed/"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://www.express.pk/world/feed/"
+                    )
                 )
             )
             "fa" -> LanguageNewsSourceConfig(
                 langCode = "fa",
-                primarySourceName = "BBC News فارسی",
-                secondarySourceName = "Euronews FA",
+                primarySourceName = "RFI فارسی • ایسنا • BBC فارسی",
+                secondarySourceName = "ایندیپندنت فارسی",
                 sectionFeeds = mapOf(
-                    NewsSectionType.TOP_STORIES to listOf("https://feeds.bbci.co.uk/persian/rss.xml"),
-                    NewsSectionType.POLITICS to listOf("https://feeds.bbci.co.uk/persian/rss.xml"),
-                    NewsSectionType.ECONOMY to listOf("https://feeds.bbci.co.uk/persian/rss.xml"),
-                    NewsSectionType.TECHNOLOGY to listOf("https://feeds.bbci.co.uk/persian/rss.xml"),
-                    NewsSectionType.WORLD to listOf("https://feeds.bbci.co.uk/persian/rss.xml")
+                    NewsSectionType.TOP_STORIES to listOf(
+                        "https://www.rfi.fr/fa/rss",
+                        "https://feeds.bbci.co.uk/persian/rss.xml"
+                    ),
+                    NewsSectionType.POLITICS to listOf(
+                        "https://www.rfi.fr/fa/%D8%A7%DB%8C%D8%B1%D8%A7%D9%86/rss",
+                        "https://www.isna.ir/rss/tp/14"
+                    ),
+                    NewsSectionType.ECONOMY to listOf(
+                        "https://www.rfi.fr/fa/%D8%A7%D9%82%D8%AA%D8%B5%D8%A7%D8%AF/rss",
+                        "https://www.isna.ir/rss/tp/34"
+                    ),
+                    NewsSectionType.TECHNOLOGY to listOf(
+                        "https://www.isna.ir/rss/tp/5",
+                        "https://www.independentpersian.com/rss.xml"
+                    ),
+                    NewsSectionType.WORLD to listOf(
+                        "https://www.isna.ir/rss/tp/17",
+                        "https://www.rfi.fr/fa/rss"
+                    )
                 )
             )
             else -> LanguageNewsSourceConfig(
                 langCode = "en",
-                primarySourceName = "BBC News • Al Jazeera",
-                secondarySourceName = "France 24",
+                primarySourceName = "BBC News • Al Jazeera • France 24",
+                secondarySourceName = "Google News",
                 sectionFeeds = mapOf(
                     NewsSectionType.TOP_STORIES to listOf(
                         "https://feeds.bbci.co.uk/news/rss.xml",
-                        "https://www.france24.com/en/rss",
-                        "https://www.aljazeera.com/xml/rss/all.xml"
+                        "https://www.france24.com/en/rss"
                     ),
                     NewsSectionType.POLITICS to listOf(
                         "https://feeds.bbci.co.uk/news/politics/rss.xml",
-                        "https://www.france24.com/en/rss"
+                        "https://news.google.com/rss/headlines/section/topic/NATION?hl=en-US&gl=US&ceid=US:en"
                     ),
                     NewsSectionType.ECONOMY to listOf(
                         "https://feeds.bbci.co.uk/news/business/rss.xml",
@@ -402,11 +892,11 @@ object NewsRepository {
                     ),
                     NewsSectionType.TECHNOLOGY to listOf(
                         "https://feeds.bbci.co.uk/news/technology/rss.xml",
-                        "https://www.france24.com/en/business-tech/rss"
+                        "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=en-US&gl=US&ceid=US:en"
                     ),
                     NewsSectionType.WORLD to listOf(
                         "https://feeds.bbci.co.uk/news/world/rss.xml",
-                        "https://www.france24.com/en/rss"
+                        "https://www.aljazeera.com/xml/rss/all.xml"
                     )
                 )
             )
@@ -418,7 +908,8 @@ object NewsRepository {
         section: NewsSectionType,
         defaultCategoryLabel: String,
         defaultSourceName: String,
-        effLang: String
+        effLang: String,
+        maxItems: Int = 16
     ): List<NewsArticleItem> {
         val xmlContent = httpGet(feedUrl, timeoutMs = 4500) ?: return emptyList()
         val results = mutableListOf<NewsArticleItem>()
@@ -440,7 +931,7 @@ object NewsRepository {
             var ogFetchesUsed = 0
             var eventType = parser.eventType
 
-            while (eventType != XmlPullParser.END_DOCUMENT && results.size < 6) {
+            while (eventType != XmlPullParser.END_DOCUMENT && results.size < maxItems) {
                 when (eventType) {
                     XmlPullParser.START_TAG -> {
                         val tagName = parser.name.lowercase(Locale.US)
@@ -563,7 +1054,9 @@ object NewsRepository {
                                 }
 
                                 val timeAgoText = getRelativeTimeLabel(effLang, (idx + 1) * 6)
-                                val summaryText = if (description.length >= 25 && !description.equals(cleanTitle, ignoreCase = true)) {
+                                val isRedundantDesc = description.equals(cleanTitle, ignoreCase = true) ||
+                                    (description.startsWith(cleanTitle, ignoreCase = true) && description.length <= cleanTitle.length + 40)
+                                val summaryText = if (description.length >= 25 && !isRedundantDesc) {
                                     description.take(200)
                                 } else {
                                     getFallbackSummaryForSection(section, effLang, cleanTitle)
@@ -696,27 +1189,71 @@ object NewsRepository {
 
     private fun getRelativeTimeLabel(effLang: String, minutes: Int): String {
         return when (effLang) {
-            "ar", "fa", "ur" -> "منذ $minutes دقيقة"
+            "ar" -> "منذ $minutes دقيقة"
+            "fa" -> "$minutes دقیقه پیش"
+            "ur" -> "$minutes منٹ قبل"
             "fr" -> "il y a $minutes min"
             "es" -> "hace $minutes min"
+            "it" -> "$minutes min fa"
+            "pt" -> "há $minutes min"
             "tr" -> "$minutes dk önce"
             "de" -> "vor $minutes Min."
             "ru" -> "$minutes мин. назад"
+            "nl" -> "$minutes min geleden"
+            "pl" -> "$minutes min temu"
+            "el" -> "πριν $minutes λεπτά"
+            "id" -> "$minutes mnt lalu"
+            "vi" -> "$minutes phút trước"
+            "th" -> "$minutes นาทีที่แล้ว"
+            "zh" -> "${minutes}分钟前"
+            "ja" -> "${minutes}分前"
+            "ko" -> "${minutes}분 전"
+            "hi" -> "$minutes मिनट पहले"
             else -> "$minutes min ago"
         }
     }
 
     private fun getFallbackSummaryForSection(section: NewsSectionType, effLang: String, title: String): String {
-        return if (effLang in setOf("ar", "fa", "ur")) {
-            when (section) {
+        return when (effLang) {
+            "ar" -> when (section) {
                 NewsSectionType.TOP_STORIES -> "تغطية إخبارية شاملة ومباشرة لأبرز التطورات والأحداث الجارية وتأثيراتها الإقليمية والدولية."
                 NewsSectionType.POLITICS -> "متابعة خاصة للمباحثات الدبلوماسية والقرارات السياسية الرسمية والمواقف الدولية الراهنة."
                 NewsSectionType.ECONOMY -> "تحليل معمق لحركة الأسواق العالمية ومؤشرات التضخم وأسعار الفائدة والعملات."
                 NewsSectionType.TECHNOLOGY -> "أحدث الابتكارات التقنية وتطورات الذكاء الاصطناعي وقطاع الشركات التكنولوجية الكبرى."
                 NewsSectionType.WORLD -> "تقارير ميدانية من مختلف العواصم العالمية حول أبرز القضايا والقمم الدولية."
             }
-        } else {
-            "Live coverage and in-depth analysis on: $title."
+            "fa" -> when (section) {
+                NewsSectionType.TOP_STORIES -> "پوشش زنده و جامع مهم‌ترین تحولات و رویدادهای روز: $title"
+                NewsSectionType.POLITICS -> "تحلیل تحولات سیاسی، مذاکرات دیپلماتیک و تصمیمات رسمی: $title"
+                NewsSectionType.ECONOMY -> "بررسی بازارهای جهانی، شاخص‌های اقتصادی و تحولات مالی: $title"
+                NewsSectionType.TECHNOLOGY -> "جدیدترین اخبار فناوری، هوش مصنوعی و نوآوری‌های دیجیتال: $title"
+                NewsSectionType.WORLD -> "گزارش‌های بین‌المللی از تحولات مهم در سراسر جهان: $title"
+            }
+            "ur" -> when (section) {
+                NewsSectionType.TOP_STORIES -> "تازہ ترین اور اہم خبروں کی براہِ راست کوریج اور تجزیہ: $title"
+                NewsSectionType.POLITICS -> "سیاسی صورتحال، سفارتی سرگرمیوں اور سرکاری فیصلوں کی رپورٹ: $title"
+                NewsSectionType.ECONOMY -> "عالمی منڈیوں، معاشی اشاریوں اور کاروباری خبروں کا جائزہ: $title"
+                NewsSectionType.TECHNOLOGY -> "ٹیکنالوجی، مصنوعی ذہانت اور سائنسی ایجادات کی تازہ خبریں: $title"
+                NewsSectionType.WORLD -> "دنیا بھر سے اہم بین الاقوامی حالات اور واقعات کی تفصیلات: $title"
+            }
+            "fr" -> "Actualités en direct : $title."
+            "es" -> "Cobertura en vivo y análisis: $title."
+            "it" -> "Aggiornamenti in diretta e analisi: $title."
+            "pt" -> "Cobertura ao vivo e análise: $title."
+            "de" -> "Aktuelle Berichterstattung und Analyse: $title."
+            "tr" -> "Canlı gelişmeler ve ayrıntılı analiz: $title."
+            "ru" -> "Прямой эфир и подробный обзор: $title."
+            "nl" -> "Live nieuws en achtergrond: $title."
+            "pl" -> "Relacja na żywo i analiza: $title."
+            "el" -> "Ζωντανή κάλυψη και ανάλυση: $title."
+            "id" -> "Liputan langsung dan analisis: $title."
+            "vi" -> "Tin tức trực tiếp và phân tích: $title."
+            "th" -> "รายงานสดและบทวิเคราะห์: $title"
+            "zh" -> "实时新闻报道与深度解析：$title"
+            "ja" -> "最新ニュース速報と解説：$title"
+            "ko" -> "실시간 뉴스 속보 및 분석: $title"
+            "hi" -> "ताज़ा समाचार कवरेज और विश्लेषण: $title"
+            else -> "Live coverage and in-depth analysis on: $title."
         }
     }
 
@@ -754,115 +1291,355 @@ object NewsRepository {
         }
     }
 
-    private fun buildBaselineState(effLang: String): NewsCenterState {
+    internal fun buildBaselineState(effLang: String): NewsCenterState {
         val timeFormat = SimpleDateFormat("HH:mm", Locale.US)
-        val isAr = effLang in setOf("ar", "fa", "ur")
         val sourceConfig = getBestSourceConfigForLanguage(effLang)
+        val strings = getLocalizedStrings(effLang)
 
-        if (isAr) {
+        if (effLang == "ar") {
             val topStoriesAr = listOf(
                 NewsArticleItem(
                     id = "ar_top_1",
                     section = NewsSectionType.TOP_STORIES,
-                    categoryLabel = "اقتصاد",
-                    headline = "انتعاش الأسواق العالمية مع تباطؤ التضخم بوتيرة أسرع من التوقعات",
-                    summary = "سجلت المؤشرات العالمية مستويات قياسية اليوم بعد أن كشفت أحدث بيانات مؤشر أسعار المستهلكين عن تراجع حاد في معدلات التضخم.",
+                    categoryLabel = strings.sectionTopStories,
+                    headline = "قمة دولية طارئة لبحث تعزيز الاستقرار وتأمين سلاسل الإمداد العالمية",
+                    summary = "انطلقت اليوم أعمال القمة بمشاركة قادة ورؤساء وفود لوضع خارطة طريق شاملة لدعم الاستقرار وتنشيط الممرات التجارية.",
                     sourceName = "فرانس 24",
-                    timeAgo = "منذ 12 دقيقة",
-                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 0),
-                    visualTheme = "trading_floor"
+                    timeAgo = getRelativeTimeLabel(effLang, 6),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TOP_STORIES, 0),
+                    visualTheme = "diplomacy_summit"
                 ),
                 NewsArticleItem(
                     id = "ar_top_2",
                     section = NewsSectionType.TOP_STORIES,
-                    categoryLabel = "تكنولوجيا",
-                    headline = "عملاق التكنولوجيا يعلن عن نموذج ذكاء اصطناعي فائق القدرات",
-                    summary = "الجيل الجديد من نماذج الذكاء الاصطناعي يوفر معالجة فورية للبيانات متعددة الوسائط بكفاءة طاقة غير مسبوقة.",
-                    sourceName = "BBC عربي",
-                    timeAgo = "منذ 18 دقيقة",
-                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 1),
-                    visualTheme = "ai_datacenter"
+                    categoryLabel = strings.sectionTopStories,
+                    headline = "مبادرة جديدة لتوسيع مشاريع الطاقة النظيفة والتحول الرقمي",
+                    summary = "أعلنت عدة دول عن شراكة استثمارية طويلة الأمد لربط الشبكات الكهربائية النظيفة وتحديث البنية التحتية الرقمية.",
+                    sourceName = "سكاي نيوز عربية",
+                    timeAgo = getRelativeTimeLabel(effLang, 12),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TOP_STORIES, 1),
+                    visualTheme = "global_climate"
                 ),
                 NewsArticleItem(
                     id = "ar_top_3",
                     section = NewsSectionType.TOP_STORIES,
-                    categoryLabel = "حول العالم",
-                    headline = "التوصل إلى اتفاق مناخي جديد خلال القمة العالمية للطاقة المستدامة",
-                    summary = "اتفق قادة الدول المشاركة على تسريع الاستثمارات في مشاريع الطاقة النظيفة وخفض الانبعاثات الكربونية خلال العقد القادم.",
-                    sourceName = "سكاي نيوز عربية",
-                    timeAgo = "منذ 25 دقيقة",
-                    imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 0),
-                    visualTheme = "global_climate"
+                    categoryLabel = strings.sectionTopStories,
+                    headline = "ارتفاع قياسي في حركة النقل الجوي والسياحة الدولية خلال الربع الحالي",
+                    summary = "كشفت تقارير النقل المدني عن نمو ملموس في الرحلات العابرة للقارات وزيادة السعة الاستيعابية للمطارات الرئيسية.",
+                    sourceName = "BBC عربي",
+                    timeAgo = getRelativeTimeLabel(effLang, 18),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TOP_STORIES, 2),
+                    visualTheme = "trading_floor"
                 ),
                 NewsArticleItem(
                     id = "ar_top_4",
                     section = NewsSectionType.TOP_STORIES,
-                    categoryLabel = "اقتصاد",
-                    headline = "البنك المركزي يقرر تثبيت أسعار الفائدة لدعم استقرار النمو الاقتصادي",
-                    summary = "أكد صناع السياسة النقدية استمرار مراقبة مؤشرات الأسعار وسوق العمل قبل اتخاذ أي خطوات جديدة بشأن أسعار الفائدة.",
-                    sourceName = "الجزيرة",
-                    timeAgo = "منذ 34 دقيقة",
-                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 3),
-                    visualTheme = "central_bank"
+                    categoryLabel = strings.sectionTopStories,
+                    headline = "تطوير معايير موحدة لجودة الخدمات الصحية والاستجابة السريعة",
+                    summary = "أطلقت هيئات دولية برنامجاً مشتركاً لدعم المستشفيات بالتقنيات الحديثة وتبادل الخبرات الطبية عن بُعد.",
+                    sourceName = "فرانس 24",
+                    timeAgo = getRelativeTimeLabel(effLang, 24),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TOP_STORIES, 3),
+                    visualTheme = "ai_datacenter"
                 ),
                 NewsArticleItem(
                     id = "ar_top_5",
                     section = NewsSectionType.TOP_STORIES,
-                    categoryLabel = "سياسة",
-                    headline = "مباحثات دبلوماسية مكثفة لتعزيز التعاون الإقليمي والأمن المشترك",
-                    summary = "شهدت العاصمة سلسلة لقاءات رفيعة المستوى لبحث ملفات التهدئة وتوسيع الشراكات الاستراتيجية والتجارية.",
+                    categoryLabel = strings.sectionTopStories,
+                    headline = "تعاون جامعي واسع لتدريب الكفاءات الشابة في مجالات البحث العلمي",
+                    summary = "اتفاقيات أكاديمية جديدة توفر منحاً بحثية متقدمة وتبادلاً طلابياً في تخصصات الهندسة والبيئة.",
                     sourceName = "سكاي نيوز عربية",
-                    timeAgo = "منذ 42 دقيقة",
-                    imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 0),
-                    visualTheme = "diplomacy_summit"
+                    timeAgo = getRelativeTimeLabel(effLang, 30),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TOP_STORIES, 4),
+                    visualTheme = "cyber_chip"
                 ),
                 NewsArticleItem(
                     id = "ar_top_6",
                     section = NewsSectionType.TOP_STORIES,
-                    categoryLabel = "تكنولوجيا",
-                    headline = "إطلاق الجيل الجديد من معالجات الحوسبة السحابية ورقائق المستقبل",
-                    summary = "قفزة تقنية جديدة في صناعة أشباه الموصلات تتيح سرعات مضاعفة لمراكز البيانات والأجهزة الذكية.",
+                    categoryLabel = strings.sectionTopStories,
+                    headline = "خطط حكومية لتحديث شبكات النقل العام والقطارات فائقة السرعة",
+                    summary = "مشروعات استراتيجية جديدة تربط المدن الكبرى بخطوط سكك حديدية كهربائية صديقة للبيئة.",
                     sourceName = "BBC عربي",
-                    timeAgo = "منذ 50 دقيقة",
-                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 0),
-                    visualTheme = "cyber_chip"
+                    timeAgo = getRelativeTimeLabel(effLang, 36),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TOP_STORIES, 5),
+                    visualTheme = "central_bank"
                 )
             )
 
             val politicsAr = listOf(
-                topStoriesAr[4],
-                topStoriesAr[2].copy(id = "ar_pol_2", section = NewsSectionType.POLITICS, categoryLabel = "سياسة", imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 1)),
-                topStoriesAr[0].copy(id = "ar_pol_3", section = NewsSectionType.POLITICS, categoryLabel = "سياسة", imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 2)),
-                topStoriesAr[3].copy(id = "ar_pol_4", section = NewsSectionType.POLITICS, imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 3)),
-                topStoriesAr[1].copy(id = "ar_pol_5", section = NewsSectionType.POLITICS, imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 4)),
-                topStoriesAr[5].copy(id = "ar_pol_6", section = NewsSectionType.POLITICS, imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 5))
+                NewsArticleItem(
+                    id = "ar_pol_1",
+                    section = NewsSectionType.POLITICS,
+                    categoryLabel = strings.sectionPolitics,
+                    headline = "مباحثات دبلوماسية رفيعة المستوى لتعزيز التعاون الأمني والإقليمي",
+                    summary = "وزراء الخارجية يناقشون في ختام اجتماعاتهم آليات التنسيق السياسي ودعم مسارات التهدئة والحوار.",
+                    sourceName = "فرانس 24",
+                    timeAgo = getRelativeTimeLabel(effLang, 8),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 0),
+                    visualTheme = "diplomacy_summit"
+                ),
+                NewsArticleItem(
+                    id = "ar_pol_2",
+                    section = NewsSectionType.POLITICS,
+                    categoryLabel = strings.sectionPolitics,
+                    headline = "البرلمان يناقش حزمة تشريعات جديدة لتطوير الحوكمة والشفافية الإدارية",
+                    summary = "اللجان البرلمانية ترفع توصياتها النهائية حول مشاريع القوانين المنظمة للعمل البلدي والرقابة المالية.",
+                    sourceName = "سكاي نيوز عربية",
+                    timeAgo = getRelativeTimeLabel(effLang, 14),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 1),
+                    visualTheme = "diplomacy_summit"
+                ),
+                NewsArticleItem(
+                    id = "ar_pol_3",
+                    section = NewsSectionType.POLITICS,
+                    categoryLabel = strings.sectionPolitics,
+                    headline = "توقيع اتفاقية شراكة استراتيجية وتعاون قضائي بين عدة عواصم",
+                    summary = "الوثيقة الجديدة تهدف إلى تسريع تبادل المعلومات القانونية وتسهيل الإجراءات الدبلوماسية والقنصلية.",
+                    sourceName = "BBC عربي",
+                    timeAgo = getRelativeTimeLabel(effLang, 20),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 2),
+                    visualTheme = "diplomacy_summit"
+                ),
+                NewsArticleItem(
+                    id = "ar_pol_4",
+                    section = NewsSectionType.POLITICS,
+                    categoryLabel = strings.sectionPolitics,
+                    headline = "جولة مشاورات رسمية لبحث ملفات الحدود البحرية وحماية الممرات",
+                    summary = "وفود فنية وقانونية تستكمل صياغة التفاهمات المشتركة لضمان حرية الملاحة والتعاون المشترك.",
+                    sourceName = "فرانس 24",
+                    timeAgo = getRelativeTimeLabel(effLang, 26),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 3),
+                    visualTheme = "global_climate"
+                ),
+                NewsArticleItem(
+                    id = "ar_pol_5",
+                    section = NewsSectionType.POLITICS,
+                    categoryLabel = strings.sectionPolitics,
+                    headline = "بيان مشترك يؤكد على أهمية الحلول السلمية ودعم جهود الإغاثة",
+                    summary = "شددت الأطراف المشاركة على ضرورة تنسيق المساعدات الإنسانية وضمان وصولها للمناطق المتضررة.",
+                    sourceName = "سكاي نيوز عربية",
+                    timeAgo = getRelativeTimeLabel(effLang, 32),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 4),
+                    visualTheme = "diplomacy_summit"
+                ),
+                NewsArticleItem(
+                    id = "ar_pol_6",
+                    section = NewsSectionType.POLITICS,
+                    categoryLabel = strings.sectionPolitics,
+                    headline = "تشكيل لجنة وزارية مشتركة لمتابعة تنفيذ اتفاقيات التجارة الحرة",
+                    summary = "اللجنة ستعقد اجتماعات دورية لرفع المعوقات الجمركية وتنشيط التبادل التجاري البيني.",
+                    sourceName = "BBC عربي",
+                    timeAgo = getRelativeTimeLabel(effLang, 38),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 5),
+                    visualTheme = "central_bank"
+                )
             )
 
             val economyAr = listOf(
-                topStoriesAr[0].copy(id = "ar_eco_1", section = NewsSectionType.ECONOMY),
-                topStoriesAr[3].copy(id = "ar_eco_2", section = NewsSectionType.ECONOMY),
-                topStoriesAr[1].copy(id = "ar_eco_3", section = NewsSectionType.ECONOMY, imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 1)),
-                topStoriesAr[2].copy(id = "ar_eco_4", section = NewsSectionType.ECONOMY, imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 2)),
-                topStoriesAr[4].copy(id = "ar_eco_5", section = NewsSectionType.ECONOMY, imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 4)),
-                topStoriesAr[5].copy(id = "ar_eco_6", section = NewsSectionType.ECONOMY, imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 5))
+                NewsArticleItem(
+                    id = "ar_eco_1",
+                    section = NewsSectionType.ECONOMY,
+                    categoryLabel = strings.sectionEconomy,
+                    headline = "انتعاش الأسواق العالمية مع تباطؤ التضخم بوتيرة أسرع من التوقعات",
+                    summary = "سجلت المؤشرات العالمية مستويات قياسية بعد أن كشفت بيانات مؤشر أسعار المستهلكين عن تراجع حاد في التضخم.",
+                    sourceName = "سكاي نيوز عربية",
+                    timeAgo = getRelativeTimeLabel(effLang, 7),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 0),
+                    visualTheme = "trading_floor"
+                ),
+                NewsArticleItem(
+                    id = "ar_eco_2",
+                    section = NewsSectionType.ECONOMY,
+                    categoryLabel = strings.sectionEconomy,
+                    headline = "البنك المركزي يقرر تثبيت أسعار الفائدة لدعم استقرار النمو الاقتصادي",
+                    summary = "أكد صناع السياسة النقدية استمرار مراقبة مؤشرات الأسعار وسوق العمل قبل اتخاذ أي خطوات جديدة.",
+                    sourceName = "فرانس 24",
+                    timeAgo = getRelativeTimeLabel(effLang, 13),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 1),
+                    visualTheme = "central_bank"
+                ),
+                NewsArticleItem(
+                    id = "ar_eco_3",
+                    section = NewsSectionType.ECONOMY,
+                    categoryLabel = strings.sectionEconomy,
+                    headline = "ارتفاع احتياطيات النقد الأجنبي مع نمو الصادرات غير النفطية",
+                    summary = "أظهرت البيانات الرسمية تحسناً ملحوظاً في الميزان التجاري بفضل زيادة الصادرات الصناعية والزراعية.",
+                    sourceName = "سكاي نيوز عربية",
+                    timeAgo = getRelativeTimeLabel(effLang, 19),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 2),
+                    visualTheme = "trading_floor"
+                ),
+                NewsArticleItem(
+                    id = "ar_eco_4",
+                    section = NewsSectionType.ECONOMY,
+                    categoryLabel = strings.sectionEconomy,
+                    headline = "توقعات بتعافي أسعار المعادن الأساسية مع ارتفاع الطلب الصناعي",
+                    summary = "محللو السلع يتوقعون طلباً قوياً على النحاس والليثيوم مدفوعاً بمشاريع الطاقة المتجددة والسيارات الكهربائية.",
+                    sourceName = "BBC عربي",
+                    timeAgo = getRelativeTimeLabel(effLang, 25),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 3),
+                    visualTheme = "central_bank"
+                ),
+                NewsArticleItem(
+                    id = "ar_eco_5",
+                    section = NewsSectionType.ECONOMY,
+                    categoryLabel = strings.sectionEconomy,
+                    headline = "صناديق استثمارية توسع محفظتها في قطاع التكنولوجيا المالية والمدفوعات",
+                    summary = "جولات تمويل جديدة تدعم الشركات الناشئة المتخصصة في حلول الدفع الرقمي والخدمات المصرفية السحابية.",
+                    sourceName = "فرانس 24",
+                    timeAgo = getRelativeTimeLabel(effLang, 31),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 4),
+                    visualTheme = "trading_floor"
+                ),
+                NewsArticleItem(
+                    id = "ar_eco_6",
+                    section = NewsSectionType.ECONOMY,
+                    categoryLabel = strings.sectionEconomy,
+                    headline = "تراجع تكاليف الشحن البحري يعزز مرونة التجارة الإلكترونية العالمية",
+                    summary = "مؤشرات الموانئ تشير إلى تحسن وتيرة تفريغ الحاويات وانخفاض أسعار التأمين على خطوط الشحن الرئيسية.",
+                    sourceName = "سكاي نيوز عربية",
+                    timeAgo = getRelativeTimeLabel(effLang, 37),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 5),
+                    visualTheme = "central_bank"
+                )
             )
 
             val techAr = listOf(
-                topStoriesAr[1].copy(id = "ar_tech_1", section = NewsSectionType.TECHNOLOGY),
-                topStoriesAr[5].copy(id = "ar_tech_2", section = NewsSectionType.TECHNOLOGY),
-                topStoriesAr[0].copy(id = "ar_tech_3", section = NewsSectionType.TECHNOLOGY, imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 2)),
-                topStoriesAr[2].copy(id = "ar_tech_4", section = NewsSectionType.TECHNOLOGY, imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 3)),
-                topStoriesAr[3].copy(id = "ar_tech_5", section = NewsSectionType.TECHNOLOGY, imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 4)),
-                topStoriesAr[4].copy(id = "ar_tech_6", section = NewsSectionType.TECHNOLOGY, imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 5))
+                NewsArticleItem(
+                    id = "ar_tech_1",
+                    section = NewsSectionType.TECHNOLOGY,
+                    categoryLabel = strings.sectionTechnology,
+                    headline = "الكشف عن جيل جديد من نماذج الذكاء الاصطناعي فائقة الكفاءة",
+                    summary = "المعمارية الجديدة توفر معالجة فورية للنصوص والصوت والصورة باستهلاك طاقة أقل داخل مراكز البيانات.",
+                    sourceName = "سكاي نيوز عربية",
+                    timeAgo = getRelativeTimeLabel(effLang, 9),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 0),
+                    visualTheme = "ai_datacenter"
+                ),
+                NewsArticleItem(
+                    id = "ar_tech_2",
+                    section = NewsSectionType.TECHNOLOGY,
+                    categoryLabel = strings.sectionTechnology,
+                    headline = "إطلاق معالجات متطورة للحوسبة السحابية بدقة تصنيع غير مسبوقة",
+                    summary = "رقائق السيليكون الجديدة ترفع سرعة تدريب النماذج الذكية وتقلل زمن الاستجابة في الأجهزة المحمولة.",
+                    sourceName = "BBC عربي",
+                    timeAgo = getRelativeTimeLabel(effLang, 15),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 1),
+                    visualTheme = "cyber_chip"
+                ),
+                NewsArticleItem(
+                    id = "ar_tech_3",
+                    section = NewsSectionType.TECHNOLOGY,
+                    categoryLabel = strings.sectionTechnology,
+                    headline = "ابتكار بطاريات صلبة للسيارات الكهربائية تُشحن خلال عشر دقائق",
+                    summary = "نجح باحثون في تطوير إلكتروليت صلب يضاعف مدى القيادة ويحافظ على الأداء في درجات الحرارة القصوى.",
+                    sourceName = "فرانس 24",
+                    timeAgo = getRelativeTimeLabel(effLang, 21),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 2),
+                    visualTheme = "cyber_chip"
+                ),
+                NewsArticleItem(
+                    id = "ar_tech_4",
+                    section = NewsSectionType.TECHNOLOGY,
+                    categoryLabel = strings.sectionTechnology,
+                    headline = "تحديثات أمنية واسعة لتعزيز حماية الشبكات السحابية والهواتف الذكية",
+                    summary = "شركات الأمن السيبراني تعتمد التشفير المقاوم للحوسبة الكمية لحماية بيانات المستخدمين والمؤسسات.",
+                    sourceName = "سكاي نيوز عربية",
+                    timeAgo = getRelativeTimeLabel(effLang, 27),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 3),
+                    visualTheme = "ai_datacenter"
+                ),
+                NewsArticleItem(
+                    id = "ar_tech_5",
+                    section = NewsSectionType.TECHNOLOGY,
+                    categoryLabel = strings.sectionTechnology,
+                    headline = "إطلاق أقمار صناعية جديدة لتوسيع تغطية الإنترنت الفضائي عالي السرعة",
+                    summary = "المجموعة المدارية الجديدة تستهدف توفير اتصال مستقر للمناطق النائية والطائرات والسفن حول العالم.",
+                    sourceName = "BBC عربي",
+                    timeAgo = getRelativeTimeLabel(effLang, 33),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 4),
+                    visualTheme = "cyber_chip"
+                ),
+                NewsArticleItem(
+                    id = "ar_tech_6",
+                    section = NewsSectionType.TECHNOLOGY,
+                    categoryLabel = strings.sectionTechnology,
+                    headline = "ثورة في تقنيات الشاشات الذكية والتلفزيونات فائقة التباين",
+                    summary = "لوحات العرض الجديدة تجمع بين السطوع العالي وانخفاض استهلاك الكهرباء مع معالجة حركة بدقة 4K.",
+                    sourceName = "فرانس 24",
+                    timeAgo = getRelativeTimeLabel(effLang, 39),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 5),
+                    visualTheme = "ai_datacenter"
+                )
             )
 
             val worldAr = listOf(
-                topStoriesAr[2].copy(id = "ar_wld_1", section = NewsSectionType.WORLD),
-                topStoriesAr[4].copy(id = "ar_wld_2", section = NewsSectionType.WORLD, imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 1)),
-                topStoriesAr[0].copy(id = "ar_wld_3", section = NewsSectionType.WORLD, imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 2)),
-                topStoriesAr[1].copy(id = "ar_wld_4", section = NewsSectionType.WORLD, imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 3)),
-                topStoriesAr[3].copy(id = "ar_wld_5", section = NewsSectionType.WORLD, imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 4)),
-                topStoriesAr[5].copy(id = "ar_wld_6", section = NewsSectionType.WORLD, imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 5))
+                NewsArticleItem(
+                    id = "ar_wld_1",
+                    section = NewsSectionType.WORLD,
+                    categoryLabel = strings.sectionWorld,
+                    headline = "التوصل إلى اتفاق مناخي جديد خلال القمة العالمية للطاقة المستدامة",
+                    summary = "اتفق القادة على تسريع الاستثمارات في مشاريع الطاقة النظيفة وخفض الانبعاثات الكربونية خلال العقد القادم.",
+                    sourceName = "BBC عربي",
+                    timeAgo = getRelativeTimeLabel(effLang, 10),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 0),
+                    visualTheme = "global_climate"
+                ),
+                NewsArticleItem(
+                    id = "ar_wld_2",
+                    section = NewsSectionType.WORLD,
+                    categoryLabel = strings.sectionWorld,
+                    headline = "مؤتمر دولي للأمن الغذائي يطلق صندوقاً لدعم الزراعة الذكية مناخياً",
+                    summary = "برنامج المساعدات يهدف إلى تطوير بذور مقاومة للجفاف وتحديث أنظمة الري في عشرات الدول النامية.",
+                    sourceName = "فرانس 24",
+                    timeAgo = getRelativeTimeLabel(effLang, 16),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 1),
+                    visualTheme = "global_climate"
+                ),
+                NewsArticleItem(
+                    id = "ar_wld_3",
+                    section = NewsSectionType.WORLD,
+                    categoryLabel = strings.sectionWorld,
+                    headline = "اكتشافات أثرية نادرة تلقي الضوء على طرق التجارة القديمة في المتوسط",
+                    summary = "بعثة دولية تكشف عن ميناء غارق ومجموعة نقود تاريخية محفوظة بحالة ممتازة تعود لعدة قرون.",
+                    sourceName = "سكاي نيوز عربية",
+                    timeAgo = getRelativeTimeLabel(effLang, 22),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 2),
+                    visualTheme = "diplomacy_summit"
+                ),
+                NewsArticleItem(
+                    id = "ar_wld_4",
+                    section = NewsSectionType.WORLD,
+                    categoryLabel = strings.sectionWorld,
+                    headline = "المدن الأوروبية والآسيوية تتوسع في إنشاء المساحات الخضراء للحد من الحرارة",
+                    summary = "بلديات المدن الكبرى تخصص مليارات الدولارات لزراعة الغابات الحضرية وتبريد الأحياء السكنية.",
+                    sourceName = "BBC عربي",
+                    timeAgo = getRelativeTimeLabel(effLang, 28),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 3),
+                    visualTheme = "global_climate"
+                ),
+                NewsArticleItem(
+                    id = "ar_wld_5",
+                    section = NewsSectionType.WORLD,
+                    categoryLabel = strings.sectionWorld,
+                    headline = "بعثات استكشاف المحيطات ترصد أنظمة بيئية بحرية لم تُكتشف من قبل",
+                    summary = "مركبات أعماق البحار توثق أنواعاً جديدة من الشعاب المرجانية العميقة التي تساهم في توازن التنوع البيولوجي.",
+                    sourceName = "فرانس 24",
+                    timeAgo = getRelativeTimeLabel(effLang, 34),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 4),
+                    visualTheme = "global_climate"
+                ),
+                NewsArticleItem(
+                    id = "ar_wld_6",
+                    section = NewsSectionType.WORLD,
+                    categoryLabel = strings.sectionWorld,
+                    headline = "منظمات دولية تدعو لحماية التراث الثقافي الرقمي والأرشيفات التاريخية",
+                    summary = "مشروع عالمي جديد لحفظ المخطوطات والوثائق النادرة عبر مسح ضوئي عالي الدقة متاح للباحثين مجاناً.",
+                    sourceName = "سكاي نيوز عربية",
+                    timeAgo = getRelativeTimeLabel(effLang, 40),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 5),
+                    visualTheme = "diplomacy_summit"
+                )
             )
 
             return NewsCenterState(
@@ -876,10 +1653,10 @@ object NewsRepository {
                     NewsSectionType.WORLD to worldAr
                 ),
                 breakingTickerItems = listOf(
-                    "البنك المركزي يقرر تثبيت أسعار الفائدة دون تغيير",
-                    "التوصل إلى اتفاق مناخي جديد خلال القمة العالمية",
-                    "عملاق التكنولوجيا يكشف عن الجيل الجديد من نماذج الذكاء الاصطناعي",
-                    "انتعاش الأسواق العالمية مع تباطؤ التضخم بوتيرة أسرع من المتوقع"
+                    "البنك المركزي يقرر تثبيت أسعار الفائدة لدعم استقرار النمو",
+                    "التوصل إلى اتفاق مناخي جديد خلال القمة العالمية للطاقة",
+                    "الكشف عن جيل جديد من نماذج الذكاء الاصطناعي فائقة الكفاءة",
+                    "قمة دولية طارئة لتأمين سلاسل الإمداد والممرات التجارية"
                 ),
                 updatedTime = timeFormat.format(Date()),
                 fetchedAtMillis = 0L,
@@ -888,70 +1665,346 @@ object NewsRepository {
         } else {
             val topStoriesEn = listOf(
                 NewsArticleItem(
-                    id = "en_top_1",
+                    id = "${effLang}_top_1",
                     section = NewsSectionType.TOP_STORIES,
-                    categoryLabel = "ECONOMY",
-                    headline = "MARKETS RALLY AS INFLATION COOLS FASTER THAN EXPECTED",
-                    summary = "Global indexes reached record highs today as the latest consumer price index data revealed a sharper-than-forecast decline in inflation.",
-                    sourceName = "BBC News",
-                    timeAgo = "12 min ago",
-                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 0),
-                    visualTheme = "trading_floor"
+                    categoryLabel = strings.sectionTopStories,
+                    headline = "Emergency Global Summit Convenes to Strengthen Supply Chain Resilience",
+                    summary = "International leaders met today to coordinate cross-border logistics, energy corridors, and long-term infrastructure resilience.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 6),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TOP_STORIES, 0),
+                    visualTheme = "diplomacy_summit"
                 ),
                 NewsArticleItem(
-                    id = "en_top_2",
+                    id = "${effLang}_top_2",
                     section = NewsSectionType.TOP_STORIES,
-                    categoryLabel = "TECHNOLOGY",
-                    headline = "Tech Giant Announces Breakthrough AI Model",
-                    summary = "Next-generation multimodal reasoning architecture delivers real-time inference with unprecedented energy efficiency across cloud and edge devices.",
-                    sourceName = "BBC News",
-                    timeAgo = "18 min ago",
-                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 1),
-                    visualTheme = "ai_datacenter"
-                ),
-                NewsArticleItem(
-                    id = "en_top_3",
-                    section = NewsSectionType.TOP_STORIES,
-                    categoryLabel = "WORLD",
-                    headline = "NEW CLIMATE AGREEMENT REACHED AT GLOBAL SUMMIT",
-                    summary = "World leaders agreed on a landmark clean-energy investment framework aimed at accelerating renewable infrastructure over the next decade.",
-                    sourceName = "BBC News",
-                    timeAgo = "24 min ago",
-                    imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 0),
+                    categoryLabel = strings.sectionTopStories,
+                    headline = "Clean Grid Partnership Expands Cross-Border Renewable Power Links",
+                    summary = "Energy ministries signed a multi-year investment pact connecting offshore wind hubs and next-generation grid storage.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 12),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TOP_STORIES, 1),
                     visualTheme = "global_climate"
                 ),
                 NewsArticleItem(
-                    id = "en_top_4",
+                    id = "${effLang}_top_3",
                     section = NewsSectionType.TOP_STORIES,
-                    categoryLabel = "ECONOMY",
-                    headline = "CENTRAL BANK HOLDS INTEREST RATES STEADY",
-                    summary = "Policymakers signaled a patient approach as inflation continues to moderate toward the long-term target alongside resilient labor data.",
-                    sourceName = "Al Jazeera",
-                    timeAgo = "32 min ago",
-                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 3),
-                    visualTheme = "central_bank"
+                    categoryLabel = strings.sectionTopStories,
+                    headline = "International Aviation Traffic Surpasses Pre-Pandemic Peak Volumes",
+                    summary = "Civil aviation authorities reported sustained demand across long-haul corridors alongside major terminal upgrades.",
+                    sourceName = sourceConfig.secondarySourceName,
+                    timeAgo = getRelativeTimeLabel(effLang, 18),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TOP_STORIES, 2),
+                    visualTheme = "trading_floor"
                 ),
                 NewsArticleItem(
-                    id = "en_top_5",
+                    id = "${effLang}_top_4",
                     section = NewsSectionType.TOP_STORIES,
-                    categoryLabel = "POLITICS",
-                    headline = "DIPLOMATIC TALKS ADVANCE ON REGIONAL TRADE CORRIDOR",
-                    summary = "Ministers finalized key cross-border trade and digital infrastructure protocols following three days of high-level summit negotiations.",
-                    sourceName = "BBC News",
-                    timeAgo = "41 min ago",
+                    categoryLabel = strings.sectionTopStories,
+                    headline = "Global Health Coalition Launches Rapid Telemedicine Network",
+                    summary = "Regional hospitals will share real-time diagnostics and specialist training across underserved rural clinics.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 24),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TOP_STORIES, 3),
+                    visualTheme = "ai_datacenter"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_top_5",
+                    section = NewsSectionType.TOP_STORIES,
+                    categoryLabel = strings.sectionTopStories,
+                    headline = "Universities Announce Joint Fellowships in Climate & Materials Science",
+                    summary = "New international grants will fund collaborative laboratories working on zero-carbon industrial manufacturing.",
+                    sourceName = sourceConfig.secondarySourceName,
+                    timeAgo = getRelativeTimeLabel(effLang, 30),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TOP_STORIES, 4),
+                    visualTheme = "cyber_chip"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_top_6",
+                    section = NewsSectionType.TOP_STORIES,
+                    categoryLabel = strings.sectionTopStories,
+                    headline = "High-Speed Electric Rail Expansion Links Major Metropolitan Corridors",
+                    summary = "Transport planners unveiled new electrified intercity routes designed to cut regional travel times in half.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 36),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TOP_STORIES, 5),
+                    visualTheme = "central_bank"
+                )
+            )
+
+            val politicsEn = listOf(
+                NewsArticleItem(
+                    id = "${effLang}_pol_1",
+                    section = NewsSectionType.POLITICS,
+                    categoryLabel = strings.sectionPolitics,
+                    headline = "Diplomatic Talks Advance on Regional Trade and Security Framework",
+                    summary = "Foreign ministers finalized cross-border customs protocols and strategic dialogue mechanisms after three days of talks.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 8),
                     imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 0),
                     visualTheme = "diplomacy_summit"
                 ),
                 NewsArticleItem(
-                    id = "en_top_6",
-                    section = NewsSectionType.TOP_STORIES,
-                    categoryLabel = "TECHNOLOGY",
-                    headline = "NEXT-GENERATION QUANTUM CHIP ACHIEVES MILESTONE",
-                    summary = "Researchers demonstrated fault-tolerant logical qubits capable of executing complex simulations orders of magnitude faster.",
-                    sourceName = "France 24",
-                    timeAgo = "49 min ago",
+                    id = "${effLang}_pol_2",
+                    section = NewsSectionType.POLITICS,
+                    categoryLabel = strings.sectionPolitics,
+                    headline = "Lawmakers Debate Landmark Public Transparency and Digital Governance Bill",
+                    summary = "Parliamentary committees advanced bipartisan proposals to modernize public procurement and digital citizen services.",
+                    sourceName = sourceConfig.secondarySourceName,
+                    timeAgo = getRelativeTimeLabel(effLang, 14),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 1),
+                    visualTheme = "diplomacy_summit"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_pol_3",
+                    section = NewsSectionType.POLITICS,
+                    categoryLabel = strings.sectionPolitics,
+                    headline = "Capitals Sign Bilateral Accord on Maritime Corridors and Port Security",
+                    summary = "Legal and maritime delegations agreed on joint coast guard coordination and streamlined vessel inspection rules.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 20),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 2),
+                    visualTheme = "diplomacy_summit"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_pol_4",
+                    section = NewsSectionType.POLITICS,
+                    categoryLabel = strings.sectionPolitics,
+                    headline = "Municipal Leaders Urge National Funding for Urban Housing Modernization",
+                    summary = "Mayors from major cities presented a shared infrastructure plan targeting affordable transit-oriented neighborhoods.",
+                    sourceName = sourceConfig.secondarySourceName,
+                    timeAgo = getRelativeTimeLabel(effLang, 26),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 3),
+                    visualTheme = "global_climate"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_pol_5",
+                    section = NewsSectionType.POLITICS,
+                    categoryLabel = strings.sectionPolitics,
+                    headline = "Joint Ministerial Council Sets Schedule for Tariff Reduction Review",
+                    summary = "Trade envoys scheduled quarterly working sessions to remove technical barriers on agricultural and industrial goods.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 32),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 4),
+                    visualTheme = "central_bank"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_pol_6",
+                    section = NewsSectionType.POLITICS,
+                    categoryLabel = strings.sectionPolitics,
+                    headline = "Election Oversight Panel Publishes Updated Cybersecurity Standards",
+                    summary = "Independent regulators released audit guidelines to safeguard voter registries and public tally infrastructure.",
+                    sourceName = sourceConfig.secondarySourceName,
+                    timeAgo = getRelativeTimeLabel(effLang, 38),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.POLITICS, 5),
+                    visualTheme = "diplomacy_summit"
+                )
+            )
+
+            val economyEn = listOf(
+                NewsArticleItem(
+                    id = "${effLang}_eco_1",
+                    section = NewsSectionType.ECONOMY,
+                    categoryLabel = strings.sectionEconomy,
+                    headline = "Global Equities Rally as Core Inflation Cools Faster Than Forecast",
+                    summary = "Benchmark stock indexes reached fresh highs after consumer price reports pointed to easing services inflation.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 7),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 0),
+                    visualTheme = "trading_floor"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_eco_2",
+                    section = NewsSectionType.ECONOMY,
+                    categoryLabel = strings.sectionEconomy,
+                    headline = "Central Bank Holds Benchmark Interest Rates Steady Amid Resilient Growth",
+                    summary = "Monetary policymakers signaled a data-dependent stance as labor markets remain balanced and credit conditions stabilize.",
+                    sourceName = sourceConfig.secondarySourceName,
+                    timeAgo = getRelativeTimeLabel(effLang, 13),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 1),
+                    visualTheme = "central_bank"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_eco_3",
+                    section = NewsSectionType.ECONOMY,
+                    categoryLabel = strings.sectionEconomy,
+                    headline = "Industrial Metals Gain Momentum on Clean Energy Manufacturing Demand",
+                    summary = "Copper and aluminum futures climbed as factory orders accelerated across grid equipment and electric vehicle plants.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 19),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 2),
+                    visualTheme = "trading_floor"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_eco_4",
+                    section = NewsSectionType.ECONOMY,
+                    categoryLabel = strings.sectionEconomy,
+                    headline = "Maritime Freight Rates Ease as Container Port Turnaround Improves",
+                    summary = "Global shipping indexes recorded steady capacity normalization along trans-Pacific and European maritime routes.",
+                    sourceName = sourceConfig.secondarySourceName,
+                    timeAgo = getRelativeTimeLabel(effLang, 25),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 3),
+                    visualTheme = "central_bank"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_eco_5",
+                    section = NewsSectionType.ECONOMY,
+                    categoryLabel = strings.sectionEconomy,
+                    headline = "Venture Capital Activity Rebounds in Fintech and Cloud Infrastructure",
+                    summary = "Institutional investors expanded late-stage allocations into automated treasury tools and enterprise payment rails.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 31),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 4),
+                    visualTheme = "trading_floor"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_eco_6",
+                    section = NewsSectionType.ECONOMY,
+                    categoryLabel = strings.sectionEconomy,
+                    headline = "Export Orders Lift Manufacturing Sentiment Across Emerging Markets",
+                    summary = "Purchasing managers surveys showed rising factory output and stronger hiring intentions heading into next quarter.",
+                    sourceName = sourceConfig.secondarySourceName,
+                    timeAgo = getRelativeTimeLabel(effLang, 37),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.ECONOMY, 5),
+                    visualTheme = "central_bank"
+                )
+            )
+
+            val techEn = listOf(
+                NewsArticleItem(
+                    id = "${effLang}_tech_1",
+                    section = NewsSectionType.TECHNOLOGY,
+                    categoryLabel = strings.sectionTechnology,
+                    headline = "Breakthrough Multimodal AI Architecture Cuts Data Center Power Use",
+                    summary = "Next-generation reasoning models deliver real-time inference with substantially lower energy consumption.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 9),
                     imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 0),
+                    visualTheme = "ai_datacenter"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_tech_2",
+                    section = NewsSectionType.TECHNOLOGY,
+                    categoryLabel = strings.sectionTechnology,
+                    headline = "Next-Generation Quantum Processor Achieves Fault-Tolerant Milestone",
+                    summary = "Researchers demonstrated logical qubit error correction capable of sustaining complex molecular simulations.",
+                    sourceName = sourceConfig.secondarySourceName,
+                    timeAgo = getRelativeTimeLabel(effLang, 15),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 1),
                     visualTheme = "cyber_chip"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_tech_3",
+                    section = NewsSectionType.TECHNOLOGY,
+                    categoryLabel = strings.sectionTechnology,
+                    headline = "Solid-State EV Battery Prototype Reaches 80% Charge in Ten Minutes",
+                    summary = "Materials scientists unveiled a ceramic electrolyte cell engineered for high thermal stability and longevity.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 21),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 2),
+                    visualTheme = "cyber_chip"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_tech_4",
+                    section = NewsSectionType.TECHNOLOGY,
+                    categoryLabel = strings.sectionTechnology,
+                    headline = "Open Standards Group Finalizes Post-Quantum Encryption Suite",
+                    summary = "Cloud providers and device makers began rolling out upgraded cryptographic protocols for consumer hardware.",
+                    sourceName = sourceConfig.secondarySourceName,
+                    timeAgo = getRelativeTimeLabel(effLang, 27),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 3),
+                    visualTheme = "ai_datacenter"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_tech_5",
+                    section = NewsSectionType.TECHNOLOGY,
+                    categoryLabel = strings.sectionTechnology,
+                    headline = "Low-Earth Orbit Constellation Expands High-Speed Rural Broadband",
+                    summary = "Newly deployed laser-linked satellites reduce latency across maritime, aviation, and remote regional networks.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 33),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 4),
+                    visualTheme = "cyber_chip"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_tech_6",
+                    section = NewsSectionType.TECHNOLOGY,
+                    categoryLabel = strings.sectionTechnology,
+                    headline = "Next-Gen MicroLED Smart TV Panels Double Peak Brightness Efficiency",
+                    summary = "Display engineers introduced ultra-thin television backplanes pairing deep contrast with lower power draw.",
+                    sourceName = sourceConfig.secondarySourceName,
+                    timeAgo = getRelativeTimeLabel(effLang, 39),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.TECHNOLOGY, 5),
+                    visualTheme = "ai_datacenter"
+                )
+            )
+
+            val worldEn = listOf(
+                NewsArticleItem(
+                    id = "${effLang}_wld_1",
+                    section = NewsSectionType.WORLD,
+                    categoryLabel = strings.sectionWorld,
+                    headline = "New Climate Accord Reached at Global Sustainable Energy Summit",
+                    summary = "Delegations pledged accelerated funding for clean power grids and coastal resilience over the coming decade.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 10),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 0),
+                    visualTheme = "global_climate"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_wld_2",
+                    section = NewsSectionType.WORLD,
+                    categoryLabel = strings.sectionWorld,
+                    headline = "International Food Security Forum Backs Drought-Resilient Farming",
+                    summary = "Agricultural agencies committed resources to precision irrigation and climate-adapted grain varieties.",
+                    sourceName = sourceConfig.secondarySourceName,
+                    timeAgo = getRelativeTimeLabel(effLang, 16),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 1),
+                    visualTheme = "global_climate"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_wld_3",
+                    section = NewsSectionType.WORLD,
+                    categoryLabel = strings.sectionWorld,
+                    headline = "Deep-Sea Expedition Maps Previously Uncharted Coral Ecosystems",
+                    summary = "Autonomous submersibles documented thriving deep-water reefs supporting diverse pelagic marine life.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 22),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 2),
+                    visualTheme = "global_climate"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_wld_4",
+                    section = NewsSectionType.WORLD,
+                    categoryLabel = strings.sectionWorld,
+                    headline = "Major Cities Expand Urban Tree Canopies to Curb Summer Heat",
+                    summary = "Metropolitan councils across Europe and Asia launched green-corridor programs to cool dense districts.",
+                    sourceName = sourceConfig.secondarySourceName,
+                    timeAgo = getRelativeTimeLabel(effLang, 28),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 3),
+                    visualTheme = "global_climate"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_wld_5",
+                    section = NewsSectionType.WORLD,
+                    categoryLabel = strings.sectionWorld,
+                    headline = "Archaeologists Uncover Ancient Mediterranean Harbor Artifacts",
+                    summary = "An international dive team preserved ceramics and trade records illuminating centuries-old maritime routes.",
+                    sourceName = sourceConfig.primarySourceName.substringBefore("•").trim(),
+                    timeAgo = getRelativeTimeLabel(effLang, 34),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 4),
+                    visualTheme = "diplomacy_summit"
+                ),
+                NewsArticleItem(
+                    id = "${effLang}_wld_6",
+                    section = NewsSectionType.WORLD,
+                    categoryLabel = strings.sectionWorld,
+                    headline = "Global Cultural Coalition Digitizes Rare Historical Archives",
+                    summary = "Libraries across four continents opened free high-resolution access to fragile manuscripts and maps.",
+                    sourceName = sourceConfig.secondarySourceName,
+                    timeAgo = getRelativeTimeLabel(effLang, 40),
+                    imageUrl = getFallbackPhotoForSection(NewsSectionType.WORLD, 5),
+                    visualTheme = "diplomacy_summit"
                 )
             )
 
@@ -960,16 +2013,16 @@ object NewsRepository {
                 activeSourceName = sourceConfig.primarySourceName,
                 articlesBySection = mapOf(
                     NewsSectionType.TOP_STORIES to topStoriesEn,
-                    NewsSectionType.POLITICS to listOf(topStoriesEn[4], topStoriesEn[2], topStoriesEn[0], topStoriesEn[3], topStoriesEn[1], topStoriesEn[5]),
-                    NewsSectionType.ECONOMY to listOf(topStoriesEn[0], topStoriesEn[3], topStoriesEn[1], topStoriesEn[2], topStoriesEn[4], topStoriesEn[5]),
-                    NewsSectionType.TECHNOLOGY to listOf(topStoriesEn[1], topStoriesEn[5], topStoriesEn[0], topStoriesEn[2], topStoriesEn[3], topStoriesEn[4]),
-                    NewsSectionType.WORLD to listOf(topStoriesEn[2], topStoriesEn[4], topStoriesEn[0], topStoriesEn[1], topStoriesEn[3], topStoriesEn[5])
+                    NewsSectionType.POLITICS to politicsEn,
+                    NewsSectionType.ECONOMY to economyEn,
+                    NewsSectionType.TECHNOLOGY to techEn,
+                    NewsSectionType.WORLD to worldEn
                 ),
                 breakingTickerItems = listOf(
-                    "Central bank holds interest rates steady",
+                    "Central bank holds interest rates steady amid resilient growth",
                     "New climate agreement reached at global summit",
-                    "Tech giant unveils next-generation AI model",
-                    "Markets rally as inflation cools faster than expected"
+                    "Breakthrough AI architecture cuts data center power use",
+                    "Global equities rally as core inflation cools faster than forecast"
                 ),
                 updatedTime = timeFormat.format(Date()),
                 fetchedAtMillis = 0L,
@@ -981,7 +2034,7 @@ object NewsRepository {
     fun getLocalizedStrings(langCode: String): NewsLocalizedStrings {
         val eff = LocaleHelper.getEffectiveLanguage(langCode)
         return when (eff) {
-            "ar", "fa", "ur" -> NewsLocalizedStrings(
+            "ar" -> NewsLocalizedStrings(
                 newsCenterTitle = "مركز الأخبار",
                 liveBadge = "مباشر",
                 sectionsHeader = "الأقسام",
@@ -997,6 +2050,40 @@ object NewsRepository {
                 sourceLabel = "المصدر التلقائي: ",
                 refreshAction = "تحديث الأخبار",
                 backToHomeHint = "رجوع للشاشة الرئيسية"
+            )
+            "fa" -> NewsLocalizedStrings(
+                newsCenterTitle = "مرکز خبر",
+                liveBadge = "زنده",
+                sectionsHeader = "بخش‌ها",
+                sectionTopStories = "مهم‌ترین اخبار",
+                sectionPolitics = "سیاست",
+                sectionEconomy = "اقتصاد",
+                sectionTechnology = "فناوری",
+                sectionWorld = "جهان",
+                upNextHeader = "خبر بعدی",
+                upNextPrefix = "بعدی: ",
+                updatedPrefix = "بروزرسانی ",
+                breakingBadge = "فوری",
+                sourceLabel = "منبع خودکار: ",
+                refreshAction = "بروزرسانی اخبار",
+                backToHomeHint = "بازگشت به خانه"
+            )
+            "ur" -> NewsLocalizedStrings(
+                newsCenterTitle = "نیوز سینٹر",
+                liveBadge = "لائیو",
+                sectionsHeader = "شعبہ جات",
+                sectionTopStories = "اہم خبریں",
+                sectionPolitics = "سیاست",
+                sectionEconomy = "معیشت",
+                sectionTechnology = "ٹیکنالوجی",
+                sectionWorld = "دنیا",
+                upNextHeader = "اگلی خبر",
+                upNextPrefix = "اگلا: ",
+                updatedPrefix = "اپڈیٹ ",
+                breakingBadge = "بریکنگ",
+                sourceLabel = "خودکار ذریعہ: ",
+                refreshAction = "خبریں تازہ کریں",
+                backToHomeHint = "ہوم پر واپس"
             )
             "fr" -> NewsLocalizedStrings(
                 newsCenterTitle = "CENTRE D'ACTUALITÉS",

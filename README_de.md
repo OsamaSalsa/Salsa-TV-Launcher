@@ -41,13 +41,15 @@ Die meisten Smart-TV-Launcher sind heute mit erzwungener Werbung, schweren Video
 
 ### 🆕 Neu in Version 2.1
 * **🌐 Live 4-Dashboard-Informationszentrum**: Direkter Zugriff über die obere Leiste auf vier flüssig animierte Vollbild-Dashboards:
-  * **☀️ Wetter-Dashboard**: Automatische Stadterkennung, 24-Stunden-Kurve, Luftfeuchtigkeit/Wind/Luftdruck/UV, 5-Tage-Vorhersage und sanfte Umgebungsbewegung.
-  * **📰 Nachrichten-Zentrum**: Mehrsprachige Live-RSS-Schlagzeilen (Top-News, Politik, Wirtschaft, Technologie, Welt) mit automatischem Artikelwechsel alle 10 Sekunden.
+  * **☀️ Wetter-Dashboard**: Automatische **GPS**-Standorterkennung & Stadtsuche, 24-Stunden-Kurve, Luftfeuchtigkeit/Wind/Luftdruck/UV und 5-Tage-Vorhersage.
+  * **📰 Nachrichten-Zentrum**: Eigene, unabhängige RSS-Feeds für alle **21 Sprachen** über 5 Ressorts (**Top-Meldungen, Politik, Wirtschaft, Technologie, Welt**) ohne doppelte Schlagzeilen und mit automatischem Artikelwechsel alle 10s.
   * **📈 Wirtschaft & Märkte**: Globale Aktienindizes, Forex-Kurse, Rohstoffe & Krypto, 5-Tage-Verlauf, Wirtschaftskalender und volle Anpassbarkeit.
-  * **⚽ Fußball-Zentrum (365Scores)**: Live-Ergebnisse, Spielpläne, Tabellen, Torjäger, erweitertes Vereins- & Ligen-Verzeichnis sowie Siegwahrscheinlichkeiten.
-* **🖥️ Neue Dashboard- & Auto-Wechsel-Bildschirmschoner**: Zeigen Sie im Ruhezustand **Wetter**, **Nachrichten**, **Wirtschaft**, **Fußball** oder **Alle im Wechsel** (**Nachrichten 30s → Wetter 10s → Wirtschaft 10s → Fußball 10s → Wiederholung**) mit nahtlosem Überblenden an.
-* **🎨 Live-UI-Einstellungen & flexible obere Leiste**: Echtzeit-Anpassungsmenü (4K-Hintergrundsuche, Nachtmodus, Lite-Modus) sowie optimierte obere Leiste ohne abgeschnittene Symbole.
-* **⚡ Schlankere & schnellere v2.1-Engine**: Deutlich kleinere APK-Größe, bereinigter Code, flüssige 60-FPS-Animationen bei unveränderter 4K-Hintergrundqualität, fokussierte Standard-Webportale (**YouTube TV** & **4 Spieleportale**) und vollständige Übersetzung in **21 Sprachen**.
+  * **⚽ Fußball-Zentrum (365Scores)**: Live-Ergebnisse, Spielpläne, Tabellen, Torjäger, erweitertes Vereins-/Ligen-Verzeichnis sowie Siegwahrscheinlichkeiten.
+* **🖥️ Dashboard-Bildschirmschoner & Auto-Wechsel**: Zeigen Sie **Wetter**, **Nachrichten**, **Wirtschaft**, **Fußball** oder **Alle im Wechsel** (**Nachrichten 60s → Wetter 10s → Wirtschaft 10s → Fußball 10s → zurück zu Nachrichten im jeweils nächsten Ressort**) an. Auch im Einzelmodus wechseln Nachrichten automatisch durch alle 5 Ressorts.
+* **📡 Broadcast Text Showcase Bildschirmschoner**: Animierter Studio-Nachrichtenticker über dem um 60 % abgedunkelten Aurora-Hintergrund mit abwechselnd **weißen & gelben** Schlagzeilen, `ON AIR`-Abzeichen, frei editierbaren Zeilen, einstellbarer Anzeigedauer (`3–15s`) und optionaler Hintergrundmusik oder eigenem MP3.
+* **🎨 Live-UI-Einstellungen HUD (Echtzeit-Vorschau)**: Schwebendes Einstellungsmenü direkt auf dem Startbildschirm für 4K-Hintergründe, Helligkeit, App-Abstand, Rasterdichte, Glas-Transparenz, Uhr/Datum/Begrüßung, obere Leiste, Wetteranzeige, Nachtfilter, Material You und Lite-Modus – **jede Änderung wird sofort live auf dem Startbildschirm sichtbar**.
+* **🧭 Flexible obere Leiste & schneller v2.1-Engine**: Keine abgeschnittenen Symbole am Rand, geringere APK-Größe, flüssige 60 FPS bei voller 4K-Qualität.
+* **🌍 Standard-Webportale & 21 Sprachen**: Enthält **YouTube TV**, **Google (`google.com`)** und **4 Spieleportale** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**) sowie volle Lokalisierung in **21 Sprachen**.
 
 ### ⚡ Extreme Leistung & sofortiger App-Start
 * **Paralleles Vorladen von Icons & Bannern**: App-Pakete, Symbole und Banner werden gleichzeitig im Hintergrund über alle CPU-Kerne dekodiert und erscheinen ohne Verzögerung beim Start.
@@ -127,7 +129,7 @@ Die meisten Smart-TV-Launcher sind heute mit erzwungener Werbung, schweren Video
 Laden Sie das aktuell kompilierte APK direkt auf Ihren Fernseher oder Ihr Smartphone herunter:
 
 👉 **[Neuestes Salsa TV Launcher APK herunterladen](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)**  
-👉 **[Downloader-Kurzcode / Direktlink: aftv.news/7099231](https://aftv.news/7099231)**
+👉 **[Downloader-Kurzcode / Direktlink: aftv.news/5157967](http://aftv.news/5157967)**
 
 ### Option 2: Installation über ADB
 ```bash

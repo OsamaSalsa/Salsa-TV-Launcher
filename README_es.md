@@ -40,14 +40,16 @@ La mayoría de los lanzadores de Smart TV actuales están llenos de anuncios for
 ## 🌟 Novedades y últimas mejoras destacadas
 
 ### 🆕 Novedades en la Versión 2.1
-* **🌐 Centro de 4 Paneles en Vivo**: Acceso directo desde la barra superior a cuatro paneles en pantalla completa con movimiento ambiental suave:
-  * **☀️ Panel del Clima**: Detección automática de ciudad, curva de 24 horas, humedad/viento/presión/UV y pronóstico de 5 días.
-  * **📰 Centro de Noticias**: Titulares RSS multilingües en vivo (Destacados, Política, Economía, Tecnología, Mundo) con rotación automática cada 10s.
+* **🌐 Centro de 4 Paneles en Vivo**: Acceso directo desde la barra superior a cuatro paneles en pantalla completa con animación suave:
+  * **☀️ Panel del Clima**: Detección automática por **GPS** y búsqueda manual de ciudad, curva de 24h, humedad/viento/presión/UV y pronóstico de 5 días.
+  * **📰 Centro de Noticias**: Fuentes RSS independientes para los **21 idiomas** en 5 secciones (**Destacadas, Política, Economía, Tecnología, Mundo**) sin titulares duplicados y con rotación cada 10s.
   * **📈 Economía y Mercados**: Índices bursátiles globales, divisas Forex, materias primas y cripto, gráficos de 5 días y calendario económico personalizable.
   * **⚽ Centro de Fútbol (365Scores)**: Resultados en vivo, partidos del día, tablas, goleadores, catálogo ampliado de clubes/ligas y probabilidades de victoria.
-* **🖥️ Salvapantallas de Paneles y Rotación Automática**: Muestra **Clima**, **Noticias**, **Economía**, **Fútbol** o **Rotar Todo** (**Noticias 30s → Clima 10s → Economía 10s → Fútbol 10s → repetir**) con transiciones suaves.
-* **🎨 Ajustes UI en Vivo y Barra Superior Adaptativa**: Personalización en tiempo real, filtro nocturno, modo ligero y barra superior sin iconos recortados.
-* **⚡ Motor v2.1 más ligero y fluido**: APK más reducido, código limpio, 60 FPS constantes manteniendo calidad 4K, portales web predeterminados enfocados en **YouTube TV** y **4 portales de juegos**, y traducción completa en **21 idiomas**.
+* **🖥️ Salvapantallas de Paneles y Rotación Automática**: Configura **Clima**, **Noticias**, **Economía**, **Fútbol** o **Rotar Todo** (**Noticias 60s → Clima 10s → Economía 10s → Fútbol 10s → vuelve a Noticias avanzando automáticamente a la siguiente sección**). El modo Noticias individual también avanza entre todas las secciones.
+* **📡 Salvapantallas Informativo de Texto (`Broadcast Text Showcase`)**: Rótulo animado estilo estudio de TV sobre el fondo Aurora atenuado al 60%, alternando líneas en **blanco y amarillo**, insignia `ON AIR`, textos editables, duración configurable (`3–15s`) y música ambiental o MP3 local opcional.
+* **🎨 Ajustes UI en Vivo (`Live UI Settings HUD`)**: Barra flotante directamente en la pantalla de inicio para ajustar fondos 4K, brillo, posición de apps, cuadrícula, opacidad, reloj/fecha/saludos, barra superior, clima, filtro nocturno, Material You y modo ligero **viendo cada cambio al instante en tiempo real sobre el inicio**.
+* **🧭 Barra Superior Adaptativa y Motor v2.1 a 60 FPS**: Iconos siempre visibles sin recortes, APK más ligero y máxima fluidez 4K.
+* **🌍 Portales Web Predeterminados y 21 Idiomas**: Incluye **YouTube TV**, **Google (`google.com`)** y **4 portales de juegos** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**), traducido completamente a **21 idiomas**.
 
 ### ⚡ Rendimiento extremo y respuesta inmediata
 * **Aparición instantánea de iconos y banners**: Todo el catálogo de apps se procesa en segundo plano en paralelo a través de los núcleos de la CPU, mostrándose de inmediato sin congelamientos.
@@ -102,7 +104,7 @@ La mayoría de los lanzadores de Smart TV actuales están llenos de anuncios for
 Descarga el archivo APK directamente a tu televisor o smartphone:
 
 👉 **[Descargar la última versión de Salsa TV Launcher](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)**  
-👉 **[Código corto para app Downloader: aftv.news/7099231](https://aftv.news/7099231)**
+👉 **[Código corto para app Downloader: aftv.news/5157967](http://aftv.news/5157967)**
 
 ### Opción 2: Instalación vía ADB
 ```bash

@@ -11,11 +11,11 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest)
+[![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
 
-### 📥 [En Son APK Sürümünü İndirmek İçin Buraya Tıklayın (Kuruluma Hazır)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest/download/salsa-tv-launcher.apk)
+### 📥 [En Son APK Sürümünü İndirmek İçin Buraya Tıklayın (Kuruluma Hazır)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
 
@@ -37,13 +37,15 @@ TV uzaktan kumandaları (D-Pad navigasyonu) için özel olarak optimize edilmiş
 
 ### 🆕 Sürüm 2.1 Yenilikleri
 * **🌐 4 Canlı Bilgi Paneli**: Üst çubuktan yumuşak animasyonlu dört tam ekran panele tek tıkla erişim:
-  * **☀️ Hava Durumu Paneli**: Otomatik şehir algılama, 24 saatlik sıcaklık grafiği, nem/rüzgar/basınç/UV ve 5 günlük tahmin.
-  * **📰 Haberler Merkezi**: Çok dilli canlı RSS başlıkları ve her 10 saniyede bir otomatik haber geçişi.
+  * **☀️ Hava Durumu Paneli**: Otomatik **GPS** konum algılama ve şehir arama, 24 saatlik sıcaklık grafiği, nem/rüzgar/basınç/UV ve 5 günlük tahmin.
+  * **📰 Haberler Merkezi**: Tüm **21 dil** için 5 bölümde (**Manşetler, Siyaset, Ekonomi, Teknoloji, Dünya**) tekrarsız, bağımsız canlı RSS akışları ve her 10 saniyede otomatik haber geçişi.
   * **📈 Ekonomi ve Piyasalar**: Küresel endeksler, Forex kurları, emtia/kripto, 5 günlük grafikler ve özelleştirilebilir ekonomik takvim.
   * **⚽ Futbol Merkezi (365Scores)**: Canlı skorlar, günün maçları, puan durumu, gol krallığı, genişletilmiş kulüp/lig listesi ve galibiyet olasılıkları.
-* **🖥️ Akıllı Panel Ekran Koruyucuları ve Otomatik Döngü**: **Hava Durumu**, **Haberler**, **Ekonomi**, **Futbol** veya **Hepsini Sırayla Göster** (**Haberler 30sn → Hava 10sn → Ekonomi 10sn → Futbol 10sn → tekrar**).
-* **🎨 Canlı Arayüz Ayarları ve Kırpılmayan Üst Çubuk**: Gerçek zamanlı kişiselleştirme, gece göz koruma filtresi ve üst menü simgelerinin kesilmeden görünmesi.
-* **⚡ Daha Hafif ve Hızlı v2.1 Motoru**: Küçültülmüş APK boyutu, temizlenmiş kod, 4K duvar kağıdı kalitesini koruyarak akıcı 60 FPS performans, varsayılan web portallarında yalnızca **YouTube TV** ve **4 oyun portalı**, ve **21 dilde** eksiksiz çeviri.
+* **🖥️ Akıllı Panel Ekran Koruyucuları ve Otomatik Döngü**: **Hava Durumu**, **Haberler**, **Ekonomi**, **Futbol** veya **Hepsini Sırayla Göster** (**Haberler 60sn → Hava 10sn → Ekonomi 10sn → Futbol 10sn → Haberler'e her dönüşte sonraki kategoriye geçer**). Tekli Haber ekran koruyucusu da 5 bölümü sırayla gezer.
+* **📡 Canlı Metin Yayın Ekran Koruyucusu (`Broadcast Text Showcase`)**: %60 karartılmış Aurora duvar kağıdı üzerinde **beyaz ve sarı** dönüşümlü başlıklar, `ON AIR` rozeti, düzenlenebilir satırlar, ayarlanabilir süre (`3–15sn`) ve isteğe bağlı arka plan müziği veya yerel MP3 desteği.
+* **🎨 Canlı Arayüz Ayarları (`Live UI Settings HUD`)**: Ana ekranda açılan şeffaf panel ile 4K duvar kağıtları, parlaklık, uygulama konumu, ızgara düzeni, cam saydamlığı, saat/tarih/karşılama, üst çubuk, hava durumu, gece göz koruma filtresi, Material You ve hafif modu **değişiklikleri anında canlı görerek** özelleştirin.
+* **🧭 Kırpılmayan Üst Çubuk ve Hızlı v2.1 Motoru**: Üst simgeler kesilmeden tam görünür, küçültülmüş APK ve 4K kalitesinde akıcı 60 FPS performans.
+* **🌍 Varsayılan Web Portalları ve 21 Dil**: **YouTube TV**, **Google (`google.com`)** ve **4 oyun portalı** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**) dahil **21 dilde** eksiksiz çeviri.
 
 ### 🖥️ 1. Sinematik ve Dinamik Ana Ekran
 * **Akıllı Odaklama ve Yakınlaştırma:** Kartlar üzerine gelindiğinde parlayan kenarlıklar, yumuşak gölgeler ve dinamik büyütme efektleriyle canlanır.
@@ -143,7 +145,8 @@ Salsa TV Launcher, standart herhangi bir Android TV kumandasıyla zahmetsizce ko
 ## 📦 Kurulum
 
 ### Yöntem 1: Doğrudan APK İndirme (Önerilen)
-1. Releases bölümünden [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest/download/salsa-tv-launcher.apk) dosyasını indirin.
+1. Releases bölümünden [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk) dosyasını indirin.
+   👉 **[Downloader Kısa Kodu / Doğrudan Bağlantı: aftv.news/5157967](http://aftv.news/5157967)**
 2. USB bellek, *Send Files to TV* veya *Downloader* uygulaması aracılığıyla Android TV'nize aktarın.
 3. APK dosyasını kurun ve istenen izinleri onaylayın.
 4. Kumandanızdaki **Home (Ana Ekran)** tuşuna basın ve varsayılan başlatıcı olarak **Salsa TV Launcher**'ı (**"Her Zaman"**) seçin.

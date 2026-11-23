@@ -11,11 +11,11 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest)
+[![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
 
-### 📥 [Klik di Sini untuk Mengunduh Rilis APK Terbaru (Siap Dipasang)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest/download/salsa-tv-launcher.apk)
+### 📥 [Klik di Sini untuk Mengunduh Rilis APK Terbaru (Siap Dipasang)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
 
@@ -36,14 +36,16 @@ Dirancang khusus untuk remote TV (navigasi D-Pad), setiap animasi, efek fokus, d
 ## 🚀 Fitur Utama
 
 ### 🆕 Yang Baru di Versi 2.1
-* **🌐 Pusat 4 Dasbor Langsung**: Akses cepat dari bilah atas ke empat layar penuh dengan animasi lembut:
-  * **☀️ Dasbor Cuaca**: Deteksi kota otomatis, grafik 24 jam, kelembapan/angin/tekanan/UV, dan prakiraan 5 hari.
-  * **📰 Pusat Berita**: Berita utama RSS multibahasa langsung dengan pergantian otomatis setiap 10 detik.
+* **🌐 Pusat 4 Dasbor Langsung**: Akses langsung dari bilah atas ke empat layar penuh dengan animasi halus:
+  * **☀️ Dasbor Cuaca**: Deteksi lokasi otomatis via **GPS** & pencarian kota, grafik 24 jam, kelembapan/angin/tekanan/UV, dan prakiraan 5 hari.
+  * **📰 Pusat Berita**: Umpan RSS terpisah untuk semua **21 bahasa** di 5 bagian (**Berita Utama, Politik, Ekonomi, Teknologi, Dunia**) tanpa berita duplikat dan berganti otomatis setiap 10 detik.
   * **📈 Ekonomi & Pasar**: Indeks saham global, kurs Forex, komoditas & kripto, grafik 5 hari, dan kalender ekonomi yang dapat disesuaikan.
   * **⚽ Pusat Sepak Bola (365Scores)**: Skor langsung, jadwal hari ini, klasemen, top skor, katalog klub/liga yang diperluas, dan peluang menang.
-* **🖥️ Mode Screensaver Dasbor & Putar Otomatis**: Tampilkan **Cuaca**, **Berita**, **Ekonomi**, **Sepak Bola**, atau **Putar Semua** (**Berita 30d → Cuaca 10d → Ekonomi 10d → Sepak Bola 10d → ulangi**).
-* **🎨 Pengaturan UI Langsung & Bilah Atas Responsif**: Kustomisasi real-time, mode nyaman malam, dan semua ikon bilah atas tampil utuh tanpa terpotong.
-* **⚡ Mesin v2.1 Lebih Ringan & Cepat**: Ukuran APK lebih kecil, kode bersih, 60 FPS mulus tanpa menurunkan kualitas wallpaper 4K, portal web bawaan fokus pada **YouTube TV** & **4 portal game**, serta terjemahan lengkap **21 bahasa**.
+* **🖥️ Mode Screensaver Dasbor & Putar Otomatis**: Tampilkan **Cuaca**, **Berita**, **Ekonomi**, **Sepak Bola**, atau **Putar Semua** (**Berita 60d → Cuaca 10d → Ekonomi 10d → Sepak Bola 10d → kembali ke Berita dengan otomatis berpindah ke kategori berikutnya**). Mode Berita tunggal juga berlanjut otomatis ke semua 5 kategori.
+* **📡 Screensaver Teks Siaran (`Broadcast Text Showcase`)**: Teks berita bergaya studio TV di atas latar Aurora redup 60%, bergantian warna **putih & kuning**, lencana `ON AIR`, baris teks dapat diedit, durasi tampil (`3–15d`), serta musik latar atau MP3 lokal opsional.
+* **🎨 Pengaturan UI Langsung (`Live UI Settings HUD`)**: Panel melayang langsung di layar utama untuk mengatur wallpaper 4K, kecerahan, posisi aplikasi, kepadatan kisi, transparansi kaca, jam/tanggal/sapaan, bilah atas, cuaca, mode malam, Material You, dan mode ringan **sambil melihat setiap perubahan secara langsung (real-time) di layar beranda**.
+* **🧭 Bilah Atas Responsif & Mesin v2.1 60 FPS**: Semua ikon tampil utuh tanpa terpotong, ukuran APK lebih kecil dengan kualitas 4K tetap terjaga.
+* **🌍 Portal Web Bawaan & 21 Bahasa**: Mencakup **YouTube TV**, **Google (`google.com`)**, dan **4 portal game** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**) dengan terjemahan penuh **21 bahasa**.
 
 ### 🖥️ 1. Layar Beranda Sinematik & Dinamis
 * **Fokus Cerdas dengan Efek Zoom:** Kartu aplikasi tampak hidup saat dipilih dengan tepi bercahaya, bayangan lembut, dan skala dinamis.
@@ -143,7 +145,8 @@ Salsa TV Launcher dirancang agar mudah dikendalikan dengan remote standar Androi
 ## 📦 Cara Pemasangan
 
 ### Metode 1: Unduh APK Langsung (Disarankan)
-1. Unduh file [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest/download/salsa-tv-launcher.apk) dari bagian Releases.
+1. Unduh file [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk) dari bagian Releases.
+   👉 **[Kode Singkat Downloader / Tautan Langsung: aftv.news/5157967](http://aftv.news/5157967)**
 2. Kirim ke Android TV Anda melalui flashdisk USB, aplikasi *Send Files to TV*, atau *Downloader*.
 3. Pasang APK dan berikan izin yang diminta.
 4. Tekan tombol **Home** pada remote Anda dan pilih **Salsa TV Launcher** sebagai aplikasi beranda bawaan (**"Selalu"**).

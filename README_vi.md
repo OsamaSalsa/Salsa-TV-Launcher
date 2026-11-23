@@ -11,11 +11,11 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest)
+[![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
 
-### 📥 [Nhấn vào đây để tải xuống phiên bản APK mới nhất (Sẵn sàng cài đặt)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest/download/salsa-tv-launcher.apk)
+### 📥 [Nhấn vào đây để tải xuống phiên bản APK mới nhất (Sẵn sàng cài đặt)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
 
@@ -37,13 +37,15 @@
 
 ### 🆕 Tính Năng Mới ở Phiên Bản 2.1
 * **🌐 Trung Tâm 4 Bảng Thông Tin Trực Tiếp**: Truy cập nhanh từ thanh trên cùng vào bốn màn hình có hiệu ứng chuyển động mượt mà:
-  * **☀️ Bảng Thời Tiết**: Tự động định vị thành phố, biểu đồ 24 giờ, độ ẩm/gió/áp suất/UV và dự báo 5 ngày.
-  * **📰 Trung Tâm Tin Tức**: Tin nóng RSS đa ngôn ngữ trực tiếp với chuyển bài tự động mỗi 10 giây.
+  * **☀️ Bảng Thời Tiết**: Tự động định vị bằng **GPS** & tìm kiếm thành phố, biểu đồ 24 giờ, độ ẩm/gió/áp suất/UV và dự báo 5 ngày.
+  * **📰 Trung Tâm Tin Tức**: Nguồn RSS riêng biệt cho cả **21 ngôn ngữ** qua 5 chuyên mục (**Tin nổi bật, Chính trị, Kinh tế, Công nghệ, Thế giới**) không trùng lặp tiêu đề, tự động chuyển bài mỗi 10 giây.
   * **📈 Kinh Tế & Thị Trường**: Chỉ số chứng khoán toàn cầu, tỷ giá Forex, hàng hóa & tiền số, biểu đồ 5 ngày và lịch kinh tế tùy chỉnh.
-  * **⚽ Trung Tâm Bóng Đá (365Scores)**: Tỷ số trực tiếp, lịch đấu hôm nay, bảng xếp hạng, vua phá lưới, danh sách CLB mở rộng và xác suất thắng.
-* **🖥️ Trình Bảo Vệ Màn Hình Bảng Trực Tiếp & Tự Động Luân Phiên**: Hiển thị **Thời tiết**, **Tin tức**, **Kinh tế**, **Bóng đá** hoặc **Luân phiên tất cả** (**Tin tức 30s → Thời tiết 10s → Kinh tế 10s → Bóng đá 10s → lặp lại**).
-* **🎨 Cài Đặt Giao Diện Trực Tiếp & Thanh Trên Không Bị Cắt**: Tùy chỉnh trực tiếp, bộ lọc ban đêm và hiển thị đầy đủ mọi biểu tượng.
-* **⚡ Động Cơ v2.1 Nhẹ & Mượt Hơn**: Giảm dung lượng APK, dọn sạch mã thừa, mượt 60 FPS giữ nguyên chất lượng hình nền 4K, cổng web mặc định gọn gàng chỉ gồm **YouTube TV** & **4 cổng game**, và dịch đầy đủ **21 ngôn ngữ**.
+  * **⚽ Trung Tâm Bóng Đá (365Scores)**: Tỷ số trực tiếp, lịch đấu hôm nay, bảng xếp hạng, vua phá lưới, danh sách CLB/giải đấu mở rộng và xác suất thắng.
+* **🖥️ Trình Bảo Vệ Màn Hình Bảng Trực Tiếp & Tự Động Luân Phiên**: Hiển thị **Thời tiết**, **Tin tức**, **Kinh tế**, **Bóng đá** hoặc **Luân phiên tất cả** (**Tin tức 60s → Thời tiết 10s → Kinh tế 10s → Bóng đá 10s → quay lại Tin tức và tự động chuyển sang chuyên mục tiếp theo**). Chế độ Tin tức riêng cũng tự động qua cả 5 chuyên mục.
+* **📡 Bảo Vệ Màn Hình Tin Chữ Phát Sóng (`Broadcast Text Showcase`)**: Dòng tin chuyển động kiểu trường quay trên nền Aurora tối 60%, luân phiên chữ **trắng & vàng**, nhãn `ON AIR`, tùy chỉnh từng dòng chữ, chỉnh thời lượng (`3–15s`) và nhạc nền hoặc MP3 tùy chọn.
+* **🎨 Cài Đặt Giao Diện Trực Tiếp (`Live UI Settings HUD`)**: Thanh nổi ngay trên màn hình chính để tùy chỉnh hình nền 4K, độ sáng, vị trí ứng dụng, số cột, độ mờ kính, đồng hồ/ngày/lời chào, thanh trên, thời tiết, lọc ban đêm, Material You và chế độ nhẹ **với xem trước thay đổi trực tiếp ngay lập tức trên màn hình chính**.
+* **🧭 Thanh Trên Không Bị Cắt & Động Cơ v2.1 60 FPS**: Biểu tượng luôn hiển thị đầy đủ, APK gọn hơn với chất lượng 4K nguyên vẹn.
+* **🌍 Cổng Web Mặc Định & 21 Ngôn Ngữ**: Bao gồm **YouTube TV**, **Google (`google.com`)** và **4 cổng game** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**), dịch đầy đủ **21 ngôn ngữ**.
 
 ### 🖥️ 1. Màn Hình Chính Điện Ảnh & Sống Động
 * **Hiệu Ứng Tiêu Điểm Thông Minh:** Các thẻ ứng dụng trở nên sống động khi được chọn với viền phát sáng, đổ bóng mềm mại và phóng to mượt mà.
@@ -143,7 +145,8 @@ Salsa TV Launcher được thiết kế để điều khiển dễ dàng bằng 
 ## 📦 Cài Đặt
 
 ### Cách 1: Tải Trực Tiếp Tệp APK (Khuyên dùng)
-1. Tải xuống tệp [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest/download/salsa-tv-launcher.apk) từ mục Releases.
+1. Tải xuống tệp [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk) từ mục Releases.
+   👉 **[Mã rút gọn ứng dụng Downloader / Liên kết trực tiếp: aftv.news/5157967](http://aftv.news/5157967)**
 2. Chuyển tệp sang Android TV của bạn qua USB, ứng dụng *Send Files to TV* hoặc *Downloader*.
 3. Cài đặt APK và cấp các quyền được yêu cầu.
 4. Nhấn nút **Home** trên điều khiển và chọn **Salsa TV Launcher** làm màn hình chính mặc định (**"Luôn luôn"**).

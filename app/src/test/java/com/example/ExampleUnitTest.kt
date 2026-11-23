@@ -34,7 +34,7 @@ class ExampleUnitTest {
     fun `app build version is 2_1 with versionCode 7 and supports auto update checks`() {
         assertEquals("2.1", BuildConfig.VERSION_NAME)
         assertEquals(7, BuildConfig.VERSION_CODE)
-        assertEquals("com.salsa.tvlauncher", BuildConfig.APPLICATION_ID)
+        assertEquals("ps.salsa.tvlauncher", BuildConfig.APPLICATION_ID)
         // Older v2.0 (code 6) upgrades to v2.1 (code 7)
         assertTrue(AppUpdateManager.isRemoteNewer(7, "2.1", 6, "2.0"))
         // Current v2.1 (code 7) upgrades to future v2.2 (code 8)
@@ -130,5 +130,93 @@ class ExampleUnitTest {
         assertEquals(com.example.data.news.NewsSectionType.TOP_STORIES, com.example.ui.home.DashboardScreensaverCycleTracker.resolveNewsSectionForCycle(com.example.ui.home.DashboardScreensaverCycleTracker.advanceNextNewsCycle()))
         assertEquals(2, com.example.ui.home.DashboardScreensaverCycleTracker.resolveStoryOffsetForCycle(5))
         com.example.ui.home.DashboardScreensaverCycleTracker.resetForTest()
+    }
+
+    @Test
+    fun `news repository provides dedicated source configs and distinct section feeds for all 21 supported languages`() {
+        val effectiveLanguages = LocaleHelper.SUPPORTED_LANGUAGES
+            .map { LocaleHelper.getEffectiveLanguage(it) }
+            .distinct()
+        assertEquals(21, effectiveLanguages.size)
+
+        for (lang in effectiveLanguages) {
+            val config = com.example.data.news.NewsRepository.getBestSourceConfigForLanguage(lang)
+            assertEquals("Expected dedicated langCode for $lang", lang, config.langCode)
+            assertEquals(5, config.sectionFeeds.size)
+
+            val feedSets = com.example.data.news.NewsSectionType.entries.map { section ->
+                val feeds = config.sectionFeeds[section].orEmpty()
+                assertTrue("Expected non-empty feeds for $lang/$section", feeds.isNotEmpty())
+                feeds.first()
+            }
+            // Every language must have distinct primary feeds across all 5 sections
+            assertEquals("Expected 5 distinct primary section feeds for $lang", 5, feedSets.toSet().size)
+        }
+    }
+
+    @Test
+    fun `news repository deduplicates overlapping headlines across sections and keeps baseline sections distinct`() {
+        val sharedHeadline = "Global Summit Reaches Historic Climate Agreement - Reuters"
+        val uniqueHeadlineA = "Local Parliament Approves Annual Infrastructure Budget"
+        val uniqueHeadlineB = "Stock Markets Surge Following Central Bank Guidance"
+        val uniqueHeadlineC = "Next-Generation AI Chip Achieves Record Efficiency"
+        val uniqueHeadlineD = "United Nations Launches Clean Water Initiative"
+
+        fun makeItem(section: com.example.data.news.NewsSectionType, idx: Int, title: String) =
+            com.example.data.news.NewsArticleItem(
+                id = "${section.id}_live_$idx",
+                section = section,
+                categoryLabel = section.name,
+                headline = title,
+                summary = "Summary for $title",
+                sourceName = "Test Source",
+                timeAgo = "6 min ago",
+                imageUrl = "https://example.com/img.jpg",
+                visualTheme = "trading_floor"
+            )
+
+        val candidates = mapOf(
+            com.example.data.news.NewsSectionType.TOP_STORIES to listOf(
+                makeItem(com.example.data.news.NewsSectionType.TOP_STORIES, 0, sharedHeadline)
+            ),
+            com.example.data.news.NewsSectionType.POLITICS to listOf(
+                makeItem(com.example.data.news.NewsSectionType.POLITICS, 0, sharedHeadline),
+                makeItem(com.example.data.news.NewsSectionType.POLITICS, 1, uniqueHeadlineA)
+            ),
+            com.example.data.news.NewsSectionType.ECONOMY to listOf(
+                makeItem(com.example.data.news.NewsSectionType.ECONOMY, 0, sharedHeadline),
+                makeItem(com.example.data.news.NewsSectionType.ECONOMY, 1, uniqueHeadlineB)
+            ),
+            com.example.data.news.NewsSectionType.TECHNOLOGY to listOf(
+                makeItem(com.example.data.news.NewsSectionType.TECHNOLOGY, 0, uniqueHeadlineC)
+            ),
+            com.example.data.news.NewsSectionType.WORLD to listOf(
+                makeItem(com.example.data.news.NewsSectionType.WORLD, 0, sharedHeadline),
+                makeItem(com.example.data.news.NewsSectionType.WORLD, 1, uniqueHeadlineD)
+            )
+        )
+
+        val baseline = com.example.data.news.NewsRepository.buildBaselineState("en")
+        val assigned = com.example.data.news.NewsRepository.assignDistinctSectionArticles(
+            candidatesBySection = candidates,
+            baselineBySection = baseline.articlesBySection,
+            strings = com.example.data.news.NewsRepository.getLocalizedStrings("en"),
+            effLang = "en"
+        )
+
+        val allAssignedHeadlines = assigned.values.flatten().map {
+            com.example.data.news.NewsRepository.normalizeHeadlineKey(it.headline)
+        }
+        assertEquals("Headlines across all 5 sections must be unique", allAssignedHeadlines.size, allAssignedHeadlines.toSet().size)
+        assertEquals(uniqueHeadlineA, assigned[com.example.data.news.NewsSectionType.POLITICS]?.firstOrNull()?.headline)
+        assertEquals(uniqueHeadlineB, assigned[com.example.data.news.NewsSectionType.ECONOMY]?.firstOrNull()?.headline)
+        assertEquals(uniqueHeadlineC, assigned[com.example.data.news.NewsSectionType.TECHNOLOGY]?.firstOrNull()?.headline)
+        assertEquals(uniqueHeadlineD, assigned[com.example.data.news.NewsSectionType.WORLD]?.firstOrNull()?.headline)
+
+        for (lang in listOf("ar", "en", "fr", "fa", "ur")) {
+            val state = com.example.data.news.NewsRepository.buildBaselineState(lang)
+            val headlines = state.articlesBySection.values.flatten().map { it.headline }
+            assertEquals("Baseline for $lang must have 30 distinct articles across 5 sections", 30, headlines.toSet().size)
+        }
     }
 }

@@ -11,11 +11,11 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest)
+[![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
 
-### 📥 [Kliknij tutaj, aby pobrać najnowszą wersję APK (Gotową do instalacji)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest/download/salsa-tv-launcher.apk)
+### 📥 [Kliknij tutaj, aby pobrać najnowszą wersję APK (Gotową do instalacji)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
 
@@ -37,13 +37,15 @@ Zaprojektowany specjalnie pod obsługę pilotem telewizyjnym (nawigacja D-Pad), 
 
 ### 🆕 Nowości w wersji 2.1
 * **🌐 Centrum 4 Paneli na Żywo**: Bezpośredni dostęp z górnego paska do czterech płynnie animowanych ekranów:
-  * **☀️ Panel Pogody**: Automatyczne wykrywanie miasta, wykres 24h, wilgotność/wiatr/ciśnienie/UV i prognoza na 5 dni.
-  * **📰 Centrum Wiadomości**: Wielojęzyczne nagłówki RSS na żywo z automatyczną zmianą co 10 sekund.
-  * **📈 Ekonomia i Rynki**: Globalne indeksy, kursy Forex, surowce i krypto, wykresy 5-dniowe oraz kalendarz ekonomiczny.
-  * **⚽ Centrum Piłkarskie (365Scores)**: Wyniki na żywo, mecze dnia, tabele, strzelcy, rozszerzona lista klubów i szanse na wygraną.
-* **🖥️ Wygaszacz Ekranu z Panelami i Automatyczną Zmianą**: Wyświetlaj **Pogodę**, **Wiadomości**, **Ekonomię**, **Piłkę nożną** lub **Automatyczną zmianę** (**Wiadomości 30s → Pogoda 10s → Ekonomia 10s → Piłka 10s → powtórz**).
-* **🎨 Ustawienia UI na Żywo i Elastyczny Górny Pasek**: Dostosowywanie w czasie rzeczywistym, tryb nocny i pełna widoczność ikon górnego paska bez ucinania.
-* **⚡ Lżejszy i Szybszy Silnik v2.1**: Mniejszy rozmiar APK, oczyszczony kod, płynne 60 FPS bez utraty jakości tapet 4K, domyślne portale ograniczone do **YouTube TV** i **4 portali gier**, oraz pełne tłumaczenie na **21 języków**.
+  * **☀️ Panel Pogody**: Automatyczna lokalizacja **GPS** i wyszukiwanie miast, wykres 24h, wilgotność/wiatr/ciśnienie/UV i prognoza na 5 dni.
+  * **📰 Centrum Wiadomości**: Niezależne kanały RSS dla wszystkich **21 języków** w 5 działach (**Najważniejsze, Polityka, Ekonomia, Technologia, Świat**) bez duplikatów i z automatyczną zmianą co 10s.
+  * **📈 Ekonomia i Rynki**: Globalne indeksy, kursy Forex, surowce i krypto, wykresy 5-dniowe oraz konfigurowalny kalendarz ekonomiczny.
+  * **⚽ Centrum Piłkarskie (365Scores)**: Wyniki na żywo, mecze dnia, tabele, strzelcy, rozszerzona lista klubów/lig i szanse na wygraną.
+* **🖥️ Wygaszacz Ekranu z Panelami i Automatyczną Zmianą**: Wyświetlaj **Pogodę**, **Wiadomości**, **Ekonomię**, **Piłkę nożną** lub **Automatyczną zmianę** (**Wiadomości 60s → Pogoda 10s → Ekonomia 10s → Piłka 10s → powrót do Wiadomości w kolejnym dziale**). Samodzielny tryb Wiadomości również przechodzi automatycznie przez wszystkie 5 działów.
+* **📡 Wygaszacz Tekstowy Studio (`Broadcast Text Showcase`)**: Animowany pasek informacyjny na 60% przyciemnionym tle Aurora z naprzemiennymi **białymi i żółtymi** liniami, znacznikiem `ON AIR`, edytowalnym tekstem, czasem wyświetlania (`3–15s`) i opcjonalną muzyką w tle lub lokalnym MP3.
+* **🎨 Ustawienia UI na Żywo (`Live UI Settings HUD`)**: Pływający panel bezpośrednio na ekranie głównym pozwalający zmieniać tapety 4K, jasność, położenie aplikacji, siatkę, przezroczystość, zegar/datę/powitania, górny pasek, pogodę, tryb nocny, Material You i tryb lekki **z natychmiastowym podglądem na żywo bezpośrednio na ekranie głównym**.
+* **🧭 Elastyczny Górny Pasek & Silnik v2.1 60 FPS**: Ikony bez ucinania, mniejszy plik APK i pełna jakość 4K.
+* **🌍 Domyślne Portale & 21 Języków**: Zawiera **YouTube TV**, **Google (`google.com`)** oraz **4 portale gier** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**), w pełni przetłumaczone na **21 języków**.
 
 ### 🖥️ 1. Kinowy i Dynamiczny Ekran Główny
 * **Inteligentny Fokus i Powiększenie:** Karty ożywają po najechaniu dzięki świecącym obramowaniom, miękkim cieniom i dynamicznemu skalowaniu.
@@ -143,7 +145,8 @@ Salsa TV Launcher został zaprojektowany do intuicyjnej obsługi dowolnym standa
 ## 📦 Instalacja
 
 ### Metoda 1: Bezpośrednie Pobranie APK (Zalecane)
-1. Pobierz plik [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/releases/latest/download/salsa-tv-launcher.apk) z sekcji Releases.
+1. Pobierz plik [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk) z sekcji Releases.
+   👉 **[Krótki kod aplikacji Downloader / Bezpośredni link: aftv.news/5157967](http://aftv.news/5157967)**
 2. Prześlij plik na swój telewizor Android TV za pomocą pamięci USB, aplikacji *Send Files to TV* lub *Downloader*.
 3. Zainstaluj plik APK i przyznaj wymagane uprawnienia.
 4. Naciśnij przycisk **Home** na pilocie i wybierz **Salsa TV Launcher** jako domyślny ekran główny (**„Zawsze”**).

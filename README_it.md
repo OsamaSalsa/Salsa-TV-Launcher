@@ -41,13 +41,15 @@ La maggior parte dei launcher TV attuali è piena di annunci forzati, pesanti an
 
 ### 🆕 Novità della Versione 2.1
 * **🌐 Hub Informativo con 4 Pannelli Live**: Accesso diretto dalla barra superiore a quattro schermate animate a tutto schermo:
-  * **☀️ Pannello Meteo**: Rilevamento automatico della città, grafico 24 ore, umidità/vento/pressione/UV e previsioni a 5 giorni.
-  * **📰 Centro Notizie**: Titoli RSS multilingue in diretta (In evidenza, Politica, Economia, Tecnologia, Mondo) con rotazione automatica ogni 10s.
+  * **☀️ Pannello Meteo**: Rilevamento automatico tramite **GPS** e ricerca città, grafico 24h, umidità/vento/pressione/UV e previsioni a 5 giorni.
+  * **📰 Centro Notizie**: Feed RSS dedicati e distinti per tutte le **21 lingue** in 5 sezioni (**In evidenza, Politica, Economia, Tecnologia, Mondo**) senza duplicati, con rotazione automatica ogni 10s.
   * **📈 Economia e Mercati**: Indici globali, cambi Forex, materie prime e crypto, grafici 5 giorni e calendario economico personalizzabile.
   * **⚽ Centro Calcio (365Scores)**: Risultati live, partite del giorno, classifiche, marcatori, catalogo esteso di club/leghe e probabilità di vittoria.
-* **🖥️ Salvaschermo con Pannelli Live e Rotazione Automatica**: Scegli **Meteo**, **Notizie**, **Economia**, **Calcio** o **Rotazione automatica** (**Notizie 30s → Meteo 10s → Economia 10s → Calcio 10s → ripeti**).
-* **🎨 Impostazioni UI Live & Barra Superiore Adattiva**: Personalizzazione in tempo reale, filtro notturno, modalità leggera e icone superiori sempre visibili senza tagli.
-* **⚡ Motore v2.1 più leggero e veloce**: APK più compatto, codice pulito, 60 FPS fluidi con qualità 4K intatta, portali web predefiniti dedicati a **YouTube TV** e **4 portali di giochi**, e traduzione completa in **21 lingue**.
+* **🖥️ Salvaschermo con Pannelli Live e Rotazione Automatica**: Imposta **Meteo**, **Notizie**, **Economia**, **Calcio** o **Rotazione automatica** (**Notizie 60s → Meteo 10s → Economia 10s → Calcio 10s → ritorno alle Notizie passando alla sezione successiva**). Anche Notizie da solo scorre automaticamente tutte le 5 sezioni.
+* **📡 Salvaschermo Testo Informativo (`Broadcast Text Showcase`)**: Ticker animato stile studio TV su sfondo Aurora oscurato al 60%, con righe alternate in **bianco e giallo**, badge `ON AIR`, frasi personalizzabili, durata regolabile (`3–15s`) e musica ambientale o MP3 locale opzionale.
+* **🎨 Impostazioni UI Live (`Live UI Settings HUD`)**: Pannello trasparente direttamente sulla Home per regolare sfondi 4K, luminosità, offset app, griglia, opacità vetro, orologio/data/saluti, barra superiore, meteo, filtro notte, Material You e modalità leggera **vedendo ogni modifica in tempo reale direttamente sulla schermata iniziale**.
+* **🧭 Barra Superiore Adattiva & Motore v2.1 60 FPS**: Icone sempre visibili senza tagli, APK ridotto e qualità 4K intatta.
+* **🌍 Portali Web Predefiniti & 21 Lingue**: Include **YouTube TV**, **Google (`google.com`)** e **4 portali di giochi** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**), tradotto interamente in **21 lingue**.
 
 ### ⚡ Prestazioni estreme e risposta immediata
 * **Caricamento immediato di icone e banner**: Tutte le app vengono decodificate in background su tutti i core della CPU, apparendo all'istante all'avvio.
@@ -102,7 +104,7 @@ La maggior parte dei launcher TV attuali è piena di annunci forzati, pesanti an
 Scarica il file APK pronto all'uso direttamente sul televisore o telefono:
 
 👉 **[Scarica l'ultimo APK di Salsa TV Launcher](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)**  
-👉 **[Codice breve per app Downloader: aftv.news/7099231](https://aftv.news/7099231)**
+👉 **[Codice breve per app Downloader: aftv.news/5157967](http://aftv.news/5157967)**
 
 ### Opzione 2: Installazione via ADB
 ```bash

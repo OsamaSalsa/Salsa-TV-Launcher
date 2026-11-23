@@ -79,7 +79,7 @@ private var hasShownIntroProcessFlag = false
 class MainActivity : ComponentActivity() {
 
     companion object {
-        const val ACTION_SALSA_VOICE_SEARCH = "com.salsa.tvlauncher.ACTION_SALSA_VOICE_SEARCH"
+        const val ACTION_SALSA_VOICE_SEARCH = "ps.salsa.tvlauncher.ACTION_SALSA_VOICE_SEARCH"
 
         @Volatile
         private var activeInstanceRef: java.lang.ref.WeakReference<MainActivity>? = null

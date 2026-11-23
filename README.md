@@ -41,15 +41,15 @@ Most smart TV launchers today are cluttered with forced ads, heavy video preview
 
 ### 🆕 What's New in Version 2.1
 * **🌐 Live 4-Dashboard Information Hub**: Direct top-bar access to four fullscreen, smoothly animated TV dashboards:
-  * **☀️ Weather Dashboard**: Live city auto-detection, 24-hour temperature curve, humidity/wind/pressure/UV cards, 5-day forecast, ambient motion, and full RTL/LTR support.
-  * **📰 News Center**: Live multilingual RSS headlines across Top Stories, Politics, Economy, Technology, and World with clean typography, auto-cycling stories (every 10s), and gentle ambient animations.
+  * **☀️ Weather Dashboard**: Automatic GPS location detection & city search, 24-hour temperature curve, humidity/wind/pressure/UV cards, 5-day forecast, ambient motion, and full RTL/LTR support.
+  * **📰 News Center**: Distinct native-language RSS feeds for all **21 languages** across 5 sections (**Top Stories, Politics, Economy, Technology, World**) with zero duplicate headlines across sections, auto-cycling stories (10s), and clean typography.
   * **📈 Economy & Markets Dashboard**: Real-time global stock indices, Forex rates, commodities & crypto, 5-day trend charts, economic calendar, and full market customization.
   * **⚽ Football Center (365Scores)**: Live scores, match fixtures, standings, top scorers, expanded clubs & leagues catalog, and match win-probability insights.
-* **🖥️ Smart Dashboard & Auto-Cycling Screensaver Modes**: In addition to Clock, 4K Wallpaper, Photo Slideshow, and Ambient Video, you can now display **Weather**, **News**, **Economy**, **Football**, or **Auto-Cycle All** (**News 30s → Weather 10s → Economy 10s → Football 10s → repeat**) with pre-warmed data and smooth crossfades.
-* **🎨 Live UI Settings HUD**: Real-time transparent side customization overlay with 4K wallpaper search/delete, custom greeting input, Night Eye-Comfort dim filter, and Low-RAM Lite mode.
-* **🧭 Non-Clipping Responsive Top Bar**: All quick-action icons remain smoothly visible and accessible without ever clipping on the right/left edge, even alongside full clock and date display.
-* **⚡ Lighter & Faster v2.1 Engine**: Significantly reduced APK footprint via custom vector icon tree-shaking, draw-phase ambient animations, zero dead code, and silky-smooth 60fps navigation without lowering 4K wallpaper quality.
-* **🌍 Streamlined Default Web Portals & 21-Language Coverage**: Default web shortcuts are cleanly focused on **YouTube TV** and **4 Instant Web Games** (CrazyGames, Poki, Playhop, EasyGames) while supporting custom bookmarks, with complete 100% native localization across all **21 languages** including all dashboards and screensaver modes.
+* **🖥️ Smart Dashboard & Auto-Cycling Screensaver Modes**: Display **Weather**, **News**, **Economy**, **Football**, or **Auto-Cycle All** (**News 60s → Weather 10s → Economy 10s → Football 10s → returns to News advancing automatically to the next section**). Standalone News screensaver also advances automatically through all 5 sections.
+* **📡 Broadcast Text Showcase Screensaver**: Studio-style animated multi-line ticker over a 60%-dimmed dynamic Aurora wallpaper with alternating **White & Yellow** headlines, `ON AIR` badge, editable custom lines, adjustable display duration (`3s–15s`), and optional ambient or local MP3 background audio.
+* **🎨 Live UI Settings HUD (Instant Live Preview)**: Floating transparent control bar right on the Home Screen letting you tweak 4K wallpapers, brightness, app vertical offset, grid density, glass opacity, clock size/format/seconds, date format, custom greetings, top bar icons, weather toggle, Night Eye-Comfort filter, Material You dynamic colors, and Low-RAM mode **while watching every change live on your Home Screen in real time**.
+* **🧭 Non-Clipping Responsive Top Bar & Lighter 60fps Engine**: All quick-action icons remain visible without edge clipping; smaller APK via tree-shaking and draw-phase animations without reducing 4K wallpaper quality.
+* **🌍 Default Web Portals & 21-Language Coverage**: Default web shortcuts include **YouTube TV**, **Google (`google.com`)**, and **4 Instant Web Games** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**) plus custom bookmarks, with 100% native localization across all **21 languages**.
 
 ### ⚡ Extreme Performance & Instant App Launch
 * **Parallel Icon & Banner Preloading**: App packages, icons, and banners are decoded concurrently across multi-core CPUs in the background, appearing instantly on boot without freezing.
@@ -129,7 +129,7 @@ Most smart TV launchers today are cluttered with forced ads, heavy video preview
 Download the latest compiled release APK directly to your TV or phone:
 
 👉 **[Download Latest Salsa TV Launcher APK](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)**  
-👉 **[Downloader Short Code / Direct Link: aftv.news/7099231](https://aftv.news/7099231)**
+👉 **[Downloader Short Code / Direct Link: aftv.news/5157967](http://aftv.news/5157967)**
 
 ### Option 2: Installation via ADB
 ```bash

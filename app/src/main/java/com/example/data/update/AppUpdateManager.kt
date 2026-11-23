@@ -55,7 +55,7 @@ object AppUpdateManager {
     const val DEFAULT_BUILD_GRADLE_URL =
         "https://raw.githubusercontent.com/$GITHUB_OWNER/$GITHUB_REPO/$GITHUB_BRANCH/app/build.gradle.kts"
     const val DEFAULT_DIRECT_APK_URL =
-        "https://raw.githubusercontent.com/$GITHUB_OWNER/$GITHUB_REPO/$GITHUB_BRANCH/salsa-tv-launcher.apk"
+        "https://github.com/$GITHUB_OWNER/$GITHUB_REPO/raw/refs/heads/$GITHUB_BRANCH/salsa-tv-launcher.apk"
     const val DEFAULT_RELEASES_API_URL =
         "https://api.github.com/repos/$GITHUB_OWNER/$GITHUB_REPO/releases/latest"
 

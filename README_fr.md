@@ -40,14 +40,16 @@ La plupart des lanceurs Android TV actuels sont saturés de publicités imposée
 ## 🌟 Nouvelles fonctionnalités et améliorations récentes
 
 ### 🆕 Nouveautés de la version 2.1
-* **🌐 Centre d'informations à 4 tableaux de bord en direct** : Accès rapide depuis la barre supérieure à quatre écrans animés en plein écran :
-  * **☀️ Tableau Météo** : Détection automatique de la ville, courbe 24h, humidité/vent/pression/UV, prévisions 5 jours et animations ambiantes fluides.
-  * **📰 Centre d'Actualités** : Titres RSS multilingues en direct (À la Une, Politique, Économie, Technologie, Monde) avec défilement automatique toutes les 10 secondes.
-  * **📈 Économie & Marchés** : Indices boursiers mondiaux, taux Forex, matières premières & crypto, courbes 5 jours, calendrier économique et personnalisation complète.
+* **🌐 Centre d'informations à 4 tableaux de bord en direct** : Accès direct depuis la barre supérieure à quatre écrans animés en plein écran :
+  * **☀️ Tableau Météo** : Localisation automatique par **GPS** et recherche de ville, courbe 24h, humidité/vent/pression/UV et prévisions sur 5 jours.
+  * **📰 Centre d'Actualités** : Flux RSS dédiés et distincts pour chacune des **21 langues** sur 5 rubriques (**À la Une, Politique, Économie, Technologie, Monde**) sans doublons, avec défilement automatique toutes les 10s.
+  * **📈 Économie & Marchés** : Indices boursiers mondiaux, taux Forex, matières premières & crypto, courbes 5 jours et calendrier économique personnalisable.
   * **⚽ Centre Football (365Scores)** : Scores en direct, matchs du jour, classements, buteurs, catalogue élargi de clubs/ligues et probabilités de victoire.
-* **🖥️ Nouveaux économiseurs d'écran interactifs & rotation automatique** : Affichez **Météo**, **Actualités**, **Économie**, **Football** ou **Rotation auto** (**Actualités 30s → Météo 10s → Économie 10s → Football 10s → boucle continue**) avec fondu fluide.
-* **🎨 Réglages UI en direct & barre supérieure adaptative** : Panneau de personnalisation instantanée (recherche de fonds 4K, confort nocturne, mode léger) et barre supérieure sans icônes coupées.
-* **⚡ Moteur v2.1 plus léger et plus rapide** : APK plus compact, code nettoyé, fluidité 60 FPS sans réduire la qualité 4K, portails web par défaut épurés (**YouTube TV** & **4 portails de jeux**) et traduction complète en **21 langues**.
+* **🖥️ Économiseurs d'écran interactifs & rotation automatique** : Affichez **Météo**, **Actualités**, **Économie**, **Football** ou **Rotation auto** (**Actualités 60s → Météo 10s → Économie 10s → Football 10s → retour aux Actualités à la rubrique suivante**). Le mode Actualités seul passe aussi automatiquement d'une rubrique à l'autre.
+* **📡 Économiseur de texte d'information (`Broadcast Text Showcase`)** : Bandeau d'actualités cinématique ligne par ligne sur fond Aurora assombri à 60%, alternant textes **blancs et jaunes**, badge `ON AIR`, lignes personnalisables, durée réglable (`3–15s`) et musique d'ambiance ou MP3 local en option.
+* **🎨 Réglages UI en direct (`Live UI Settings HUD`)** : Panneau flottant directement sur l'écran d'accueil pour ajuster fonds 4K, luminosité, décalage des apps, grille, transparence, horloge/date/salutation, barre supérieure, météo, filtre nocturne, Material You et mode léger **tout en voyant chaque réglage s'appliquer en temps réel sous vos yeux**.
+* **🧭 Barre supérieure adaptative & moteur v2.1 60 FPS** : Icônes jamais coupées, APK plus compact et qualité 4K intacte.
+* **🌍 Portails web par défaut & 21 langues** : Inclut **YouTube TV**, **Google (`google.com`)** et **4 portails de jeux** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**), avec traduction complète en **21 langues**.
 
 ### ⚡ Performances extrêmes et réactivité immédiate
 * **Préchargement parallèle des icônes et bannières** : Toutes les applications et leurs bannières sont décodées simultanément en arrière-plan dès le lancement, s'affichant immédiatement à l'écran.
@@ -102,7 +104,7 @@ La plupart des lanceurs Android TV actuels sont saturés de publicités imposée
 Téléchargez directement le fichier APK prêt à l'emploi :
 
 👉 **[Télécharger le dernier APK d'Salsa TV Launcher](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)**  
-👉 **[Code court Downloader : aftv.news/7099231](https://aftv.news/7099231)**
+👉 **[Code court Downloader : aftv.news/5157967](http://aftv.news/5157967)**
 
 ### Option 2 : Installation via ADB
 ```bash

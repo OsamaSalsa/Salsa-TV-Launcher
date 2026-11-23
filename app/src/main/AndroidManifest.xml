@@ -101,7 +101,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.salsa.tvlauncher.ACTION_SALSA_VOICE_SEARCH" />
+                <action android:name="ps.salsa.tvlauncher.ACTION_SALSA_VOICE_SEARCH" />
                 <action android:name="android.intent.action.SEARCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
