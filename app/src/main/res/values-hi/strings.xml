@@ -677,4 +677,14 @@
     <string name="broadcast_text_lines_preview_label">पंक्तियों का पूर्वावलोकन (सफेद और पीला क्रमशः):</string>
     <string name="settings_news_voice_title">समाचार वॉइस रीडर</string>
     <string name="settings_news_voice_desc">स्क्रीन पर दिख रही खबर को बिना प्रकाशन तिथि के पढ़ता है और अगली खबर पर जाने से पहले पढ़ने के पूरा होने तक रुकता है</string>
+    <string name="dashboard_sound_title">हल्का बैकग्राउंड साउंड (इन्फ़ो स्क्रीनसेवर)</string>
+    <string name="dashboard_sound_desc">समाचार, मौसम, अर्थव्यवस्था और फ़ुटबॉल स्क्रीनसेवर के दौरान शांत बैकग्राउंड ध्वनि चलाता है (वॉइस रीडर बोलते समय अपने आप धीमा हो जाता है)</string>
+    <string name="dashboard_sound_label">साउंड विकल्प</string>
+    <string name="dashboard_sound_off">बंद</string>
+    <string name="dashboard_sound_studio">सॉफ़्ट स्टूडियो पल्स</string>
+    <string name="dashboard_sound_piano">वार्म शांत पियानो</string>
+    <string name="dashboard_sound_rain">हल्की सुकूनभरी बारिश</string>
+    <string name="dashboard_sound_horizon">शांत रात्रि क्षितिज</string>
+    <string name="dashboard_sound_chime">सॉफ़्ट एम्बिएंट चाइम</string>
+    <string name="dashboard_sound_volume_label">आवाज़ का स्तर</string>
 </resources>

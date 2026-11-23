@@ -691,4 +691,14 @@
     <string name="broadcast_text_lines_preview_label">Podgląd kolejności (naprzemiennie biały i żółty):</string>
     <string name="settings_news_voice_title">Lektor wiadomości</string>
     <string name="settings_news_voice_desc">Czyta wyświetlaną wiadomość bez daty publikacji i czeka z przełączeniem do zakończenia czytania</string>
+    <string name="dashboard_sound_title">Delikatny dźwięk w tle (Ekrany informacyjne)</string>
+    <string name="dashboard_sound_desc">Odtwarza subtelne tło dźwiękowe na ekranach Wiadomości, Pogody, Ekonomii i Piłki nożnej (automatycznie cichnie podczas czytania)</string>
+    <string name="dashboard_sound_label">Opcja dźwięku</string>
+    <string name="dashboard_sound_off">Wyłączony</string>
+    <string name="dashboard_sound_studio">Delikatny puls studyjny</string>
+    <string name="dashboard_sound_piano">Ciepłe spokojne pianino</string>
+    <string name="dashboard_sound_rain">Delikatny spokojny deszcz</string>
+    <string name="dashboard_sound_horizon">Cichy nocny horyzont</string>
+    <string name="dashboard_sound_chime">Delikatne dzwonki ambient</string>
+    <string name="dashboard_sound_volume_label">Poziom głośności</string>
 </resources>

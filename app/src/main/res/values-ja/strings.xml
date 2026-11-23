@@ -636,4 +636,14 @@
     <string name="broadcast_text_lines_preview_label">表示順プレビュー（白と黄色を交互に表示）:</string>
     <string name="settings_news_voice_title">ニュース音声読み上げ</string>
     <string name="settings_news_voice_desc">表示中のニュースを公開日時なしで読み上げ、読み終わるまで次のニュースへ移動しません</string>
+    <string name="dashboard_sound_title">穏やかな背景サウンド（情報スクリーンセーバー用）</string>
+    <string name="dashboard_sound_desc">ニュース・天気・経済・サッカーの画面表示中に心地よい環境音を再生します（音声読み上げ中は自動で音量を下げます）</string>
+    <string name="dashboard_sound_label">サウンド選択</string>
+    <string name="dashboard_sound_off">オフ</string>
+    <string name="dashboard_sound_studio">ソフト・スタジオパルス</string>
+    <string name="dashboard_sound_piano">穏やかなウォームピアノ</string>
+    <string name="dashboard_sound_rain">やさしい静かな雨音</string>
+    <string name="dashboard_sound_horizon">静寂のナイトホライズン</string>
+    <string name="dashboard_sound_chime">ソフト・アンビエントチャイム</string>
+    <string name="dashboard_sound_volume_label">音量</string>
 </resources>

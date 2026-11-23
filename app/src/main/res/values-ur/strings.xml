@@ -677,4 +677,14 @@
     <string name="broadcast_text_lines_preview_label">سطروں کی ترتیب (سفید اور پیلا باری باری):</string>
     <string name="settings_news_voice_title">خبروں کا صوتی قاری</string>
     <string name="settings_news_voice_desc">اسکرین پر موجود خبر کو اشاعت کی تاریخ کے بغیر پڑھتا ہے اور پڑھنا مکمل ہونے تک اگلی خبر پر نہیں جاتا</string>
+    <string name="dashboard_sound_title">ہلکی پس منظر کی آواز (معلوماتی اسکرین سیور)</string>
+    <string name="dashboard_sound_desc">خبروں، موسم، معیشت اور فٹبال کے دوران نرم و پرسکون پس منظر آواز چلاتا ہے (خبریں پڑھتے وقت آواز خودکار طور پر کم ہو جاتی ہے)</string>
+    <string name="dashboard_sound_label">آواز کا انتخاب</string>
+    <string name="dashboard_sound_off">بند</string>
+    <string name="dashboard_sound_studio">نرم اسٹوڈیو دھڑکن</string>
+    <string name="dashboard_sound_piano">نرم و پرسکون پیانو</string>
+    <string name="dashboard_sound_rain">ہلکی پرسکون بارش</string>
+    <string name="dashboard_sound_horizon">خاموش رات کا افق</string>
+    <string name="dashboard_sound_chime">نرم محیطی گھنٹی</string>
+    <string name="dashboard_sound_volume_label">آواز کی سطح</string>
 </resources>

@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
@@ -36,6 +37,7 @@ import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.createBitmap
 import androidx.palette.graphics.Palette
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.ui.theme.TvMidnightBackground
 import kotlin.math.PI
 import kotlin.math.cos
@@ -64,31 +66,32 @@ fun Modifier.safeBlur(radius: Dp, edgeTreatment: BlurredEdgeTreatment = BlurredE
 }
 
 /**
- * Resamples sparse gradient keyframes into a dense C1-continuous cosine-eased table
- * so Skia hardware shaders never produce Mach bands or visible contour lines.
+ * Resamples sparse gradient keyframes into pre-allocated C1-continuous cosine-eased tables
+ * so Skia hardware shaders never produce Mach bands without allocating per animation frame.
  */
-private fun buildCosineGradientStops(
-    keyframes: List<Pair<Float, Color>>,
-    steps: Int = 14
-): Pair<IntArray, FloatArray> {
-    val colors = IntArray(steps)
-    val positions = FloatArray(steps)
+private fun fillCosineGradientStops(
+    stops: FloatArray,
+    colorsInput: Array<Color>,
+    keyframeCount: Int,
+    outColors: IntArray,
+    outPositions: FloatArray
+) {
+    val steps = outColors.size
     val lastIdx = steps - 1
     for (i in 0 until steps) {
         val t = i.toFloat() / lastIdx.toFloat()
-        positions[i] = t
+        outPositions[i] = t
         var segIdx = 0
-        while (segIdx < keyframes.size - 2 && t > keyframes[segIdx + 1].first) {
+        while (segIdx < keyframeCount - 2 && t > stops[segIdx + 1]) {
             segIdx++
         }
-        val (p0, c0) = keyframes[segIdx]
-        val (p1, c1) = keyframes[segIdx + 1]
+        val p0 = stops[segIdx]
+        val p1 = stops[segIdx + 1]
         val span = (p1 - p0).coerceAtLeast(0.0001f)
         val localT = ((t - p0) / span).coerceIn(0f, 1f)
         val easedT = 0.5f * (1f - cos(PI.toFloat() * localT))
-        colors[i] = lerp(c0, c1, easedT).toArgb()
+        outColors[i] = lerp(colorsInput[segIdx], colorsInput[segIdx + 1], easedT).toArgb()
     }
-    return colors to positions
 }
 
 private object AuroraDitherCache {
@@ -130,6 +133,39 @@ private class AuroraOffscreenBuffer {
     var hasRendered: Boolean = false
     var isRecycled: Boolean = false
 
+    // Reusable scratch buffers so 280ms color transitions allocate zero heap memory per frame
+    private val keyPositions = FloatArray(5)
+    private val keyColors = Array(5) { Color.Transparent }
+    private val cols12 = IntArray(12)
+    private val pos12 = FloatArray(12)
+    private val cols10 = IntArray(10)
+    private val pos10 = FloatArray(10)
+
+    private val topVignetteStops = floatArrayOf(0.00f, 0.45f, 1.00f)
+    private val topVignetteColors = arrayOf(
+        Color.Black.copy(alpha = 0.68f),
+        Color.Black.copy(alpha = 0.24f),
+        Color.Black.copy(alpha = 0f)
+    )
+    private val brVignetteStops = floatArrayOf(0.00f, 0.52f, 1.00f)
+    private val brVignetteColors = arrayOf(
+        Color.Black.copy(alpha = 0.86f),
+        Color.Black.copy(alpha = 0.36f),
+        Color.Black.copy(alpha = 0f)
+    )
+    private val topVignetteShader: LinearGradient by lazy {
+        val c = IntArray(10)
+        val p = FloatArray(10)
+        fillCosineGradientStops(topVignetteStops, topVignetteColors, 3, c, p)
+        LinearGradient(0f, 0f, 0f, height * 0.30f, c, p, Shader.TileMode.CLAMP)
+    }
+    private val brVignetteShader: RadialGradient by lazy {
+        val c = IntArray(10)
+        val p = FloatArray(10)
+        fillCosineGradientStops(brVignetteStops, brVignetteColors, 3, c, p)
+        RadialGradient(width * 1.05f, height * 1.05f, width * 0.68f, c, p, Shader.TileMode.CLAMP)
+    }
+
     fun renderIfNeeded(
         glow: Color,
         teal: Color,
@@ -160,134 +196,96 @@ private class AuroraOffscreenBuffer {
         nc.drawColor(base.toArgb())
 
         // 1) Seamless multi-stop diagonal backdrop gradient
-        val (baseCols, basePos) = buildCosineGradientStops(
-            listOf(
-                0.00f to deep.copy(alpha = 0.62f),
-                0.38f to accent.copy(alpha = 0.28f),
-                0.72f to base.copy(alpha = 0.78f),
-                1.00f to base
-            ),
-            steps = 12
-        )
-        drawPaint.shader = LinearGradient(0f, 0f, w, h, baseCols, basePos, Shader.TileMode.CLAMP)
+        keyPositions[0] = 0.00f; keyPositions[1] = 0.38f; keyPositions[2] = 0.72f; keyPositions[3] = 1.00f
+        keyColors[0] = deep.copy(alpha = 0.62f)
+        keyColors[1] = accent.copy(alpha = 0.28f)
+        keyColors[2] = base.copy(alpha = 0.78f)
+        keyColors[3] = base
+        fillCosineGradientStops(keyPositions, keyColors, 4, cols12, pos12)
+        drawPaint.shader = LinearGradient(0f, 0f, w, h, cols12, pos12, Shader.TileMode.CLAMP)
         nc.drawRect(0f, 0f, w, h, drawPaint)
 
         // 2) Middle-left rich cobalt/sapphire bloom
-        val (midCols, midPos) = buildCosineGradientStops(
-            listOf(
-                0.00f to mid.copy(alpha = 0.78f),
-                0.45f to deep.copy(alpha = 0.36f),
-                1.00f to deep.copy(alpha = 0f)
-            ),
-            steps = 10
-        )
+        keyPositions[0] = 0.00f; keyPositions[1] = 0.45f; keyPositions[2] = 1.00f
+        keyColors[0] = mid.copy(alpha = 0.78f)
+        keyColors[1] = deep.copy(alpha = 0.36f)
+        keyColors[2] = deep.copy(alpha = 0f)
+        fillCosineGradientStops(keyPositions, keyColors, 3, cols10, pos10)
         val midCx = w * 0.22f
         val midCy = h * 0.42f
         val midR = w * 0.95f
-        drawPaint.shader = RadialGradient(midCx, midCy, midR, midCols, midPos, Shader.TileMode.CLAMP)
+        drawPaint.shader = RadialGradient(midCx, midCy, midR, cols10, pos10, Shader.TileMode.CLAMP)
         nc.drawCircle(midCx, midCy, midR, drawPaint)
 
         // 3) Upper-right luminous Teal & Cyan atmospheric beam
-        val (tealCols, tealPos) = buildCosineGradientStops(
-            listOf(
-                0.00f to teal.copy(alpha = 0.72f),
-                0.48f to glow.copy(alpha = 0.30f),
-                1.00f to teal.copy(alpha = 0f)
-            ),
-            steps = 10
-        )
+        keyPositions[0] = 0.00f; keyPositions[1] = 0.48f; keyPositions[2] = 1.00f
+        keyColors[0] = teal.copy(alpha = 0.72f)
+        keyColors[1] = glow.copy(alpha = 0.30f)
+        keyColors[2] = teal.copy(alpha = 0f)
+        fillCosineGradientStops(keyPositions, keyColors, 3, cols10, pos10)
         val tealCx = w * 0.75f
         val tealCy = h * 0.16f
         val tealR = w * 0.80f
-        drawPaint.shader = RadialGradient(tealCx, tealCy, tealR, tealCols, tealPos, Shader.TileMode.CLAMP)
+        drawPaint.shader = RadialGradient(tealCx, tealCy, tealR, cols10, pos10, Shader.TileMode.CLAMP)
         nc.save()
         nc.scale(1.10f, 0.54f, tealCx, tealCy)
         nc.drawCircle(tealCx, tealCy, tealR, drawPaint)
         nc.restore()
 
         // 4) Top-center luminous Cyan hotspot band
-        val (cyanCols, cyanPos) = buildCosineGradientStops(
-            listOf(
-                0.00f to Color.White.copy(alpha = 0.32f),
-                0.24f to glow.copy(alpha = 0.64f),
-                0.55f to mid.copy(alpha = 0.34f),
-                0.80f to accent.copy(alpha = 0.12f),
-                1.00f to deep.copy(alpha = 0f)
-            ),
-            steps = 12
-        )
+        keyPositions[0] = 0.00f; keyPositions[1] = 0.24f; keyPositions[2] = 0.55f; keyPositions[3] = 0.80f; keyPositions[4] = 1.00f
+        keyColors[0] = Color.White.copy(alpha = 0.32f)
+        keyColors[1] = glow.copy(alpha = 0.64f)
+        keyColors[2] = mid.copy(alpha = 0.34f)
+        keyColors[3] = accent.copy(alpha = 0.12f)
+        keyColors[4] = deep.copy(alpha = 0f)
+        fillCosineGradientStops(keyPositions, keyColors, 5, cols12, pos12)
         val cyanCx = w * 0.35f
         val cyanCy = h * 0.12f
         val cyanR = w * 0.85f
-        drawPaint.shader = RadialGradient(cyanCx, cyanCy, cyanR, cyanCols, cyanPos, Shader.TileMode.CLAMP)
+        drawPaint.shader = RadialGradient(cyanCx, cyanCy, cyanR, cols12, pos12, Shader.TileMode.CLAMP)
         nc.save()
         nc.scale(1.05f, 0.48f, cyanCx, cyanCy)
         nc.drawCircle(cyanCx, cyanCy, cyanR, drawPaint)
         nc.restore()
 
         // 5) Right-side Magenta & Purple glow streak
-        val (magCols, magPos) = buildCosineGradientStops(
-            listOf(
-                0.00f to magenta.copy(alpha = 0.66f),
-                0.50f to accent.copy(alpha = 0.28f),
-                1.00f to magenta.copy(alpha = 0f)
-            ),
-            steps = 10
-        )
+        keyPositions[0] = 0.00f; keyPositions[1] = 0.50f; keyPositions[2] = 1.00f
+        keyColors[0] = magenta.copy(alpha = 0.66f)
+        keyColors[1] = accent.copy(alpha = 0.28f)
+        keyColors[2] = magenta.copy(alpha = 0f)
+        fillCosineGradientStops(keyPositions, keyColors, 3, cols10, pos10)
         val magCx = w * 0.82f
         val magCy = h * 0.36f
         val magR = w * 0.72f
-        drawPaint.shader = RadialGradient(magCx, magCy, magR, magCols, magPos, Shader.TileMode.CLAMP)
+        drawPaint.shader = RadialGradient(magCx, magCy, magR, cols10, pos10, Shader.TileMode.CLAMP)
         nc.save()
         nc.scale(1.20f, 0.48f, magCx, magCy)
         nc.drawCircle(magCx, magCy, magR, drawPaint)
         nc.restore()
 
         // 6) Bottom-left warm Amber/Gold subtle highlight
-        val (ambCols, ambPos) = buildCosineGradientStops(
-            listOf(
-                0.00f to amber.copy(alpha = 0.34f),
-                0.55f to accent.copy(alpha = 0.10f),
-                1.00f to accent.copy(alpha = 0f)
-            ),
-            steps = 10
-        )
+        keyPositions[0] = 0.00f; keyPositions[1] = 0.55f; keyPositions[2] = 1.00f
+        keyColors[0] = amber.copy(alpha = 0.34f)
+        keyColors[1] = accent.copy(alpha = 0.10f)
+        keyColors[2] = accent.copy(alpha = 0f)
+        fillCosineGradientStops(keyPositions, keyColors, 3, cols10, pos10)
         val ambCx = w * 0.15f
         val ambCy = h * 0.88f
         val ambR = w * 0.62f
-        drawPaint.shader = RadialGradient(ambCx, ambCy, ambR, ambCols, ambPos, Shader.TileMode.CLAMP)
+        drawPaint.shader = RadialGradient(ambCx, ambCy, ambR, cols10, pos10, Shader.TileMode.CLAMP)
         nc.save()
         nc.scale(1.05f, 0.54f, ambCx, ambCy)
         nc.drawCircle(ambCx, ambCy, ambR, drawPaint)
         nc.restore()
 
-        // 7) Smooth top cinematic vignette
-        val topVignetteH = h * 0.30f
-        val (topVigCols, topVigPos) = buildCosineGradientStops(
-            listOf(
-                0.00f to Color.Black.copy(alpha = 0.68f),
-                0.45f to Color.Black.copy(alpha = 0.24f),
-                1.00f to Color.Black.copy(alpha = 0f)
-            ),
-            steps = 10
-        )
-        drawPaint.shader = LinearGradient(0f, 0f, 0f, topVignetteH, topVigCols, topVigPos, Shader.TileMode.CLAMP)
-        nc.drawRect(0f, 0f, w, topVignetteH, drawPaint)
+        // 7) Smooth top cinematic vignette (cached shader)
+        drawPaint.shader = topVignetteShader
+        nc.drawRect(0f, 0f, w, h * 0.30f, drawPaint)
 
-        // 8) Bottom-right corner rich vignette
-        val (brVigCols, brVigPos) = buildCosineGradientStops(
-            listOf(
-                0.00f to Color.Black.copy(alpha = 0.86f),
-                0.52f to Color.Black.copy(alpha = 0.36f),
-                1.00f to Color.Black.copy(alpha = 0f)
-            ),
-            steps = 10
-        )
-        val brCx = w * 1.05f
-        val brCy = h * 1.05f
-        val brR = w * 0.68f
-        drawPaint.shader = RadialGradient(brCx, brCy, brR, brVigCols, brVigPos, Shader.TileMode.CLAMP)
-        nc.drawCircle(brCx, brCy, brR, drawPaint)
+        // 8) Bottom-right corner rich vignette (cached shader)
+        drawPaint.shader = brVignetteShader
+        nc.drawCircle(w * 1.05f, h * 1.05f, w * 0.68f, drawPaint)
     }
 
     fun release() {
@@ -428,8 +426,18 @@ fun DynamicBackground(
                 customWallpaperUrl != "aurora_gradient" &&
                 !customWallpaperUrl.contains("1543946207")
             if (hasValidCustomImage) {
+                val context = LocalContext.current
+                val wallpaperRequest = remember(context, customWallpaperUrl) {
+                    ImageRequest.Builder(context)
+                        .data(customWallpaperUrl)
+                        .bitmapConfig(Bitmap.Config.ARGB_8888)
+                        .allowRgb565(false)
+                        .allowHardware(true)
+                        .crossfade(200)
+                        .build()
+                }
                 AsyncImage(
-                    model = customWallpaperUrl,
+                    model = wallpaperRequest,
                     contentDescription = "Active Wallpaper",
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop

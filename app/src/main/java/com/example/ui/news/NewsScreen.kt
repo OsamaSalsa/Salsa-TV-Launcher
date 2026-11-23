@@ -61,6 +61,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
@@ -124,10 +125,14 @@ fun NewsScreen(
     initialSection: NewsSectionType = NewsSectionType.TOP_STORIES,
     initialStoryIndex: Int = 0,
     cycleRefreshNonce: Int = 0,
-    isScreensaverMode: Boolean = false
+    isScreensaverMode: Boolean = false,
+    holdAfterCycleStoriesWhenVoiceOn: Boolean = false,
+    onCycleStoriesCompleted: (() -> Unit)? = null
 ) {
     val context = LocalContext.current
-    val prefs = remember { LauncherPreferences(context) }
+    val prefs = remember(context) {
+        (context.applicationContext as? com.example.AuraTvApp)?.preferences ?: LauncherPreferences(context)
+    }
     val coroutineScope = rememberCoroutineScope()
 
     val initialLang = remember { prefs.getCachedLanguage() }
@@ -149,12 +154,16 @@ fun NewsScreen(
     var activeStoryIndex by remember { mutableIntStateOf(initialStoryIndex) }
     var storiesViewedInSection by remember { mutableIntStateOf(0) }
     var storyProgressRatio by remember { mutableFloatStateOf(0.45f) }
+    var cycleStoriesCompleted by remember(initialSection, cycleRefreshNonce, holdAfterCycleStoriesWhenVoiceOn) {
+        mutableStateOf(false)
+    }
 
     LaunchedEffect(initialSection, initialStoryIndex, cycleRefreshNonce) {
         activeSection = initialSection
         activeStoryIndex = initialStoryIndex
         storiesViewedInSection = 0
         storyProgressRatio = 0.12f
+        cycleStoriesCompleted = false
     }
 
     val initialSectionFocusRequester = remember { FocusRequester() }
@@ -215,8 +224,8 @@ fun NewsScreen(
 
     // Speak the currently displayed news article (headline + summary, NEVER publication date/time)
     // whenever Voice Reader is enabled and the visible story changes.
-    LaunchedEffect(isVoiceReaderEnabled, currentStoryKey, effectiveLang) {
-        if (!isVoiceReaderEnabled || currentStory == null || currentStoryKey.isBlank()) {
+    LaunchedEffect(isVoiceReaderEnabled, currentStoryKey, effectiveLang, cycleStoriesCompleted, holdAfterCycleStoriesWhenVoiceOn) {
+        if (!isVoiceReaderEnabled || (holdAfterCycleStoriesWhenVoiceOn && cycleStoriesCompleted) || currentStory == null || currentStoryKey.isBlank()) {
             voiceReader.stop()
         } else {
             val spokenText = buildSpokenNewsText(currentStory)
@@ -230,8 +239,23 @@ fun NewsScreen(
 
     // Auto-cycle stories every 6 seconds.
     // If Voice Reader is enabled and still reading after 6 seconds, hold on the current story until reading finishes.
-    LaunchedEffect(activeSection, safeIndex, currentStoryKey, storyCount, autoAdvanceSections, cycleRefreshNonce) {
-        if (storyCount <= 1 && !autoAdvanceSections) return@LaunchedEffect
+    LaunchedEffect(
+        activeSection,
+        safeIndex,
+        currentStoryKey,
+        storyCount,
+        autoAdvanceSections,
+        cycleRefreshNonce,
+        holdAfterCycleStoriesWhenVoiceOn,
+        isVoiceReaderEnabled,
+        cycleStoriesCompleted
+    ) {
+        if (storyCount <= 1 && !autoAdvanceSections && !holdAfterCycleStoriesWhenVoiceOn) return@LaunchedEffect
+        if (holdAfterCycleStoriesWhenVoiceOn && isVoiceReaderEnabled && cycleStoriesCompleted) {
+            storyProgressRatio = 1f
+            return@LaunchedEffect
+        }
+
         val minDurationMs = 6_000L
         val stepMs = 100L
         var elapsed = 0L
@@ -255,7 +279,17 @@ fun NewsScreen(
         }
 
         val nextViewedCount = storiesViewedInSection + 1
-        if (autoAdvanceSections && nextViewedCount >= storyCount) {
+        val targetCycleStories = storyCount.coerceAtMost(com.example.ui.home.NEWS_VOICE_CYCLE_STORY_TARGET).coerceAtLeast(1)
+        if (holdAfterCycleStoriesWhenVoiceOn && isVoiceReaderEnabled) {
+            if (nextViewedCount >= targetCycleStories) {
+                storiesViewedInSection = nextViewedCount
+                cycleStoriesCompleted = true
+                onCycleStoriesCompleted?.invoke()
+            } else {
+                storiesViewedInSection = nextViewedCount
+                activeStoryIndex = (safeIndex + 1) % storyCount
+            }
+        } else if (autoAdvanceSections && nextViewedCount >= storyCount) {
             activeSection = nextSection
             activeStoryIndex = 0
             storiesViewedInSection = 0
@@ -421,86 +455,11 @@ private fun NewsroomWorldMapBackground() {
         label = "news_hub_ping"
     )
 
-    Canvas(modifier = Modifier.fillMaxSize()) {
-        val w = size.width
-        val h = size.height
-        val scan = scanPhase.value
-        val glowAngle = studioGlow.value * 2f * PI.toFloat()
-        val ping = pingPhase.value
-
-        // 1. Deep broadcast navy-blue gradient
-        drawRect(
-            brush = Brush.linearGradient(
-                colors = listOf(
-                    Color(0xFF070F22),
-                    Color(0xFF0C1D3E),
-                    Color(0xFF102A56),
-                    Color(0xFF0A1833)
-                ),
-                start = Offset(0f, 0f),
-                end = Offset(w, h)
-            )
-        )
-
-        // 2. Breathing Bottom-Left Crimson Broadcast Studio Glow
-        val crimsonCenter = Offset(
-            w * (0.09f + cos(glowAngle.toDouble()).toFloat() * 0.03f),
-            h * (0.89f + sin(glowAngle.toDouble()).toFloat() * 0.03f)
-        )
-        drawCircle(
-            brush = Brush.radialGradient(
-                colors = listOf(
-                    Color(0xFFDC2626).copy(alpha = 0.28f),
-                    Color(0xFF991B1B).copy(alpha = 0.12f),
-                    Color.Transparent
-                ),
-                center = crimsonCenter,
-                radius = w * 0.36f
-            ),
-            radius = w * 0.36f,
-            center = crimsonCenter
-        )
-
-        // 3. Breathing Center-Right Electric Sapphire Glow
-        val sapphireCenter = Offset(
-            w * (0.78f + sin(glowAngle.toDouble()).toFloat() * 0.04f),
-            h * (0.54f + cos(glowAngle.toDouble()).toFloat() * 0.04f)
-        )
-        drawCircle(
-            brush = Brush.radialGradient(
-                colors = listOf(
-                    Color(0xFF2563EB).copy(alpha = 0.25f),
-                    Color(0xFF1D4ED8).copy(alpha = 0.10f),
-                    Color.Transparent
-                ),
-                center = sapphireCenter,
-                radius = w * 0.43f
-            ),
-            radius = w * 0.43f,
-            center = sapphireCenter
-        )
-
-        // 4. Silky Horizontal Broadcast Scan Beam Sweeping Across World Map
-        val scanX = w * scan
-        drawRect(
-            brush = Brush.horizontalGradient(
-                colors = listOf(
-                    Color.Transparent,
-                    Color(0xFF60A5FA).copy(alpha = 0.075f),
-                    Color(0xFF93C5FD).copy(alpha = 0.11f),
-                    Color(0xFF60A5FA).copy(alpha = 0.075f),
-                    Color.Transparent
-                ),
-                startX = (scanX - w * 0.09f).coerceAtLeast(0f),
-                endX = (scanX + w * 0.09f).coerceAtMost(w)
-            )
-        )
-
-        // 5. Dotted World Map Matrix Pattern Illuminated Smoothly by the Scan Beam
+    // Precompute normalized world-map dot coordinates (nx, ny) once instead of 1,560 grid iterations per frame
+    val mapDotsNorm = remember {
         val cols = 64
         val rows = 30
-        val stepX = w / cols
-        val stepY = h / rows
+        val coords = ArrayList<Float>(512)
         for (r in 2 until rows - 2) {
             for (c in 2 until cols - 2) {
                 val nx = c.toFloat() / cols
@@ -509,40 +468,159 @@ private fun NewsroomWorldMapBackground() {
                 val inEurAfrica = (nx in 0.40f..0.58f && ny in 0.15f..0.74f)
                 val inAsia = (nx in 0.58f..0.86f && ny in 0.16f..0.62f)
                 if ((inAmericas || inEurAfrica || inAsia) && ((r + c) % 2 == 0)) {
-                    val dist = abs(nx - scan)
-                    val highlight = (1f - (dist / 0.08f).coerceIn(0f, 1f))
-                    drawCircle(
-                        color = Color(0xFF60A5FA).copy(alpha = 0.11f + highlight * 0.22f),
-                        radius = 2.1f + highlight * 1.1f,
-                        center = Offset(c * stepX, r * stepY)
-                    )
+                    coords.add(nx)
+                    coords.add(ny)
                 }
             }
         }
-
-        // 6. Expanding Global News Hub Satellite Signal Rings (Americas, Europe/MENA, Asia)
-        val hubs = listOf(
-            Offset(w * 0.21f, h * 0.34f),
-            Offset(w * 0.50f, h * 0.38f),
-            Offset(w * 0.77f, h * 0.36f)
-        )
-        hubs.forEachIndexed { idx, center ->
-            val localPing = (ping + idx * 0.33f) % 1f
-            val ringRadius = (6.dp + 30.dp * localPing).toPx()
-            val ringAlpha = (1f - localPing) * 0.28f
-            drawCircle(
-                color = if (idx == 1) Color(0xFFF87171).copy(alpha = ringAlpha) else Color(0xFF60A5FA).copy(alpha = ringAlpha),
-                radius = ringRadius,
-                center = center,
-                style = Stroke(width = 1.3.dp.toPx())
-            )
-            drawCircle(
-                color = if (idx == 1) Color(0xFFEF4444).copy(alpha = 0.55f) else Color(0xFF93C5FD).copy(alpha = 0.55f),
-                radius = 2.6.dp.toPx(),
-                center = center
-            )
-        }
+        FloatArray(coords.size) { coords[it] }
     }
+
+    val baseBgColors = remember {
+        listOf(
+            Color(0xFF070F22),
+            Color(0xFF0C1D3E),
+            Color(0xFF102A56),
+            Color(0xFF0A1833)
+        )
+    }
+    val crimsonColors = remember {
+        listOf(
+            Color(0xFFDC2626).copy(alpha = 0.28f),
+            Color(0xFF991B1B).copy(alpha = 0.12f),
+            Color.Transparent
+        )
+    }
+    val sapphireColors = remember {
+        listOf(
+            Color(0xFF2563EB).copy(alpha = 0.25f),
+            Color(0xFF1D4ED8).copy(alpha = 0.10f),
+            Color.Transparent
+        )
+    }
+    val scanColors = remember {
+        listOf(
+            Color.Transparent,
+            Color(0xFF60A5FA).copy(alpha = 0.075f),
+            Color(0xFF93C5FD).copy(alpha = 0.11f),
+            Color(0xFF60A5FA).copy(alpha = 0.075f),
+            Color.Transparent
+        )
+    }
+
+    Spacer(
+        modifier = Modifier
+            .fillMaxSize()
+            .drawWithCache {
+                val w = size.width
+                val h = size.height
+                val baseBrush = Brush.linearGradient(
+                    colors = baseBgColors,
+                    start = Offset.Zero,
+                    end = Offset(w, h)
+                )
+                val hubOffsets = arrayOf(
+                    Offset(w * 0.21f, h * 0.34f),
+                    Offset(w * 0.50f, h * 0.38f),
+                    Offset(w * 0.77f, h * 0.36f)
+                )
+                val hubRingStroke = Stroke(width = 1.3.dp.toPx())
+                val minRingPx = 6.dp.toPx()
+                val ringSpanPx = 30.dp.toPx()
+                val hubCoreRadius = 2.6.dp.toPx()
+
+                val dotCount = mapDotsNorm.size / 2
+                val dotScreenX = FloatArray(dotCount)
+                val dotScreenY = FloatArray(dotCount)
+                val dotNormX = FloatArray(dotCount)
+                for (i in 0 until dotCount) {
+                    val nx = mapDotsNorm[i * 2]
+                    val ny = mapDotsNorm[i * 2 + 1]
+                    dotNormX[i] = nx
+                    dotScreenX[i] = nx * w
+                    dotScreenY[i] = ny * h
+                }
+
+                onDrawBehind {
+                    val scan = scanPhase.value
+                    val glowAngle = studioGlow.value * 2f * PI.toFloat()
+                    val ping = pingPhase.value
+
+                    // 1. Deep broadcast navy-blue gradient
+                    drawRect(brush = baseBrush)
+
+                    // 2. Breathing Bottom-Left Crimson Broadcast Studio Glow
+                    val crimsonCenter = Offset(
+                        w * (0.09f + cos(glowAngle.toDouble()).toFloat() * 0.03f),
+                        h * (0.89f + sin(glowAngle.toDouble()).toFloat() * 0.03f)
+                    )
+                    drawCircle(
+                        brush = Brush.radialGradient(
+                            colors = crimsonColors,
+                            center = crimsonCenter,
+                            radius = w * 0.36f
+                        ),
+                        radius = w * 0.36f,
+                        center = crimsonCenter
+                    )
+
+                    // 3. Breathing Center-Right Electric Sapphire Glow
+                    val sapphireCenter = Offset(
+                        w * (0.78f + sin(glowAngle.toDouble()).toFloat() * 0.04f),
+                        h * (0.54f + cos(glowAngle.toDouble()).toFloat() * 0.04f)
+                    )
+                    drawCircle(
+                        brush = Brush.radialGradient(
+                            colors = sapphireColors,
+                            center = sapphireCenter,
+                            radius = w * 0.43f
+                        ),
+                        radius = w * 0.43f,
+                        center = sapphireCenter
+                    )
+
+                    // 4. Silky Horizontal Broadcast Scan Beam Sweeping Across World Map
+                    val scanX = w * scan
+                    drawRect(
+                        brush = Brush.horizontalGradient(
+                            colors = scanColors,
+                            startX = (scanX - w * 0.09f).coerceAtLeast(0f),
+                            endX = (scanX + w * 0.09f).coerceAtMost(w)
+                        )
+                    )
+
+                    // 5. Dotted World Map Matrix Pattern Illuminated Smoothly by the Scan Beam
+                    for (i in 0 until dotCount) {
+                        val dist = abs(dotNormX[i] - scan)
+                        val highlight = 1f - (dist / 0.08f).coerceIn(0f, 1f)
+                        drawCircle(
+                            color = Color(0xFF60A5FA).copy(alpha = 0.11f + highlight * 0.22f),
+                            radius = 2.1f + highlight * 1.1f,
+                            center = Offset(dotScreenX[i], dotScreenY[i])
+                        )
+                    }
+
+                    // 6. Expanding Global News Hub Satellite Signal Rings (Americas, Europe/MENA, Asia)
+                    for (idx in hubOffsets.indices) {
+                        val center = hubOffsets[idx]
+                        val localPing = (ping + idx * 0.33f) % 1f
+                        val ringRadius = minRingPx + ringSpanPx * localPing
+                        val ringAlpha = (1f - localPing) * 0.28f
+                        drawCircle(
+                            color = if (idx == 1) Color(0xFFF87171).copy(alpha = ringAlpha) else Color(0xFF60A5FA).copy(alpha = ringAlpha),
+                            radius = ringRadius,
+                            center = center,
+                            style = hubRingStroke
+                        )
+                        drawCircle(
+                            color = if (idx == 1) Color(0xFFEF4444).copy(alpha = 0.55f) else Color(0xFF93C5FD).copy(alpha = 0.55f),
+                            radius = hubCoreRadius,
+                            center = center
+                        )
+                    }
+                }
+            }
+    )
 }
 
 @Composable

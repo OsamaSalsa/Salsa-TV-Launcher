@@ -643,4 +643,14 @@
     <string name="broadcast_text_lines_preview_label">پیش‌نمایش ترتیب خطوط (سفید و زرد متناوب):</string>
     <string name="settings_news_voice_title">خواندن صوتی اخبار</string>
     <string name="settings_news_voice_desc">خبر نمایش داده‌شده را بدون تاریخ انتشار می‌خواند و تا پایان خواندن به خبر بعدی نمی‌رود</string>
+    <string name="dashboard_sound_title">صدای پس‌زمینه ملایم (صفحه‌های اطلاعات)</string>
+    <string name="dashboard_sound_desc">پخش صدای آرام و ملایم هنگام نمایش اخبار، آب‌وهوا، اقتصاد و فوتبال (هنگام خواندن صوتی اخبار به‌طور خودکار کم می‌شود)</string>
+    <string name="dashboard_sound_label">نوع صدای ملایم</string>
+    <string name="dashboard_sound_off">خاموش</string>
+    <string name="dashboard_sound_studio">نبض ملایم استودیو</string>
+    <string name="dashboard_sound_piano">پیانوی گرم و آرام</string>
+    <string name="dashboard_sound_rain">باران آرام‌بخش</string>
+    <string name="dashboard_sound_horizon">افق شبانه آرام</string>
+    <string name="dashboard_sound_chime">نغمه محیطی لطیف</string>
+    <string name="dashboard_sound_volume_label">میزان صدا</string>
 </resources>

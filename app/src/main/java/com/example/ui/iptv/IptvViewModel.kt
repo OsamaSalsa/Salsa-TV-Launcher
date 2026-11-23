@@ -77,9 +77,12 @@ class IptvViewModel(
     val epgState: StateFlow<Map<String, List<EpgProgram>>> = EpgManager.epgState
     val epgIsLoading: StateFlow<Boolean> = EpgManager.isLoading
 
-    init {
+    private var epgObserverStarted = false
+
+    fun ensureEpgLoaded() {
+        if (epgObserverStarted) return
+        epgObserverStarted = true
         viewModelScope.launch {
-            kotlinx.coroutines.delay(1500L)
             combine(activePlaylist, epgUrlOverride) { playlist, override ->
                 override.ifBlank { playlist?.epgUrl.orEmpty() }
             }.collectLatest { url ->

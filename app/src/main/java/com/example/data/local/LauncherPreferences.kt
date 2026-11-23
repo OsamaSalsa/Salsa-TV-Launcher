@@ -95,6 +95,9 @@ class LauncherPreferences(private val context: Context) {
         val KEY_CUSTOM_ONLINE_WALLPAPERS = stringSetPreferencesKey("custom_online_wallpapers")
         val KEY_WEATHER_ENABLED = booleanPreferencesKey("weather_home_enabled")
         val KEY_NEWS_VOICE_ENABLED = booleanPreferencesKey("news_voice_reader_enabled")
+        val KEY_DASHBOARD_SOUND_MODE = stringPreferencesKey("dashboard_ambient_sound_mode")
+        val KEY_DASHBOARD_CUSTOM_SOUND_URI = stringPreferencesKey("dashboard_custom_sound_uri")
+        val KEY_DASHBOARD_SOUND_VOLUME = intPreferencesKey("dashboard_ambient_sound_volume")
         val KEY_ECONOMIC_INDICES = stringPreferencesKey("economic_selected_indices")
         val KEY_ECONOMIC_COMMODITIES = stringPreferencesKey("economic_selected_commodities")
         val KEY_ECONOMIC_FOREX = stringPreferencesKey("economic_selected_forex")
@@ -1129,6 +1132,36 @@ class LauncherPreferences(private val context: Context) {
         }
     }
 
+    val dashboardSoundModeFlow: Flow<String> = prefFlow { prefs ->
+        prefs[KEY_DASHBOARD_SOUND_MODE] ?: "off"
+    }
+
+    suspend fun setDashboardSoundMode(mode: String) {
+        context.dataStore.edit { prefs ->
+            prefs[KEY_DASHBOARD_SOUND_MODE] = mode
+        }
+    }
+
+    val dashboardCustomSoundUriFlow: Flow<String> = prefFlow { prefs ->
+        prefs[KEY_DASHBOARD_CUSTOM_SOUND_URI] ?: ""
+    }
+
+    suspend fun setDashboardCustomSoundUri(uri: String) {
+        context.dataStore.edit { prefs ->
+            prefs[KEY_DASHBOARD_CUSTOM_SOUND_URI] = uri.trim()
+        }
+    }
+
+    val dashboardSoundVolumeFlow: Flow<Int> = prefFlow { prefs ->
+        prefs[KEY_DASHBOARD_SOUND_VOLUME] ?: 25
+    }
+
+    suspend fun setDashboardSoundVolume(percent: Int) {
+        context.dataStore.edit { prefs ->
+            prefs[KEY_DASHBOARD_SOUND_VOLUME] = percent.coerceIn(5, 100)
+        }
+    }
+
     val economicIndicesFlow: Flow<List<String>> = prefFlow { prefs ->
         val raw = prefs[KEY_ECONOMIC_INDICES] ?: "sp500,nasdaq,dow,dxy"
         raw.split(",").map { it.trim() }.filter { it.isNotBlank() }.ifEmpty {
@@ -1273,7 +1306,8 @@ class LauncherPreferences(private val context: Context) {
                 KEY_SLIDESHOW_MUSIC_MODE, KEY_SLIDESHOW_CUSTOM_MUSIC_URI, KEY_HEADER_CONTROL_MODE,
                 KEY_RECENT_CHANNELS, KEY_NIGHT_COMFORT_MODE, KEY_FOOTBALL_LEAGUES, KEY_FOOTBALL_CLUBS,
                 KEY_ECONOMIC_INDICES, KEY_ECONOMIC_COMMODITIES, KEY_ECONOMIC_FOREX,
-                KEY_BROADCAST_TEXT_LINES, KEY_BROADCAST_MUSIC_MODE, KEY_BROADCAST_CUSTOM_MUSIC_URI
+                KEY_BROADCAST_TEXT_LINES, KEY_BROADCAST_MUSIC_MODE, KEY_BROADCAST_CUSTOM_MUSIC_URI,
+                KEY_DASHBOARD_SOUND_MODE, KEY_DASHBOARD_CUSTOM_SOUND_URI
             )
             val boolKeys = listOf(
                 KEY_DYNAMIC_BG, KEY_CLOCK_24H, KEY_HAS_PROMPTED_LAUNCHER, KEY_HAS_PROMPTED_STORAGE,
@@ -1285,7 +1319,7 @@ class LauncherPreferences(private val context: Context) {
             val intKeys = listOf(
                 KEY_APPS_PER_ROW, KEY_GLASS_OPACITY, KEY_APPS_TOP_OFFSET, KEY_WALLPAPER_VISIBILITY,
                 KEY_SLIDESHOW_INTERVAL_SEC, KEY_SLIDESHOW_MUSIC_VOLUME, KEY_SLIDESHOW_DIM_LEVEL,
-                KEY_BROADCAST_LINE_DURATION_SEC, KEY_BROADCAST_MUSIC_VOLUME
+                KEY_BROADCAST_LINE_DURATION_SEC, KEY_BROADCAST_MUSIC_VOLUME, KEY_DASHBOARD_SOUND_VOLUME
             )
             val longKeys = listOf(KEY_LAST_PLAYED_CHANNEL_ID)
             val stringSetKeys = listOf(

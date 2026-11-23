@@ -648,4 +648,14 @@
     <string name="broadcast_text_lines_preview_label">Aperçu de la séquence (blanc et jaune alternés) :</string>
     <string name="settings_news_voice_title">Lecteur vocal des actualités</string>
     <string name="settings_news_voice_desc">Lit l’actualité affichée sans la date de publication et attend la fin de la lecture avant de changer</string>
+    <string name="dashboard_sound_title">Son d\'Ambiance Doux (Écrans d\'Info)</string>
+    <string name="dashboard_sound_desc">Diffuse une ambiance sonore douce pendant les écrans Actualités, Météo, Économie et Football (s\'atténue automatiquement lors de la lecture vocale)</string>
+    <string name="dashboard_sound_label">Ambiance Sonore</string>
+    <string name="dashboard_sound_off">Désactivé</string>
+    <string name="dashboard_sound_studio">Pulsation Studio Douce</string>
+    <string name="dashboard_sound_piano">Piano Calme et Chaleureux</string>
+    <string name="dashboard_sound_rain">Pluie Douce et Apaisante</string>
+    <string name="dashboard_sound_horizon">Horizon Nocturne Paisible</string>
+    <string name="dashboard_sound_chime">Carillon Ambiant Doux</string>
+    <string name="dashboard_sound_volume_label">Volume Sonore</string>
 </resources>

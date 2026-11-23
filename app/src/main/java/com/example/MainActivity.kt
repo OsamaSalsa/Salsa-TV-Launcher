@@ -225,7 +225,7 @@ class MainActivity : ComponentActivity() {
                                 isLauncherContentMounted = true
                             }
                             if (showStartupSplash) {
-                                delay(450L)
+                                delay(150L)
                                 hasShownIntroProcessFlag = true
                                 showStartupSplash = false
                             }
@@ -576,8 +576,9 @@ fun LauncherNavigation(
         onHomeViewModelCreated(homeViewModel)
     }
 
-    // Start DNS Blocker Service if enabled and permission is granted
+    // Start DNS Blocker Service if enabled and permission is granted (deferred past initial launch frames)
     LaunchedEffect(Unit) {
+        delay(1200L)
         val mode = app.preferences.dnsBlockerModeFlow.first()
         if (mode != "off") {
             val vpnIntent = VpnService.prepare(app)

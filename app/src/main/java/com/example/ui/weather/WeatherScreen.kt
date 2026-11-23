@@ -55,6 +55,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -1909,171 +1910,184 @@ private fun WeatherAtmosphericSkyBackground(
         label = "ray_sway"
     )
 
-    val skyColors = if (isDay) {
+    val skyColors = remember(isDay) {
+        if (isDay) {
+            listOf(
+                Color(0xFF1F4B7A),
+                Color(0xFF2E5F93),
+                Color(0xFF4B7EB3),
+                Color(0xFF6B9BCC)
+            )
+        } else {
+            listOf(
+                Color(0xFF0F2542),
+                Color(0xFF1B3A63),
+                Color(0xFF284F80),
+                Color(0xFF386498)
+            )
+        }
+    }
+    val beamColors = remember(isDay) {
         listOf(
-            Color(0xFF1F4B7A),
-            Color(0xFF2E5F93),
-            Color(0xFF4B7EB3),
-            Color(0xFF6B9BCC)
-        )
-    } else {
-        listOf(
-            Color(0xFF0F2542),
-            Color(0xFF1B3A63),
-            Color(0xFF284F80),
-            Color(0xFF386498)
+            Color.White.copy(alpha = if (isDay) 0.065f else 0.035f),
+            Color.Transparent
         )
     }
-
-    Canvas(modifier = Modifier.fillMaxSize()) {
-        val w = size.width
-        val h = size.height
-        val pulse = sunPulse.value
-        val drift = cloudDrift.value
-        val pPhase = particlePhase.value
-        val sway = raySway.value
-
-        // 1. Base Sky Gradient
-        drawRect(
-            brush = Brush.linearGradient(
-                colors = skyColors,
-                start = Offset(w * 0.8f, 0f),
-                end = Offset(w * 0.2f, h)
-            )
+    val cloudColors = remember(isDay) {
+        listOf(
+            Color.White.copy(alpha = if (isDay) 0.24f else 0.12f),
+            Color(0xFFE0F2FE).copy(alpha = if (isDay) 0.10f else 0.05f),
+            Color.Transparent
         )
+    }
+    val cloudBaseX = remember { floatArrayOf(0.05f, 0.24f, 0.46f, 0.70f, 0.90f) }
+    val cloudBaseY = remember { floatArrayOf(0.14f, 0.11f, 0.16f, 0.12f, 0.17f) }
+    val cloudRadFrac = remember { floatArrayOf(0.12f, 0.15f, 0.11f, 0.14f, 0.10f) }
+    val beamPath = remember { Path() }
 
-        // 2. Top-Left Breathing Sunburst / Moonlight Glow + Gentle Diagonal Light Rays
-        val sunOrigin = Offset(w * (0.17f + sway * 0.015f), -h * 0.06f)
-        drawCircle(
-            brush = Brush.radialGradient(
-                colors = listOf(
-                    (if (isDay) Color(0xFFFFFBEB) else Color(0xFFE0F2FE)).copy(alpha = (if (isDay) 0.52f else 0.30f) * pulse),
-                    (if (isDay) Color(0xFFFEF08A) else Color(0xFF93C5FD)).copy(alpha = (if (isDay) 0.22f else 0.14f) * pulse),
-                    Color(0xFFBAE6FD).copy(alpha = 0.10f),
-                    Color.Transparent
-                ),
-                center = sunOrigin,
-                radius = w * 0.54f * pulse
-            ),
-            radius = w * 0.54f * pulse,
-            center = sunOrigin
-        )
-
-        // Soft volumetric sunbeams fanning gently
-        for (i in 0 until 3) {
-            val spread = 0.14f + i * 0.18f + sway * 0.025f
-            val beamPath = Path().apply {
-                moveTo(sunOrigin.x, sunOrigin.y)
-                lineTo(w * (spread + 0.05f), h)
-                lineTo(w * (spread + 0.19f), h)
-                close()
-            }
-            drawPath(
-                path = beamPath,
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color.White.copy(alpha = if (isDay) 0.065f else 0.035f),
-                        Color.Transparent
-                    )
+    Spacer(
+        modifier = Modifier
+            .fillMaxSize()
+            .drawWithCache {
+                val w = size.width
+                val h = size.height
+                val skyBrush = Brush.linearGradient(
+                    colors = skyColors,
+                    start = Offset(w * 0.8f, 0f),
+                    end = Offset(w * 0.2f, h)
                 )
-            )
-        }
+                val beamBrush = Brush.verticalGradient(
+                    colors = beamColors,
+                    startY = 0f,
+                    endY = h
+                )
+                val rainLenPx = (if (condition == WeatherConditionType.DRIZZLE) 12.dp else 18.dp).toPx()
+                val rainStrokePx = 1.2.dp.toPx()
 
-        // 3. Smoothly Drifting Parallax Volumetric Clouds (wrapping seamlessly)
-        val cloudSpecs = listOf(
-            Triple(0.05f, 0.14f, 0.12f),
-            Triple(0.24f, 0.11f, 0.15f),
-            Triple(0.46f, 0.16f, 0.11f),
-            Triple(0.70f, 0.12f, 0.14f),
-            Triple(0.90f, 0.17f, 0.10f)
-        )
-        cloudSpecs.forEachIndexed { idx, (baseX, baseY, radFrac) ->
-            val speed = if (idx % 2 == 0) 1f else 0.65f
-            val wrappedX = ((baseX + drift * speed) % 1.32f) - 0.16f
-            val bobY = sin((drift * 2f * PI + idx * 1.1).toDouble()).toFloat() * 0.012f
-            val cx = w * wrappedX
-            val cy = h * (baseY + bobY)
-            val rad = w * radFrac
-            drawCircle(
-                brush = Brush.radialGradient(
-                    colors = listOf(
-                        Color.White.copy(alpha = if (isDay) 0.24f else 0.12f),
-                        Color(0xFFE0F2FE).copy(alpha = if (isDay) 0.10f else 0.05f),
-                        Color.Transparent
-                    ),
-                    center = Offset(cx, cy),
-                    radius = rad
-                ),
-                radius = rad,
-                center = Offset(cx, cy)
-            )
-        }
+                onDrawBehind {
+                    val pulse = sunPulse.value
+                    val drift = cloudDrift.value
+                    val pPhase = particlePhase.value
+                    val sway = raySway.value
 
-        // 4. Condition-Aware Delicate Ambient Particles
-        when (condition) {
-            WeatherConditionType.RAIN, WeatherConditionType.DRIZZLE, WeatherConditionType.THUNDERSTORM -> {
-                val dropCount = if (condition == WeatherConditionType.DRIZZLE) 18 else 28
-                for (i in 0 until dropCount) {
-                    val seedX = ((i * 0.37f) % 1f)
-                    val seedY = ((i * 0.61f) % 1f)
-                    val speedMul = 1.4f + (i % 3) * 0.45f
-                    val py = ((seedY + pPhase * speedMul) % 1.12f) - 0.06f
-                    val px = ((seedX - pPhase * 0.18f + 1f) % 1f)
-                    val startPt = Offset(w * px, h * py)
-                    val len = (if (condition == WeatherConditionType.DRIZZLE) 12.dp else 18.dp).toPx()
-                    drawLine(
-                        color = Color(0xFFE0F2FE).copy(alpha = 0.18f),
-                        start = startPt,
-                        end = Offset(startPt.x - len * 0.22f, startPt.y + len),
-                        strokeWidth = 1.2.dp.toPx(),
-                        cap = StrokeCap.Round
-                    )
-                }
-            }
-            WeatherConditionType.SNOW -> {
-                for (i in 0 until 24) {
-                    val seedX = ((i * 0.29f) % 1f)
-                    val seedY = ((i * 0.53f) % 1f)
-                    val py = ((seedY + pPhase * (0.7f + (i % 3) * 0.2f)) % 1.08f) - 0.04f
-                    val swayX = sin((pPhase * 2f * PI + i * 0.8).toDouble()).toFloat() * 0.018f
+                    // 1. Base Sky Gradient
+                    drawRect(brush = skyBrush)
+
+                    // 2. Top-Left Breathing Sunburst / Moonlight Glow + Gentle Diagonal Light Rays
+                    val sunOrigin = Offset(w * (0.17f + sway * 0.015f), -h * 0.06f)
+                    val sunRadius = w * 0.54f * pulse
                     drawCircle(
-                        color = Color.White.copy(alpha = 0.32f),
-                        radius = (1.6f + (i % 3) * 0.8f).dp.toPx(),
-                        center = Offset(w * (seedX + swayX), h * py)
+                        brush = Brush.radialGradient(
+                            colors = listOf(
+                                (if (isDay) Color(0xFFFFFBEB) else Color(0xFFE0F2FE)).copy(alpha = (if (isDay) 0.52f else 0.30f) * pulse),
+                                (if (isDay) Color(0xFFFEF08A) else Color(0xFF93C5FD)).copy(alpha = (if (isDay) 0.22f else 0.14f) * pulse),
+                                Color(0xFFBAE6FD).copy(alpha = 0.10f),
+                                Color.Transparent
+                            ),
+                            center = sunOrigin,
+                            radius = sunRadius
+                        ),
+                        radius = sunRadius,
+                        center = sunOrigin
                     )
-                }
-            }
-            else -> {
-                if (!isDay) {
-                    // Twinkling stars in upper night sky
-                    for (i in 0 until 22) {
-                        val sx = w * (((i * 0.31f + 0.07f) % 0.92f) + 0.04f)
-                        val sy = h * (((i * 0.47f + 0.05f) % 0.45f) + 0.04f)
-                        val twinkle = (0.35f + 0.65f * ((sin((pPhase * 4f * PI + i * 1.3).toDouble()).toFloat() + 1f) * 0.5f))
+
+                    // Soft volumetric sunbeams fanning gently (reusing beamPath)
+                    for (i in 0 until 3) {
+                        val spread = 0.14f + i * 0.18f + sway * 0.025f
+                        beamPath.reset()
+                        beamPath.moveTo(sunOrigin.x, sunOrigin.y)
+                        beamPath.lineTo(w * (spread + 0.05f), h)
+                        beamPath.lineTo(w * (spread + 0.19f), h)
+                        beamPath.close()
+                        drawPath(path = beamPath, brush = beamBrush)
+                    }
+
+                    // 3. Smoothly Drifting Parallax Volumetric Clouds (wrapping seamlessly)
+                    for (idx in cloudBaseX.indices) {
+                        val speed = if (idx % 2 == 0) 1f else 0.65f
+                        val wrappedX = ((cloudBaseX[idx] + drift * speed) % 1.32f) - 0.16f
+                        val bobY = sin((drift * 2f * PI + idx * 1.1).toDouble()).toFloat() * 0.012f
+                        val cx = w * wrappedX
+                        val cy = h * (cloudBaseY[idx] + bobY)
+                        val rad = w * cloudRadFrac[idx]
+                        val center = Offset(cx, cy)
                         drawCircle(
-                            color = Color.White.copy(alpha = 0.45f * twinkle),
-                            radius = (1.0f + (i % 2) * 0.6f).dp.toPx(),
-                            center = Offset(sx, sy)
+                            brush = Brush.radialGradient(
+                                colors = cloudColors,
+                                center = center,
+                                radius = rad
+                            ),
+                            radius = rad,
+                            center = center
                         )
                     }
-                } else {
-                    // Gentle sunlit atmospheric light motes floating softly
-                    for (i in 0 until 14) {
-                        val seedX = ((i * 0.33f + 0.08f) % 0.92f) + 0.04f
-                        val seedY = ((i * 0.57f + 0.1f) % 0.84f) + 0.08f
-                        val dx = sin((pPhase * 2f * PI + i * 0.9).toDouble()).toFloat() * 0.02f
-                        val dy = cos((pPhase * 2f * PI + i * 1.2).toDouble()).toFloat() * 0.025f
-                        val alphaFade = 0.12f + 0.14f * ((sin((pPhase * 2f * PI + i).toDouble()).toFloat() + 1f) * 0.5f)
-                        drawCircle(
-                            color = Color(0xFFFFFBEB).copy(alpha = alphaFade),
-                            radius = (1.8f + (i % 3) * 0.9f).dp.toPx(),
-                            center = Offset(w * (seedX + dx), h * (seedY + dy))
-                        )
+
+                    // 4. Condition-Aware Delicate Ambient Particles
+                    when (condition) {
+                        WeatherConditionType.RAIN, WeatherConditionType.DRIZZLE, WeatherConditionType.THUNDERSTORM -> {
+                            val dropCount = if (condition == WeatherConditionType.DRIZZLE) 18 else 28
+                            for (i in 0 until dropCount) {
+                                val seedX = ((i * 0.37f) % 1f)
+                                val seedY = ((i * 0.61f) % 1f)
+                                val speedMul = 1.4f + (i % 3) * 0.45f
+                                val py = ((seedY + pPhase * speedMul) % 1.12f) - 0.06f
+                                val px = ((seedX - pPhase * 0.18f + 1f) % 1f)
+                                val startPt = Offset(w * px, h * py)
+                                drawLine(
+                                    color = Color(0xFFE0F2FE).copy(alpha = 0.18f),
+                                    start = startPt,
+                                    end = Offset(startPt.x - rainLenPx * 0.22f, startPt.y + rainLenPx),
+                                    strokeWidth = rainStrokePx,
+                                    cap = StrokeCap.Round
+                                )
+                            }
+                        }
+                        WeatherConditionType.SNOW -> {
+                            for (i in 0 until 24) {
+                                val seedX = ((i * 0.29f) % 1f)
+                                val seedY = ((i * 0.53f) % 1f)
+                                val py = ((seedY + pPhase * (0.7f + (i % 3) * 0.2f)) % 1.08f) - 0.04f
+                                val swayX = sin((pPhase * 2f * PI + i * 0.8).toDouble()).toFloat() * 0.018f
+                                drawCircle(
+                                    color = Color.White.copy(alpha = 0.32f),
+                                    radius = (1.6f + (i % 3) * 0.8f).dp.toPx(),
+                                    center = Offset(w * (seedX + swayX), h * py)
+                                )
+                            }
+                        }
+                        else -> {
+                            if (!isDay) {
+                                // Twinkling stars in upper night sky
+                                for (i in 0 until 22) {
+                                    val sx = w * (((i * 0.31f + 0.07f) % 0.92f) + 0.04f)
+                                    val sy = h * (((i * 0.47f + 0.05f) % 0.45f) + 0.04f)
+                                    val twinkle = 0.35f + 0.65f * ((sin((pPhase * 4f * PI + i * 1.3).toDouble()).toFloat() + 1f) * 0.5f)
+                                    drawCircle(
+                                        color = Color.White.copy(alpha = 0.45f * twinkle),
+                                        radius = (1.0f + (i % 2) * 0.6f).dp.toPx(),
+                                        center = Offset(sx, sy)
+                                    )
+                                }
+                            } else {
+                                // Gentle sunlit atmospheric light motes floating softly
+                                for (i in 0 until 14) {
+                                    val seedX = ((i * 0.33f + 0.08f) % 0.92f) + 0.04f
+                                    val seedY = ((i * 0.57f + 0.1f) % 0.84f) + 0.08f
+                                    val dx = sin((pPhase * 2f * PI + i * 0.9).toDouble()).toFloat() * 0.02f
+                                    val dy = cos((pPhase * 2f * PI + i * 1.2).toDouble()).toFloat() * 0.025f
+                                    val alphaFade = 0.12f + 0.14f * ((sin((pPhase * 2f * PI + i).toDouble()).toFloat() + 1f) * 0.5f)
+                                    drawCircle(
+                                        color = Color(0xFFFFFBEB).copy(alpha = alphaFade),
+                                        radius = (1.8f + (i % 3) * 0.9f).dp.toPx(),
+                                        center = Offset(w * (seedX + dx), h * (seedY + dy))
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }
-        }
-    }
+    )
 }
 
 @Preview(widthDp = 960, heightDp = 540, showBackground = true)

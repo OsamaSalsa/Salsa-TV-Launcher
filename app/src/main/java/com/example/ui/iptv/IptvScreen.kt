@@ -138,6 +138,10 @@ fun IptvScreen(
     val firstCategoryFocusRequester = remember { FocusRequester() }
     var initialFocusAssigned by remember { mutableStateOf(false) }
 
+    LaunchedEffect(Unit) {
+        viewModel.ensureEpgLoaded()
+    }
+
     LaunchedEffect(autoResumeLastChannel, lastPlayedChannel) {
         val lastCh = lastPlayedChannel
         if (autoResumeLastChannel && !autoResumedOnce && lastCh != null && currentPlayingChannel == null) {

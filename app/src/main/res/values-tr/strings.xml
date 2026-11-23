@@ -677,4 +677,14 @@
     <string name="broadcast_text_lines_preview_label">Satır Sırası Önizlemesi (Sırayla Beyaz ve Sarı):</string>
     <string name="settings_news_voice_title">Sesli Haber Okuyucu</string>
     <string name="settings_news_voice_desc">Ekrandaki haberi yayın tarihi olmadan sesli okur ve okuma bitene kadar diğer habere geçmez</string>
+    <string name="dashboard_sound_title">Hafif Arka Plan Sesi (Bilgi Ekranları)</string>
+    <string name="dashboard_sound_desc">Haber, Hava Durumu, Ekonomi ve Futbol ekran koruyucularında hafif bir ortam sesi çalar (sesli haber okunurken otomatik kısılır)</string>
+    <string name="dashboard_sound_label">Ses Seçeneği</string>
+    <string name="dashboard_sound_off">Kapalı</string>
+    <string name="dashboard_sound_studio">Yumuşak Stüdyo Nabzı</string>
+    <string name="dashboard_sound_piano">Sıcak Sakin Piyano</string>
+    <string name="dashboard_sound_rain">Hafif Dinlendirici Yağmur</string>
+    <string name="dashboard_sound_horizon">Sessiz Gece Ufku</string>
+    <string name="dashboard_sound_chime">Yumuşak Ortam Çanı</string>
+    <string name="dashboard_sound_volume_label">Ses Seviyesi</string>
 </resources>

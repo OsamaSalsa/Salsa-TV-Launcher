@@ -642,5 +642,15 @@
     <string name="broadcast_text_badge_live">ON AIR</string>
     <string name="broadcast_text_lines_preview_label">Headline Sequence Preview (Alternating White &amp; Yellow):</string>
     <string name="settings_news_voice_title">Voice News Reader</string>
-    <string name="settings_news_voice_desc">Read the displayed news headline and summary aloud without publish date, waiting until reading finishes before switching</string>
+    <string name="settings_news_voice_desc">Read the displayed news headline and summary aloud without publish date, waiting until reading finishes before switching stories or leaving the 6-story news cycle</string>
+    <string name="dashboard_sound_title">Soft Background Sound (Info Screensavers)</string>
+    <string name="dashboard_sound_desc">Play a gentle, subtle ambient soundscape while displaying News, Weather, Economy &amp; Football screensavers (automatically ducks when News Voice Reader speaks)</string>
+    <string name="dashboard_sound_label">Ambient Sound</string>
+    <string name="dashboard_sound_off">Off</string>
+    <string name="dashboard_sound_studio">Soft Studio Pulse</string>
+    <string name="dashboard_sound_piano">Warm Calm Piano</string>
+    <string name="dashboard_sound_rain">Gentle Soft Rain</string>
+    <string name="dashboard_sound_horizon">Quiet Night Horizon</string>
+    <string name="dashboard_sound_chime">Soft Ambient Chime</string>
+    <string name="dashboard_sound_volume_label">Sound Volume</string>
 </resources>

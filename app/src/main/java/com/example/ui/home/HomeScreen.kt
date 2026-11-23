@@ -897,12 +897,12 @@ fun HomeScreen(
                     ) {
                     // Permanent index-0 anchor spacer so async loading of Favorite Channels or Recent Apps
                     // never shifts LazyColumn's firstVisibleItemIndex or shrinks the top clock.
-                    item(key = "top_anchor_spacer") {
+                    item(key = "top_anchor_spacer", contentType = "spacer") {
                         Spacer(modifier = Modifier.height(topSpacerHeight))
                     }
 
                     if (favoriteChannels.isNotEmpty()) {
-                        item(key = "fav_channels_section") {
+                        item(key = "fav_channels_section", contentType = "channels") {
                             Column(modifier = Modifier.padding(bottom = 12.dp)) {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
@@ -921,7 +921,7 @@ fun HomeScreen(
                                         contentPadding = PaddingValues(horizontal = 48.dp, vertical = 8.dp),
                                         horizontalArrangement = Arrangement.spacedBy(16.dp)
                                     ) {
-                                        itemsIndexed(displayChannels, key = { _, channel -> channel.id }) { index, channel ->
+                                        itemsIndexed(displayChannels, key = { _, channel -> channel.id }, contentType = { _, _ -> "fav_channel" }) { index, channel ->
                                             val isBeingReordered = channel.id == activeReorderChannelId
                                             val defaultFr = channelFocusRequesters.getOrPut(channel.id) { androidx.compose.ui.focus.FocusRequester() }
                                             
@@ -972,7 +972,7 @@ fun HomeScreen(
 
                     val isRecentFirstSection = favoriteChannels.isEmpty() && showRecentApps && recentApps.isNotEmpty() && reorderState == null
                     if (showRecentApps && recentApps.isNotEmpty() && reorderState == null) {
-                        item(key = "recent_apps_section") {
+                        item(key = "recent_apps_section", contentType = "recent") {
                             Column(modifier = Modifier.padding(bottom = 8.dp)) {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
@@ -989,7 +989,7 @@ fun HomeScreen(
                                         contentPadding = PaddingValues(horizontal = 48.dp, vertical = 6.dp),
                                         horizontalArrangement = Arrangement.spacedBy(16.dp)
                                     ) {
-                                        itemsIndexed(recentApps, key = { _, app -> "recent_${app.packageName}" }) { idx, app ->
+                                        itemsIndexed(recentApps, key = { _, app -> "recent_${app.packageName}" }, contentType = { _, _ -> "recent_app" }) { idx, app ->
                                             val recentFr = if (isRecentFirstSection && idx == 0) firstItemFocusRequester else remember { androidx.compose.ui.focus.FocusRequester() }
                                             AppItemCard(
                                                 app = app,
@@ -1021,7 +1021,7 @@ fun HomeScreen(
 
                     val isAppsFirstSection = favoriteChannels.isEmpty() && !isRecentFirstSection
                     if (regularApps.isNotEmpty()) {
-                        item(key = "apps_header") {
+                        item(key = "apps_header", contentType = "header") {
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier
@@ -1043,7 +1043,8 @@ fun HomeScreen(
 
                         itemsIndexed(
                             items = regularAppRows,
-                            key = { rowIndex, _ -> "app_row_$rowIndex" }
+                            key = { rowIndex, _ -> "app_row_$rowIndex" },
+                            contentType = { _, _ -> "app_row" }
                         ) { rowIndex, rowApps ->
                             Row(
                                 modifier = Modifier
@@ -1113,7 +1114,7 @@ fun HomeScreen(
                     }
 
                     if (webApps.isNotEmpty()) {
-                        item(key = "web_header") {
+                        item(key = "web_header", contentType = "header") {
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier.padding(
@@ -1136,7 +1137,8 @@ fun HomeScreen(
                         val isWebFirstSection = isAppsFirstSection && regularApps.isEmpty()
                         itemsIndexed(
                             items = webRows,
-                            key = { rowIndex, _ -> "web_row_$rowIndex" }
+                            key = { rowIndex, _ -> "web_row_$rowIndex" },
+                            contentType = { _, _ -> "app_row" }
                         ) { rowIndex, rowWebApps ->
                             Row(
                                 modifier = Modifier
@@ -1206,7 +1208,7 @@ fun HomeScreen(
                     }
 
                     if (gameApps.isNotEmpty()) {
-                        item(key = "games_header") {
+                        item(key = "games_header", contentType = "header") {
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier.padding(
@@ -1229,7 +1231,8 @@ fun HomeScreen(
                         val isGamesFirstSection = isAppsFirstSection && regularApps.isEmpty() && webApps.isEmpty()
                         itemsIndexed(
                             items = gameRows,
-                            key = { rowIndex, _ -> "game_row_$rowIndex" }
+                            key = { rowIndex, _ -> "game_row_$rowIndex" },
+                            contentType = { _, _ -> "app_row" }
                         ) { rowIndex, rowGames ->
                             Row(
                                 modifier = Modifier

@@ -650,4 +650,14 @@
     <string name="broadcast_text_lines_preview_label">Anteprima sequenza (bianco e giallo alternati):</string>
     <string name="settings_news_voice_title">Lettore vocale notizie</string>
     <string name="settings_news_voice_desc">Legge la notizia sullo schermo senza la data di pubblicazione e attende la fine prima di cambiare</string>
+    <string name="dashboard_sound_title">Suono di Sottofondo Morbido (Schermate Info)</string>
+    <string name="dashboard_sound_desc">Riproduce un sottofondo sonoro discreto durante Notizie, Meteo, Economia e Calcio (si abbassa automaticamente quando parla la voce)</string>
+    <string name="dashboard_sound_label">Suono Ambientale</string>
+    <string name="dashboard_sound_off">Disattivato</string>
+    <string name="dashboard_sound_studio">Impulso Studio Morbido</string>
+    <string name="dashboard_sound_piano">Pianoforte Caldo e Calmo</string>
+    <string name="dashboard_sound_rain">Pioggia Leggera Rilassante</string>
+    <string name="dashboard_sound_horizon">Orizzonte Notturno Sereno</string>
+    <string name="dashboard_sound_chime">Campanelli Ambientali Morbidi</string>
+    <string name="dashboard_sound_volume_label">Volume Suono</string>
 </resources>

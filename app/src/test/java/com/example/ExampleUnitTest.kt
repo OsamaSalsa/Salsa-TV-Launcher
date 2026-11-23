@@ -262,4 +262,76 @@ class ExampleUnitTest {
             assertTrue("voiceSpeakingLabel missing for $lang", strings.voiceSpeakingLabel.isNotBlank())
         }
     }
+
+    @Test
+    fun `news cycle holds before switching screens until all six stories finish speaking when voice is enabled`() {
+        assertEquals(6, com.example.ui.home.NEWS_VOICE_CYCLE_STORY_TARGET)
+
+        assertTrue(
+            com.example.ui.home.shouldWaitForNewsVoiceCycle(
+                isCycleMode = true,
+                activeSlide = com.example.ui.home.DashboardScreensaverSlide.NEWS,
+                isVoiceEnabled = true,
+                cycleStoriesCompleted = false
+            )
+        )
+        assertFalse(
+            com.example.ui.home.shouldWaitForNewsVoiceCycle(
+                isCycleMode = true,
+                activeSlide = com.example.ui.home.DashboardScreensaverSlide.NEWS,
+                isVoiceEnabled = true,
+                cycleStoriesCompleted = true
+            )
+        )
+        assertFalse(
+            com.example.ui.home.shouldWaitForNewsVoiceCycle(
+                isCycleMode = true,
+                activeSlide = com.example.ui.home.DashboardScreensaverSlide.NEWS,
+                isVoiceEnabled = false,
+                cycleStoriesCompleted = false
+            )
+        )
+        assertFalse(
+            com.example.ui.home.shouldWaitForNewsVoiceCycle(
+                isCycleMode = true,
+                activeSlide = com.example.ui.home.DashboardScreensaverSlide.WEATHER,
+                isVoiceEnabled = true,
+                cycleStoriesCompleted = false
+            )
+        )
+    }
+
+    @Test
+    fun `dashboard ambient sound engine renders silence when off and soft bounded waveforms for all built-in presets`() {
+        val buf = ShortArray(4096)
+
+        val offState = com.example.ui.home.DashboardAmbientSoundEngine.SynthState()
+        com.example.ui.home.DashboardAmbientSoundEngine.renderBlock(
+            mode = com.example.ui.home.DashboardAmbientSoundPresets.OFF,
+            targetAmplitude = 0.25f,
+            output = buf,
+            state = offState
+        )
+        assertTrue("OFF mode must render pure silence", buf.all { it.toInt() == 0 })
+
+        for (mode in com.example.ui.home.DashboardAmbientSoundPresets.BUILT_IN_MODES) {
+            val state = com.example.ui.home.DashboardAmbientSoundEngine.SynthState()
+            com.example.ui.home.DashboardAmbientSoundEngine.renderBlock(
+                mode = mode,
+                targetAmplitude = 0.25f,
+                output = buf,
+                state = state
+            )
+            // Advance a second block past initial fade-in ramp
+            com.example.ui.home.DashboardAmbientSoundEngine.renderBlock(
+                mode = mode,
+                targetAmplitude = 0.25f,
+                output = buf,
+                state = state
+            )
+            val peak = buf.maxOf { kotlin.math.abs(it.toInt()) }
+            assertTrue("Preset $mode must produce audible PCM samples (peak=$peak)", peak > 50)
+            assertTrue("Preset $mode must remain soft without clipping (peak=$peak)", peak < Short.MAX_VALUE)
+        }
+    }
 }

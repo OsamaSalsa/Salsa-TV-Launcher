@@ -179,6 +179,9 @@ fun SettingsScreen(
     val lowRamMode by viewModel.lowRamMode.collectAsState()
     val nightComfortMode by viewModel.nightComfortMode.collectAsState()
     val newsVoiceEnabled by viewModel.newsVoiceEnabled.collectAsState()
+    val dashboardSoundMode by viewModel.dashboardSoundMode.collectAsState()
+    val dashboardCustomSoundUri by viewModel.dashboardCustomSoundUri.collectAsState()
+    val dashboardSoundVolume by viewModel.dashboardSoundVolume.collectAsState()
     val customWebBookmarks by viewModel.customWebBookmarks.collectAsState()
     val presetWebBookmarks by viewModel.presetWebBookmarks.collectAsState()
     val deletedPresetWebBookmarks by viewModel.deletedPresetWebBookmarks.collectAsState()
@@ -346,6 +349,20 @@ fun SettingsScreen(
                 )
             } catch (_: Exception) {}
             viewModel.setBroadcastCustomMusicUri(uri.toString())
+        }
+    }
+
+    val dashboardSoundPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        if (uri != null) {
+            try {
+                context.contentResolver.takePersistableUriPermission(
+                    uri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
+            } catch (_: Exception) {}
+            viewModel.setDashboardCustomSoundUri(uri.toString())
         }
     }
 
@@ -1323,6 +1340,9 @@ fun SettingsScreen(
                             screensaverTimeout = screensaverTimeout,
                             screensaverMode = screensaverMode,
                             newsVoiceEnabled = newsVoiceEnabled,
+                            dashboardSoundMode = dashboardSoundMode,
+                            dashboardCustomSoundUri = dashboardCustomSoundUri,
+                            dashboardSoundVolume = dashboardSoundVolume,
                             screensaverVideo = screensaverVideo,
                             customScreensaverVideos = customScreensaverVideos,
                             deletedScreensaverPresets = deletedScreensaverPresets,
@@ -1360,6 +1380,11 @@ fun SettingsScreen(
                             onLaunchBroadcastMusicPicker = {
                                 try {
                                     broadcastMusicPickerLauncher.launch(arrayOf("audio/*"))
+                                } catch (_: Exception) {}
+                            },
+                            onLaunchDashboardMusicPicker = {
+                                try {
+                                    dashboardSoundPickerLauncher.launch(arrayOf("audio/*"))
                                 } catch (_: Exception) {}
                             },
                             onPickLocalScreensaverVideo = {

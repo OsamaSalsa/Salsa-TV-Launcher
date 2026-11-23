@@ -48,9 +48,10 @@ class AuraTvApp : Application(), ImageLoaderFactory {
         appRepository = AppRepository(this, preferences)
         iptvRepository = IptvRepository(database.iptvDao(), preferences)
 
-        // Initialize WebView cache dirs & default IPTV data off the main thread
+        // Initialize WebView cache dirs immediately, deferring default IPTV seeding slightly so home UI boots instantaneously
         applicationScope.launch(Dispatchers.IO) {
             com.example.ui.common.ensureWebViewCacheDirs(this@AuraTvApp)
+            kotlinx.coroutines.delay(1500L)
             iptvRepository.initializeDefaultsIfNeeded()
         }
     }
@@ -78,8 +79,8 @@ class AuraTvApp : Application(), ImageLoaderFactory {
                     .maxSizeBytes(80L * 1024L * 1024L) // 80 MB bounded disk cache for IPTV logos & 4K wallpapers
                     .build()
             }
-            .allowHardware(false)
-            .allowRgb565(true)
+            .allowHardware(true)
+            .allowRgb565(lowRam)
             .bitmapConfig(if (lowRam) Bitmap.Config.RGB_565 else Bitmap.Config.ARGB_8888)
             .crossfade(!lowRam)
             .respectCacheHeaders(false)

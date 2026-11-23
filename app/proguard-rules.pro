@@ -13,6 +13,9 @@
 -keep class com.example.ui.home.ScreensaverVideoBridge {
     *;
 }
+-keep class com.example.ui.games.CustomBookmarkWebView$* {
+    @android.webkit.JavascriptInterface <methods>;
+}
 -keep class com.example.ui.games.CustomWebPortalScreenKt$* {
     @android.webkit.JavascriptInterface <methods>;
 }

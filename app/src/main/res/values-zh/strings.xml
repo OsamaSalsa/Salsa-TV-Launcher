@@ -670,4 +670,14 @@
     <string name="broadcast_text_lines_preview_label">播报顺序预览（白色与黄色交替）：</string>
     <string name="settings_news_voice_title">新闻语音朗读</string>
     <string name="settings_news_voice_desc">朗读屏幕当前新闻且不读发布日期，并在朗读完成后再切换下一条</string>
+    <string name="dashboard_sound_title">轻柔背景音效（信息屏保专用）</string>
+    <string name="dashboard_sound_desc">在新闻、天气、财经与足球屏保期间播放柔和背景音（语音播报新闻时自动降低音量）</string>
+    <string name="dashboard_sound_label">音效选项</string>
+    <string name="dashboard_sound_off">关闭</string>
+    <string name="dashboard_sound_studio">轻柔演播室律动</string>
+    <string name="dashboard_sound_piano">温暖舒缓钢琴</string>
+    <string name="dashboard_sound_rain">轻柔静谧雨声</string>
+    <string name="dashboard_sound_horizon">宁静夜色地平线</string>
+    <string name="dashboard_sound_chime">轻柔环境风铃</string>
+    <string name="dashboard_sound_volume_label">音量大小</string>
 </resources>

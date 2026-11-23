@@ -670,4 +670,14 @@
     <string name="broadcast_text_lines_preview_label">Xem trước thứ tự dòng (Trắng &amp; Vàng xen kẽ):</string>
     <string name="settings_news_voice_title">Đọc tin tức bằng giọng nói</string>
     <string name="settings_news_voice_desc">Đọc tin đang hiển thị không kèm ngày đăng và chờ đọc xong mới chuyển sang tin tiếp theo</string>
+    <string name="dashboard_sound_title">Âm Thanh Nền Dịu Nhẹ (Màn Hình Thông Tin)</string>
+    <string name="dashboard_sound_desc">Phát âm thanh nền êm dịu khi hiển thị Tin tức, Thời tiết, Kinh tế &amp; Bóng đá (tự động giảm âm lượng khi đọc tin)</string>
+    <string name="dashboard_sound_label">Tùy Chọn Âm Thanh</string>
+    <string name="dashboard_sound_off">Tắt</string>
+    <string name="dashboard_sound_studio">Nhịp Studio Êm Dịu</string>
+    <string name="dashboard_sound_piano">Piano Ấm Áp Thư Giãn</string>
+    <string name="dashboard_sound_rain">Mưa Nhẹ Êm Ái</string>
+    <string name="dashboard_sound_horizon">Chân Trời Đêm Tĩnh Lặng</string>
+    <string name="dashboard_sound_chime">Chuông Môi Trường Dịu Nhẹ</string>
+    <string name="dashboard_sound_volume_label">Âm Lượng</string>
 </resources>

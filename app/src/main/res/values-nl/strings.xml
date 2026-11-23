@@ -643,4 +643,14 @@
     <string name="broadcast_text_lines_preview_label">Voorbeeld volgorde (afwisselend wit &amp; geel):</string>
     <string name="settings_news_voice_title">Nieuws-voorlezer</string>
     <string name="settings_news_voice_desc">Leest het weergegeven nieuws voor zonder publicatiedatum en wacht tot het voorlezen klaar is</string>
+    <string name="dashboard_sound_title">Zacht Achtergrondgeluid (Infoschermen)</string>
+    <string name="dashboard_sound_desc">Speelt een subtiele, rustgevende klank af tijdens Nieuws, Weer, Economie &amp; Voetbal (dimt automatisch tijdens voorlezen)</string>
+    <string name="dashboard_sound_label">Geluidsoptie</string>
+    <string name="dashboard_sound_off">Uit</string>
+    <string name="dashboard_sound_studio">Zachte Studiopuls</string>
+    <string name="dashboard_sound_piano">Warme Rustige Piano</string>
+    <string name="dashboard_sound_rain">Zachte Kalme Regen</string>
+    <string name="dashboard_sound_horizon">Stille Nachthorizon</string>
+    <string name="dashboard_sound_chime">Zachte Ambient Klokjes</string>
+    <string name="dashboard_sound_volume_label">Geluidsvolume</string>
 </resources>

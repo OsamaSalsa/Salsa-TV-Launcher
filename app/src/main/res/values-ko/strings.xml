@@ -636,4 +636,14 @@
     <string name="broadcast_text_lines_preview_label">순서 미리보기 (흰색과 노란색 교대):</string>
     <string name="settings_news_voice_title">뉴스 음성 읽기</string>
     <string name="settings_news_voice_desc">화면에 표시된 뉴스를 게시 날짜 없이 읽어주며, 읽기가 끝날 때까지 다음 뉴스로 넘어가지 않습니다</string>
+    <string name="dashboard_sound_title">부드러운 배경 사운드 (정보 화면 보호기)</string>
+    <string name="dashboard_sound_desc">뉴스, 날씨, 경제, 축구 화면 보호기 표시 중 잔잔한 배경음을 재생합니다 (음성 읽기 중에는 자동으로 소리가 줄어듭니다)</string>
+    <string name="dashboard_sound_label">배경 사운드</string>
+    <string name="dashboard_sound_off">끄기</string>
+    <string name="dashboard_sound_studio">부드러운 스튜디오 펄스</string>
+    <string name="dashboard_sound_piano">따뜻하고 잔잔한 피아노</string>
+    <string name="dashboard_sound_rain">편안한 가랑비 소리</string>
+    <string name="dashboard_sound_horizon">고요한 밤의 수평선</string>
+    <string name="dashboard_sound_chime">부드러운 앰비언트 차임</string>
+    <string name="dashboard_sound_volume_label">음량</string>
 </resources>

@@ -55,6 +55,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.CornerRadius
@@ -1542,133 +1543,166 @@ private fun EconomicFinancialBackground() {
         label = "econ_scan_phase"
     )
 
-    Canvas(modifier = Modifier.fillMaxSize()) {
-        val w = size.width
-        val h = size.height
-        val orbAngle = orbPhase.value * 2f * PI.toFloat()
-        val scan = scanPhase.value
-
-        // 1. Deep Dark Navy Base Gradient
-        drawRect(
-            brush = Brush.linearGradient(
-                colors = listOf(
-                    Color(0xFF050B16),
-                    Color(0xFF0A182D),
-                    Color(0xFF0D233D),
-                    Color(0xFF071222)
-                ),
-                start = Offset(0f, 0f),
-                end = Offset(w, h)
-            )
+    val navyColors = remember {
+        listOf(
+            Color(0xFF050B16),
+            Color(0xFF0A182D),
+            Color(0xFF0D233D),
+            Color(0xFF071222)
         )
-
-        // 2. Slowly Drifting Cyan-Aqua Top-Right Financial Glow
-        val glowCenter = Offset(
-            w * (0.70f + cos(orbAngle.toDouble()).toFloat() * 0.055f),
-            h * (0.14f + sin(orbAngle.toDouble()).toFloat() * 0.05f)
+    }
+    val cyanGlowColors = remember {
+        listOf(
+            Color(0xFF06B6D4).copy(alpha = 0.42f),
+            Color(0xFF0284C7).copy(alpha = 0.20f),
+            Color.Transparent
         )
-        drawCircle(
-            brush = Brush.radialGradient(
-                colors = listOf(
-                    Color(0xFF06B6D4).copy(alpha = 0.42f),
-                    Color(0xFF0284C7).copy(alpha = 0.20f),
-                    Color.Transparent
-                ),
-                center = glowCenter,
-                radius = w * 0.54f
-            ),
-            radius = w * 0.54f,
-            center = glowCenter
+    }
+    val emeraldGlowColors = remember {
+        listOf(
+            Color(0xFF10B981).copy(alpha = 0.16f),
+            Color(0xFF0EA5E9).copy(alpha = 0.06f),
+            Color.Transparent
         )
-
-        // 3. Soft Counter-Orbiting Emerald Market Glow (Bottom-Left)
-        val emeraldCenter = Offset(
-            w * (0.18f + sin(orbAngle.toDouble()).toFloat() * 0.05f),
-            h * (0.82f + cos(orbAngle.toDouble()).toFloat() * 0.05f)
-        )
-        drawCircle(
-            brush = Brush.radialGradient(
-                colors = listOf(
-                    Color(0xFF10B981).copy(alpha = 0.16f),
-                    Color(0xFF0EA5E9).copy(alpha = 0.06f),
-                    Color.Transparent
-                ),
-                center = emeraldCenter,
-                radius = w * 0.38f
-            ),
-            radius = w * 0.38f,
-            center = emeraldCenter
-        )
-
-        // 4. Gently Undulating Translucent Financial Data Ribbon Curves
-        for (waveIdx in 0..1) {
-            val wavePath = Path()
-            val baseY = h * (if (waveIdx == 0) 0.58f else 0.70f)
-            val amp = h * (if (waveIdx == 0) 0.045f else 0.032f)
-            val freq = if (waveIdx == 0) 2.2f else 3.1f
-            val phaseShift = orbAngle * (if (waveIdx == 0) 1f else -1.4f) + waveIdx * 1.7f
-            val steps = 36
-            for (s in 0..steps) {
-                val frac = s.toFloat() / steps
-                val x = w * frac
-                val y = baseY + sin((frac * freq * PI * 2 + phaseShift).toDouble()).toFloat() * amp
-                if (s == 0) wavePath.moveTo(x, y) else wavePath.lineTo(x, y)
-            }
-            drawPath(
-                path = wavePath,
-                color = (if (waveIdx == 0) Color(0xFF38BDF8) else Color(0xFF34D399)).copy(alpha = 0.09f),
-                style = Stroke(width = 1.6.dp.toPx(), cap = StrokeCap.Round)
-            )
-            // Soft traveling luminous pulse dot gliding along each ribbon
-            val dotFrac = (scan + waveIdx * 0.5f) % 1f
-            val dotX = w * dotFrac
-            val dotY = baseY + sin((dotFrac * freq * PI * 2 + phaseShift).toDouble()).toFloat() * amp
-            drawCircle(
-                color = (if (waveIdx == 0) Color(0xFF7DD3FC) else Color(0xFF6EE7B7)).copy(alpha = 0.32f),
-                radius = 5.5.dp.toPx(),
-                center = Offset(dotX, dotY)
-            )
-            drawCircle(
-                color = Color.White.copy(alpha = 0.55f),
-                radius = 2.dp.toPx(),
-                center = Offset(dotX, dotY)
-            )
-        }
-
-        // 5. Breathing Translucent Candlestick Silhouettes with Smooth Market Scan Wave
-        val candleCount = 16
-        val startX = w * 0.45f
-        val stepX = (w * 0.52f) / candleCount
-        val baseHeights = listOf(
+    }
+    val baseHeights = remember {
+        floatArrayOf(
             0.52f, 0.48f, 0.44f, 0.49f, 0.42f, 0.38f, 0.43f, 0.35f,
             0.31f, 0.36f, 0.28f, 0.24f, 0.29f, 0.22f, 0.18f, 0.15f
         )
-        for (i in 0 until candleCount) {
-            val frac = i.toFloat() / (candleCount - 1).toFloat()
-            val scanDist = abs(frac - scan)
-            val scanBoost = (1f - (scanDist / 0.18f).coerceIn(0f, 1f))
-            val breathe = sin((orbAngle * 2f + i * 0.55f).toDouble()).toFloat() * 0.015f
-
-            val cx = startX + i * stepX
-            val cy = h * (baseHeights[i % baseHeights.size] + breathe)
-            val bodyH = h * (0.068f + scanBoost * 0.018f)
-            val wickH = h * 0.14f
-            val baseAlpha = 0.08f + scanBoost * 0.13f
-
-            drawLine(
-                color = Color(0xFF38BDF8).copy(alpha = baseAlpha + 0.02f),
-                start = Offset(cx, cy - wickH * 0.5f),
-                end = Offset(cx, cy + wickH * 0.5f),
-                strokeWidth = 2.dp.toPx()
-            )
-            drawRoundRect(
-                color = Color(0xFF38BDF8).copy(alpha = baseAlpha),
-                topLeft = Offset(cx - 5.dp.toPx(), cy - bodyH * 0.5f),
-                size = Size(10.dp.toPx(), bodyH),
-                cornerRadius = CornerRadius(2.dp.toPx(), 2.dp.toPx())
-            )
-        }
     }
+    val wavePath = remember { Path() }
+
+    Spacer(
+        modifier = Modifier
+            .fillMaxSize()
+            .drawWithCache {
+                val w = size.width
+                val h = size.height
+                val navyBrush = Brush.linearGradient(
+                    colors = navyColors,
+                    start = Offset.Zero,
+                    end = Offset(w, h)
+                )
+                val waveStroke = Stroke(width = 1.6.dp.toPx(), cap = StrokeCap.Round)
+                val haloRadiusPx = 5.5.dp.toPx()
+                val dotRadiusPx = 2.dp.toPx()
+                val wickStrokePx = 2.dp.toPx()
+                val candleHalfWidthPx = 5.dp.toPx()
+                val candleWidthPx = 10.dp.toPx()
+                val candleCornerPx = 2.dp.toPx()
+                val candleCorner = CornerRadius(candleCornerPx, candleCornerPx)
+                val wave0Color = Color(0xFF38BDF8).copy(alpha = 0.09f)
+                val wave1Color = Color(0xFF34D399).copy(alpha = 0.09f)
+                val wave0DotColor = Color(0xFF7DD3FC).copy(alpha = 0.32f)
+                val wave1DotColor = Color(0xFF6EE7B7).copy(alpha = 0.32f)
+                val whiteCoreColor = Color.White.copy(alpha = 0.55f)
+
+                onDrawBehind {
+                    val orbAngle = orbPhase.value * 2f * PI.toFloat()
+                    val scan = scanPhase.value
+
+                    // 1. Deep Dark Navy Base Gradient
+                    drawRect(brush = navyBrush)
+
+                    // 2. Slowly Drifting Cyan-Aqua Top-Right Financial Glow
+                    val glowCenter = Offset(
+                        w * (0.70f + cos(orbAngle.toDouble()).toFloat() * 0.055f),
+                        h * (0.14f + sin(orbAngle.toDouble()).toFloat() * 0.05f)
+                    )
+                    drawCircle(
+                        brush = Brush.radialGradient(
+                            colors = cyanGlowColors,
+                            center = glowCenter,
+                            radius = w * 0.54f
+                        ),
+                        radius = w * 0.54f,
+                        center = glowCenter
+                    )
+
+                    // 3. Soft Counter-Orbiting Emerald Market Glow (Bottom-Left)
+                    val emeraldCenter = Offset(
+                        w * (0.18f + sin(orbAngle.toDouble()).toFloat() * 0.05f),
+                        h * (0.82f + cos(orbAngle.toDouble()).toFloat() * 0.05f)
+                    )
+                    drawCircle(
+                        brush = Brush.radialGradient(
+                            colors = emeraldGlowColors,
+                            center = emeraldCenter,
+                            radius = w * 0.38f
+                        ),
+                        radius = w * 0.38f,
+                        center = emeraldCenter
+                    )
+
+                    // 4. Gently Undulating Translucent Financial Data Ribbon Curves (reusing wavePath)
+                    for (waveIdx in 0..1) {
+                        wavePath.reset()
+                        val baseY = h * (if (waveIdx == 0) 0.58f else 0.70f)
+                        val amp = h * (if (waveIdx == 0) 0.045f else 0.032f)
+                        val freq = if (waveIdx == 0) 2.2f else 3.1f
+                        val phaseShift = orbAngle * (if (waveIdx == 0) 1f else -1.4f) + waveIdx * 1.7f
+                        val steps = 36
+                        for (s in 0..steps) {
+                            val frac = s.toFloat() / steps
+                            val x = w * frac
+                            val y = baseY + sin((frac * freq * PI * 2 + phaseShift).toDouble()).toFloat() * amp
+                            if (s == 0) wavePath.moveTo(x, y) else wavePath.lineTo(x, y)
+                        }
+                        drawPath(
+                            path = wavePath,
+                            color = if (waveIdx == 0) wave0Color else wave1Color,
+                            style = waveStroke
+                        )
+                        // Soft traveling luminous pulse dot gliding along each ribbon
+                        val dotFrac = (scan + waveIdx * 0.5f) % 1f
+                        val dotX = w * dotFrac
+                        val dotY = baseY + sin((dotFrac * freq * PI * 2 + phaseShift).toDouble()).toFloat() * amp
+                        val dotCenter = Offset(dotX, dotY)
+                        drawCircle(
+                            color = if (waveIdx == 0) wave0DotColor else wave1DotColor,
+                            radius = haloRadiusPx,
+                            center = dotCenter
+                        )
+                        drawCircle(
+                            color = whiteCoreColor,
+                            radius = dotRadiusPx,
+                            center = dotCenter
+                        )
+                    }
+
+                    // 5. Breathing Translucent Candlestick Silhouettes with Smooth Market Scan Wave
+                    val candleCount = 16
+                    val startX = w * 0.45f
+                    val stepX = (w * 0.52f) / candleCount
+                    val wickH = h * 0.14f
+                    for (i in 0 until candleCount) {
+                        val frac = i.toFloat() / (candleCount - 1).toFloat()
+                        val scanDist = abs(frac - scan)
+                        val scanBoost = 1f - (scanDist / 0.18f).coerceIn(0f, 1f)
+                        val breathe = sin((orbAngle * 2f + i * 0.55f).toDouble()).toFloat() * 0.015f
+
+                        val cx = startX + i * stepX
+                        val cy = h * (baseHeights[i % baseHeights.size] + breathe)
+                        val bodyH = h * (0.068f + scanBoost * 0.018f)
+                        val baseAlpha = 0.08f + scanBoost * 0.13f
+
+                        drawLine(
+                            color = Color(0xFF38BDF8).copy(alpha = baseAlpha + 0.02f),
+                            start = Offset(cx, cy - wickH * 0.5f),
+                            end = Offset(cx, cy + wickH * 0.5f),
+                            strokeWidth = wickStrokePx
+                        )
+                        drawRoundRect(
+                            color = Color(0xFF38BDF8).copy(alpha = baseAlpha),
+                            topLeft = Offset(cx - candleHalfWidthPx, cy - bodyH * 0.5f),
+                            size = Size(candleWidthPx, bodyH),
+                            cornerRadius = candleCorner
+                        )
+                    }
+                }
+            }
+    )
 }
 
 @Composable

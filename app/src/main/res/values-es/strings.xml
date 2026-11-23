@@ -648,4 +648,14 @@
     <string name="broadcast_text_lines_preview_label">Vista previa de secuencia (blanco y amarillo alternados):</string>
     <string name="settings_news_voice_title">Lector de noticias por voz</string>
     <string name="settings_news_voice_desc">Lee la noticia en pantalla sin fecha de publicación y espera a terminar antes de pasar a la siguiente</string>
+    <string name="dashboard_sound_title">Sonido Suave de Fondo (Pantallas de Información)</string>
+    <string name="dashboard_sound_desc">Reproduce un ambiente suave durante los salvapantallas de Noticias, Clima, Economía y Fútbol (se atenúa automáticamente al leer noticias)</string>
+    <string name="dashboard_sound_label">Sonido Ambiental</string>
+    <string name="dashboard_sound_off">Apagado</string>
+    <string name="dashboard_sound_studio">Pulso Suave de Estudio</string>
+    <string name="dashboard_sound_piano">Piano Cálido y Sereno</string>
+    <string name="dashboard_sound_rain">Lluvia Suave y Relajante</string>
+    <string name="dashboard_sound_horizon">Horizonte Nocturno Tranquilo</string>
+    <string name="dashboard_sound_chime">Campanillas Ambientales Suaves</string>
+    <string name="dashboard_sound_volume_label">Volumen del Sonido</string>
 </resources>

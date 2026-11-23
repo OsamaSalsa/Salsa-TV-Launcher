@@ -670,4 +670,14 @@
     <string name="broadcast_text_lines_preview_label">ตัวอย่างลำดับข้อความ (สลับสีขาวและสีเหลือง):</string>
     <string name="settings_news_voice_title">อ่านข่าวด้วยเสียง</string>
     <string name="settings_news_voice_desc">อ่านข่าวที่แสดงบนหน้าจอโดยไม่อ่านวันที่เผยแพร่ และรอจนกว่าจะอ่านจบก่อนเปลี่ยนข่าว</string>
+    <string name="dashboard_sound_title">เสียงพื้นหลังนุ่มนวล (หน้าจอข้อมูล)</string>
+    <string name="dashboard_sound_desc">เล่นเสียงบรรยากาศเบาๆ ระหว่างแสดงหน้าจอข่าว สภาพอากาศ เศรษฐกิจ และฟุตบอล (ลดเสียงอัตโนมัติเมื่อมีการอ่านข่าวด้วยเสียง)</string>
+    <string name="dashboard_sound_label">ตัวเลือกเสียง</string>
+    <string name="dashboard_sound_off">ปิด</string>
+    <string name="dashboard_sound_studio">จังหวะสตูดิโอนุ่มนวล</string>
+    <string name="dashboard_sound_piano">เปียโนอุ่นๆ สบายใจ</string>
+    <string name="dashboard_sound_rain">เสียงฝนตกปรอยๆ เบาๆ</string>
+    <string name="dashboard_sound_horizon">ขอบฟ้ายามค่ำคืนอันเงียบสงบ</string>
+    <string name="dashboard_sound_chime">เสียงกระดิ่งแอมเบียนต์นุ่มนวล</string>
+    <string name="dashboard_sound_volume_label">ระดับเสียง</string>
 </resources>

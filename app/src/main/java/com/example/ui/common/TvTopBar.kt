@@ -110,7 +110,6 @@ fun TvTopBar(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    var currentTimeString by remember { mutableStateOf("") }
     var currentAmPmString by remember { mutableStateOf("") }
     var currentDateString by remember { mutableStateOf("") }
     var currentGreeting by remember { mutableStateOf("") }
@@ -181,54 +180,28 @@ fun TvTopBar(
         onDispose { try { cm?.unregisterNetworkCallback(callback) } catch (_: Exception) {} }
     }
     
-    // Live clock and greeting update
-    LaunchedEffect(is24hFormat, showSeconds, dateFormatStyle, greetingMode, customGreetingText, lang) {
-        val timePattern = when {
-            is24hFormat && showSeconds -> "HH:mm:ss"
-            is24hFormat -> "HH:mm"
-            showSeconds -> "hh:mm:ss"
-            else -> "hh:mm"
-        }
-        val timeFormat = SimpleDateFormat(timePattern, Locale.US)
-        
+    // Update AM/PM, date and greeting at hour/day boundaries instead of every second
+    LaunchedEffect(is24hFormat, dateFormatStyle, greetingMode, customGreetingText, lang) {
         val effectiveLang = com.example.util.LocaleHelper.getEffectiveLanguage(lang)
-        var lastMinuteKey = -1
         var lastHourKey = -1
 
         while (true) {
             val now = java.util.Calendar.getInstance()
-            val minuteKey = now.get(java.util.Calendar.DAY_OF_YEAR) * 1440 +
-                now.get(java.util.Calendar.HOUR_OF_DAY) * 60 +
-                now.get(java.util.Calendar.MINUTE)
             val hourOfDay = now.get(java.util.Calendar.HOUR_OF_DAY)
-
-            if (showSeconds || minuteKey != lastMinuteKey) {
-                val rawTime = timeFormat.format(now.time)
-                // Explicitly force English digits (0-9) to prevent any system-level override
-                currentTimeString = rawTime.map { ch ->
-                    val digit = Character.getNumericValue(ch)
-                    if (digit in 0..9 && ch !in '0'..'9' && ch !in 'a'..'z' && ch !in 'A'..'Z') {
-                        digit.toString()[0]
-                    } else ch
-                }.joinToString("")
-            }
-
-            if (minuteKey != lastMinuteKey) {
-                lastMinuteKey = minuteKey
-                val hourKey = now.get(java.util.Calendar.DAY_OF_YEAR) * 24 + hourOfDay
-                if (hourKey != lastHourKey) {
-                    lastHourKey = hourKey
-                    currentAmPmString = if (!is24hFormat) {
-                        com.example.util.LocaleHelper.getAmPmString(hourOfDay, lang)
-                    } else {
-                        ""
-                    }
-                    currentDateString = com.example.util.LocaleHelper.formatDate(now.time, dateFormatStyle, lang)
-                    currentGreeting = com.example.util.GreetingHelper.getGreeting(hourOfDay, effectiveLang, greetingMode, customGreetingText)
+            val hourKey = now.get(java.util.Calendar.DAY_OF_YEAR) * 24 + hourOfDay
+            if (hourKey != lastHourKey) {
+                lastHourKey = hourKey
+                currentAmPmString = if (!is24hFormat) {
+                    com.example.util.LocaleHelper.getAmPmString(hourOfDay, lang)
+                } else {
+                    ""
                 }
+                currentDateString = com.example.util.LocaleHelper.formatDate(now.time, dateFormatStyle, lang)
+                currentGreeting = com.example.util.GreetingHelper.getGreeting(hourOfDay, effectiveLang, greetingMode, customGreetingText)
             }
-
-            delay(if (showSeconds) 500L else 1000L)
+            val nowMs = now.timeInMillis
+            val msUntilNextMinute = (60_020L - (nowMs % 60_000L)).coerceIn(1_000L, 60_050L)
+            delay(msUntilNextMinute)
         }
     }
 
@@ -375,24 +348,13 @@ fun TvTopBar(
                             .fillMaxWidth()
                             .padding(top = if (isScrolled) 0.dp else 4.dp)
                     ) {
-                        // Time: Force English (ASCII) Digits and Original System Font
-                        CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
-                            Text(
-                                text = currentTimeString,
-                                color = TvTextPrimary,
-                                fontSize = effectiveTimeSp.sp,
-                                fontWeight = FontWeight.Normal,
-                                fontFamily = FontFamily.Default,
-                                letterSpacing = (-1.0).sp,
-                                maxLines = 1,
-                                softWrap = false,
-                                style = TextStyle(
-                                    fontFamily = FontFamily.Default,
-                                    fontFeatureSettings = "tnum",
-                                    shadow = topTextShadow
-                                )
-                            )
-                        }
+                        // Time: Isolated live clock composable so clock ticks only recompose the clock Text
+                        LiveClockText(
+                            is24hFormat = is24hFormat,
+                            showSeconds = showSeconds,
+                            fontSizeSp = effectiveTimeSp,
+                            shadow = topTextShadow
+                        )
 
                         if (hasDate || hasAmPm || hasWeather) {
                             Spacer(modifier = Modifier.width(if (isScrolled) 8.dp else if (leftAvailWidth < 400.dp) 10.dp else 14.dp))
@@ -778,6 +740,54 @@ fun TvTopBar(
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun LiveClockText(
+    is24hFormat: Boolean,
+    showSeconds: Boolean,
+    fontSizeSp: Float,
+    shadow: Shadow
+) {
+    var timeString by remember { mutableStateOf("") }
+
+    LaunchedEffect(is24hFormat, showSeconds) {
+        val pattern = when {
+            is24hFormat && showSeconds -> "HH:mm:ss"
+            is24hFormat -> "HH:mm"
+            showSeconds -> "hh:mm:ss"
+            else -> "hh:mm"
+        }
+        val formatter = SimpleDateFormat(pattern, Locale.US)
+        while (true) {
+            val nowMs = System.currentTimeMillis()
+            timeString = formatter.format(Date(nowMs))
+            val delayMs = if (showSeconds) {
+                (1005L - (nowMs % 1000L)).coerceIn(100L, 1005L)
+            } else {
+                (60_020L - (nowMs % 60_000L)).coerceIn(500L, 60_050L)
+            }
+            delay(delayMs)
+        }
+    }
+
+    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+        Text(
+            text = timeString,
+            color = TvTextPrimary,
+            fontSize = fontSizeSp.sp,
+            fontWeight = FontWeight.Normal,
+            fontFamily = FontFamily.Default,
+            letterSpacing = (-1.0).sp,
+            maxLines = 1,
+            softWrap = false,
+            style = TextStyle(
+                fontFamily = FontFamily.Default,
+                fontFeatureSettings = "tnum",
+                shadow = shadow
+            )
+        )
     }
 }
 

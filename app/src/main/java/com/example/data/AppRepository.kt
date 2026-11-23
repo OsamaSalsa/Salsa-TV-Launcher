@@ -286,14 +286,14 @@ class AppRepository(
                     lockedPackages = lockedPackages
                 )
             }
-        val combined = apps + bookmarkItems
+        val combined = if (bookmarkItems.isEmpty()) apps else apps + bookmarkItems
         val filtered = if (tvOnly) {
             combined.filter { it.banner != null || it.packageName.endsWith(".portal") }
         } else {
             combined
         }
         val withLocks = filtered.map { it.copy(isLocked = lockedPackages.contains(it.packageName)) }
-        if (input.savedOrder.isEmpty()) {
+        if (bookmarkItems.isEmpty() || input.savedOrder.isEmpty()) {
             withLocks
         } else {
             val orderMap = input.savedOrder.withIndex().associate { it.value to it.index }
@@ -645,7 +645,14 @@ class AppRepository(
 
     private fun drawableToBitmap(drawable: Drawable, maxWidth: Int = 128, maxHeight: Int = 128): Bitmap {
         if (drawable is BitmapDrawable && drawable.bitmap != null) {
-            return drawable.bitmap
+            val bmp = drawable.bitmap
+            if (bmp.width > maxWidth * 2 || bmp.height > maxHeight * 2) {
+                val scale = minOf(maxWidth.toFloat() / bmp.width, maxHeight.toFloat() / bmp.height)
+                val targetW = (bmp.width * scale).toInt().coerceAtLeast(1)
+                val targetH = (bmp.height * scale).toInt().coerceAtLeast(1)
+                return Bitmap.createScaledBitmap(bmp, targetW, targetH, true)
+            }
+            return bmp
         }
         val w = if (drawable.intrinsicWidth > 0) drawable.intrinsicWidth.coerceAtMost(maxWidth) else 96
         val h = if (drawable.intrinsicHeight > 0) drawable.intrinsicHeight.coerceAtMost(maxHeight) else 96

@@ -1,11 +1,9 @@
-import com.google.gms.googleservices.GoogleServicesPlugin.MissingGoogleServicesStrategy
-
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.compose)
   alias(libs.plugins.google.devtools.ksp)
   alias(libs.plugins.secrets)
-  alias(libs.plugins.google.services)
+  // alias(libs.plugins.google.services)
 }
 
 android {
@@ -42,13 +40,19 @@ android {
 
   buildTypes {
     release {
-      isCrunchPngs = false
+      isCrunchPngs = true
       isMinifyEnabled = true
       isShrinkResources = true
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
       // Do not remove or modify this signingConfig assignment. It is necessary for Android apps in
       // AI Studio.
       signingConfig = signingConfigs.getByName("release")
+    }
+    create("compact") {
+      initWith(getByName("release"))
+      matchingFallbacks += listOf("release", "debug")
+      isDebuggable = false
+      signingConfig = signingConfigs.getByName("debugConfig")
     }
     debug {
       // Do not remove or modify this signingConfig assignment. It is necessary for Android apps in
@@ -94,8 +98,6 @@ secrets {
   ignoreList.add("FIREBASE_APPCHECK_DEBUG_TOKEN")
 }
 
-googleServices { missingGoogleServicesStrategy = MissingGoogleServicesStrategy.WARN }
-
 // Some unused dependencies are commented out below instead of being removed.
 // This makes it easy to add them back in the future if needed.
 dependencies {
@@ -134,7 +136,8 @@ dependencies {
   // implementation(libs.firebase.appcheck.recaptcha)
   // implementation(libs.firebase.appcheck.debug)
   implementation(libs.kotlinx.coroutines.android)
-  implementation(libs.kotlinx.coroutines.core)
+  // Pulled in transitively by kotlinx-coroutines-android
+  // implementation(libs.kotlinx.coroutines.core)
   // implementation(libs.logging.interceptor)
   // implementation(libs.moshi.kotlin)
   // implementation(libs.okhttp)

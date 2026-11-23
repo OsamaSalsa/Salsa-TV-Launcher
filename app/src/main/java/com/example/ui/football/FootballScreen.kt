@@ -54,6 +54,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
@@ -462,144 +463,160 @@ private fun FootballStadiumBackground() {
         label = "stadium_motes"
     )
 
-    Canvas(modifier = Modifier.fillMaxSize()) {
-        val w = size.width
-        val h = size.height
-        val sway = beamSway.value
-        val pulse = glowPulse.value
-        val mote = motePhase.value
-
-        // 1. Stadium Night-to-Emerald Pitch Gradient
-        drawRect(
-            brush = Brush.verticalGradient(
-                colors = listOf(
-                    Color(0xFF0A141D),
-                    Color(0xFF0F2622),
-                    Color(0xFF143E27),
-                    Color(0xFF184D2C),
-                    Color(0xFF0D2E1A)
-                )
-            )
+    val pitchColors = remember {
+        listOf(
+            Color(0xFF0A141D),
+            Color(0xFF0F2622),
+            Color(0xFF143E27),
+            Color(0xFF184D2C),
+            Color(0xFF0D2E1A)
         )
-
-        // 2. Gracefully Sweeping Volumetric Stadium Floodlight Beams
-        val leftTower = Offset(w * 0.08f, h * 0.16f)
-        val rightTower = Offset(w * 0.92f, h * 0.16f)
-
-        val leftBeam = Path().apply {
-            moveTo(leftTower.x, leftTower.y)
-            lineTo(w * (0.28f + sway * 0.12f), h)
-            lineTo(w * (0.56f + sway * 0.12f), h)
-            close()
-        }
-        drawPath(
-            path = leftBeam,
-            brush = Brush.verticalGradient(
-                colors = listOf(
-                    Color(0xFFD1FAE5).copy(alpha = 0.095f * pulse),
-                    Color(0xFF34D399).copy(alpha = 0.035f),
-                    Color.Transparent
-                )
-            )
-        )
-
-        val rightBeam = Path().apply {
-            moveTo(rightTower.x, rightTower.y)
-            lineTo(w * (0.44f - sway * 0.12f), h)
-            lineTo(w * (0.72f - sway * 0.12f), h)
-            close()
-        }
-        drawPath(
-            path = rightBeam,
-            brush = Brush.verticalGradient(
-                colors = listOf(
-                    Color(0xFFD1FAE5).copy(alpha = 0.090f * pulse),
-                    Color(0xFF34D399).copy(alpha = 0.032f),
-                    Color.Transparent
-                )
-            )
-        )
-
-        // 3. Breathing Left & Right Floodlight Halos
-        drawCircle(
-            brush = Brush.radialGradient(
-                colors = listOf(
-                    Color(0xFFE2F8F0).copy(alpha = 0.28f * pulse),
-                    Color(0xFF34D399).copy(alpha = 0.12f * pulse),
-                    Color.Transparent
-                ),
-                center = leftTower,
-                radius = w * 0.36f * pulse
-            ),
-            radius = w * 0.36f * pulse,
-            center = leftTower
-        )
-
-        drawCircle(
-            brush = Brush.radialGradient(
-                colors = listOf(
-                    Color(0xFFE2F8F0).copy(alpha = 0.26f * pulse),
-                    Color(0xFF34D399).copy(alpha = 0.11f * pulse),
-                    Color.Transparent
-                ),
-                center = rightTower,
-                radius = w * 0.36f * pulse
-            ),
-            radius = w * 0.36f * pulse,
-            center = rightTower
-        )
-
-        // Stadium bulb clusters with gentle shimmer
-        for (i in 0..3) {
-            val bulbAlpha = 0.14f + 0.07f * ((sin((mote * 4f * PI + i * 1.1).toDouble()).toFloat() + 1f) * 0.5f)
-            drawCircle(
-                color = Color.White.copy(alpha = bulbAlpha),
-                radius = 7f,
-                center = Offset(w * 0.04f + i * 16f, h * 0.17f + i * 3f)
-            )
-            drawCircle(
-                color = Color.White.copy(alpha = bulbAlpha),
-                radius = 7f,
-                center = Offset(w * 0.96f - i * 16f, h * 0.17f + i * 3f)
-            )
-        }
-
-        // 4. Lower Pitch Grass Stripes + Soft Passing Stadium Light Sheen
-        val pitchTop = h * 0.56f
-        val stripeCount = 8
-        val stripeHeight = (h - pitchTop) / stripeCount
-        for (i in 0 until stripeCount) {
-            if (i % 2 == 0) {
-                drawRect(
-                    color = Color(0xFF22C55E).copy(alpha = 0.045f),
-                    topLeft = Offset(0f, pitchTop + i * stripeHeight),
-                    size = Size(w, stripeHeight)
-                )
-            }
-        }
-
-        drawLine(
-            color = Color.White.copy(alpha = 0.07f),
-            start = Offset(0f, h * 0.72f),
-            end = Offset(w, h * 0.72f),
-            strokeWidth = 1.5f
-        )
-
-        // 5. Luminous Stadium Atmosphere Particles Drifting Gently Upward
-        for (i in 0 until 18) {
-            val seedX = ((i * 0.37f + 0.05f) % 0.90f) + 0.05f
-            val seedY = ((i * 0.59f) % 1f)
-            val py = (1.06f - ((seedY + mote * (0.65f + (i % 3) * 0.2f)) % 1.12f))
-            val driftX = sin((mote * 2f * PI + i * 0.95).toDouble()).toFloat() * 0.018f
-            val fade = (sin((py.coerceIn(0f, 1f) * PI).toDouble()).toFloat()).coerceIn(0f, 1f)
-            val color = if (i % 4 == 0) Color(0xFFFDE68A) else Color(0xFFA7F3D0)
-            drawCircle(
-                color = color.copy(alpha = 0.24f * fade),
-                radius = (1.5f + (i % 3) * 0.7f).dp.toPx(),
-                center = Offset(w * (seedX + driftX), h * py)
-            )
-        }
     }
+    val beamPath = remember { Path() }
+
+    Spacer(
+        modifier = Modifier
+            .fillMaxSize()
+            .drawWithCache {
+                val w = size.width
+                val h = size.height
+                val pitchBrush = Brush.verticalGradient(
+                    colors = pitchColors,
+                    startY = 0f,
+                    endY = h
+                )
+                val leftTower = Offset(w * 0.08f, h * 0.16f)
+                val rightTower = Offset(w * 0.92f, h * 0.16f)
+                val pitchTop = h * 0.56f
+                val stripeCount = 8
+                val stripeHeight = (h - pitchTop) / stripeCount
+                val pitchLineColor = Color.White.copy(alpha = 0.07f)
+                val pitchStripeColor = Color(0xFF22C55E).copy(alpha = 0.045f)
+
+                onDrawBehind {
+                    val sway = beamSway.value
+                    val pulse = glowPulse.value
+                    val mote = motePhase.value
+
+                    // 1. Stadium Night-to-Emerald Pitch Gradient
+                    drawRect(brush = pitchBrush)
+
+                    // 2. Gracefully Sweeping Volumetric Stadium Floodlight Beams
+                    beamPath.reset()
+                    beamPath.moveTo(leftTower.x, leftTower.y)
+                    beamPath.lineTo(w * (0.28f + sway * 0.12f), h)
+                    beamPath.lineTo(w * (0.56f + sway * 0.12f), h)
+                    beamPath.close()
+                    drawPath(
+                        path = beamPath,
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                Color(0xFFD1FAE5).copy(alpha = 0.095f * pulse),
+                                Color(0xFF34D399).copy(alpha = 0.035f),
+                                Color.Transparent
+                            ),
+                            startY = leftTower.y,
+                            endY = h
+                        )
+                    )
+
+                    beamPath.reset()
+                    beamPath.moveTo(rightTower.x, rightTower.y)
+                    beamPath.lineTo(w * (0.44f - sway * 0.12f), h)
+                    beamPath.lineTo(w * (0.72f - sway * 0.12f), h)
+                    beamPath.close()
+                    drawPath(
+                        path = beamPath,
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                Color(0xFFD1FAE5).copy(alpha = 0.090f * pulse),
+                                Color(0xFF34D399).copy(alpha = 0.032f),
+                                Color.Transparent
+                            ),
+                            startY = rightTower.y,
+                            endY = h
+                        )
+                    )
+
+                    // 3. Breathing Left & Right Floodlight Halos
+                    val haloRadius = w * 0.36f * pulse
+                    drawCircle(
+                        brush = Brush.radialGradient(
+                            colors = listOf(
+                                Color(0xFFE2F8F0).copy(alpha = 0.28f * pulse),
+                                Color(0xFF34D399).copy(alpha = 0.12f * pulse),
+                                Color.Transparent
+                            ),
+                            center = leftTower,
+                            radius = haloRadius
+                        ),
+                        radius = haloRadius,
+                        center = leftTower
+                    )
+
+                    drawCircle(
+                        brush = Brush.radialGradient(
+                            colors = listOf(
+                                Color(0xFFE2F8F0).copy(alpha = 0.26f * pulse),
+                                Color(0xFF34D399).copy(alpha = 0.11f * pulse),
+                                Color.Transparent
+                            ),
+                            center = rightTower,
+                            radius = haloRadius
+                        ),
+                        radius = haloRadius,
+                        center = rightTower
+                    )
+
+                    // Stadium bulb clusters with gentle shimmer
+                    for (i in 0..3) {
+                        val bulbAlpha = 0.14f + 0.07f * ((sin((mote * 4f * PI + i * 1.1).toDouble()).toFloat() + 1f) * 0.5f)
+                        val bulbColor = Color.White.copy(alpha = bulbAlpha)
+                        drawCircle(
+                            color = bulbColor,
+                            radius = 7f,
+                            center = Offset(w * 0.04f + i * 16f, h * 0.17f + i * 3f)
+                        )
+                        drawCircle(
+                            color = bulbColor,
+                            radius = 7f,
+                            center = Offset(w * 0.96f - i * 16f, h * 0.17f + i * 3f)
+                        )
+                    }
+
+                    // 4. Lower Pitch Grass Stripes + Soft Passing Stadium Light Sheen
+                    for (i in 0 until stripeCount step 2) {
+                        drawRect(
+                            color = pitchStripeColor,
+                            topLeft = Offset(0f, pitchTop + i * stripeHeight),
+                            size = Size(w, stripeHeight)
+                        )
+                    }
+
+                    drawLine(
+                        color = pitchLineColor,
+                        start = Offset(0f, h * 0.72f),
+                        end = Offset(w, h * 0.72f),
+                        strokeWidth = 1.5f
+                    )
+
+                    // 5. Luminous Stadium Atmosphere Particles Drifting Gently Upward
+                    for (i in 0 until 18) {
+                        val seedX = ((i * 0.37f + 0.05f) % 0.90f) + 0.05f
+                        val seedY = ((i * 0.59f) % 1f)
+                        val py = 1.06f - ((seedY + mote * (0.65f + (i % 3) * 0.2f)) % 1.12f)
+                        val driftX = sin((mote * 2f * PI + i * 0.95).toDouble()).toFloat() * 0.018f
+                        val fade = sin((py.coerceIn(0f, 1f) * PI).toDouble()).toFloat().coerceIn(0f, 1f)
+                        val color = if (i % 4 == 0) Color(0xFFFDE68A) else Color(0xFFA7F3D0)
+                        drawCircle(
+                            color = color.copy(alpha = 0.24f * fade),
+                            radius = (1.5f + (i % 3) * 0.7f).dp.toPx(),
+                            center = Offset(w * (seedX + driftX), h * py)
+                        )
+                    }
+                }
+            }
+    )
 }
 
 @Composable

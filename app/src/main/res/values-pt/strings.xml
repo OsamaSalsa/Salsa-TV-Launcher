@@ -684,4 +684,14 @@
     <string name="broadcast_text_lines_preview_label">Prévia da sequência (branco e amarelo alternados):</string>
     <string name="settings_news_voice_title">Leitor de notícias por voz</string>
     <string name="settings_news_voice_desc">Lê a notícia exibida sem a data de publicação e aguarda o término antes de mudar</string>
+    <string name="dashboard_sound_title">Som Suave de Fundo (Telas de Informação)</string>
+    <string name="dashboard_sound_desc">Reproduz um som ambiente discreto nas telas de Notícias, Clima, Economia e Futebol (diminui automaticamente durante a leitura por voz)</string>
+    <string name="dashboard_sound_label">Som Ambiente</string>
+    <string name="dashboard_sound_off">Desativado</string>
+    <string name="dashboard_sound_studio">Pulso Suave de Estúdio</string>
+    <string name="dashboard_sound_piano">Piano Calmo e Aconchegante</string>
+    <string name="dashboard_sound_rain">Chuva Suave Relaxante</string>
+    <string name="dashboard_sound_horizon">Horizonte Noturno Tranquilo</string>
+    <string name="dashboard_sound_chime">Sinos Ambientais Suaves</string>
+    <string name="dashboard_sound_volume_label">Volume do Som</string>
 </resources>

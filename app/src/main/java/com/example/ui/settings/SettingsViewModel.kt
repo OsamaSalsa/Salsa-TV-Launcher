@@ -104,6 +104,36 @@ class SettingsViewModel(
         }
     }
 
+    val dashboardSoundMode: StateFlow<String> = preferences.dashboardSoundModeFlow
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "off")
+
+    fun setDashboardSoundMode(mode: String) {
+        viewModelScope.launch {
+            preferences.setDashboardSoundMode(mode)
+        }
+    }
+
+    val dashboardCustomSoundUri: StateFlow<String> = preferences.dashboardCustomSoundUriFlow
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "")
+
+    fun setDashboardCustomSoundUri(uri: String) {
+        viewModelScope.launch {
+            preferences.setDashboardCustomSoundUri(uri)
+            if (uri.isNotBlank()) {
+                preferences.setDashboardSoundMode("custom_file")
+            }
+        }
+    }
+
+    val dashboardSoundVolume: StateFlow<Int> = preferences.dashboardSoundVolumeFlow
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 25)
+
+    fun setDashboardSoundVolume(percent: Int) {
+        viewModelScope.launch {
+            preferences.setDashboardSoundVolume(percent)
+        }
+    }
+
     fun exportBackup(context: Context) {
         viewModelScope.launch {
             val result = com.example.util.BackupRestoreManager.exportBackupToFile(

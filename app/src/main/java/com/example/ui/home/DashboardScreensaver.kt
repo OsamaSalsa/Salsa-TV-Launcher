@@ -17,7 +17,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -66,6 +68,20 @@ internal enum class DashboardScreensaverSlide(val durationMs: Long) {
     WEATHER(10_000L),
     ECONOMIC(10_000L),
     FOOTBALL(10_000L)
+}
+
+internal const val NEWS_VOICE_CYCLE_STORY_TARGET = 6
+
+internal fun shouldWaitForNewsVoiceCycle(
+    isCycleMode: Boolean,
+    activeSlide: DashboardScreensaverSlide,
+    isVoiceEnabled: Boolean,
+    cycleStoriesCompleted: Boolean
+): Boolean {
+    return isCycleMode &&
+        activeSlide == DashboardScreensaverSlide.NEWS &&
+        isVoiceEnabled &&
+        !cycleStoriesCompleted
 }
 
 internal object DashboardScreensaverCycleTracker {
@@ -120,6 +136,17 @@ internal fun DashboardScreensaver(
             else 0
         )
     }
+    var newsCycleStoriesDone by remember(screensaverMode, currentSlideIndex, newsCycleCount) {
+        mutableStateOf(false)
+    }
+    val isVoiceReaderEnabled by prefs.newsVoiceEnabledFlow.collectAsState(initial = false)
+    val dashboardSoundMode by prefs.dashboardSoundModeFlow.collectAsState(initial = "off")
+    val dashboardCustomSoundUri by prefs.dashboardCustomSoundUriFlow.collectAsState(initial = "")
+    val dashboardSoundVolume by prefs.dashboardSoundVolumeFlow.collectAsState(initial = 25)
+
+    val latestVoiceEnabled by rememberUpdatedState(isVoiceReaderEnabled)
+    val latestNewsCycleStoriesDone by rememberUpdatedState(newsCycleStoriesDone)
+
     var slideProgress by remember(screensaverMode) { mutableFloatStateOf(0f) }
     val mountedAtMs = remember { System.currentTimeMillis() }
 
@@ -132,6 +159,13 @@ internal fun DashboardScreensaver(
             else -> cycleSlides[currentSlideIndex % cycleSlides.size]
         }
     }
+
+    // Continuous soft ambient background soundscape tailored for dashboard screensavers
+    DashboardAmbientSoundEffect(
+        soundMode = dashboardSoundMode,
+        customSoundUri = dashboardCustomSoundUri,
+        volumePercent = dashboardSoundVolume
+    )
 
     val cycleNewsSection = remember(newsCycleCount) {
         DashboardScreensaverCycleTracker.resolveNewsSectionForCycle(newsCycleCount)
@@ -169,7 +203,7 @@ internal fun DashboardScreensaver(
         }
     }
 
-    // Auto-cycle timer: News (60s / 1 min, new section after Football -> News) -> Weather (10s) -> Economy (10s) -> Football (10s) -> repeat
+    // Auto-cycle timer: News (60s / 1 min, holding until all 6 stories finish if Voice Reader is on) -> Weather (10s) -> Economy (10s) -> Football (10s) -> repeat
     LaunchedEffect(isCycleMode, currentSlideIndex) {
         if (!isCycleMode) return@LaunchedEffect
         val slide = cycleSlides[currentSlideIndex % cycleSlides.size]
@@ -184,9 +218,24 @@ internal fun DashboardScreensaver(
         }
         if (slide == DashboardScreensaverSlide.NEWS) {
             var extraWaitMs = 0L
-            while (com.example.ui.news.NewsVoicePlaybackTracker.isSpeakingFlow.value && extraWaitMs < 35_000L) {
+            val maxExtraWaitMs = 240_000L
+            while (
+                shouldWaitForNewsVoiceCycle(
+                    isCycleMode = true,
+                    activeSlide = slide,
+                    isVoiceEnabled = latestVoiceEnabled,
+                    cycleStoriesCompleted = latestNewsCycleStoriesDone
+                ) &&
+                extraWaitMs < maxExtraWaitMs
+            ) {
                 delay(stepMs)
                 extraWaitMs += stepMs
+            }
+            // Also ensure any trailing utterance finishes cleanly
+            var trailingWaitMs = 0L
+            while (latestVoiceEnabled && com.example.ui.news.NewsVoicePlaybackTracker.isSpeakingFlow.value && trailingWaitMs < 35_000L) {
+                delay(stepMs)
+                trailingWaitMs += stepMs
             }
         }
         val nextSlideIndex = (currentSlideIndex + 1) % cycleSlides.size
@@ -237,13 +286,17 @@ internal fun DashboardScreensaver(
                             appLanguage = appLanguage,
                             onBackToHome = onDismiss,
                             // Standalone News auto-advances across sections every time a section completes.
-                            // All-Dashboards stays in the designated section for the full 1-minute slot, then
-                            // advances to the NEXT section each time it returns from Football -> News.
+                            // All-Dashboards stays in the designated section for the full 1-minute slot
+                            // (or until all 6 stories finish reading when Voice News Reader is ON).
                             autoAdvanceSections = !isCycleMode,
                             initialSection = if (isCycleMode) cycleNewsSection else NewsSectionType.TOP_STORIES,
                             initialStoryIndex = if (isCycleMode) cycleNewsStoryOffset else 0,
                             cycleRefreshNonce = if (isCycleMode) newsCycleCount else 0,
-                            isScreensaverMode = true
+                            isScreensaverMode = true,
+                            holdAfterCycleStoriesWhenVoiceOn = isCycleMode,
+                            onCycleStoriesCompleted = {
+                                newsCycleStoriesDone = true
+                            }
                         )
                     }
                 }

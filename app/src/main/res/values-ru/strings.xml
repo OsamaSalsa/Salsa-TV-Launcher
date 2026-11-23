@@ -689,4 +689,14 @@
     <string name="broadcast_text_lines_preview_label">Предпросмотр строк (чередование белого и жёлтого):</string>
     <string name="settings_news_voice_title">Голосовое чтение новостей</string>
     <string name="settings_news_voice_desc">Озвучивает новость на экране без даты публикации и ждёт окончания чтения перед переключением</string>
+    <string name="dashboard_sound_title">Мягкий фоновый звук (Инфо-заставки)</string>
+    <string name="dashboard_sound_desc">Воспроизводит спокойный звуковой фон на экранах новостей, погоды, экономики и футбола (автоматически приглушается при голосовой озвучке)</string>
+    <string name="dashboard_sound_label">Вариант звука</string>
+    <string name="dashboard_sound_off">Выкл.</string>
+    <string name="dashboard_sound_studio">Мягкий пульс студии</string>
+    <string name="dashboard_sound_piano">Тёплое спокойное пианино</string>
+    <string name="dashboard_sound_rain">Лёгкий тихий дождь</string>
+    <string name="dashboard_sound_horizon">Тихий ночной горизонт</string>
+    <string name="dashboard_sound_chime">Мягкий эмбиент-перезвон</string>
+    <string name="dashboard_sound_volume_label">Громкость звука</string>
 </resources>

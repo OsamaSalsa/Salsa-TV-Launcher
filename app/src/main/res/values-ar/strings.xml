@@ -670,5 +670,15 @@
     <string name="broadcast_text_badge_live">على الهواء</string>
     <string name="broadcast_text_lines_preview_label">معاينة تتابع الأسطر (أبيض وأصفر بالتوالي):</string>
     <string name="settings_news_voice_title">قراءة الأخبار صوتياً</string>
-    <string name="settings_news_voice_desc">قراءة الخبر المعروض على الشاشة صوتياً بدون تاريخ النشر، مع الانتظار حتى انتهاء القراءة قبل الانتقال للخبر التالي</string>
+    <string name="settings_news_voice_desc">قراءة الخبر المعروض على الشاشة صوتياً بدون تاريخ النشر، مع الانتظار حتى انتهاء القراءة قبل الانتقال للخبر التالي أو مغادرة شاشة الأخبار بعد قراءة الـ 6 فقرات</string>
+    <string name="dashboard_sound_title">صوت خلفية خفيف (لشاشات المعلومات)</string>
+    <string name="dashboard_sound_desc">تشغيل خلفية صوتية هادئة ومناسبة أثناء عرض شاشة الأخبار والطقس والاقتصاد وكرة القدم (يخفض الصوت تلقائياً عند قراءة الأخبار)</string>
+    <string name="dashboard_sound_label">خيار الصوت الخفيف</string>
+    <string name="dashboard_sound_off">متوقف</string>
+    <string name="dashboard_sound_studio">نبض استوديو إخباري هادئ</string>
+    <string name="dashboard_sound_piano">بيانو دافئ وهادئ</string>
+    <string name="dashboard_sound_rain">مطر خفيف مريح</string>
+    <string name="dashboard_sound_horizon">أفق ليلي هادئ</string>
+    <string name="dashboard_sound_chime">رنين محيطي ناعم</string>
+    <string name="dashboard_sound_volume_label">مستوى الصوت</string>
 </resources>

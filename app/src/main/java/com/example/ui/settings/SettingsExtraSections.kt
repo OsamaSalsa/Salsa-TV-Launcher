@@ -123,6 +123,9 @@ internal fun ScreensaverSettingsSection(
     screensaverTimeout: String,
     screensaverMode: String,
     newsVoiceEnabled: Boolean,
+    dashboardSoundMode: String,
+    dashboardCustomSoundUri: String,
+    dashboardSoundVolume: Int,
     screensaverVideo: String,
     customScreensaverVideos: Set<String>,
     deletedScreensaverPresets: Set<String>,
@@ -148,6 +151,7 @@ internal fun ScreensaverSettingsSection(
     onLaunchMultiPhotosPicker: () -> Unit,
     onLaunchMusicPicker: () -> Unit,
     onLaunchBroadcastMusicPicker: () -> Unit,
+    onLaunchDashboardMusicPicker: () -> Unit,
     onPickLocalScreensaverVideo: () -> Unit,
     onPreviewScreensaver: () -> Unit
 ) {
@@ -220,6 +224,26 @@ internal fun ScreensaverSettingsSection(
                     isChecked = newsVoiceEnabled,
                     onToggle = { viewModel.setNewsVoiceEnabled(!newsVoiceEnabled) },
                     modifier = Modifier.testTag("screensaver_news_voice_toggle")
+                )
+            }
+        }
+
+        if (screensaverMode in setOf(
+                "all_dashboards_cycle",
+                "news_dashboard",
+                "weather_dashboard",
+                "economic_dashboard",
+                "football_dashboard"
+            )
+        ) {
+            item {
+                DashboardSoftSoundCard(
+                    soundMode = dashboardSoundMode,
+                    customSoundUri = dashboardCustomSoundUri,
+                    soundVolume = dashboardSoundVolume,
+                    onSoundModeSelected = { viewModel.setDashboardSoundMode(it) },
+                    onPickCustomSound = onLaunchDashboardMusicPicker,
+                    onSoundVolumeSelected = { viewModel.setDashboardSoundVolume(it) }
                 )
             }
         }
@@ -950,6 +974,84 @@ private fun ScreensaverBackgroundAudioCard(
                 ),
                 selectedOption = musicVolume,
                 onOptionSelected = onMusicVolumeSelected
+            )
+        }
+    }
+}
+
+@Composable
+private fun DashboardSoftSoundCard(
+    soundMode: String,
+    customSoundUri: String,
+    soundVolume: Int,
+    onSoundModeSelected: (String) -> Unit,
+    onPickCustomSound: () -> Unit,
+    onSoundVolumeSelected: (Int) -> Unit
+) {
+    SettingsGlassCard {
+        SettingsCardHeader(
+            icon = Icons.Default.MusicNote,
+            title = stringResource(R.string.dashboard_sound_title),
+            subtitle = stringResource(R.string.dashboard_sound_desc)
+        )
+        Spacer(modifier = Modifier.height(14.dp))
+        TvSelectField(
+            label = stringResource(R.string.dashboard_sound_label),
+            options = listOf(
+                "off" to stringResource(R.string.dashboard_sound_off),
+                "studio_pulse" to stringResource(R.string.dashboard_sound_studio),
+                "warm_piano" to stringResource(R.string.dashboard_sound_piano),
+                "soft_rain" to stringResource(R.string.dashboard_sound_rain),
+                "night_horizon" to stringResource(R.string.dashboard_sound_horizon),
+                "soft_chime" to stringResource(R.string.dashboard_sound_chime),
+                "custom_file" to stringResource(R.string.slideshow_music_custom)
+            ),
+            selectedOption = soundMode,
+            onOptionSelected = onSoundModeSelected
+        )
+
+        if (soundMode == "custom_file") {
+            Spacer(modifier = Modifier.height(12.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = customSoundUri.ifBlank {
+                        stringResource(R.string.slideshow_music_custom)
+                    },
+                    color = if (customSoundUri.isNotBlank()) TvAccentGoldRadiant else TvTextSecondary,
+                    fontSize = 12.5.sp,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f)
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+                TvActionButton(
+                    text = stringResource(R.string.slideshow_music_pick_btn),
+                    icon = Icons.Default.MusicNote,
+                    onClick = onPickCustomSound,
+                    baseColor = TvAccentGold.copy(alpha = 0.88f),
+                    focusedColor = TvAccentGold
+                )
+            }
+        }
+
+        if (soundMode != "off") {
+            Spacer(modifier = Modifier.height(10.dp))
+            TvSelectField(
+                label = stringResource(R.string.dashboard_sound_volume_label),
+                options = listOf(
+                    10 to "10%",
+                    20 to "20%",
+                    25 to "25%",
+                    35 to "35%",
+                    50 to "50%",
+                    75 to "75%"
+                ),
+                selectedOption = soundVolume,
+                onOptionSelected = onSoundVolumeSelected
             )
         }
     }

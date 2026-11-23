@@ -1,6 +1,5 @@
 package com.example.ui.home
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -29,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -166,7 +166,7 @@ private fun AppTileFallbackContent(
     app: AppItem,
     iconImageBitmap: ImageBitmap?
 ) {
-    val domColor = app.dominantColor?.let { Color(it) } ?: TvAccentBlue
+    val domColor = remember(app.dominantColor) { app.dominantColor?.let { Color(it) } ?: TvAccentBlue }
     val glowColor = TvAccentBlue
     val deepColor = TvDeepBlue
     val glassBg = Color(0x331E293B)
@@ -177,40 +177,40 @@ private fun AppTileFallbackContent(
             .background(glassBg),
         contentAlignment = Alignment.Center
     ) {
-        Canvas(modifier = Modifier.fillMaxSize()) {
-            val w = size.width
-            val h = size.height
-            drawRect(
-                brush = Brush.radialGradient(
-                    0.0f to domColor.copy(alpha = 0.50f),
-                    0.55f to deepColor.copy(alpha = 0.25f),
-                    1.0f to Color.Transparent,
-                    center = Offset(w * 0.5f, h * 0.5f),
-                    radius = w * 0.85f
-                )
-            )
-            drawCircle(
-                brush = Brush.radialGradient(
-                    0.0f to glowColor.copy(alpha = 0.35f),
-                    0.55f to glowColor.copy(alpha = 0.12f),
-                    1.0f to Color.Transparent,
-                    center = Offset(w * 0.50f, h * 0.35f),
-                    radius = w * 0.60f
-                )
-            )
-        }
-
-        Box(
+        Spacer(
             modifier = Modifier
                 .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
+                .drawWithCache {
+                    val w = size.width.coerceAtLeast(1f)
+                    val h = size.height.coerceAtLeast(1f)
+                    val baseGlow = Brush.radialGradient(
+                        0.0f to domColor.copy(alpha = 0.50f),
+                        0.55f to deepColor.copy(alpha = 0.25f),
+                        1.0f to Color.Transparent,
+                        center = Offset(w * 0.5f, h * 0.5f),
+                        radius = w * 0.85f
+                    )
+                    val topGlow = Brush.radialGradient(
+                        0.0f to glowColor.copy(alpha = 0.35f),
+                        0.55f to glowColor.copy(alpha = 0.12f),
+                        1.0f to Color.Transparent,
+                        center = Offset(w * 0.50f, h * 0.35f),
+                        radius = w * 0.60f
+                    )
+                    val scrim = Brush.verticalGradient(
                         listOf(
                             Color.Black.copy(alpha = 0.12f),
                             Color.Black.copy(alpha = 0.42f)
-                        )
+                        ),
+                        startY = 0f,
+                        endY = h
                     )
-                )
+                    onDrawBehind {
+                        drawRect(brush = baseGlow)
+                        drawCircle(brush = topGlow)
+                        drawRect(brush = scrim)
+                    }
+                }
         )
 
         Column(

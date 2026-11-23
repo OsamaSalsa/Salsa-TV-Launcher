@@ -643,4 +643,14 @@
     <string name="broadcast_text_lines_preview_label">Zeilen-Vorschau (abwechselnd Weiß &amp; Gelb):</string>
     <string name="settings_news_voice_title">Nachrichten-Vorlesefunktion</string>
     <string name="settings_news_voice_desc">Liest die angezeigte Nachricht ohne Veröffentlichungsdatum vor und wartet bis zum Ende, bevor gewechselt wird</string>
+    <string name="dashboard_sound_title">Sanfter Hintergrundklang (Info-Bildschirmschoner)</string>
+    <string name="dashboard_sound_desc">Spielt eine dezente Klangkulisse bei Nachrichten-, Wetter-, Wirtschafts- und Fußball-Bildschirmschonern ab (wird beim Vorlesen automatisch abgesenkt)</string>
+    <string name="dashboard_sound_label">Klangoption</string>
+    <string name="dashboard_sound_off">Aus</string>
+    <string name="dashboard_sound_studio">Sanfter Studio-Puls</string>
+    <string name="dashboard_sound_piano">Ruhiges Warmes Piano</string>
+    <string name="dashboard_sound_rain">Sanfter Leiser Regen</string>
+    <string name="dashboard_sound_horizon">Stiller Nachthorizont</string>
+    <string name="dashboard_sound_chime">Sanftes Ambient-Klangspiel</string>
+    <string name="dashboard_sound_volume_label">Lautstärke</string>
 </resources>
