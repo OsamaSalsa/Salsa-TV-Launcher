@@ -328,12 +328,8 @@ class IptvViewModel(
     }
 
     fun retryPlayback() {
-        val current = _currentPlayingChannel.value
-        if (current != null) {
+        if (_currentPlayingChannel.value != null) {
             _playbackError.value = null
-            val target = current.copy()
-            _currentPlayingChannel.value = null
-            _currentPlayingChannel.value = target
         }
     }
 }

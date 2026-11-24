@@ -36,7 +36,8 @@
     <string name="iptv_search_hint">ابحث عن القنوات…</string>
     <string name="iptv_empty">لم يتم العثور على قنوات في هذه الفئة</string>
     <string name="iptv_loading">جارٍ تحميل قائمة القنوات…</string>
-    <string name="iptv_error_playback">تعذر تشغيل البث. اضغط لإعادة المحاولة أو اختر قناة أخرى.</string>
+    <string name="iptv_error_playback">تعذر تشغيل هذه القناة.</string>
+    <string name="iptv_error_auto_retry_countdown">إعادة محاولة نفس القناة تلقائياً خلال %d ثانية…</string>
     <string name="iptv_toggle_favorite">المفضلة</string>
     <string name="iptv_added_to_favorites">تمت الإضافة إلى المفضلة ★</string>
     <string name="iptv_removed_from_favorites">تمت الإزالة من المفضلة</string>

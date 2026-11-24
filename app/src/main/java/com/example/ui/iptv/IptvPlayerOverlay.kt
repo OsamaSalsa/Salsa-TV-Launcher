@@ -4,6 +4,8 @@ import android.view.KeyEvent
 import androidx.activity.compose.BackHandler
 import androidx.annotation.OptIn
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
@@ -59,6 +61,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -81,6 +84,7 @@ import androidx.compose.ui.input.key.type
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -637,6 +641,25 @@ fun IptvPlayerOverlay(
                     else -> null
                 }
 
+                if (playbackError != null) {
+                    if (keyEvent.type != KeyEventType.KeyDown) return@onKeyEvent false
+                    return@onKeyEvent when (keyEvent.key) {
+                        Key.Back -> {
+                            onClose()
+                            true
+                        }
+                        Key.DirectionCenter, Key.Enter, Key.NumPadEnter, Key.ChannelUp, Key.PageUp -> {
+                            onNextChannel()
+                            true
+                        }
+                        Key.ChannelDown, Key.PageDown -> {
+                            onPrevChannel()
+                            true
+                        }
+                        else -> false
+                    }
+                }
+
                 if (nativeEvent.action == KeyEvent.ACTION_DOWN) {
                     if (digitChar != null) {
                         if (numericBuffer.length < 4) {
@@ -934,13 +957,34 @@ fun IptvPlayerOverlay(
             }
         }
 
-        // Playback Error Overlay (TV Remote Optimized)
+        // Playback Error Overlay (Single "Next Channel" Action + 15-Second Automatic Same-Channel Retry)
         if (playbackError != null) {
-            val retryFocusRequester = remember { FocusRequester() }
-            LaunchedEffect(playbackError) {
-                delay(80)
-                try { retryFocusRequester.requestFocus() } catch (_: Exception) {}
+            val nextChannelFocusRequester = remember { FocusRequester() }
+            var autoRetrySecondsLeft by remember(channel.id, playbackError, manualReloadTick) {
+                mutableIntStateOf(15)
             }
+            val countdownProgress by animateFloatAsState(
+                targetValue = (autoRetrySecondsLeft / 15f).coerceIn(0f, 1f),
+                animationSpec = tween(durationMillis = 350),
+                label = "iptv_auto_retry_progress"
+            )
+
+            LaunchedEffect(channel.id, playbackError, manualReloadTick) {
+                delay(80)
+                try { nextChannelFocusRequester.requestFocus() } catch (_: Exception) {}
+            }
+
+            LaunchedEffect(channel.id, playbackError, manualReloadTick) {
+                autoRetrySecondsLeft = 15
+                for (remaining in 15 downTo 1) {
+                    autoRetrySecondsLeft = remaining
+                    delay(1_000L)
+                }
+                autoRetrySecondsLeft = 0
+                manualReloadTick++
+                onRetry()
+            }
+
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -950,10 +994,15 @@ fun IptvPlayerOverlay(
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .width(560.dp)
+                        .width(500.dp)
                         .clip(RoundedCornerShape(28.dp))
                         .background(Color(0xFF0E1628).copy(alpha = 0.96f))
-                        .padding(32.dp)
+                        .border(
+                            width = 1.dp,
+                            color = Color.White.copy(alpha = 0.12f),
+                            shape = RoundedCornerShape(28.dp)
+                        )
+                        .padding(horizontal = 32.dp, vertical = 28.dp)
                 ) {
                     Box(
                         modifier = Modifier
@@ -974,7 +1023,9 @@ fun IptvPlayerOverlay(
                         text = channel.name,
                         color = TvAccentGold,
                         fontSize = 18.sp,
-                        fontWeight = FontWeight.ExtraBold
+                        fontWeight = FontWeight.ExtraBold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
@@ -993,35 +1044,69 @@ fun IptvPlayerOverlay(
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
                     )
-                    Spacer(modifier = Modifier.height(24.dp))
 
+                    Spacer(modifier = Modifier.height(18.dp))
+
+                    // Subtle 15-second auto-retry indicator for the same channel
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(50))
+                            .background(TvAccentGold.copy(alpha = 0.12f))
+                            .border(
+                                width = 1.dp,
+                                color = TvAccentGold.copy(alpha = 0.30f),
+                                shape = RoundedCornerShape(50)
+                            )
+                            .padding(horizontal = 14.dp, vertical = 6.dp)
                     ) {
-                        PlayerErrorActionButton(
-                            icon = Icons.Default.Refresh,
-                            label = stringResource(R.string.action_retry),
-                            accentColor = TvAccentGold,
-                            focusRequester = retryFocusRequester,
-                            onClick = onRetry,
-                            modifier = Modifier.weight(1f)
+                        Icon(
+                            imageVector = Icons.Default.Refresh,
+                            contentDescription = null,
+                            tint = TvAccentGold,
+                            modifier = Modifier.size(14.dp)
                         )
-                        PlayerErrorActionButton(
-                            icon = Icons.Default.KeyboardArrowUp,
-                            label = stringResource(R.string.iptv_next_channel),
-                            accentColor = TvAccentBlue,
-                            onClick = onNextChannel,
-                            modifier = Modifier.weight(1f)
-                        )
-                        PlayerErrorActionButton(
-                            icon = Icons.Default.Close,
-                            label = stringResource(R.string.action_cancel),
-                            accentColor = TvAccentRed,
-                            onClick = onClose,
-                            modifier = Modifier.weight(0.9f)
+                        Text(
+                            text = stringResource(R.string.iptv_error_auto_retry_countdown, autoRetrySecondsLeft),
+                            color = TvAccentGold,
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            modifier = Modifier.testTag("iptv_error_auto_retry_countdown")
                         )
                     }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    LinearProgressIndicator(
+                        progress = { countdownProgress },
+                        color = TvAccentGold,
+                        trackColor = Color.White.copy(alpha = 0.12f),
+                        modifier = Modifier
+                            .fillMaxWidth(0.72f)
+                            .height(4.dp)
+                            .clip(RoundedCornerShape(50))
+                    )
+
+                    Spacer(modifier = Modifier.height(22.dp))
+
+                    // ONLY ONE option: Next Channel
+                    PlayerErrorActionButton(
+                        icon = Icons.Default.KeyboardArrowUp,
+                        label = stringResource(R.string.iptv_next_channel),
+                        accentColor = TvAccentBlue,
+                        focusRequester = nextChannelFocusRequester,
+                        onClick = onNextChannel,
+                        modifier = Modifier
+                            .fillMaxWidth(0.72f)
+                            .focusProperties {
+                                up = nextChannelFocusRequester
+                                down = nextChannelFocusRequester
+                                left = nextChannelFocusRequester
+                                right = nextChannelFocusRequester
+                            }
+                            .testTag("iptv_error_next_channel_btn")
+                    )
                 }
             }
         }

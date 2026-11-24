@@ -38,7 +38,8 @@
     <string name="iptv_search_hint">Search channels…</string>
     <string name="iptv_empty">No channels found in this group</string>
     <string name="iptv_loading">Loading playlist channels…</string>
-    <string name="iptv_error_playback">Stream playback error. Click retry or choose another channel.</string>
+    <string name="iptv_error_playback">Unable to play this channel.</string>
+    <string name="iptv_error_auto_retry_countdown">Auto-retrying same channel in %ds…</string>
     <string name="iptv_quick_channels">Quick Channels</string>
     <string name="iptv_toggle_favorite">Favorite</string>
     <string name="iptv_added_to_favorites">Added to Favorites ★</string>
