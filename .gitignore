@@ -16,3 +16,20 @@
 local.properties
 .env
 debug.keystore
+
+# Exclude source code, build config, and internal files from GitHub sync
+# (keeps README*.md, docs/screenshots/, salsa-tv-launcher.apk, and version.json only)
+/app/
+app/
+/gradle/
+gradle/
+/workspace/
+workspace/
+/.build-outputs/
+.build-outputs/
+/build.gradle.kts
+/settings.gradle.kts
+/gradle.properties
+/metadata.json
+/.env.example
+/debug.keystore.base64
