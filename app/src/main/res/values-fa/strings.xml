@@ -653,4 +653,14 @@
     <string name="dashboard_sound_horizon">افق شبانه آرام</string>
     <string name="dashboard_sound_chime">نغمه محیطی لطیف</string>
     <string name="dashboard_sound_volume_label">میزان صدا</string>
+    <string name="broadcast_theme_title">تم حرکت و چیدمان متن</string>
+    <string name="broadcast_theme_desc">نحوه ورود و خروج متن، چیدمان نمایش در صفحه و عناصر گرافیکی اطراف را انتخاب کنید</string>
+    <string name="broadcast_theme_studio_classic">ورود افقی • ستون‌های استودیو</string>
+    <string name="broadcast_theme_breaking_news">نوار پایین صفحه • صعود از پایین</string>
+    <string name="broadcast_theme_royal_cinema">کادر سینمایی • زوم و محو نرم</string>
+    <string name="broadcast_theme_neon_cyber">تایپ دیجیتال • قاب HUD</string>
+    <string name="broadcast_theme_emerald_sport">حرکت مورب • نورافکن ورزشگاه</string>
+    <string name="broadcast_theme_minimal_zen">شناور آرام • شماره‌گذاری پس‌زمینه</string>
+    <string name="settings_broadcast_voice_title">خواندن صوتی متن خبری</string>
+    <string name="settings_broadcast_voice_desc">خط نمایش‌داده‌شده را با صدا می‌خواند و تا پایان خواندن صبر می‌کند سپس به خط بعدی می‌رود</string>
 </resources>

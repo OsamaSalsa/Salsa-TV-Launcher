@@ -680,4 +680,14 @@
     <string name="dashboard_sound_horizon">宁静夜色地平线</string>
     <string name="dashboard_sound_chime">轻柔环境风铃</string>
     <string name="dashboard_sound_volume_label">音量大小</string>
+    <string name="broadcast_theme_title">播报排版与动效主题</string>
+    <string name="broadcast_theme_desc">选择文字入场/退场动画、屏幕布局位置以及周围的演播室视觉元素</string>
+    <string name="broadcast_theme_studio_classic">横向滑入 • 两侧竖条</string>
+    <string name="broadcast_theme_breaking_news">新闻台卡 • 底部升起</string>
+    <string name="broadcast_theme_royal_cinema">影院变焦 • 宽银幕黑边</string>
+    <string name="broadcast_theme_neon_cyber">赛博打字 • HUD 角标框</string>
+    <string name="broadcast_theme_emerald_sport">斜向切入 • 赛场灯光束</string>
+    <string name="broadcast_theme_minimal_zen">柔和上浮 • 背景序号水印</string>
+    <string name="settings_broadcast_voice_title">语音朗读播报文字</string>
+    <string name="settings_broadcast_voice_desc">朗读当前显示的每一行文字，若在设定时间内未读完，则等待朗读完成后再切换下一行</string>
 </resources>

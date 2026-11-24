@@ -87,6 +87,8 @@ class LauncherPreferences(private val context: Context) {
         val KEY_BROADCAST_MUSIC_MODE = stringPreferencesKey("broadcast_music_mode")
         val KEY_BROADCAST_CUSTOM_MUSIC_URI = stringPreferencesKey("broadcast_custom_music_uri")
         val KEY_BROADCAST_MUSIC_VOLUME = intPreferencesKey("broadcast_music_volume")
+        val KEY_BROADCAST_THEME = stringPreferencesKey("broadcast_text_theme")
+        val KEY_BROADCAST_VOICE_ENABLED = booleanPreferencesKey("broadcast_voice_reader_enabled")
         val KEY_HEADER_CONTROL_MODE = stringPreferencesKey("header_control_mode")
         val KEY_RECENT_CHANNELS = stringPreferencesKey("recent_iptv_channel_ids")
         val KEY_LOW_RAM_MODE = booleanPreferencesKey("low_ram_lite_mode")
@@ -464,7 +466,7 @@ class LauncherPreferences(private val context: Context) {
     }
 
     val screensaverTimeoutFlow: Flow<String> = prefFlow { prefs ->
-        prefs[KEY_SCREENSAVER_TIMEOUT] ?: "5"
+        prefs[KEY_SCREENSAVER_TIMEOUT] ?: "10"
     }
 
     suspend fun setScreensaverTimeout(timeout: String) {
@@ -1079,6 +1081,26 @@ class LauncherPreferences(private val context: Context) {
         }
     }
 
+    val broadcastThemeFlow: Flow<String> = prefFlow { prefs ->
+        prefs[KEY_BROADCAST_THEME] ?: "studio_classic"
+    }
+
+    suspend fun setBroadcastTheme(themeId: String) {
+        context.dataStore.edit { prefs ->
+            prefs[KEY_BROADCAST_THEME] = themeId
+        }
+    }
+
+    val broadcastVoiceEnabledFlow: Flow<Boolean> = prefFlow { prefs ->
+        prefs[KEY_BROADCAST_VOICE_ENABLED] ?: false
+    }
+
+    suspend fun setBroadcastVoiceEnabled(enabled: Boolean) {
+        context.dataStore.edit { prefs ->
+            prefs[KEY_BROADCAST_VOICE_ENABLED] = enabled
+        }
+    }
+
     val headerControlModeFlow: Flow<String> = prefFlow { prefs ->
         prefs[KEY_HEADER_CONTROL_MODE] ?: "control_center"
     }
@@ -1307,14 +1329,15 @@ class LauncherPreferences(private val context: Context) {
                 KEY_RECENT_CHANNELS, KEY_NIGHT_COMFORT_MODE, KEY_FOOTBALL_LEAGUES, KEY_FOOTBALL_CLUBS,
                 KEY_ECONOMIC_INDICES, KEY_ECONOMIC_COMMODITIES, KEY_ECONOMIC_FOREX,
                 KEY_BROADCAST_TEXT_LINES, KEY_BROADCAST_MUSIC_MODE, KEY_BROADCAST_CUSTOM_MUSIC_URI,
-                KEY_DASHBOARD_SOUND_MODE, KEY_DASHBOARD_CUSTOM_SOUND_URI
+                KEY_BROADCAST_THEME, KEY_DASHBOARD_SOUND_MODE, KEY_DASHBOARD_CUSTOM_SOUND_URI
             )
             val boolKeys = listOf(
                 KEY_DYNAMIC_BG, KEY_CLOCK_24H, KEY_HAS_PROMPTED_LAUNCHER, KEY_HAS_PROMPTED_STORAGE,
                 KEY_ADS_BLOCKER_ENABLED, KEY_SHOW_ONLY_TV_APPS, KEY_CLOCK_SHOW_SECONDS,
                 KEY_IPTV_PRESETS_INITIALIZED, KEY_AUTO_CHECK_UPDATES, KEY_AUTO_RESUME_LAST_CHANNEL,
                 KEY_SHOW_RECENT_APPS, KEY_USE_DYNAMIC_COLOR, KEY_SLIDESHOW_SHUFFLE,
-                KEY_LOW_RAM_MODE, KEY_WEATHER_ENABLED, KEY_NEWS_VOICE_ENABLED
+                KEY_LOW_RAM_MODE, KEY_WEATHER_ENABLED, KEY_NEWS_VOICE_ENABLED,
+                KEY_BROADCAST_VOICE_ENABLED
             )
             val intKeys = listOf(
                 KEY_APPS_PER_ROW, KEY_GLASS_OPACITY, KEY_APPS_TOP_OFFSET, KEY_WALLPAPER_VISIBILITY,

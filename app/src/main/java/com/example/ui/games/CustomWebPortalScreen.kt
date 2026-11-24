@@ -3,9 +3,7 @@ package com.example.ui.games
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
-import android.os.SystemClock
 import android.view.KeyEvent
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.CookieManager
@@ -73,13 +71,20 @@ import com.example.ui.common.WebPortalDownloadDialog
 import com.example.ui.common.WebPortalDownloadManager
 import com.example.ui.common.WebPortalDownloadState
 import com.example.ui.common.ensureYouTubeConsentCookies
+import com.example.ui.common.VirtualMouseDirection
+import com.example.ui.common.clampVirtualMousePosition
+import com.example.ui.common.dispatchVirtualMouseClick
+import com.example.ui.common.dispatchVirtualMouseHover
 import com.example.ui.common.findActivityContext
 import com.example.ui.common.grantSafeWebPermissions
 import com.example.ui.common.hardenWebView
 import com.example.ui.common.injectWebViewStabilityShim
 import com.example.ui.common.isWebViewDestroyed
 import com.example.ui.common.postOnMain
+import com.example.ui.common.resolveVirtualMouseScrollStepPx
+import com.example.ui.common.resolveVirtualMouseStepPx
 import com.example.ui.common.safeDestroyWebView
+import com.example.ui.common.stepVirtualMouse
 import com.example.ui.downloader.VirtualMousePointer
 import com.example.ui.theme.TvAccentGold
 import com.example.ui.theme.TvTextPrimary
@@ -107,6 +112,8 @@ class CustomBookmarkWebView(
     private var customView: View? = null
     private var customViewCallback: WebChromeClient.CustomViewCallback? = null
     private var fullscreenContainer: FrameLayout? = null
+
+    fun activeTouchView(): View = fullscreenContainer ?: customView ?: this
 
     private inner class AuraBlobDownloadBridge {
         @JavascriptInterface
@@ -462,21 +469,55 @@ fun CustomWebPortalScreen(
     var cursorY by remember { mutableFloatStateOf(540f) }
     var isCursorClicking by remember { mutableStateOf(false) }
 
-    val cursorStep = 65f
-    val scrollStep = 220
+    fun effectiveViewportSize(): Pair<Float, Float> {
+        val w = webViewRef?.width?.takeIf { it > 0 }?.toFloat() ?: screenWidthPx
+        val h = webViewRef?.height?.takeIf { it > 0 }?.toFloat() ?: screenHeightPx
+        return w.coerceAtLeast(1f) to h.coerceAtLeast(1f)
+    }
+
+    LaunchedEffect(screenWidthPx, screenHeightPx, webViewRef) {
+        val (vw, vh) = effectiveViewportSize()
+        val (cx, cy) = clampVirtualMousePosition(cursorX, cursorY, vw, vh)
+        cursorX = cx
+        cursorY = cy
+    }
 
     fun dispatchClickAtCursor() {
-        val webView = webViewRef ?: return
-        if (isWebViewDestroyed(webView)) return
+        val touchTarget = webViewRef?.activeTouchView() ?: return
         isCursorClicking = true
-        val downTime = SystemClock.uptimeMillis()
-        val downEvent = MotionEvent.obtain(downTime, downTime, MotionEvent.ACTION_DOWN, cursorX, cursorY, 0)
-        val upEvent = MotionEvent.obtain(downTime, downTime + 45, MotionEvent.ACTION_UP, cursorX, cursorY, 0)
-        webView.dispatchTouchEvent(downEvent)
-        webView.dispatchTouchEvent(upEvent)
-        downEvent.recycle()
-        upEvent.recycle()
-        postOnMain(120L) { isCursorClicking = false }
+        val dispatched = dispatchVirtualMouseClick(touchTarget, cursorX, cursorY) {
+            isCursorClicking = false
+        }
+        if (!dispatched) {
+            isCursorClicking = false
+        }
+    }
+
+    fun moveOrScrollCursor(direction: VirtualMouseDirection, repeatCount: Int = 0) {
+        val webView = webViewRef
+        val (vw, vh) = effectiveViewportSize()
+        val canScroll = when (direction) {
+            VirtualMouseDirection.LEFT -> webView?.canScrollHorizontally(-1) == true
+            VirtualMouseDirection.RIGHT -> webView?.canScrollHorizontally(1) == true
+            VirtualMouseDirection.UP -> webView?.canScrollVertically(-1) == true
+            VirtualMouseDirection.DOWN -> webView?.canScrollVertically(1) == true
+        }
+        val stepResult = stepVirtualMouse(
+            currentX = cursorX,
+            currentY = cursorY,
+            viewportWidth = vw,
+            viewportHeight = vh,
+            direction = direction,
+            stepPx = resolveVirtualMouseStepPx(vw, vh, repeatCount),
+            scrollStepPx = resolveVirtualMouseScrollStepPx(vh),
+            canScrollInDirection = canScroll
+        )
+        cursorX = stepResult.nextX
+        cursorY = stepResult.nextY
+        if (stepResult.scrollDx != 0 || stepResult.scrollDy != 0) {
+            webView?.scrollBy(stepResult.scrollDx, stepResult.scrollDy)
+        }
+        dispatchVirtualMouseHover(webView?.activeTouchView(), cursorX, cursorY)
     }
 
     BackHandler {
@@ -517,27 +558,28 @@ fun CustomWebPortalScreen(
                                 if (native.keyCode == KeyEvent.KEYCODE_MENU || native.keyCode == KeyEvent.KEYCODE_SETTINGS) {
                                     isMouseModeEnabled = !isMouseModeEnabled
                                     true
-                                } else if (isMouseModeEnabled) {
+                                } else if (isMouseModeEnabled && loadError == null) {
                                     when (native.keyCode) {
                                         KeyEvent.KEYCODE_DPAD_LEFT -> {
-                                            cursorX = (cursorX - cursorStep).coerceAtLeast(10f)
+                                            moveOrScrollCursor(VirtualMouseDirection.LEFT, native.repeatCount)
                                             true
                                         }
                                         KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                                            cursorX = (cursorX + cursorStep).coerceAtMost(screenWidthPx - 10f)
+                                            moveOrScrollCursor(VirtualMouseDirection.RIGHT, native.repeatCount)
                                             true
                                         }
                                         KeyEvent.KEYCODE_DPAD_UP -> {
-                                            if (cursorY <= 120f) webViewRef?.scrollBy(0, -scrollStep)
-                                            else cursorY = (cursorY - cursorStep).coerceAtLeast(10f)
+                                            moveOrScrollCursor(VirtualMouseDirection.UP, native.repeatCount)
                                             true
                                         }
                                         KeyEvent.KEYCODE_DPAD_DOWN -> {
-                                            if (cursorY >= screenHeightPx - 140f) webViewRef?.scrollBy(0, scrollStep)
-                                            else cursorY = (cursorY + cursorStep).coerceAtMost(screenHeightPx - 10f)
+                                            moveOrScrollCursor(VirtualMouseDirection.DOWN, native.repeatCount)
                                             true
                                         }
-                                        KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                                        KeyEvent.KEYCODE_DPAD_CENTER,
+                                        KeyEvent.KEYCODE_ENTER,
+                                        KeyEvent.KEYCODE_NUMPAD_ENTER,
+                                        KeyEvent.KEYCODE_BUTTON_A -> {
                                             dispatchClickAtCursor()
                                             true
                                         }

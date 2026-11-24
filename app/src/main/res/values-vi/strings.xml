@@ -680,4 +680,14 @@
     <string name="dashboard_sound_horizon">Chân Trời Đêm Tĩnh Lặng</string>
     <string name="dashboard_sound_chime">Chuông Môi Trường Dịu Nhẹ</string>
     <string name="dashboard_sound_volume_label">Âm Lượng</string>
+    <string name="broadcast_theme_title">Chủ Đề Bố Cục &amp; Chuyển Động Chữ</string>
+    <string name="broadcast_theme_desc">Chọn hiệu ứng chữ vào/ra, vị trí hiển thị trên màn hình và các yếu tố đồ họa xung quanh</string>
+    <string name="broadcast_theme_studio_classic">Trượt Ngang • Thanh Bên</string>
+    <string name="broadcast_theme_breaking_news">Bàn Tin • Trồi Từ Dưới</string>
+    <string name="broadcast_theme_royal_cinema">Thu Phóng Điện Ảnh • Khung Letterbox</string>
+    <string name="broadcast_theme_neon_cyber">Đánh Máy Cyber • Khung Góc HUD</string>
+    <string name="broadcast_theme_emerald_sport">Vào Đường Chéo • Đèn Sân Đấu</string>
+    <string name="broadcast_theme_minimal_zen">Trôi Nhẹ Nhàng • Số Nền Lớn</string>
+    <string name="settings_broadcast_voice_title">Đọc Văn Bản Phát Sóng Thành Tiếng</string>
+    <string name="settings_broadcast_voice_desc">Đọc to từng dòng đang hiển thị và đợi đọc xong mới chuyển sang dòng tiếp theo nếu hết giờ sớm hơn</string>
 </resources>

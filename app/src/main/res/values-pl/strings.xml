@@ -701,4 +701,14 @@
     <string name="dashboard_sound_horizon">Cichy nocny horyzont</string>
     <string name="dashboard_sound_chime">Delikatne dzwonki ambient</string>
     <string name="dashboard_sound_volume_label">Poziom głośności</string>
+    <string name="broadcast_theme_title">Motyw Układu i Ruchu Tekstu</string>
+    <string name="broadcast_theme_desc">Wybierz animację wejścia/wyjścia tekstu, układ na ekranie oraz otaczające elementy graficzne</string>
+    <string name="broadcast_theme_studio_classic">Płynne Przesunięcie • Słupki Boczne</string>
+    <string name="broadcast_theme_breaking_news">Belka Informacyjna • Wysuw z Dołu</string>
+    <string name="broadcast_theme_royal_cinema">Kinowe Zbliżenie • Pasy Letterbox</string>
+    <string name="broadcast_theme_neon_cyber">Maszyna Cyber • Ramka HUD</string>
+    <string name="broadcast_theme_emerald_sport">Ukośne Wejście • Reflektory Areny</string>
+    <string name="broadcast_theme_minimal_zen">Łagodne Unoszenie • Znak Wodny</string>
+    <string name="settings_broadcast_voice_title">Czytanie Tekstu Na Głos</string>
+    <string name="settings_broadcast_voice_desc">Czyta na głos każdą wyświetlaną linię i czeka z przejściem do następnej do zakończenia lektora, jeśli czas minie wcześniej</string>
 </resources>

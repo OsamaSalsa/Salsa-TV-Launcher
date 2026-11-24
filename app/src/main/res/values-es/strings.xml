@@ -658,4 +658,14 @@
     <string name="dashboard_sound_horizon">Horizonte Nocturno Tranquilo</string>
     <string name="dashboard_sound_chime">Campanillas Ambientales Suaves</string>
     <string name="dashboard_sound_volume_label">Volumen del Sonido</string>
+    <string name="broadcast_theme_title">Tema de Movimiento y Diseño</string>
+    <string name="broadcast_theme_desc">Elige la animación de entrada/salida, posición en pantalla y elementos gráficos del estudio</string>
+    <string name="broadcast_theme_studio_classic">Deslizamiento • Barras Laterales</string>
+    <string name="broadcast_theme_breaking_news">Mesa Informativa • Zócalo Inferior</string>
+    <string name="broadcast_theme_royal_cinema">Zoom Cine • Bandas Letterbox</string>
+    <string name="broadcast_theme_neon_cyber">Escritura Cyber • Marco HUD</string>
+    <string name="broadcast_theme_emerald_sport">Entrada Diagonal • Focos Estadio</string>
+    <string name="broadcast_theme_minimal_zen">Flotado Zen • Número de Fondo</string>
+    <string name="settings_broadcast_voice_title">Lectura por Voz del Texto</string>
+    <string name="settings_broadcast_voice_desc">Lee en voz alta cada línea mostrada y espera a que termine antes de pasar a la siguiente línea</string>
 </resources>

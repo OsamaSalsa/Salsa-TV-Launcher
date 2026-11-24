@@ -658,4 +658,14 @@
     <string name="dashboard_sound_horizon">Horizon Nocturne Paisible</string>
     <string name="dashboard_sound_chime">Carillon Ambiant Doux</string>
     <string name="dashboard_sound_volume_label">Volume Sonore</string>
+    <string name="broadcast_theme_title">Thème d\'Animation &amp; Mise en Page</string>
+    <string name="broadcast_theme_desc">Choisissez l\'animation d\'entrée/sortie du texte, sa position et les éléments graphiques autour</string>
+    <string name="broadcast_theme_studio_classic">Glissement Studio • Barres Latérales</string>
+    <string name="broadcast_theme_breaking_news">Bandeau Info • Montée Bas d\'Écran</string>
+    <string name="broadcast_theme_royal_cinema">Zoom Cinéma • Bandes Noires</string>
+    <string name="broadcast_theme_neon_cyber">Frappe Cyber • Cadre HUD</string>
+    <string name="broadcast_theme_emerald_sport">Entrée Diagonale • Projecteurs</string>
+    <string name="broadcast_theme_minimal_zen">Flottement Zen • Numéro Filigrane</string>
+    <string name="settings_broadcast_voice_title">Lecture Vocale du Texte</string>
+    <string name="settings_broadcast_voice_desc">Lit chaque ligne affichée à voix haute et attend la fin de la lecture avant de passer à la ligne suivante</string>
 </resources>

@@ -680,4 +680,14 @@
     <string name="dashboard_sound_horizon">ขอบฟ้ายามค่ำคืนอันเงียบสงบ</string>
     <string name="dashboard_sound_chime">เสียงกระดิ่งแอมเบียนต์นุ่มนวล</string>
     <string name="dashboard_sound_volume_label">ระดับเสียง</string>
+    <string name="broadcast_theme_title">ธีมการจัดวางและการเคลื่อนไหวข้อความ</string>
+    <string name="broadcast_theme_desc">เลือกรูปแบบการเข้า-ออกของข้อความ ตำแหน่งบนหน้าจอ และกราฟิกประกอบรอบข้อความ</string>
+    <string name="broadcast_theme_studio_classic">เลื่อนด้านข้าง • แถบสตูดิโอ</string>
+    <string name="broadcast_theme_breaking_news">แถบข่าวด้านล่าง • เลื่อนขึ้น</string>
+    <string name="broadcast_theme_royal_cinema">ซูมโรงภาพยนตร์ • ขอบ Letterbox</string>
+    <string name="broadcast_theme_neon_cyber">พิมพ์ดีดไซเบอร์ • กรอบมุม HUD</string>
+    <string name="broadcast_theme_emerald_sport">พุ่งแนวทแยง • ไฟสปอตไลต์สนาม</string>
+    <string name="broadcast_theme_minimal_zen">ลอยนุ่มนวล • ตัวเลขพื้นหลัง</string>
+    <string name="settings_broadcast_voice_title">อ่านข้อความออกเสียง</string>
+    <string name="settings_broadcast_voice_desc">อ่านข้อความแต่ละบรรทัดที่แสดงออกเสียง และรอให้อ่านจบก่อนเปลี่ยนบรรทัดถัดไปหากหมดเวลาตั้งไว้ก่อน</string>
 </resources>

@@ -653,4 +653,14 @@
     <string name="dashboard_sound_horizon">Stiller Nachthorizont</string>
     <string name="dashboard_sound_chime">Sanftes Ambient-Klangspiel</string>
     <string name="dashboard_sound_volume_label">Lautstärke</string>
+    <string name="broadcast_theme_title">Layout- &amp; Bewegungs-Theme</string>
+    <string name="broadcast_theme_desc">Wähle Ein-/Ausblend-Animation, Bildschirmposition und umgebende Studio-Grafiken</string>
+    <string name="broadcast_theme_studio_classic">Studio-Gleitflug • Seitenbalken</string>
+    <string name="broadcast_theme_breaking_news">Nachrichtenpult • Bauchbinde</string>
+    <string name="broadcast_theme_royal_cinema">Kino-Zoom • Letterbox</string>
+    <string name="broadcast_theme_neon_cyber">Cyber-Tippen • HUD-Rahmen</string>
+    <string name="broadcast_theme_emerald_sport">Arena Diagonal • Scheinwerfer</string>
+    <string name="broadcast_theme_minimal_zen">Zen-Schweben • Index-Wasserzeichen</string>
+    <string name="settings_broadcast_voice_title">Broadcast-Text vorlesen</string>
+    <string name="settings_broadcast_voice_desc">Liest jede angezeigte Zeile vor und wartet bis zum Ende des Vorlesens, bevor zur nächsten Zeile gewechselt wird</string>
 </resources>

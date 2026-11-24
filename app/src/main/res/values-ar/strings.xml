@@ -681,4 +681,14 @@
     <string name="dashboard_sound_horizon">أفق ليلي هادئ</string>
     <string name="dashboard_sound_chime">رنين محيطي ناعم</string>
     <string name="dashboard_sound_volume_label">مستوى الصوت</string>
+    <string name="broadcast_theme_title">ثيم حركة وعرض النص الإعلامي</string>
+    <string name="broadcast_theme_desc">اختر طريقة دخول وخروج النص، تنسيق العرض على الشاشة، والعناصر البصرية المحيطة به</string>
+    <string name="broadcast_theme_studio_classic">انسياب جانبي • أعمدة استوديو</string>
+    <string name="broadcast_theme_breaking_news">شريط عاجل • صعود من الأسفل</string>
+    <string name="broadcast_theme_royal_cinema">إطار سينمائي • تقريب وتلاشي</string>
+    <string name="broadcast_theme_neon_cyber">كتابة رقمية • زوايا HUD</string>
+    <string name="broadcast_theme_emerald_sport">انطلاق قطري • أضواء ملاعب</string>
+    <string name="broadcast_theme_minimal_zen">طفو هادئ • ترقيم خلفي</string>
+    <string name="settings_broadcast_voice_title">قراءة النص الإعلامي صوتياً</string>
+    <string name="settings_broadcast_voice_desc">قراءة السطر المعروض صوتياً، والانتظار حتى انتهاء القراءة قبل الانتقال للسطر التالي إذا لم ينتهِ من القراءة بالوقت المحدد</string>
 </resources>

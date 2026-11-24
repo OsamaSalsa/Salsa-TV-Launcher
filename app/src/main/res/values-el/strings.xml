@@ -653,4 +653,14 @@
     <string name="dashboard_sound_horizon">Ήσυχος Νυχτερινός Ορίζοντας</string>
     <string name="dashboard_sound_chime">Απαλός Περιβαλλοντικός Ήχος</string>
     <string name="dashboard_sound_volume_label">Ένταση Ήχου</string>
+    <string name="broadcast_theme_title">Θέμα Διάταξης &amp; Κίνησης Κειμένου</string>
+    <string name="broadcast_theme_desc">Επιλέξτε κίνηση εισόδου/εξόδου κειμένου, θέση προβολής και γραφικά στούντιο</string>
+    <string name="broadcast_theme_studio_classic">Ολίσθηση Στούντιο • Πλαϊνές Μπάρες</string>
+    <string name="broadcast_theme_breaking_news">Δελτίο Ειδήσεων • Κάτω Μπάρα</string>
+    <string name="broadcast_theme_royal_cinema">Σινεμά Ζουμ • Μαύρες Λωρίδες</string>
+    <string name="broadcast_theme_neon_cyber">Ψηφιακή Γραφή • Γωνίες HUD</string>
+    <string name="broadcast_theme_emerald_sport">Διαγώνιο Στάδιο • Προβολείς</string>
+    <string name="broadcast_theme_minimal_zen">Ήρεμη Αιώρηση • Υδατογράφημα</string>
+    <string name="settings_broadcast_voice_title">Φωνητική Ανάγνωση Κειμένου</string>
+    <string name="settings_broadcast_voice_desc">Διαβάζει φωναχτά κάθε γραμμή και περιμένει να ολοκληρωθεί η ανάγνωση πριν αλλάξει γραμμή</string>
 </resources>

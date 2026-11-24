@@ -687,4 +687,14 @@
     <string name="dashboard_sound_horizon">शांत रात्रि क्षितिज</string>
     <string name="dashboard_sound_chime">सॉफ़्ट एम्बिएंट चाइम</string>
     <string name="dashboard_sound_volume_label">आवाज़ का स्तर</string>
+    <string name="broadcast_theme_title">टेक्स्ट लेआउट और मोशन थीम</string>
+    <string name="broadcast_theme_desc">टेक्स्ट के प्रवेश/निकास एनीमेशन, स्क्रीन स्थिति और आसपास के स्टूडियो ग्राफ़िक्स चुनें</string>
+    <string name="broadcast_theme_studio_classic">स्टूडियो स्लाइड • साइड बार्स</string>
+    <string name="broadcast_theme_breaking_news">न्यूज़ डेस्क • निचली पट्टी</string>
+    <string name="broadcast_theme_royal_cinema">सिनेमा ज़ूम • लेटरबॉक्स</string>
+    <string name="broadcast_theme_neon_cyber">साइबर टाइप • HUD फ्रेम</string>
+    <string name="broadcast_theme_emerald_sport">तिरछा अरीना • स्पॉटलाइट्स</string>
+    <string name="broadcast_theme_minimal_zen">ज़ेन फ्लोट • वॉटरमार्क अंक</string>
+    <string name="settings_broadcast_voice_title">ब्रॉडकास्ट टेक्स्ट ज़ोर से पढ़ें</string>
+    <string name="settings_broadcast_voice_desc">प्रदर्शित प्रत्येक पंक्ति को पढ़ता है और समय पूरा होने पर भी पढ़ने के समाप्त होने तक अगली पंक्ति पर नहीं जाता</string>
 </resources>

@@ -539,7 +539,7 @@ fun LauncherNavigation(
     }
 
     val timeoutMinutes = remember(screensaverTimeout) {
-        if (screensaverTimeout == "never") 0 else (screensaverTimeout.toIntOrNull() ?: 5)
+        if (screensaverTimeout == "never") 0 else (screensaverTimeout.toIntOrNull() ?: 10)
     }
 
     // If internal screensaver is ENABLED (timeoutMinutes > 0), keep window awake at all times so external/system screensavers NEVER run.

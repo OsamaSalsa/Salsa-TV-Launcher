@@ -646,4 +646,14 @@
     <string name="dashboard_sound_horizon">静寂のナイトホライズン</string>
     <string name="dashboard_sound_chime">ソフト・アンビエントチャイム</string>
     <string name="dashboard_sound_volume_label">音量</string>
+    <string name="broadcast_theme_title">放送テキストの配置・モーションテーマ</string>
+    <string name="broadcast_theme_desc">文字のイン・アウトの動き、画面配置、周囲のスタジオ演出グラフィックを選択します</string>
+    <string name="broadcast_theme_studio_classic">横スライド • サイドバー演出</string>
+    <string name="broadcast_theme_breaking_news">ニュースデスク • 下部テロップ上昇</string>
+    <string name="broadcast_theme_royal_cinema">シネマズーム • レターボックス枠</string>
+    <string name="broadcast_theme_neon_cyber">タイプライター • HUDフレーム</string>
+    <string name="broadcast_theme_emerald_sport">斜めスライド • スタジアム照明</string>
+    <string name="broadcast_theme_minimal_zen">静かな浮遊 • 背景インデックス</string>
+    <string name="settings_broadcast_voice_title">放送テキストの音声読み上げ</string>
+    <string name="settings_broadcast_voice_desc">表示中のテキストを音声で読み上げ、設定時間内に読み終わらない場合は完了まで次の行へ進みません</string>
 </resources>

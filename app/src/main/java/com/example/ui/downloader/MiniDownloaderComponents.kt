@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -45,6 +46,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.withTransform
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -141,7 +144,9 @@ internal fun extractFileName(
  * Virtual Mouse Pointer overlay component:
  * High-visibility pointer arrow with subtle shadow and click animation.
  * Uses [absoluteOffset] so its physical screen coordinates (x, y) always match
- * WebView touch event coordinates regardless of LTR or RTL layout direction.
+ * WebView touch event coordinates regardless of LTR or RTL layout direction,
+ * and flips inward near the right/bottom borders so the cursor remains visible
+ * even when its hotspot reaches the exact screen edges.
  */
 @Composable
 fun VirtualMousePointer(
@@ -152,17 +157,39 @@ fun VirtualMousePointer(
     androidx.compose.runtime.CompositionLocalProvider(
         androidx.compose.ui.platform.LocalLayoutDirection provides androidx.compose.ui.unit.LayoutDirection.Ltr
     ) {
-        Box(
+        BoxWithConstraints(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.TopStart
         ) {
+            val density = LocalDensity.current
+            val pointerSizeDp = 26.dp
+            val pointerSizePx = with(density) { pointerSizeDp.toPx() }
+            val maxWidthPx = constraints.maxWidth.toFloat()
+            val maxHeightPx = constraints.maxHeight.toFloat()
+
+            val flipHorizontal = maxWidthPx > 0f && x > maxWidthPx - pointerSizePx
+            val flipVertical = maxHeightPx > 0f && y > maxHeightPx - pointerSizePx
+
+            val offsetX = if (flipHorizontal) (x - pointerSizePx).roundToInt() else x.roundToInt()
+            val offsetY = if (flipVertical) (y - pointerSizePx).roundToInt() else y.roundToInt()
+
             Box(
                 modifier = Modifier
-                    .absoluteOffset { IntOffset(x.roundToInt(), y.roundToInt()) }
-                    .size(32.dp)
+                    .absoluteOffset { IntOffset(offsetX, offsetY) }
+                    .size(pointerSizeDp)
             ) {
                 Canvas(modifier = Modifier.fillMaxSize()) {
-                    drawMousePointer(isClicking)
+                    withTransform({
+                        if (flipHorizontal || flipVertical) {
+                            scale(
+                                scaleX = if (flipHorizontal) -1f else 1f,
+                                scaleY = if (flipVertical) -1f else 1f,
+                                pivot = androidx.compose.ui.geometry.Offset(size.width / 2f, size.height / 2f)
+                            )
+                        }
+                    }) {
+                        drawMousePointer(isClicking)
+                    }
                 }
             }
         }
@@ -171,25 +198,29 @@ fun VirtualMousePointer(
 
 private fun DrawScope.drawMousePointer(isClicking: Boolean) {
     val scale = if (isClicking) 0.88f else 1.0f
+    val s = size.minDimension * scale
+    val strokePx = 1.6.dp.toPx()
+    val shadowOffset = 1.8.dp.toPx()
+
     val path = Path().apply {
-        moveTo(0f * scale, 0f * scale)
-        lineTo(0f * scale, 24f * scale)
-        lineTo(6f * scale, 19f * scale)
-        lineTo(11f * scale, 29f * scale)
-        lineTo(15f * scale, 27f * scale)
-        lineTo(10f * scale, 17f * scale)
-        lineTo(18f * scale, 17f * scale)
+        moveTo(0f, 0f)
+        lineTo(0f, 0.82f * s)
+        lineTo(0.22f * s, 0.64f * s)
+        lineTo(0.38f * s, 0.96f * s)
+        lineTo(0.52f * s, 0.90f * s)
+        lineTo(0.36f * s, 0.58f * s)
+        lineTo(0.62f * s, 0.58f * s)
         close()
     }
 
     val shadowPath = Path().apply {
-        moveTo(1.5f * scale, 1.5f * scale)
-        lineTo(1.5f * scale, 25.5f * scale)
-        lineTo(7.5f * scale, 20.5f * scale)
-        lineTo(12.5f * scale, 30.5f * scale)
-        lineTo(16.5f * scale, 28.5f * scale)
-        lineTo(11.5f * scale, 18.5f * scale)
-        lineTo(19.5f * scale, 18.5f * scale)
+        moveTo(shadowOffset, shadowOffset)
+        lineTo(shadowOffset, 0.82f * s + shadowOffset)
+        lineTo(0.22f * s + shadowOffset, 0.64f * s + shadowOffset)
+        lineTo(0.38f * s + shadowOffset, 0.96f * s + shadowOffset)
+        lineTo(0.52f * s + shadowOffset, 0.90f * s + shadowOffset)
+        lineTo(0.36f * s + shadowOffset, 0.58f * s + shadowOffset)
+        lineTo(0.62f * s + shadowOffset, 0.58f * s + shadowOffset)
         close()
     }
 
@@ -199,7 +230,7 @@ private fun DrawScope.drawMousePointer(isClicking: Boolean) {
     drawPath(
         path,
         color = if (isClicking) Color.White else Color.Black,
-        style = androidx.compose.ui.graphics.drawscope.Stroke(width = 1.8f)
+        style = androidx.compose.ui.graphics.drawscope.Stroke(width = strokePx)
     )
 }
 

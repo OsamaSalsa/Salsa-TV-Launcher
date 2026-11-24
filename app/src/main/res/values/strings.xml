@@ -653,4 +653,14 @@
     <string name="dashboard_sound_horizon">Quiet Night Horizon</string>
     <string name="dashboard_sound_chime">Soft Ambient Chime</string>
     <string name="dashboard_sound_volume_label">Sound Volume</string>
+    <string name="broadcast_theme_title">Broadcast Layout &amp; Motion Theme</string>
+    <string name="broadcast_theme_desc">Choose text entrance/exit animation, screen placement, and surrounding studio graphics</string>
+    <string name="broadcast_theme_studio_classic">Studio Glide • Side Bars</string>
+    <string name="broadcast_theme_breaking_news">News Desk • Lower-Third</string>
+    <string name="broadcast_theme_royal_cinema">Cinema Zoom • Letterbox</string>
+    <string name="broadcast_theme_neon_cyber">Cyber Type • HUD Frame</string>
+    <string name="broadcast_theme_emerald_sport">Arena Diagonal • Spotlights</string>
+    <string name="broadcast_theme_minimal_zen">Zen Float • Index Watermark</string>
+    <string name="settings_broadcast_voice_title">Read Broadcast Text Aloud</string>
+    <string name="settings_broadcast_voice_desc">Read each displayed line aloud and wait until speech finishes before advancing to the next line if the timer ends early</string>
 </resources>

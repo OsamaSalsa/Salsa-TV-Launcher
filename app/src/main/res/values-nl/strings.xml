@@ -653,4 +653,14 @@
     <string name="dashboard_sound_horizon">Stille Nachthorizon</string>
     <string name="dashboard_sound_chime">Zachte Ambient Klokjes</string>
     <string name="dashboard_sound_volume_label">Geluidsvolume</string>
+    <string name="broadcast_theme_title">Indeling &amp; Bewegingsthema Tekstscherm</string>
+    <string name="broadcast_theme_desc">Kies de in- en uitgangsanimatie, schermpositie en omliggende studio-elementen</string>
+    <string name="broadcast_theme_studio_classic">Zijwaartse Schuif • Zijbalken</string>
+    <string name="broadcast_theme_breaking_news">Nieuwsdesk • Onderbalk Omhoog</string>
+    <string name="broadcast_theme_royal_cinema">Cinema Zoom • Letterbox-randen</string>
+    <string name="broadcast_theme_neon_cyber">Cyber Typemachine • HUD-hoeken</string>
+    <string name="broadcast_theme_emerald_sport">Diagonale Entree • Stadionlichten</string>
+    <string name="broadcast_theme_minimal_zen">Zacht Zweven • Achtergrondcijfer</string>
+    <string name="settings_broadcast_voice_title">Uitzendtekst Voorlezen</string>
+    <string name="settings_broadcast_voice_desc">Leest elke getoonde regel voor en wacht tot het voorlezen klaar is voordat de volgende regel verschijnt als de timer eerder afloopt</string>
 </resources>

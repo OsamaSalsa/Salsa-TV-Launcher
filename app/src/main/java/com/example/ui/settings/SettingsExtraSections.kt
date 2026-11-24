@@ -1,6 +1,7 @@
 package com.example.ui.settings
 
 import android.content.Context
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -50,7 +51,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
@@ -147,6 +155,8 @@ internal fun ScreensaverSettingsSection(
     broadcastMusicMode: String,
     broadcastCustomMusicUri: String,
     broadcastMusicVolume: Int,
+    broadcastTheme: String,
+    broadcastVoiceEnabled: Boolean,
     onShowTvFolderPicker: () -> Unit,
     onLaunchMultiPhotosPicker: () -> Unit,
     onLaunchMusicPicker: () -> Unit,
@@ -159,6 +169,9 @@ internal fun ScreensaverSettingsSection(
     var broadcastTextDraft by remember(broadcastTextLines) { mutableStateOf(broadcastTextLines) }
     var newBroadcastLineInput by remember { mutableStateOf("") }
     val defaultBroadcastLinesText = stringResource(R.string.broadcast_text_default_lines)
+    val activeBroadcastThemeSpec = remember(broadcastTheme) {
+        com.example.ui.home.resolveBroadcastThemeSpec(broadcastTheme)
+    }
 
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(14.dp),
@@ -503,6 +516,23 @@ internal fun ScreensaverSettingsSection(
             )
 
             item {
+                BroadcastThemeCard(
+                    selectedThemeId = activeBroadcastThemeSpec.id,
+                    onThemeSelected = { viewModel.setBroadcastTheme(it) }
+                )
+            }
+
+            item {
+                SettingToggleTile(
+                    title = stringResource(R.string.settings_broadcast_voice_title),
+                    desc = stringResource(R.string.settings_broadcast_voice_desc),
+                    isChecked = broadcastVoiceEnabled,
+                    onToggle = { viewModel.setBroadcastVoiceEnabled(!broadcastVoiceEnabled) },
+                    modifier = Modifier.testTag("screensaver_broadcast_voice_toggle")
+                )
+            }
+
+            item {
                 SettingsGlassCard {
                     SettingsCardHeader(
                         icon = Icons.Default.SmartDisplay,
@@ -609,8 +639,12 @@ internal fun ScreensaverSettingsSection(
                         Spacer(modifier = Modifier.height(8.dp))
                         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             activeParsedLines.forEachIndexed { idx, lineText ->
-                                val isYellow = idx % 2 == 1
-                                val lineColor = if (isYellow) Color(0xFFFFD60A) else Color.White
+                                val isSecondary = idx % 2 == 1
+                                val lineColor = if (isSecondary) {
+                                    activeBroadcastThemeSpec.secondaryColor
+                                } else {
+                                    activeBroadcastThemeSpec.primaryColor
+                                }
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
@@ -1053,6 +1087,211 @@ private fun DashboardSoftSoundCard(
                 selectedOption = soundVolume,
                 onOptionSelected = onSoundVolumeSelected
             )
+        }
+    }
+}
+
+@Composable
+private fun BroadcastThemeCard(
+    selectedThemeId: String,
+    onThemeSelected: (String) -> Unit
+) {
+    val themeOptions = listOf(
+        com.example.ui.home.BroadcastThemeIds.STUDIO_CLASSIC to R.string.broadcast_theme_studio_classic,
+        com.example.ui.home.BroadcastThemeIds.BREAKING_NEWS to R.string.broadcast_theme_breaking_news,
+        com.example.ui.home.BroadcastThemeIds.ROYAL_CINEMA to R.string.broadcast_theme_royal_cinema,
+        com.example.ui.home.BroadcastThemeIds.NEON_CYBER to R.string.broadcast_theme_neon_cyber,
+        com.example.ui.home.BroadcastThemeIds.EMERALD_SPORT to R.string.broadcast_theme_emerald_sport,
+        com.example.ui.home.BroadcastThemeIds.MINIMAL_ZEN to R.string.broadcast_theme_minimal_zen
+    )
+
+    SettingsGlassCard {
+        SettingsCardHeader(
+            icon = Icons.Default.AutoAwesome,
+            title = stringResource(R.string.broadcast_theme_title),
+            subtitle = stringResource(R.string.broadcast_theme_desc)
+        )
+        Spacer(modifier = Modifier.height(14.dp))
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            themeOptions.chunked(3).forEach { rowItems ->
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    rowItems.forEach { (themeId, labelRes) ->
+                        val spec = remember(themeId) {
+                            com.example.ui.home.resolveBroadcastThemeSpec(themeId)
+                        }
+                        val isSelected = selectedThemeId == themeId
+                        TvFocusableCard(
+                            onClick = { onThemeSelected(themeId) },
+                            scaleUpRatio = 1.03f,
+                            shape = RoundedCornerShape(14.dp),
+                            useDefaultBorder = false,
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(74.dp)
+                                .testTag("broadcast_theme_$themeId")
+                        ) { isFocused ->
+                            val borderColor = when {
+                                isFocused -> TvAccentGold
+                                isSelected -> spec.secondaryColor
+                                else -> Color.White.copy(alpha = 0.10f)
+                            }
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .clip(RoundedCornerShape(14.dp))
+                                    .background(
+                                        when {
+                                            isFocused -> spec.glowPrimary.copy(alpha = 0.24f)
+                                            isSelected -> spec.glowPrimary.copy(alpha = 0.16f)
+                                            else -> spec.backdropTint.copy(alpha = 0.85f)
+                                        }
+                                    )
+                                    .border(
+                                        width = if (isFocused || isSelected) 2.dp else 1.dp,
+                                        color = borderColor,
+                                        shape = RoundedCornerShape(14.dp)
+                                    )
+                                    .padding(horizontal = 10.dp, vertical = 8.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            ) {
+                                // Mini wireframe preview showing layout + surrounding broadcast elements
+                                BroadcastThemeMiniPreview(
+                                    spec = spec,
+                                    modifier = Modifier.size(width = 48.dp, height = 34.dp)
+                                )
+
+                                Text(
+                                    text = stringResource(labelRes),
+                                    color = if (isFocused || isSelected) TvTextPrimary else TvTextPrimary.copy(alpha = 0.88f),
+                                    fontSize = 12.sp,
+                                    lineHeight = 15.sp,
+                                    fontWeight = if (isSelected || isFocused) FontWeight.Bold else FontWeight.SemiBold,
+                                    maxLines = 2,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier.weight(1f)
+                                )
+
+                                if (isSelected) {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(19.dp)
+                                            .clip(CircleShape)
+                                            .background(spec.secondaryColor),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.Check,
+                                            contentDescription = null,
+                                            tint = Color.Black,
+                                            modifier = Modifier.size(12.dp)
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun BroadcastThemeMiniPreview(
+    spec: com.example.ui.home.BroadcastThemeSpec,
+    modifier: Modifier = Modifier
+) {
+    Canvas(
+        modifier = modifier
+            .clip(RoundedCornerShape(7.dp))
+            .border(1.dp, Color.White.copy(alpha = 0.14f), RoundedCornerShape(7.dp))
+    ) {
+        val w = size.width
+        val h = size.height
+        val palette = spec.backdropPalette
+        val p = spec.primaryColor
+        val s = spec.secondaryColor
+
+        // Theme-specific dark base gradient + contrasting color shadow glow preview
+        drawRect(
+            brush = Brush.linearGradient(
+                colors = listOf(palette.baseTop, palette.baseBottom),
+                start = Offset.Zero,
+                end = Offset(w, h)
+            )
+        )
+        drawCircle(
+            brush = Brush.radialGradient(
+                colors = listOf(palette.shadowColorPrimary.copy(alpha = 0.45f), Color.Transparent),
+                center = Offset(w * 0.25f, h * 0.30f),
+                radius = w * 0.55f
+            ),
+            center = Offset(w * 0.25f, h * 0.30f),
+            radius = w * 0.55f
+        )
+        drawCircle(
+            brush = Brush.radialGradient(
+                colors = listOf(palette.shadowColorContrast.copy(alpha = 0.48f), Color.Transparent),
+                center = Offset(w * 0.78f, h * 0.75f),
+                radius = w * 0.55f
+            ),
+            center = Offset(w * 0.78f, h * 0.75f),
+            radius = w * 0.55f
+        )
+        when (spec.layoutMode) {
+            com.example.ui.home.BroadcastLayoutMode.CENTER_STAGE -> {
+                drawLine(s, Offset(w * 0.18f, h * 0.25f), Offset(w * 0.18f, h * 0.75f), strokeWidth = 3f, cap = StrokeCap.Round)
+                drawLine(s.copy(alpha = 0.55f), Offset(w * 0.82f, h * 0.25f), Offset(w * 0.82f, h * 0.75f), strokeWidth = 3f, cap = StrokeCap.Round)
+                drawLine(p, Offset(w * 0.30f, h * 0.50f), Offset(w * 0.70f, h * 0.50f), strokeWidth = 4f, cap = StrokeCap.Round)
+            }
+            com.example.ui.home.BroadcastLayoutMode.LOWER_THIRD_DESK -> {
+                drawRoundRect(
+                    color = s.copy(alpha = 0.88f),
+                    topLeft = Offset(w * 0.10f, h * 0.50f),
+                    size = Size(w * 0.80f, h * 0.14f),
+                    cornerRadius = CornerRadius(3f, 3f)
+                )
+                drawRoundRect(
+                    color = p.copy(alpha = 0.22f),
+                    topLeft = Offset(w * 0.10f, h * 0.64f),
+                    size = Size(w * 0.80f, h * 0.24f),
+                    cornerRadius = CornerRadius(3f, 3f)
+                )
+                drawLine(p, Offset(w * 0.20f, h * 0.76f), Offset(w * 0.72f, h * 0.76f), strokeWidth = 3f, cap = StrokeCap.Round)
+            }
+            com.example.ui.home.BroadcastLayoutMode.CINEMA_LETTERBOX -> {
+                drawRect(Color.Black, topLeft = Offset.Zero, size = Size(w, h * 0.20f))
+                drawRect(Color.Black, topLeft = Offset(0f, h * 0.80f), size = Size(w, h * 0.20f))
+                drawLine(s, Offset(0f, h * 0.20f), Offset(w, h * 0.20f), strokeWidth = 1.5f)
+                drawLine(s, Offset(0f, h * 0.80f), Offset(w, h * 0.80f), strokeWidth = 1.5f)
+                drawLine(p, Offset(w * 0.24f, h * 0.50f), Offset(w * 0.76f, h * 0.50f), strokeWidth = 3.5f, cap = StrokeCap.Round)
+            }
+            com.example.ui.home.BroadcastLayoutMode.HUD_VIEWFINDER -> {
+                val b = w * 0.18f
+                drawLine(p, Offset(w * 0.14f, h * 0.22f), Offset(w * 0.14f + b, h * 0.22f), strokeWidth = 2.5f)
+                drawLine(p, Offset(w * 0.14f, h * 0.22f), Offset(w * 0.14f, h * 0.22f + b), strokeWidth = 2.5f)
+                drawLine(s, Offset(w * 0.86f - b, h * 0.22f), Offset(w * 0.86f, h * 0.22f), strokeWidth = 2.5f)
+                drawLine(s, Offset(w * 0.86f, h * 0.22f), Offset(w * 0.86f, h * 0.22f + b), strokeWidth = 2.5f)
+                drawLine(s, Offset(w * 0.14f, h * 0.78f - b), Offset(w * 0.14f, h * 0.78f), strokeWidth = 2.5f)
+                drawLine(s, Offset(w * 0.14f, h * 0.78f), Offset(w * 0.14f + b, h * 0.78f), strokeWidth = 2.5f)
+                drawLine(p, Offset(w * 0.86f - b, h * 0.78f), Offset(w * 0.86f, h * 0.78f), strokeWidth = 2.5f)
+                drawLine(p, Offset(w * 0.86f, h * 0.78f - b), Offset(w * 0.86f, h * 0.78f), strokeWidth = 2.5f)
+                drawLine(p, Offset(w * 0.30f, h * 0.50f), Offset(w * 0.70f, h * 0.50f), strokeWidth = 3f, cap = StrokeCap.Round)
+            }
+            com.example.ui.home.BroadcastLayoutMode.DIAGONAL_ARENA -> {
+                drawLine(s, Offset(w * 0.16f, h * 0.72f), Offset(w * 0.26f, h * 0.28f), strokeWidth = 3.5f, cap = StrokeCap.Round)
+                drawLine(s, Offset(w * 0.74f, h * 0.72f), Offset(w * 0.84f, h * 0.28f), strokeWidth = 3.5f, cap = StrokeCap.Round)
+                drawLine(p, Offset(w * 0.34f, h * 0.50f), Offset(w * 0.66f, h * 0.50f), strokeWidth = 4f, cap = StrokeCap.Round)
+            }
+            com.example.ui.home.BroadcastLayoutMode.EDITORIAL_MINIMAL -> {
+                drawCircle(s.copy(alpha = 0.85f), radius = 3.5f, center = Offset(w * 0.50f, h * 0.32f))
+                drawLine(p, Offset(w * 0.28f, h * 0.54f), Offset(w * 0.72f, h * 0.54f), strokeWidth = 3.5f, cap = StrokeCap.Round)
+                drawLine(s.copy(alpha = 0.65f), Offset(w * 0.38f, h * 0.72f), Offset(w * 0.62f, h * 0.72f), strokeWidth = 2f, cap = StrokeCap.Round)
+            }
         }
     }
 }

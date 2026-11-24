@@ -660,4 +660,14 @@
     <string name="dashboard_sound_horizon">Orizzonte Notturno Sereno</string>
     <string name="dashboard_sound_chime">Campanelli Ambientali Morbidi</string>
     <string name="dashboard_sound_volume_label">Volume Suono</string>
+    <string name="broadcast_theme_title">Tema Movimento e Layout Testo</string>
+    <string name="broadcast_theme_desc">Scegli animazione di ingresso/uscita del testo, posizione sullo schermo ed elementi grafici intorno</string>
+    <string name="broadcast_theme_studio_classic">Scorrimento Studio • Barre Laterali</string>
+    <string name="broadcast_theme_breaking_news">Barra Notizie • Sottopancia</string>
+    <string name="broadcast_theme_royal_cinema">Zoom Cinema • Bande Letterbox</string>
+    <string name="broadcast_theme_neon_cyber">Scrittura Cyber • Cornice HUD</string>
+    <string name="broadcast_theme_emerald_sport">Ingresso Diagonale • Riflettori</string>
+    <string name="broadcast_theme_minimal_zen">Fluttuazione Zen • Numero Sfondo</string>
+    <string name="settings_broadcast_voice_title">Lettura Vocale del Testo</string>
+    <string name="settings_broadcast_voice_desc">Legge ad alta voce ogni riga mostrata e attende il termine della lettura prima di passare alla riga successiva</string>
 </resources>

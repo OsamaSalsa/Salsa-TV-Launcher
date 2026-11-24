@@ -687,4 +687,14 @@
     <string name="dashboard_sound_horizon">Sessiz Gece Ufku</string>
     <string name="dashboard_sound_chime">Yumuşak Ortam Çanı</string>
     <string name="dashboard_sound_volume_label">Ses Seviyesi</string>
+    <string name="broadcast_theme_title">Yayın Yerleşimi ve Hareket Teması</string>
+    <string name="broadcast_theme_desc">Metin giriş/çıkış animasyonunu, ekran konumunu ve çevresindeki stüdyo grafiklerini seçin</string>
+    <string name="broadcast_theme_studio_classic">Yatay Kayış • Yan Çubuklar</string>
+    <string name="broadcast_theme_breaking_news">Haber Masası • Alttan Yükseliş</string>
+    <string name="broadcast_theme_royal_cinema">Sinema Yakınlaşma • Letterbox</string>
+    <string name="broadcast_theme_neon_cyber">Siber Daktilo • HUD Köşeler</string>
+    <string name="broadcast_theme_emerald_sport">Çapraz Giriş • Stat Işıkları</string>
+    <string name="broadcast_theme_minimal_zen">Sakin Süzülüş • Arka Sıra No</string>
+    <string name="settings_broadcast_voice_title">Yayın Metnini Sesli Oku</string>
+    <string name="settings_broadcast_voice_desc">Ekrandaki her satırı sesli okur ve süre dolsa bile okuma bitene kadar bir sonraki satıra geçmez</string>
 </resources>

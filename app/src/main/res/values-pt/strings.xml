@@ -694,4 +694,14 @@
     <string name="dashboard_sound_horizon">Horizonte Noturno Tranquilo</string>
     <string name="dashboard_sound_chime">Sinos Ambientais Suaves</string>
     <string name="dashboard_sound_volume_label">Volume do Som</string>
+    <string name="broadcast_theme_title">Tema de Layout e Movimento do Texto</string>
+    <string name="broadcast_theme_desc">Escolha a animação de entrada/saída do texto, o posicionamento na tela e os elementos gráficos ao redor</string>
+    <string name="broadcast_theme_studio_classic">Deslize Lateral • Barras de Estúdio</string>
+    <string name="broadcast_theme_breaking_news">Bancada de Notícias • Rodapé Inferior</string>
+    <string name="broadcast_theme_royal_cinema">Zoom de Cinema • Barras Letterbox</string>
+    <string name="broadcast_theme_neon_cyber">Digitação Cyber • Moldura HUD</string>
+    <string name="broadcast_theme_emerald_sport">Entrada Diagonal • Holofotes</string>
+    <string name="broadcast_theme_minimal_zen">Flutuação Suave • Índice ao Fundo</string>
+    <string name="settings_broadcast_voice_title">Ler Texto de Transmissão em Voz Alta</string>
+    <string name="settings_broadcast_voice_desc">Lê cada linha exibida em voz alta e aguarda o término da leitura antes de avançar se o tempo acabar antes</string>
 </resources>

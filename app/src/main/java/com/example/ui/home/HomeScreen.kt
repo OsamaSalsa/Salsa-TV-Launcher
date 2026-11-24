@@ -202,7 +202,7 @@ fun HomeScreen(
 
     // In-app inactivity sleep / screensaver timer
     val timeoutMinutes = remember(screensaverTimeout) {
-        if (screensaverTimeout == "never") 0 else (screensaverTimeout.toIntOrNull() ?: 5)
+        if (screensaverTimeout == "never") 0 else (screensaverTimeout.toIntOrNull() ?: 10)
     }
 
     LaunchedEffect(screensaverTimeout, timeoutMinutes, showAmbientMode, isPlaybackActive, isActivityResumed, showLiveUiSettings) {

@@ -699,4 +699,14 @@
     <string name="dashboard_sound_horizon">Тихий ночной горизонт</string>
     <string name="dashboard_sound_chime">Мягкий эмбиент-перезвон</string>
     <string name="dashboard_sound_volume_label">Громкость звука</string>
+    <string name="broadcast_theme_title">Тема макета и анимации текста</string>
+    <string name="broadcast_theme_desc">Выберите анимацию появления и исчезновения текста, расположение на экране и графику вокруг</string>
+    <string name="broadcast_theme_studio_classic">Боковое скольжение • Полосы студии</string>
+    <string name="broadcast_theme_breaking_news">Нижняя плашка • Выезд снизу</string>
+    <string name="broadcast_theme_royal_cinema">Кино-зум • Полосы Letterbox</string>
+    <string name="broadcast_theme_neon_cyber">Печатный ввод • Рамка HUD</string>
+    <string name="broadcast_theme_emerald_sport">Диагональный вход • Прожекторы</string>
+    <string name="broadcast_theme_minimal_zen">Плавное парение • Номер на фоне</string>
+    <string name="settings_broadcast_voice_title">Озвучивать текст на экране</string>
+    <string name="settings_broadcast_voice_desc">Читает каждую строку вслух и ждёт окончания озвучки перед переходом к следующей, если таймер истёк раньше</string>
 </resources>

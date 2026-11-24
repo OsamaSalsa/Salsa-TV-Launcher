@@ -334,4 +334,153 @@ class ExampleUnitTest {
             assertTrue("Preset $mode must remain soft without clipping (peak=$peak)", peak < Short.MAX_VALUE)
         }
     }
+
+    @Test
+    fun `broadcast text themes provide six distinct motions layouts frames and clean fallback`() {
+        val themeIds = listOf(
+            com.example.ui.home.BroadcastThemeIds.STUDIO_CLASSIC,
+            com.example.ui.home.BroadcastThemeIds.BREAKING_NEWS,
+            com.example.ui.home.BroadcastThemeIds.ROYAL_CINEMA,
+            com.example.ui.home.BroadcastThemeIds.NEON_CYBER,
+            com.example.ui.home.BroadcastThemeIds.EMERALD_SPORT,
+            com.example.ui.home.BroadcastThemeIds.MINIMAL_ZEN
+        )
+        val specs = themeIds.map { com.example.ui.home.resolveBroadcastThemeSpec(it) }
+        assertEquals(6, specs.map { it.id }.toSet().size)
+        assertEquals(6, specs.map { it.secondaryColor }.toSet().size)
+        assertEquals(6, specs.map { it.motionStyle }.toSet().size)
+        assertEquals(6, specs.map { it.layoutMode }.toSet().size)
+        assertEquals(6, specs.map { it.frameStyle }.toSet().size)
+        assertEquals(6, specs.map { it.backdropPalette.baseTop }.toSet().size)
+        assertEquals(6, specs.map { it.backdropPalette.shiftTop }.toSet().size)
+        assertEquals(6, specs.map { it.backdropPalette.shadowColorContrast }.toSet().size)
+        assertTrue(specs.all { it.backdropPalette.shadowColorPrimary != it.backdropPalette.shadowColorContrast })
+        assertTrue(specs.first { it.id == com.example.ui.home.BroadcastThemeIds.NEON_CYBER }.showCyberGrid)
+        assertFalse(specs.first { it.id == com.example.ui.home.BroadcastThemeIds.STUDIO_CLASSIC }.showCyberGrid)
+        assertEquals(
+            com.example.ui.home.BroadcastThemeIds.STUDIO_CLASSIC,
+            com.example.ui.home.resolveBroadcastThemeSpec("unknown_theme").id
+        )
+    }
+
+    @Test
+    fun `broadcast voice wait and typewriter codepoint helpers behave cleanly`() {
+        assertTrue(com.example.ui.home.shouldWaitForBroadcastLineSpeech(isVoiceEnabled = true, speechCompleted = false))
+        assertFalse(com.example.ui.home.shouldWaitForBroadcastLineSpeech(isVoiceEnabled = true, speechCompleted = true))
+        assertFalse(com.example.ui.home.shouldWaitForBroadcastLineSpeech(isVoiceEnabled = false, speechCompleted = false))
+
+        assertEquals(
+            "broadcast_2_${"أهلاً بكم".hashCode()}",
+            com.example.ui.home.buildBroadcastSpeechKey(2, "أهلاً بكم")
+        )
+
+        val arabicWithEmoji = "مرحبا 🎬 بكم"
+        assertEquals("", com.example.ui.home.takeBroadcastCodePoints(arabicWithEmoji, 0f))
+        assertEquals(arabicWithEmoji, com.example.ui.home.takeBroadcastCodePoints(arabicWithEmoji, 1f))
+        val half = com.example.ui.home.takeBroadcastCodePoints(arabicWithEmoji, 0.6f)
+        assertTrue(half.isNotEmpty() && half.length < arabicWithEmoji.length)
+        // Ensure no dangling high surrogate
+        assertFalse(Character.isHighSurrogate(half.last()))
+    }
+
+    @Test
+    fun `remote select and menu key helpers recognize tv dpad and menu buttons`() {
+        assertTrue(com.example.ui.common.isRemoteSelectKey(android.view.KeyEvent.KEYCODE_DPAD_CENTER))
+        assertTrue(com.example.ui.common.isRemoteSelectKey(android.view.KeyEvent.KEYCODE_ENTER))
+        assertTrue(com.example.ui.common.isRemoteSelectKey(android.view.KeyEvent.KEYCODE_NUMPAD_ENTER))
+        assertTrue(com.example.ui.common.isRemoteSelectKey(android.view.KeyEvent.KEYCODE_BUTTON_A))
+        assertFalse(com.example.ui.common.isRemoteSelectKey(android.view.KeyEvent.KEYCODE_DPAD_LEFT))
+
+        assertTrue(com.example.ui.common.isRemoteMenuKey(android.view.KeyEvent.KEYCODE_MENU))
+        assertTrue(com.example.ui.common.isRemoteMenuKey(android.view.KeyEvent.KEYCODE_SETTINGS))
+        assertFalse(com.example.ui.common.isRemoteMenuKey(android.view.KeyEvent.KEYCODE_DPAD_CENTER))
+    }
+
+    @Test
+    fun `virtual mouse reaches exact top bottom left and right borders before scrolling`() {
+        val width = 1920f
+        val height = 1080f
+        val step = 50f
+
+        // Moving UP from inside top 120px must still move cursor all the way to 0f (top border)
+        val upIntoTopBar = com.example.ui.common.stepVirtualMouse(
+            currentX = 960f,
+            currentY = 90f,
+            viewportWidth = width,
+            viewportHeight = height,
+            direction = com.example.ui.common.VirtualMouseDirection.UP,
+            stepPx = step,
+            scrollStepPx = 220,
+            canScrollInDirection = true
+        )
+        assertEquals(40f, upIntoTopBar.nextY, 0.01f)
+        assertEquals(0, upIntoTopBar.scrollDy)
+
+        val upToExactTop = com.example.ui.common.stepVirtualMouse(
+            currentX = 960f,
+            currentY = upIntoTopBar.nextY,
+            viewportWidth = width,
+            viewportHeight = height,
+            direction = com.example.ui.common.VirtualMouseDirection.UP,
+            stepPx = step,
+            scrollStepPx = 220,
+            canScrollInDirection = true
+        )
+        assertEquals(0f, upToExactTop.nextY, 0.01f)
+        assertEquals(0, upToExactTop.scrollDy)
+
+        // Pressing UP once already at 0f scrolls upward cleanly
+        val scrollUpAtTop = com.example.ui.common.stepVirtualMouse(
+            currentX = 960f,
+            currentY = 0f,
+            viewportWidth = width,
+            viewportHeight = height,
+            direction = com.example.ui.common.VirtualMouseDirection.UP,
+            stepPx = step,
+            scrollStepPx = 220,
+            canScrollInDirection = true
+        )
+        assertEquals(0f, scrollUpAtTop.nextY, 0.01f)
+        assertEquals(-220, scrollUpAtTop.scrollDy)
+        assertFalse(scrollUpAtTop.reachedEdgeBeyondLimit)
+
+        // Moving DOWN from inside bottom 140px must reach height - 2f (exact bottom edge)
+        val downToEdge = com.example.ui.common.stepVirtualMouse(
+            currentX = 960f,
+            currentY = height - 40f,
+            viewportWidth = width,
+            viewportHeight = height,
+            direction = com.example.ui.common.VirtualMouseDirection.DOWN,
+            stepPx = step,
+            scrollStepPx = 220,
+            canScrollInDirection = false
+        )
+        assertEquals(height - 2f, downToEdge.nextY, 0.01f)
+        assertEquals(0, downToEdge.scrollDy)
+
+        // Left & Right borders reach 0f and width - 2f
+        val leftToEdge = com.example.ui.common.stepVirtualMouse(
+            currentX = 8f,
+            currentY = 500f,
+            viewportWidth = width,
+            viewportHeight = height,
+            direction = com.example.ui.common.VirtualMouseDirection.LEFT,
+            stepPx = step,
+            scrollStepPx = 220,
+            canScrollInDirection = false
+        )
+        assertEquals(0f, leftToEdge.nextX, 0.01f)
+
+        val rightToEdge = com.example.ui.common.stepVirtualMouse(
+            currentX = width - 8f,
+            currentY = 500f,
+            viewportWidth = width,
+            viewportHeight = height,
+            direction = com.example.ui.common.VirtualMouseDirection.RIGHT,
+            stepPx = step,
+            scrollStepPx = 220,
+            canScrollInDirection = false
+        )
+        assertEquals(width - 2f, rightToEdge.nextX, 0.01f)
+    }
 }

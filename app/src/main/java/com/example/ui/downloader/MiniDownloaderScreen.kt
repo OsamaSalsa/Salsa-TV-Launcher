@@ -7,9 +7,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import android.os.SystemClock
 import android.view.KeyEvent
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.CookieManager
@@ -84,13 +82,20 @@ import androidx.core.content.FileProvider
 import com.example.R
 import com.example.ui.common.BindWebViewLifecycle
 import com.example.ui.common.TvFocusableCard
+import com.example.ui.common.VirtualMouseDirection
+import com.example.ui.common.clampVirtualMousePosition
+import com.example.ui.common.dispatchVirtualMouseClick
+import com.example.ui.common.dispatchVirtualMouseHover
 import com.example.ui.common.findActivityContext
 import com.example.ui.common.grantSafeWebPermissions
 import com.example.ui.common.hardenWebView
 import com.example.ui.common.injectWebViewStabilityShim
 import com.example.ui.common.isWebViewDestroyed
 import com.example.ui.common.postOnMain
+import com.example.ui.common.resolveVirtualMouseScrollStepPx
+import com.example.ui.common.resolveVirtualMouseStepPx
 import com.example.ui.common.safeDestroyWebView
+import com.example.ui.common.stepVirtualMouse
 import com.example.ui.theme.TvAccentGold
 import com.example.ui.theme.TvAccentGold
 import com.example.ui.theme.TvMidnightBackground
@@ -1312,31 +1317,79 @@ fun BrowserScreen(
         }
     }
 
-    // Screen dimensions and Virtual Mouse position
-    var screenWidthPx by remember { mutableFloatStateOf(1920f) }
-    var screenHeightPx by remember { mutableFloatStateOf(1080f) }
+    // Viewport dimensions and Virtual Mouse position (matched 1:1 to WebView box)
+    var viewportWidthPx by remember { mutableFloatStateOf(1920f) }
+    var viewportHeightPx by remember { mutableFloatStateOf(1000f) }
     var cursorX by remember { mutableFloatStateOf(960f) }
-    var cursorY by remember { mutableFloatStateOf(540f) }
+    var cursorY by remember { mutableFloatStateOf(500f) }
     var isCursorClicking by remember { mutableStateOf(false) }
 
-    val cursorStep = 65f
-    val scrollStep = 220f.toInt()
+    val browserViewportFocusRequester = remember { FocusRequester() }
+    val topBarFocusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(Unit) {
+        try { browserViewportFocusRequester.requestFocus() } catch (_: Exception) {}
+    }
+
+    fun effectiveViewportSize(): Pair<Float, Float> {
+        val w = webViewRef?.width?.takeIf { it > 0 }?.toFloat() ?: viewportWidthPx
+        val h = webViewRef?.height?.takeIf { it > 0 }?.toFloat() ?: viewportHeightPx
+        return w.coerceAtLeast(1f) to h.coerceAtLeast(1f)
+    }
+
+    LaunchedEffect(viewportWidthPx, viewportHeightPx, webViewRef) {
+        val (vw, vh) = effectiveViewportSize()
+        val (cx, cy) = clampVirtualMousePosition(cursorX, cursorY, vw, vh)
+        cursorX = cx
+        cursorY = cy
+    }
 
     fun dispatchClickAtCursor() {
         val webView = webViewRef ?: return
-        if (isWebViewDestroyed(webView)) return
         isCursorClicking = true
-        val downTime = SystemClock.uptimeMillis()
-        val downEvent = MotionEvent.obtain(downTime, downTime, MotionEvent.ACTION_DOWN, cursorX, cursorY, 0)
-        val upEvent = MotionEvent.obtain(downTime, downTime + 45, MotionEvent.ACTION_UP, cursorX, cursorY, 0)
-        webView.dispatchTouchEvent(downEvent)
-        webView.dispatchTouchEvent(upEvent)
-        downEvent.recycle()
-        upEvent.recycle()
-        postOnMain(120L) { isCursorClicking = false }
+        val dispatched = dispatchVirtualMouseClick(webView, cursorX, cursorY) {
+            isCursorClicking = false
+        }
+        if (!dispatched) {
+            isCursorClicking = false
+        }
     }
 
-    BoxWithConstraints(
+    fun moveOrScrollCursor(direction: VirtualMouseDirection, repeatCount: Int) {
+        val webView = webViewRef
+        val (vw, vh) = effectiveViewportSize()
+        val canScroll = when (direction) {
+            VirtualMouseDirection.LEFT -> webView?.canScrollHorizontally(-1) == true
+            VirtualMouseDirection.RIGHT -> webView?.canScrollHorizontally(1) == true
+            VirtualMouseDirection.UP -> webView?.canScrollVertically(-1) == true
+            VirtualMouseDirection.DOWN -> webView?.canScrollVertically(1) == true
+        }
+        val stepResult = stepVirtualMouse(
+            currentX = cursorX,
+            currentY = cursorY,
+            viewportWidth = vw,
+            viewportHeight = vh,
+            direction = direction,
+            stepPx = resolveVirtualMouseStepPx(vw, vh, repeatCount),
+            scrollStepPx = resolveVirtualMouseScrollStepPx(vh),
+            canScrollInDirection = canScroll
+        )
+        if (direction == VirtualMouseDirection.UP &&
+            stepResult.reachedEdgeBeyondLimit &&
+            repeatCount == 0
+        ) {
+            try { topBarFocusRequester.requestFocus() } catch (_: Exception) {}
+            return
+        }
+        cursorX = stepResult.nextX
+        cursorY = stepResult.nextY
+        if (stepResult.scrollDx != 0 || stepResult.scrollDy != 0) {
+            webView?.scrollBy(stepResult.scrollDx, stepResult.scrollDy)
+        }
+        dispatchVirtualMouseHover(webView, cursorX, cursorY)
+    }
+
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
@@ -1346,36 +1399,6 @@ fun BrowserScreen(
                     when (native.keyCode) {
                         KeyEvent.KEYCODE_POUND -> {
                             onGoToKeypad()
-                            true
-                        }
-                        KeyEvent.KEYCODE_DPAD_LEFT -> {
-                            cursorX = (cursorX - cursorStep).coerceAtLeast(10f)
-                            true
-                        }
-                        KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                            cursorX = (cursorX + cursorStep).coerceAtMost(screenWidthPx - 10f)
-                            true
-                        }
-                        KeyEvent.KEYCODE_DPAD_UP -> {
-                            // "عند الذهاب للاعلى يبدأ بالتصفح للأعلى"
-                            if (cursorY <= 120f) {
-                                webViewRef?.scrollBy(0, -scrollStep)
-                            } else {
-                                cursorY = (cursorY - cursorStep).coerceAtLeast(10f)
-                            }
-                            true
-                        }
-                        KeyEvent.KEYCODE_DPAD_DOWN -> {
-                            // "و عند الذهاب للاسفل و تحريك الفار للاسفل اكثر يبداء بالتصفح بالاسفل"
-                            if (cursorY >= screenHeightPx - 140f) {
-                                webViewRef?.scrollBy(0, scrollStep)
-                            } else {
-                                cursorY = (cursorY + cursorStep).coerceAtMost(screenHeightPx - 10f)
-                            }
-                            true
-                        }
-                        KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
-                            dispatchClickAtCursor()
                             true
                         }
                         KeyEvent.KEYCODE_BACK -> {
@@ -1393,193 +1416,21 @@ fun BrowserScreen(
                 } else false
             }
     ) {
-        val density = androidx.compose.ui.platform.LocalDensity.current
-        screenWidthPx = with(density) { maxWidth.toPx() }
-        screenHeightPx = with(density) { maxHeight.toPx() }
-
-        // WebView
-        androidx.compose.runtime.key(crashCount) {
-            AndroidView(
-                factory = { ctx ->
-                    WebView(ctx.findActivityContext()).apply {
-                        layoutParams = ViewGroup.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.MATCH_PARENT
-                        )
-                        isFocusable = true
-                        isFocusableInTouchMode = true
-                        isClickable = true
-
-                        settings.apply {
-                            javaScriptEnabled = true
-                            domStorageEnabled = true
-                            mediaPlaybackRequiresUserGesture = false
-                            useWideViewPort = true
-                            loadWithOverviewMode = true
-                            setSupportZoom(true)
-                            builtInZoomControls = true
-                            displayZoomControls = false
-                            allowFileAccess = true
-                            allowContentAccess = true
-                            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-                            userAgentString = "Mozilla/5.0 (Linux; Android 10; TV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Downloader/1.4.3"
-                            safeBrowsingEnabled = false
-                        }
-
-                        CookieManager.getInstance().let { cm ->
-                            cm.setAcceptCookie(true)
-                            cm.setAcceptThirdPartyCookies(this, true)
-                        }
-
-                        hardenWebView(this)
-
-                        webChromeClient = object : WebChromeClient() {
-                            override fun onPermissionRequest(request: PermissionRequest?) {
-                                grantSafeWebPermissions(request)
-                            }
-                        }
-
-                        webViewClient = object : WebViewClient() {
-                            override fun onRenderProcessGone(view: WebView?, detail: RenderProcessGoneDetail?): Boolean {
-                                safeDestroyWebView(view, rendererGone = true)
-                                if (webViewRef === view) webViewRef = null
-                                postOnMain(300L) {
-                                    try {
-                                        Toast.makeText(ctx, ctx.getString(R.string.mini_downloader_browser_crash), Toast.LENGTH_SHORT).show()
-                                    } catch (_: Exception) {}
-                                    onGoToKeypad()
-                                }
-                                return true
-                            }
-
-                        override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-                            val rawUrl = request?.url?.toString() ?: return false
-                            if (com.example.ui.common.DownloadUrlResolver.shouldInterceptAsDownload(rawUrl)) {
-                                onRequestDownload(
-                                    com.example.ui.common.DownloadUrlResolver.normalizeInitialDownloadUrl(rawUrl),
-                                    view?.settings?.userAgentString,
-                                    null,
-                                    "application/vnd.android.package-archive",
-                                    currentDisplayUrl
-                                )
-                                return true
-                            }
-                            if (rawUrl.startsWith("intent://", ignoreCase = true)) {
-                                val unwrapped = com.example.ui.common.DownloadUrlResolver.unwrapIntentUrl(rawUrl)
-                                if (unwrapped != rawUrl && (unwrapped.startsWith("http://", ignoreCase = true) || unwrapped.startsWith("https://", ignoreCase = true))) {
-                                    view?.loadUrl(unwrapped)
-                                    return true
-                                }
-                                return true
-                            }
-                            return false
-                        }
-
-                        override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: android.webkit.WebResourceError?) {
-                            super.onReceivedError(view, request, error)
-                            if (request?.isForMainFrame == true) {
-                                val failingUrl = request.url?.toString() ?: ""
-                                if (com.example.ui.common.DownloadUrlResolver.shouldInterceptAsDownload(failingUrl)) {
-                                    onRequestDownload(
-                                        com.example.ui.common.DownloadUrlResolver.normalizeInitialDownloadUrl(failingUrl),
-                                        view?.settings?.userAgentString,
-                                        null,
-                                        "application/vnd.android.package-archive",
-                                        currentDisplayUrl
-                                    )
-                                } else if (failingUrl.startsWith("https://", ignoreCase = true)) {
-                                    val fallbackHttp = failingUrl.replaceFirst("https://", "http://", ignoreCase = true)
-                                    view?.loadUrl(fallbackHttp)
-                                } else if (failingUrl.startsWith("http://", ignoreCase = true)) {
-                                    val fallbackHttps = failingUrl.replaceFirst("http://", "https://", ignoreCase = true)
-                                    view?.loadUrl(fallbackHttps)
-                                }
-                            }
-                        }
-
-                        override fun onPageStarted(view: WebView?, startedUrl: String?, favicon: Bitmap?) {
-                            super.onPageStarted(view, startedUrl, favicon)
-                            injectWebViewStabilityShim(view, disableWebGl = true)
-                            com.example.ui.common.DownloadUrlResolver.injectPopupAndBlankTargetShim(view)
-                            isLoading = true
-                            startedUrl?.let { currentDisplayUrl = it }
-                        }
-
-                        override fun onPageFinished(view: WebView?, finishedUrl: String?) {
-                            super.onPageFinished(view, finishedUrl)
-                            injectWebViewStabilityShim(view, disableWebGl = true)
-                            com.example.ui.common.DownloadUrlResolver.injectPopupAndBlankTargetShim(view)
-                            isLoading = false
-                            finishedUrl?.let { currentDisplayUrl = it }
-
-                            // Auto-fast-forward aftvnews countdown and prevent pausing
-                            if (finishedUrl?.contains("aftvnews.com", ignoreCase = true) == true ||
-                                finishedUrl?.contains("aftv.news", ignoreCase = true) == true
-                            ) {
-                                view?.evaluateJavascript(
-                                    """
-                                    (function() {
-                                        try {
-                                            if (typeof seconds !== 'undefined') {
-                                                seconds = 0;
-                                            }
-                                            if (typeof paused !== 'undefined') {
-                                                paused = false;
-                                            }
-                                            var link = document.querySelector('#redirect_message a') || document.querySelector('#redirect_noscript a');
-                                            if (link && link.href) {
-                                                window.location.href = link.href;
-                                            }
-                                        } catch(e) {}
-                                    })();
-                                    """.trimIndent(),
-                                    null
-                                )
-                            }
-                        }
-                    }
-
-                    setDownloadListener { dUrl, userAgent, contentDisposition, mimetype, _ ->
-                        val effectiveUa = if (!userAgent.isNullOrBlank()) userAgent else settings.userAgentString
-                        onRequestDownload(dUrl, effectiveUa, contentDisposition, mimetype, currentDisplayUrl)
-                    }
-
-                    val targetUrl = currentDisplayUrl.ifBlank { url }
-                    loadUrl(targetUrl)
-                    lastLoadedUrl = targetUrl
-                    webViewRef = this
-                }
-            },
-            update = { webView ->
-                webViewRef = webView
-            },
-            onRelease = { webView ->
-                if (webViewRef === webView) webViewRef = null
-                safeDestroyWebView(webView)
-            },
-            modifier = Modifier.fillMaxSize()
-        )
-        }
-
-        LaunchedEffect(url) {
-            if (url.isNotBlank() && url != lastLoadedUrl) {
-                lastLoadedUrl = url
-                webViewRef?.loadUrl(url)
-            }
-        }
-
-        // Top Overlay Bar: Small # Badge, Large Editable URL Bar, Prominent "انتقال" (GO) Button, Refresh, Exit
+        // Top Browser Bar docked cleanly ABOVE the WebView so top web page menus remain unobstructed
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 14.dp, vertical = 10.dp),
+                .background(Color(0xFF0A0F1E))
+                .padding(horizontal = 14.dp, vertical = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Small "#" Badge button to return to keypad (اشارة # صغيرة)
             TvFocusableCard(
                 onClick = onGoToKeypad,
-                modifier = Modifier.size(38.dp)
+                modifier = Modifier
+                    .size(38.dp)
+                    .focusRequester(topBarFocusRequester)
             ) { isFocused ->
                 Box(
                     modifier = Modifier
@@ -1612,7 +1463,10 @@ fun BrowserScreen(
 
             // Prominent "انتقال" (GO) Button to load page (زر انتقال لفتح الصفحة)
             TvFocusableCard(
-                onClick = { navigateToEditableUrl() },
+                onClick = {
+                    navigateToEditableUrl()
+                    try { browserViewportFocusRequester.requestFocus() } catch (_: Exception) {}
+                },
                 scaleUpRatio = 1.05f,
                 modifier = Modifier.height(48.dp)
             ) { isFocused ->
@@ -1652,7 +1506,7 @@ fun BrowserScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .background(
-                            if (isFocused) TvAccentGold else Color.Black.copy(alpha = 0.75f),
+                            if (isFocused) TvAccentGold else Color.White.copy(alpha = 0.14f),
                             CircleShape
                         ),
                     contentAlignment = Alignment.Center
@@ -1675,7 +1529,7 @@ fun BrowserScreen(
                     modifier = Modifier
                         .fillMaxHeight()
                         .background(
-                            if (isFocused) TvAccentGold else Color.Black.copy(alpha = 0.75f),
+                            if (isFocused) TvAccentGold else Color.White.copy(alpha = 0.14f),
                             RoundedCornerShape(12.dp)
                         )
                         .padding(horizontal = 10.dp),
@@ -1715,7 +1569,7 @@ fun BrowserScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .background(
-                            if (isFocused) Color(0xFFEF4444) else Color.Black.copy(alpha = 0.75f),
+                            if (isFocused) Color(0xFFEF4444) else Color.White.copy(alpha = 0.14f),
                             CircleShape
                         ),
                     contentAlignment = Alignment.Center
@@ -1730,12 +1584,233 @@ fun BrowserScreen(
             }
         }
 
-        // Virtual Mouse Cursor (مؤشر الماوس)
-        VirtualMousePointer(
-            x = cursorX,
-            y = cursorY,
-            isClicking = isCursorClicking
-        )
+        // Dedicated WebView + Virtual Mouse Viewport (full unobstructed 0..maxX, 0..maxY reach)
+        BoxWithConstraints(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+                .focusRequester(browserViewportFocusRequester)
+                .focusable()
+                .onKeyEvent { keyEvent ->
+                    val native = keyEvent.nativeKeyEvent
+                    if (native.action == KeyEvent.ACTION_DOWN) {
+                        when (native.keyCode) {
+                            KeyEvent.KEYCODE_MENU, KeyEvent.KEYCODE_SETTINGS -> {
+                                try { topBarFocusRequester.requestFocus() } catch (_: Exception) {}
+                                true
+                            }
+                            KeyEvent.KEYCODE_DPAD_LEFT -> {
+                                moveOrScrollCursor(VirtualMouseDirection.LEFT, native.repeatCount)
+                                true
+                            }
+                            KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                                moveOrScrollCursor(VirtualMouseDirection.RIGHT, native.repeatCount)
+                                true
+                            }
+                            KeyEvent.KEYCODE_DPAD_UP -> {
+                                moveOrScrollCursor(VirtualMouseDirection.UP, native.repeatCount)
+                                true
+                            }
+                            KeyEvent.KEYCODE_DPAD_DOWN -> {
+                                moveOrScrollCursor(VirtualMouseDirection.DOWN, native.repeatCount)
+                                true
+                            }
+                            KeyEvent.KEYCODE_DPAD_CENTER,
+                            KeyEvent.KEYCODE_ENTER,
+                            KeyEvent.KEYCODE_NUMPAD_ENTER,
+                            KeyEvent.KEYCODE_BUTTON_A -> {
+                                dispatchClickAtCursor()
+                                true
+                            }
+                            else -> false
+                        }
+                    } else false
+                }
+        ) {
+            val density = androidx.compose.ui.platform.LocalDensity.current
+            viewportWidthPx = with(density) { maxWidth.toPx() }
+            viewportHeightPx = with(density) { maxHeight.toPx() }
+
+            // WebView
+            androidx.compose.runtime.key(crashCount) {
+                AndroidView(
+                    factory = { ctx ->
+                        WebView(ctx.findActivityContext()).apply {
+                            layoutParams = ViewGroup.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.MATCH_PARENT
+                            )
+                            isFocusable = false
+                            isFocusableInTouchMode = false
+                            isClickable = true
+
+                            settings.apply {
+                                javaScriptEnabled = true
+                                domStorageEnabled = true
+                                mediaPlaybackRequiresUserGesture = false
+                                useWideViewPort = true
+                                loadWithOverviewMode = true
+                                setSupportZoom(true)
+                                builtInZoomControls = true
+                                displayZoomControls = false
+                                allowFileAccess = true
+                                allowContentAccess = true
+                                mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+                                userAgentString = "Mozilla/5.0 (Linux; Android 10; TV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Downloader/1.4.3"
+                                safeBrowsingEnabled = false
+                            }
+
+                            CookieManager.getInstance().let { cm ->
+                                cm.setAcceptCookie(true)
+                                cm.setAcceptThirdPartyCookies(this, true)
+                            }
+
+                            hardenWebView(this)
+
+                            webChromeClient = object : WebChromeClient() {
+                                override fun onPermissionRequest(request: PermissionRequest?) {
+                                    grantSafeWebPermissions(request)
+                                }
+                            }
+
+                            webViewClient = object : WebViewClient() {
+                                override fun onRenderProcessGone(view: WebView?, detail: RenderProcessGoneDetail?): Boolean {
+                                    safeDestroyWebView(view, rendererGone = true)
+                                    if (webViewRef === view) webViewRef = null
+                                    postOnMain(300L) {
+                                        try {
+                                            Toast.makeText(ctx, ctx.getString(R.string.mini_downloader_browser_crash), Toast.LENGTH_SHORT).show()
+                                        } catch (_: Exception) {}
+                                        onGoToKeypad()
+                                    }
+                                    return true
+                                }
+
+                                override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                                    val rawUrl = request?.url?.toString() ?: return false
+                                    if (com.example.ui.common.DownloadUrlResolver.shouldInterceptAsDownload(rawUrl)) {
+                                        onRequestDownload(
+                                            com.example.ui.common.DownloadUrlResolver.normalizeInitialDownloadUrl(rawUrl),
+                                            view?.settings?.userAgentString,
+                                            null,
+                                            "application/vnd.android.package-archive",
+                                            currentDisplayUrl
+                                        )
+                                        return true
+                                    }
+                                    if (rawUrl.startsWith("intent://", ignoreCase = true)) {
+                                        val unwrapped = com.example.ui.common.DownloadUrlResolver.unwrapIntentUrl(rawUrl)
+                                        if (unwrapped != rawUrl && (unwrapped.startsWith("http://", ignoreCase = true) || unwrapped.startsWith("https://", ignoreCase = true))) {
+                                            view?.loadUrl(unwrapped)
+                                            return true
+                                        }
+                                        return true
+                                    }
+                                    return false
+                                }
+
+                                override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: android.webkit.WebResourceError?) {
+                                    super.onReceivedError(view, request, error)
+                                    if (request?.isForMainFrame == true) {
+                                        val failingUrl = request.url?.toString() ?: ""
+                                        if (com.example.ui.common.DownloadUrlResolver.shouldInterceptAsDownload(failingUrl)) {
+                                            onRequestDownload(
+                                                com.example.ui.common.DownloadUrlResolver.normalizeInitialDownloadUrl(failingUrl),
+                                                view?.settings?.userAgentString,
+                                                null,
+                                                "application/vnd.android.package-archive",
+                                                currentDisplayUrl
+                                            )
+                                        } else if (failingUrl.startsWith("https://", ignoreCase = true)) {
+                                            val fallbackHttp = failingUrl.replaceFirst("https://", "http://", ignoreCase = true)
+                                            view?.loadUrl(fallbackHttp)
+                                        } else if (failingUrl.startsWith("http://", ignoreCase = true)) {
+                                            val fallbackHttps = failingUrl.replaceFirst("http://", "https://", ignoreCase = true)
+                                            view?.loadUrl(fallbackHttps)
+                                        }
+                                    }
+                                }
+
+                                override fun onPageStarted(view: WebView?, startedUrl: String?, favicon: Bitmap?) {
+                                    super.onPageStarted(view, startedUrl, favicon)
+                                    injectWebViewStabilityShim(view, disableWebGl = true)
+                                    com.example.ui.common.DownloadUrlResolver.injectPopupAndBlankTargetShim(view)
+                                    isLoading = true
+                                    startedUrl?.let { currentDisplayUrl = it }
+                                }
+
+                                override fun onPageFinished(view: WebView?, finishedUrl: String?) {
+                                    super.onPageFinished(view, finishedUrl)
+                                    injectWebViewStabilityShim(view, disableWebGl = true)
+                                    com.example.ui.common.DownloadUrlResolver.injectPopupAndBlankTargetShim(view)
+                                    isLoading = false
+                                    finishedUrl?.let { currentDisplayUrl = it }
+
+                                    // Auto-fast-forward aftvnews countdown and prevent pausing
+                                    if (finishedUrl?.contains("aftvnews.com", ignoreCase = true) == true ||
+                                        finishedUrl?.contains("aftv.news", ignoreCase = true) == true
+                                    ) {
+                                        view?.evaluateJavascript(
+                                            """
+                                            (function() {
+                                                try {
+                                                    if (typeof seconds !== 'undefined') {
+                                                        seconds = 0;
+                                                    }
+                                                    if (typeof paused !== 'undefined') {
+                                                        paused = false;
+                                                    }
+                                                    var link = document.querySelector('#redirect_message a') || document.querySelector('#redirect_noscript a');
+                                                    if (link && link.href) {
+                                                        window.location.href = link.href;
+                                                    }
+                                                } catch(e) {}
+                                            })();
+                                            """.trimIndent(),
+                                            null
+                                        )
+                                    }
+                                }
+                            }
+
+                            setDownloadListener { dUrl, userAgent, contentDisposition, mimetype, _ ->
+                                val effectiveUa = if (!userAgent.isNullOrBlank()) userAgent else settings.userAgentString
+                                onRequestDownload(dUrl, effectiveUa, contentDisposition, mimetype, currentDisplayUrl)
+                            }
+
+                            val targetUrl = currentDisplayUrl.ifBlank { url }
+                            loadUrl(targetUrl)
+                            lastLoadedUrl = targetUrl
+                            webViewRef = this
+                        }
+                    },
+                    update = { webView ->
+                        webViewRef = webView
+                        webView.isFocusable = false
+                        webView.isFocusableInTouchMode = false
+                    },
+                    onRelease = { webView ->
+                        if (webViewRef === webView) webViewRef = null
+                        safeDestroyWebView(webView)
+                    },
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+
+            LaunchedEffect(url) {
+                if (url.isNotBlank() && url != lastLoadedUrl) {
+                    lastLoadedUrl = url
+                    webViewRef?.loadUrl(url)
+                }
+            }
+
+            // Virtual Mouse Cursor (مؤشر الماوس)
+            VirtualMousePointer(
+                x = cursorX,
+                y = cursorY,
+                isClicking = isCursorClicking
+            )
+        }
     }
 
     BindWebViewLifecycle(webViewRef)

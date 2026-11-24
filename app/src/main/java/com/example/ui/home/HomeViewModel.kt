@@ -121,7 +121,7 @@ class HomeViewModel(
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 75)
 
     val screensaverTimeout: StateFlow<String> = preferences.screensaverTimeoutFlow
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "5")
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "10")
 
     val screensaverMode: StateFlow<String> = preferences.screensaverModeFlow
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "clock_date")

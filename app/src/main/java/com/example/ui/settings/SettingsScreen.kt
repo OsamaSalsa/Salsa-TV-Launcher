@@ -213,6 +213,8 @@ fun SettingsScreen(
     val broadcastMusicMode by viewModel.broadcastMusicMode.collectAsState()
     val broadcastCustomMusicUri by viewModel.broadcastCustomMusicUri.collectAsState()
     val broadcastMusicVolume by viewModel.broadcastMusicVolume.collectAsState()
+    val broadcastTheme by viewModel.broadcastTheme.collectAsState()
+    val broadcastVoiceEnabled by viewModel.broadcastVoiceEnabled.collectAsState()
     var showPreviewScreensaver by remember { mutableStateOf(false) }
     var showStorageManagerDialog by remember { mutableStateOf(false) }
     var showTvFolderPickerDialog by remember { mutableStateOf(false) }
@@ -1364,6 +1366,8 @@ fun SettingsScreen(
                             broadcastMusicMode = broadcastMusicMode,
                             broadcastCustomMusicUri = broadcastCustomMusicUri,
                             broadcastMusicVolume = broadcastMusicVolume,
+                            broadcastTheme = broadcastTheme,
+                            broadcastVoiceEnabled = broadcastVoiceEnabled,
                             onShowTvFolderPicker = {
                                 runWithFilePermissionIfNeeded { showTvFolderPickerDialog = true }
                             },

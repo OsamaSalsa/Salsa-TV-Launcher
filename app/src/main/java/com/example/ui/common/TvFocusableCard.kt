@@ -27,7 +27,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -38,6 +38,13 @@ import kotlinx.coroutines.launch
 
 private val FastFocusTween = tween<Float>(durationMillis = 110, easing = FastOutSlowInEasing)
 private const val REMOTE_LONG_PRESS_MS = 380L
+
+fun isRemoteSelectKey(keyCode: Int): Boolean {
+    return keyCode == KeyEvent.KEYCODE_DPAD_CENTER ||
+        keyCode == KeyEvent.KEYCODE_ENTER ||
+        keyCode == KeyEvent.KEYCODE_NUMPAD_ENTER ||
+        keyCode == KeyEvent.KEYCODE_BUTTON_A
+}
 
 fun isRemoteMenuKey(keyCode: Int): Boolean {
     return keyCode == KeyEvent.KEYCODE_MENU ||
@@ -112,59 +119,62 @@ fun TvFocusableCard(
                     }
                 }
             }
-            .onKeyEvent { keyEvent ->
+            .onPreviewKeyEvent { keyEvent ->
                 val native = keyEvent.nativeKeyEvent
                 if (isFocused && currentOnLongClick != null && isRemoteMenuKey(native.keyCode)) {
                     if (native.action == KeyEvent.ACTION_DOWN) {
                         if (native.repeatCount == 0) {
                             currentOnLongClick?.invoke()
                         }
-                        return@onKeyEvent true
+                        return@onPreviewKeyEvent true
                     } else if (native.action == KeyEvent.ACTION_UP) {
-                        return@onKeyEvent true
+                        return@onPreviewKeyEvent true
                     }
                 }
-                if (isFocused) {
-                    val isCenterOrEnter = native.keyCode == KeyEvent.KEYCODE_DPAD_CENTER ||
-                        native.keyCode == KeyEvent.KEYCODE_ENTER ||
-                        native.keyCode == KeyEvent.KEYCODE_NUMPAD_ENTER ||
-                        native.keyCode == KeyEvent.KEYCODE_BUTTON_A
-                    if (isCenterOrEnter) {
-                        val longClickHandler = currentOnLongClick
-                        if (longClickHandler != null) {
-                            if (native.action == KeyEvent.ACTION_DOWN) {
-                                if (native.repeatCount == 0 && !centerDownActive) {
-                                    centerDownActive = true
-                                    longClickTriggered = false
-                                    longPressJob?.cancel()
-                                    longPressJob = scope.launch {
-                                        delay(REMOTE_LONG_PRESS_MS)
-                                        if (centerDownActive && !longClickTriggered) {
-                                            longClickTriggered = true
-                                            currentOnLongClick?.invoke()
-                                        }
+                if (isFocused && isRemoteSelectKey(native.keyCode)) {
+                    val longClickHandler = currentOnLongClick
+                    if (longClickHandler != null) {
+                        if (native.action == KeyEvent.ACTION_DOWN) {
+                            if (native.repeatCount == 0 && !centerDownActive) {
+                                centerDownActive = true
+                                longClickTriggered = false
+                                longPressJob?.cancel()
+                                longPressJob = scope.launch {
+                                    delay(REMOTE_LONG_PRESS_MS)
+                                    if (centerDownActive && !longClickTriggered) {
+                                        longClickTriggered = true
+                                        currentOnLongClick?.invoke()
                                     }
-                                } else if (native.repeatCount >= 1 && centerDownActive && !longClickTriggered) {
-                                    longClickTriggered = true
-                                    longPressJob?.cancel()
-                                    longPressJob = null
-                                    longClickHandler()
                                 }
-                                // Always consume ACTION_DOWN when onLongClick is present so Compose's
-                                // clickable never fires onClick prematurely on key-down!
-                                return@onKeyEvent true
-                            } else if (native.action == KeyEvent.ACTION_UP) {
+                            } else if ((native.isLongPress || native.repeatCount >= 1) && centerDownActive && !longClickTriggered) {
+                                longClickTriggered = true
                                 longPressJob?.cancel()
                                 longPressJob = null
-                                val wasDown = centerDownActive
-                                val wasLong = longClickTriggered
-                                centerDownActive = false
-                                longClickTriggered = false
-                                if (wasDown && !wasLong) {
+                                longClickHandler()
+                            }
+                            // Intercept in preview phase BEFORE combinedClickable so it never steals ACTION_DOWN
+                            // or misfires onClick when the user releases after a long press!
+                            return@onPreviewKeyEvent true
+                        } else if (native.action == KeyEvent.ACTION_UP) {
+                            longPressJob?.cancel()
+                            longPressJob = null
+                            val wasDown = centerDownActive
+                            val wasLong = longClickTriggered
+                            centerDownActive = false
+                            longClickTriggered = false
+                            val heldMs = if (native.downTime > 0L && native.eventTime >= native.downTime) {
+                                native.eventTime - native.downTime
+                            } else {
+                                0L
+                            }
+                            if (wasDown && !wasLong && !native.isCanceled) {
+                                if (heldMs >= REMOTE_LONG_PRESS_MS) {
+                                    longClickHandler()
+                                } else {
                                     currentOnClick()
                                 }
-                                return@onKeyEvent true
                             }
+                            return@onPreviewKeyEvent true
                         }
                     }
                 }

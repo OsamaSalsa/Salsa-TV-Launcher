@@ -443,7 +443,7 @@ class SettingsViewModel(
     }
 
     val screensaverTimeout: StateFlow<String> = preferences.screensaverTimeoutFlow
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "5")
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "10")
 
     fun setScreensaverTimeout(timeout: String) {
         viewModelScope.launch {
@@ -687,6 +687,24 @@ class SettingsViewModel(
     fun setBroadcastMusicVolume(percent: Int) {
         viewModelScope.launch {
             preferences.setBroadcastMusicVolume(percent)
+        }
+    }
+
+    val broadcastTheme: StateFlow<String> = preferences.broadcastThemeFlow
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "studio_classic")
+
+    fun setBroadcastTheme(themeId: String) {
+        viewModelScope.launch {
+            preferences.setBroadcastTheme(themeId)
+        }
+    }
+
+    val broadcastVoiceEnabled: StateFlow<Boolean> = preferences.broadcastVoiceEnabledFlow
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+
+    fun setBroadcastVoiceEnabled(enabled: Boolean) {
+        viewModelScope.launch {
+            preferences.setBroadcastVoiceEnabled(enabled)
         }
     }
 

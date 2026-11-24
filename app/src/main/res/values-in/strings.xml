@@ -646,4 +646,14 @@
     <string name="dashboard_sound_horizon">Cakrawala Malam Tenang</string>
     <string name="dashboard_sound_chime">Lonceng Ambien Lembut</string>
     <string name="dashboard_sound_volume_label">Volume Suara</string>
+    <string name="broadcast_theme_title">Tema Tata Letak &amp; Gerak Siaran</string>
+    <string name="broadcast_theme_desc">Pilih animasi masuk/keluar teks, posisi tampilan layar, dan grafis studio di sekitarnya</string>
+    <string name="broadcast_theme_studio_classic">Meluncur Samping • Bilah Studio</string>
+    <string name="broadcast_theme_breaking_news">Meja Berita • Naik Bawah</string>
+    <string name="broadcast_theme_royal_cinema">Sinema Zoom • Letterbox</string>
+    <string name="broadcast_theme_neon_cyber">Ketik Siber • Bingkai HUD</string>
+    <string name="broadcast_theme_emerald_sport">Arena Diagonal • Sorotan Lampu</string>
+    <string name="broadcast_theme_minimal_zen">Mengambang Tenang • Angka Latar</string>
+    <string name="settings_broadcast_voice_title">Bacakan Teks Siaran</string>
+    <string name="settings_broadcast_voice_desc">Bacakan setiap baris teks dengan suara dan tunggu hingga pembacaan selesai sebelum pindah ke baris berikutnya jika waktu habis</string>
 </resources>

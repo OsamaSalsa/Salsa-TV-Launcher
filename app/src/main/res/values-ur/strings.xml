@@ -687,4 +687,14 @@
     <string name="dashboard_sound_horizon">خاموش رات کا افق</string>
     <string name="dashboard_sound_chime">نرم محیطی گھنٹی</string>
     <string name="dashboard_sound_volume_label">آواز کی سطح</string>
+    <string name="broadcast_theme_title">نشریاتی متن کی حرکت اور ترتیب</string>
+    <string name="broadcast_theme_desc">متن کے آنے جانے کی حرکت، اسکرین پر مقام، اور گرد و نواح کے اسٹوڈیو عناصر منتخب کریں</string>
+    <string name="broadcast_theme_studio_classic">افقی سلائیڈ • اطرافی ستون</string>
+    <string name="broadcast_theme_breaking_news">نیوز ڈیسک • نیچے سے ابھار</string>
+    <string name="broadcast_theme_royal_cinema">سنیما زوم • لیٹر باکس پٹیاں</string>
+    <string name="broadcast_theme_neon_cyber">سائبر ٹائپ رائٹر • HUD کونے</string>
+    <string name="broadcast_theme_emerald_sport">ترچھی انٹری • اسٹیڈیم لائٹس</string>
+    <string name="broadcast_theme_minimal_zen">پرسکون تیرنا • عقبی نمبر</string>
+    <string name="settings_broadcast_voice_title">نشریاتی متن بلند آواز سے پڑھیں</string>
+    <string name="settings_broadcast_voice_desc">ظاہر ہونے والی ہر سطر کو آواز سے پڑھتا ہے اور اگر وقت ختم ہو جائے تو پڑھائی مکمل ہونے تک اگلی سطر پر نہیں جاتا</string>
 </resources>
