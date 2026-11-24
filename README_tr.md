@@ -7,7 +7,7 @@
 **Modern, ultra hızlı ve sinematik bir TV arayüzü ile ev eğlencesinin geleceğini deneyimleyin.**
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-2.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
@@ -35,17 +35,14 @@ TV uzaktan kumandaları (D-Pad navigasyonu) için özel olarak optimize edilmiş
 
 ## 🚀 Temel Özellikler
 
-### 🆕 Sürüm 2.1 Yenilikleri
-* **🌐 4 Canlı Bilgi Paneli**: Üst çubuktan yumuşak animasyonlu dört tam ekran panele tek tıkla erişim:
-  * **☀️ Hava Durumu Paneli**: Otomatik **GPS** konum algılama ve şehir arama, 24 saatlik sıcaklık grafiği, nem/rüzgar/basınç/UV ve 5 günlük tahmin.
-  * **📰 Haberler Merkezi**: Tüm **21 dil** için 5 bölümde (**Manşetler, Siyaset, Ekonomi, Teknoloji, Dünya**) tekrarsız, bağımsız canlı RSS akışları ve her 10 saniyede otomatik haber geçişi.
-  * **📈 Ekonomi ve Piyasalar**: Küresel endeksler, Forex kurları, emtia/kripto, 5 günlük grafikler ve özelleştirilebilir ekonomik takvim.
-  * **⚽ Futbol Merkezi (365Scores)**: Canlı skorlar, günün maçları, puan durumu, gol krallığı, genişletilmiş kulüp/lig listesi ve galibiyet olasılıkları.
-* **🖥️ Akıllı Panel Ekran Koruyucuları ve Otomatik Döngü**: **Hava Durumu**, **Haberler**, **Ekonomi**, **Futbol** veya **Hepsini Sırayla Göster** (**Haberler 60sn → Hava 10sn → Ekonomi 10sn → Futbol 10sn → Haberler'e her dönüşte sonraki kategoriye geçer**). Tekli Haber ekran koruyucusu da 5 bölümü sırayla gezer.
-* **📡 Canlı Metin Yayın Ekran Koruyucusu (`Broadcast Text Showcase`)**: %60 karartılmış Aurora duvar kağıdı üzerinde **beyaz ve sarı** dönüşümlü başlıklar, `ON AIR` rozeti, düzenlenebilir satırlar, ayarlanabilir süre (`3–15sn`) ve isteğe bağlı arka plan müziği veya yerel MP3 desteği.
-* **🎨 Canlı Arayüz Ayarları (`Live UI Settings HUD`)**: Ana ekranda açılan şeffaf panel ile 4K duvar kağıtları, parlaklık, uygulama konumu, ızgara düzeni, cam saydamlığı, saat/tarih/karşılama, üst çubuk, hava durumu, gece göz koruma filtresi, Material You ve hafif modu **değişiklikleri anında canlı görerek** özelleştirin.
-* **🧭 Kırpılmayan Üst Çubuk ve Hızlı v2.1 Motoru**: Üst simgeler kesilmeden tam görünür, küçültülmüş APK ve 4K kalitesinde akıcı 60 FPS performans.
-* **🌍 Varsayılan Web Portalları ve 21 Dil**: **YouTube TV**, **Google (`google.com`)** ve **4 oyun portalı** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**) dahil **21 dilde** eksiksiz çeviri.
+### 🆕 Sürüm 3.0 Yenilikleri
+* **📡 Canlı Metin Yayın Ekran Koruyucusu (6 Animasyonlu Tema, Koyu Dinamik Arka Planlar & Sesli Okuyucu)**: Her biri kendine özgü animasyon, düzen, grafik detay ve zıt renkli hareketli gölgelere sahip **temaya özel koyu dinamik arka planlı** 6 stüdyo teması + Ayarlarda canlı önizleme, düzenlenebilir satırlar (`3–15sn`), anlatım bitene kadar bekleyen **Sesli Okuyucu (TTS)** ve isteğe bağlı arka plan müziği veya yerel MP3 desteği.
+* **📺 IPTV Akıllı Hata Kurtarma (`Sonraki Kanal` + 15sn Otomatik Yeniden Deneme)**: Bir IPTV kanalı açılamadığında yalnızca **Sonraki Kanal** düğmesine odaklanan sade bir ekran ve seçim yapılmazsa aynı kanalı otomatik yeniden deneyen **15 saniyelik geri sayım** gösterir.
+* **🎨 Canlı Arayüz Ayarları (`Live UI Settings`) — Doğrudan Saat Formatı Değiştirici**: Ana ekrandaki şeffaf panel artık Saat Boyutu ve Tarih Formatının hemen yanında doğrudan **Saat Formatı** (**`24s • 22:00`** / **`12s • AM/PM`**) seçicisi sunar; 4K duvar kağıtları, parlaklık, uygulama konumu, ızgara, cam saydamlığı, karşılama, hava durumu, gece filtresi, Material You ve hafif mod değişiklikleri anında canlı görünür.
+* **🖥️ Panel Ekran Koruyucuları & Haber Sesli Okuyucusu**: **Hava Durumu**, **Haberler**, **Ekonomi**, **Futbol** veya **Hepsini Sırayla Göster**; Haberler ekran koruyucusu geçiş yapmadan önce 6 haberi de okuyan **Sesli Okuyucu (TTS)** ve seçilebilir arka plan müzikleri sunar.
+* **🌙 Varsayılan Ekran Koruyucu Süresi 10 Dakika**: Varsayılan hareketsizlik süresi **10 dakika** olarak güncellendi (2, 5, 10, 15, 30 dk veya Devre Dışı olarak ayarlanabilir).
+* **🖱️ Kenardan Kenara Sanal Fare, Kumanda İyileştirmeleri & Başlangıç Sürüm Göstergesi**: Web portalları ve HTML5 oyunlarındaki sanal imleç ekranın en üst ve en alt kenarlarına sorunsuz ulaşır; TV kumandasında uzun basma bırakıldığında yanlışlıkla uygulama açılmasını önleyen düzeltme; yenilenmiş kompakt **Salsa Store** simgesi; açılış ekranının altında şık `v3.0` sürüm etiketi ve **GitHub OTA otomatik güncellemeleri**.
+* **🌐 4 Canlı Bilgi Paneli, Web Portalları & 21 Dilde v3.0 Motoru**: **Hava Durumu**, **Haberler** (21 dil, 5 kategori), **Ekonomi ve Piyasalar** ve **Futbol (365Scores)** panelleri, varsayılan web portalları (**YouTube TV**, **Google**, **CrazyGames**, **Poki**, **Playhop**, **EasyGames**), kırpılmayan üst çubuk ve 60 FPS v3.0 motoru.
 
 ### 🖥️ 1. Sinematik ve Dinamik Ana Ekran
 * **Akıllı Odaklama ve Yakınlaştırma:** Kartlar üzerine gelindiğinde parlayan kenarlıklar, yumuşak gölgeler ve dinamik büyütme efektleriyle canlanır.

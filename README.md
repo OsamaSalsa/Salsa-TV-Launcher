@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v2.1
+# 📺 Salsa TV Launcher v3.0
 
 ![Home Screen](docs/screenshots/home.png)
 
@@ -10,7 +10,7 @@
 *The All-in-One TV solution that replaces dozens of separate apps on your device.*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-2.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -39,17 +39,14 @@ Most smart TV launchers today are cluttered with forced ads, heavy video preview
 
 ## 🌟 New Features & Latest Enhancements
 
-### 🆕 What's New in Version 2.1
-* **🌐 Live 4-Dashboard Information Hub**: Direct top-bar access to four fullscreen, smoothly animated TV dashboards:
-  * **☀️ Weather Dashboard**: Automatic GPS location detection & city search, 24-hour temperature curve, humidity/wind/pressure/UV cards, 5-day forecast, ambient motion, and full RTL/LTR support.
-  * **📰 News Center**: Distinct native-language RSS feeds for all **21 languages** across 5 sections (**Top Stories, Politics, Economy, Technology, World**) with zero duplicate headlines across sections, auto-cycling stories (10s), and clean typography.
-  * **📈 Economy & Markets Dashboard**: Real-time global stock indices, Forex rates, commodities & crypto, 5-day trend charts, economic calendar, and full market customization.
-  * **⚽ Football Center (365Scores)**: Live scores, match fixtures, standings, top scorers, expanded clubs & leagues catalog, and match win-probability insights.
-* **🖥️ Smart Dashboard & Auto-Cycling Screensaver Modes**: Display **Weather**, **News**, **Economy**, **Football**, or **Auto-Cycle All** (**News 60s → Weather 10s → Economy 10s → Football 10s → returns to News advancing automatically to the next section**). Standalone News screensaver also advances automatically through all 5 sections.
-* **📡 Broadcast Text Showcase Screensaver**: Studio-style animated multi-line ticker over a 60%-dimmed dynamic Aurora wallpaper with alternating **White & Yellow** headlines, `ON AIR` badge, editable custom lines, adjustable display duration (`3s–15s`), and optional ambient or local MP3 background audio.
-* **🎨 Live UI Settings HUD (Instant Live Preview)**: Floating transparent control bar right on the Home Screen letting you tweak 4K wallpapers, brightness, app vertical offset, grid density, glass opacity, clock size/format/seconds, date format, custom greetings, top bar icons, weather toggle, Night Eye-Comfort filter, Material You dynamic colors, and Low-RAM mode **while watching every change live on your Home Screen in real time**.
-* **🧭 Non-Clipping Responsive Top Bar & Lighter 60fps Engine**: All quick-action icons remain visible without edge clipping; smaller APK via tree-shaking and draw-phase animations without reducing 4K wallpaper quality.
-* **🌍 Default Web Portals & 21-Language Coverage**: Default web shortcuts include **YouTube TV**, **Google (`google.com`)**, and **4 Instant Web Games** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**) plus custom bookmarks, with 100% native localization across all **21 languages**.
+### 🆕 What's New in Version 3.0
+* **📡 Broadcast Text Showcase (6 Animated Themes, Dynamic Dark Backdrops & Voice Reader)**: 6 distinct studio presentation themes with unique motion, layouts, surrounding accents, and per-theme dark dynamic backdrops with shifting contrasting colored shadows + live preview thumbnails in Settings, editable custom lines, adjustable duration (`3s–15s`), **Voice Reader (TTS)** that waits for narration to finish before advancing, and optional soft ambient audio or local MP3 playback.
+* **📺 IPTV Smart Error Recovery (`Next Channel` + 15s Auto-Retry)**: When an IPTV channel fails to load, displays a focused single-action overlay with **Next Channel** only and a live **15-second countdown** that automatically retries the same channel if unselected.
+* **🎨 Live UI Settings HUD — Direct Clock Format Toggle**: Instant live-preview bar right on the Home Screen now features a dedicated **Clock Format** toggle (**`24h • 22:00`** vs **`12h • AM/PM`**) directly alongside Clock Size, Date Format, 4K wallpapers, brightness, app vertical offset, grid density, glass opacity, custom greetings, top bar icons, weather toggle, Night Eye-Comfort filter, Material You dynamic colors, and Low-RAM mode.
+* **🖥️ Smart Dashboard Screensaver & News Voice Reader**: Display **Weather**, **News**, **Economy**, **Football**, or **Auto-Cycle All** (**News 60s → Weather 10s → Economy 10s → Football 10s → returns to News advancing automatically to the next section**). News screensaver supports **Voice Reader (TTS)** that finishes reading all 6 items before switching, plus selectable soft ambient soundtracks.
+* **🌙 10-Minute Default Screensaver Timeout**: Default screensaver inactivity timer updated to **10 minutes** (configurable: 2, 5, 10, 15, 30 min, or Disabled for system handover).
+* **🖱️ Edge-to-Edge Virtual Mouse, TV Remote Fixes & Startup Splash Version**: Virtual mouse cursor in web portals & HTML5 games cleanly reaches the very top and bottom edges; reliable TV remote long-press menu without accidental launch on release; refreshed compact **Salsa Store** icon; subtle `v3.0` version indicator at the bottom of the Salsa TV startup splash screen; and seamless **GitHub OTA auto-updates** for users on older versions.
+* **🌐 Live 4-Dashboard Hub, Web Portals & 21-Language v3.0 Engine**: Direct top-bar access to fullscreen **Weather**, **News** (21 languages, 5 deduplicated sections), **Economy & Markets**, and **Football (365Scores)** dashboards, default web shortcuts (**YouTube TV**, **Google**, **CrazyGames**, **Poki**, **Playhop**, **EasyGames**), non-clipping top bar, and a lightweight 60fps v3.0 engine.
 
 ### ⚡ Extreme Performance & Instant App Launch
 * **Parallel Icon & Banner Preloading**: App packages, icons, and banners are decoded concurrently across multi-core CPUs in the background, appearing instantly on boot without freezing.
@@ -59,7 +56,7 @@ Most smart TV launchers today are cluttered with forced ads, heavy video preview
 
 ### 🌙 Intelligent Screensaver & External Screensaver Handover
 * **Smart External Handover (`Disabled` Mode)**: Disabling the in-app screensaver automatically clears window wake locks (`FLAG_KEEP_SCREEN_ON`), allowing your Android TV's system screensaver or external ambient app to trigger freely.
-* **Built-in Ambient Sleep Mode (`Enabled`)**: When enabled (2, 5, 10, 15, or 30 mins), it keeps the TV awake and triggers the built-in screensaver:
+* **Built-in Ambient Sleep Mode (`Enabled`)**: Enabled by default after **10 minutes** of inactivity (configurable: 2, 5, 10, 15, or 30 mins), keeping the TV awake to trigger your chosen built-in screensaver:
   * **Clock & Date Mode**: Luminous time and date with drift protection.
   * **4K Wallpaper & Info Mode**: 45-degree corner gradient with clock, date, and live greeting.
   * **Cinematic Video Screensaver & Custom Streams**: Fullscreen relaxing fireplace, winter cabin, or tropical waterfall streams without intrusive banners or sign-in prompts, plus the ability to **add custom YouTube video IDs/URLs**, delete or restore presets, and trigger an instant **Live Screensaver Preview** from Settings.
@@ -88,7 +85,7 @@ Most smart TV launchers today are cluttered with forced ads, heavy video preview
 * **Universal Voice & Instant Search (`🎤`)**: Search across all installed TV apps, live IPTV channels, and web/YouTube queries simultaneously using your TV remote microphone or on-screen keyboard.
 * **System-Level Default Digital Voice Assistant**: Built-in `SalsaVoiceInteractionService` and `SalsaRecognitionService` allow setting **Salsa TV** as your Android TV's default system voice assistant so the remote's microphone button works natively.
 * **Quick Control Center (`Control Center`)**: Glassmorphic quick-access panel to toggle 12h/24h clock format, toggle dynamic background, start the Ambient Screensaver immediately, launch Voice Search, or open Wi-Fi & full Settings (with the option to skip Control Center for Direct Settings or show both icons).
-* **Multi-Playlist IPTV Manager & Interactive Info Bar**: Add, switch between, refresh, or delete **multiple M3U playlists** and custom XMLTV EPG URLs. While watching live IPTV, touching the screen or pressing `OK` on the remote opens the Cinema Info Bar with an embedded horizontal **Channel Carousel Strip** (`◀ / ▶`), live EPG, Sleep Timer, Aspect Ratio (`Fit`/`Fill`/`Zoom`), Category PIN Lock, and Auto-Resume Last Channel.
+* **Multi-Playlist IPTV Manager, Interactive Info Bar & Smart Error Recovery**: Add, switch between, refresh, or delete **multiple M3U playlists** and custom XMLTV EPG URLs. While watching live IPTV, touching the screen or pressing `OK` on the remote opens the Cinema Info Bar with an embedded horizontal **Channel Carousel Strip** (`◀ / ▶`), live EPG, Sleep Timer, Aspect Ratio (`Fit`/`Fill`/`Zoom`), Category PIN Lock, Auto-Resume Last Channel, and smart error recovery (**Next Channel** button with **15-second automatic retry**).
 * **Clean Startup Showcase & Smart 240dp Clock Header**: Launches with apps and channels positioned at the bottom (6 named levels from *High* to *Ultra Low*, default `450`), an unobtrusive parked cursor (no button highlighted until you press a key), and a full-size clock that automatically shrinks into a compact header as soon as rows scroll within `240dp` of the top.
 * **Smart Web Bookmarks (High-Res Icons & YouTube TV Mode)**: Custom website shortcuts automatically extract and cache high-resolution Touch/Favicon artwork, and any YouTube bookmark opens directly in the full **YouTube TV Leanback** remote-friendly interface.
 * **Recent Apps Row & GitHub OTA Updater**: Optional horizontal Recent Apps bar and 1-click GitHub OTA update checking with automatic APK verification.

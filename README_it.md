@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v2.1
+# 📺 Salsa TV Launcher v3.0
 
 ![Schermata Principale](docs/screenshots/home.png)
 
@@ -10,7 +10,7 @@
 *La soluzione All-in-One che sostituisce dozzine di app separate sul tuo televisore.*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-2.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -39,17 +39,14 @@ La maggior parte dei launcher TV attuali è piena di annunci forzati, pesanti an
 
 ## 🌟 Nuove funzionalità e ultimi miglioramenti
 
-### 🆕 Novità della Versione 2.1
-* **🌐 Hub Informativo con 4 Pannelli Live**: Accesso diretto dalla barra superiore a quattro schermate animate a tutto schermo:
-  * **☀️ Pannello Meteo**: Rilevamento automatico tramite **GPS** e ricerca città, grafico 24h, umidità/vento/pressione/UV e previsioni a 5 giorni.
-  * **📰 Centro Notizie**: Feed RSS dedicati e distinti per tutte le **21 lingue** in 5 sezioni (**In evidenza, Politica, Economia, Tecnologia, Mondo**) senza duplicati, con rotazione automatica ogni 10s.
-  * **📈 Economia e Mercati**: Indici globali, cambi Forex, materie prime e crypto, grafici 5 giorni e calendario economico personalizzabile.
-  * **⚽ Centro Calcio (365Scores)**: Risultati live, partite del giorno, classifiche, marcatori, catalogo esteso di club/leghe e probabilità di vittoria.
-* **🖥️ Salvaschermo con Pannelli Live e Rotazione Automatica**: Imposta **Meteo**, **Notizie**, **Economia**, **Calcio** o **Rotazione automatica** (**Notizie 60s → Meteo 10s → Economia 10s → Calcio 10s → ritorno alle Notizie passando alla sezione successiva**). Anche Notizie da solo scorre automaticamente tutte le 5 sezioni.
-* **📡 Salvaschermo Testo Informativo (`Broadcast Text Showcase`)**: Ticker animato stile studio TV su sfondo Aurora oscurato al 60%, con righe alternate in **bianco e giallo**, badge `ON AIR`, frasi personalizzabili, durata regolabile (`3–15s`) e musica ambientale o MP3 locale opzionale.
-* **🎨 Impostazioni UI Live (`Live UI Settings HUD`)**: Pannello trasparente direttamente sulla Home per regolare sfondi 4K, luminosità, offset app, griglia, opacità vetro, orologio/data/saluti, barra superiore, meteo, filtro notte, Material You e modalità leggera **vedendo ogni modifica in tempo reale direttamente sulla schermata iniziale**.
-* **🧭 Barra Superiore Adattiva & Motore v2.1 60 FPS**: Icone sempre visibili senza tagli, APK ridotto e qualità 4K intatta.
-* **🌍 Portali Web Predefiniti & 21 Lingue**: Include **YouTube TV**, **Google (`google.com`)** e **4 portali di giochi** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**), tradotto interamente in **21 lingue**.
+### 🆕 Novità della Versione 3.0
+* **📡 Salvaschermo Testo Broadcast (6 Temi Animati, Sfondi Scuri Dinamici e Lettore Vocale)**: 6 temi studio unici con animazioni, layout, dettagli grafici e **sfondi scuri dinamici dedicati a ogni tema** con ombre colorate cangianti + anteprime live nelle Impostazioni, righe modificabili (`3–15s`), **Lettore Vocale (TTS)** che attende la fine della lettura prima di avanzare, e musica ambientale o MP3 locale opzionale.
+* **📺 Ripristino Intelligente Errori IPTV (`Canale Successivo` + Riprova dopo 15s)**: Quando un canale IPTV non si avvia, mostra una schermata essenziale con un solo pulsante (**Canale Successivo**) e un **conto alla rovescia di 15 secondi** che ritenta automaticamente lo stesso canale se non viene selezionata altra azione.
+* **🎨 Impostazioni UI Live (`Live UI Settings`) — Formato Ora Diretto**: La barra trasparente sulla Home ora include un selettore diretto del **Formato Ora** (**`24h • 22:00`** vs **`12h • AM/PM`**) accanto a dimensione orologio e formato data, insieme all'anteprima in tempo reale per sfondi 4K, luminosità, offset app, griglia, opacità, saluti, meteo, filtro notte, Material You e modalità leggera.
+* **🖥️ Salvaschermo Pannelli Live e Lettore Vocale Notizie**: Imposta **Meteo**, **Notizie**, **Economia**, **Calcio** o **Rotazione automatica**; il salvaschermo Notizie supporta la **lettura vocale (TTS)** completa dei 6 titoli prima di cambiare schermata, con musiche rilassanti selezionabili.
+* **🌙 Timeout Predefinito Salvaschermo di 10 Minuti**: L'inattività predefinita è ora di **10 minuti** (configurabile: 2, 5, 10, 15, 30 min o Disattivato).
+* **🖱️ Mouse Virtuale Bordo-a-Bordo, Fix Telecomando & Versione Avvio**: Il cursore virtuale nei portali web e giochi raggiunge perfettamente i bordi superiore e inferiore; pressione prolungata affidabile sul telecomando TV senza avvii involontari al rilascio; nuova icona compatta **Salsa Store**; discreta indicazione `v3.0` nella schermata iniziale; e **aggiornamenti automatici OTA via GitHub**.
+* **🌐 Hub 4 Pannelli Live, Portali Web & Motore v3.0 in 21 Lingue**: Accesso diretto a **Meteo**, **Notizie** (21 lingue, 5 sezioni), **Economia e Mercati** e **Calcio (365Scores)**, portali web predefiniti (**YouTube TV**, **Google**, **CrazyGames**, **Poki**, **Playhop**, **EasyGames**), barra superiore adattiva e motore v3.0 a 60 FPS.
 
 ### ⚡ Prestazioni estreme e risposta immediata
 * **Caricamento immediato di icone e banner**: Tutte le app vengono decodificate in background su tutti i core della CPU, apparendo all'istante all'avvio.

@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v2.1
+# 📺 Salsa TV Launcher v3.0
 
 ![Startbildschirm](docs/screenshots/home.png)
 
@@ -10,7 +10,7 @@
 *Die All-in-One-TV-Lösung, die Dutzende einzelner Apps auf Ihrem Gerät ersetzt.*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-2.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -39,17 +39,14 @@ Die meisten Smart-TV-Launcher sind heute mit erzwungener Werbung, schweren Video
 
 ## 🌟 Neue Funktionen & aktuelle Verbesserungen
 
-### 🆕 Neu in Version 2.1
-* **🌐 Live 4-Dashboard-Informationszentrum**: Direkter Zugriff über die obere Leiste auf vier flüssig animierte Vollbild-Dashboards:
-  * **☀️ Wetter-Dashboard**: Automatische **GPS**-Standorterkennung & Stadtsuche, 24-Stunden-Kurve, Luftfeuchtigkeit/Wind/Luftdruck/UV und 5-Tage-Vorhersage.
-  * **📰 Nachrichten-Zentrum**: Eigene, unabhängige RSS-Feeds für alle **21 Sprachen** über 5 Ressorts (**Top-Meldungen, Politik, Wirtschaft, Technologie, Welt**) ohne doppelte Schlagzeilen und mit automatischem Artikelwechsel alle 10s.
-  * **📈 Wirtschaft & Märkte**: Globale Aktienindizes, Forex-Kurse, Rohstoffe & Krypto, 5-Tage-Verlauf, Wirtschaftskalender und volle Anpassbarkeit.
-  * **⚽ Fußball-Zentrum (365Scores)**: Live-Ergebnisse, Spielpläne, Tabellen, Torjäger, erweitertes Vereins-/Ligen-Verzeichnis sowie Siegwahrscheinlichkeiten.
-* **🖥️ Dashboard-Bildschirmschoner & Auto-Wechsel**: Zeigen Sie **Wetter**, **Nachrichten**, **Wirtschaft**, **Fußball** oder **Alle im Wechsel** (**Nachrichten 60s → Wetter 10s → Wirtschaft 10s → Fußball 10s → zurück zu Nachrichten im jeweils nächsten Ressort**) an. Auch im Einzelmodus wechseln Nachrichten automatisch durch alle 5 Ressorts.
-* **📡 Broadcast Text Showcase Bildschirmschoner**: Animierter Studio-Nachrichtenticker über dem um 60 % abgedunkelten Aurora-Hintergrund mit abwechselnd **weißen & gelben** Schlagzeilen, `ON AIR`-Abzeichen, frei editierbaren Zeilen, einstellbarer Anzeigedauer (`3–15s`) und optionaler Hintergrundmusik oder eigenem MP3.
-* **🎨 Live-UI-Einstellungen HUD (Echtzeit-Vorschau)**: Schwebendes Einstellungsmenü direkt auf dem Startbildschirm für 4K-Hintergründe, Helligkeit, App-Abstand, Rasterdichte, Glas-Transparenz, Uhr/Datum/Begrüßung, obere Leiste, Wetteranzeige, Nachtfilter, Material You und Lite-Modus – **jede Änderung wird sofort live auf dem Startbildschirm sichtbar**.
-* **🧭 Flexible obere Leiste & schneller v2.1-Engine**: Keine abgeschnittenen Symbole am Rand, geringere APK-Größe, flüssige 60 FPS bei voller 4K-Qualität.
-* **🌍 Standard-Webportale & 21 Sprachen**: Enthält **YouTube TV**, **Google (`google.com`)** und **4 Spieleportale** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**) sowie volle Lokalisierung in **21 Sprachen**.
+### 🆕 Neu in Version 3.0
+* **📡 Broadcast Text Showcase (6 animierte Themen, dunkle dynamische Hintergründe & Sprachausgabe)**: 6 eigenständige Studio-Themes mit individuellem Design, Bewegung, Akzenten und jeweils eigenem dunklem, dynamischem Hintergrund samt wechselnden Farbschatten + Live-Vorschau in den Einstellungen, editierbaren Textzeilen (`3–15s`), **Vorlesefunktion (TTS)** (wartet bis zum Ende des Vorlesens) sowie optionaler Hintergrundmusik oder lokalem MP3.
+* **📺 IPTV Intelligente Fehlerbehebung (`Nächster Sender` + 15s Auto-Wiederholung)**: Wenn ein IPTV-Sender nicht lädt, erscheint ein fokussierter Bildschirm mit nur einer Schaltfläche (**Nächster Sender**) und einem **15-Sekunden-Countdown**, der denselben Sender automatisch erneut versucht, falls nichts gewählt wird.
+* **🎨 Live-UI-Einstellungen HUD — Direkte Uhrformat-Umschaltung**: Schwebendes Einstellungsmenü direkt auf dem Startbildschirm jetzt mit eigenem **Uhrformat**-Umschalter (**`24h • 22:00`** vs. **`12h • AM/PM`**) direkt neben Uhrgröße und Datumsformat sowie Live-Vorschau für 4K-Hintergründe, Helligkeit, App-Abstand, Rasterdichte, Glas-Transparenz, Begrüßung, Wetter, Nachtfilter, Material You und Lite-Modus.
+* **🖥️ Dashboard-Bildschirmschoner & Nachrichten-Sprachausgabe**: Zeigen Sie **Wetter**, **Nachrichten**, **Wirtschaft**, **Fußball** oder **Alle im Wechsel** an; der Nachrichten-Bildschirmschoner unterstützt **Vorlesen (TTS)** für alle 6 Meldungen vor dem Wechsel sowie wählbare Hintergrundmusik.
+* **🌙 Standard-Timeout für Bildschirmschoner auf 10 Minuten erhöht**: Der Standardwert für Inaktivität beträgt nun **10 Minuten** (anpassbar: 2, 5, 10, 15, 30 Min. oder Deaktiviert für Systemübergabe).
+* **🖱️ Randlose virtuelle Maus, Fernbedienungs-Fixes & Startbildschirm-Version**: Die virtuelle Maus in Webportalen & HTML5-Spielen erreicht sauber den oberen und unteren Bildschirmrand; zuverlässiges langes Drücken der TV-Fernbedienung ohne versehentliches Starten beim Loslassen; kompaktes **Salsa Store**-Symbol; dezente `v3.0`-Versionsanzeige unten im Startbildschirm sowie **GitHub-OTA-Auto-Updates**.
+* **🌐 Live 4-Dashboard-Zentrum, Webportale & v3.0-Engine in 21 Sprachen**: Vollbild-Dashboards für **Wetter**, **Nachrichten** (21 Sprachen, 5 Ressorts), **Wirtschaft & Märkte** und **Fußball (365Scores)**, Standard-Webportale (**YouTube TV**, **Google**, **CrazyGames**, **Poki**, **Playhop**, **EasyGames**), nicht abgeschnittene obere Leiste und leichte 60-FPS-v3.0-Engine.
 
 ### ⚡ Extreme Leistung & sofortiger App-Start
 * **Paralleles Vorladen von Icons & Bannern**: App-Pakete, Symbole und Banner werden gleichzeitig im Hintergrund über alle CPU-Kerne dekodiert und erscheinen ohne Verzögerung beim Start.

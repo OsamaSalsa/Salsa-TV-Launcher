@@ -7,7 +7,7 @@
 **Odkryj przyszłość domowej rozrywki dzięki nowoczesnemu, ultraszybkiemu i kinowemu interfejsowi TV.**
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-2.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
@@ -35,17 +35,14 @@ Zaprojektowany specjalnie pod obsługę pilotem telewizyjnym (nawigacja D-Pad), 
 
 ## 🚀 Główne Funkcje
 
-### 🆕 Nowości w wersji 2.1
-* **🌐 Centrum 4 Paneli na Żywo**: Bezpośredni dostęp z górnego paska do czterech płynnie animowanych ekranów:
-  * **☀️ Panel Pogody**: Automatyczna lokalizacja **GPS** i wyszukiwanie miast, wykres 24h, wilgotność/wiatr/ciśnienie/UV i prognoza na 5 dni.
-  * **📰 Centrum Wiadomości**: Niezależne kanały RSS dla wszystkich **21 języków** w 5 działach (**Najważniejsze, Polityka, Ekonomia, Technologia, Świat**) bez duplikatów i z automatyczną zmianą co 10s.
-  * **📈 Ekonomia i Rynki**: Globalne indeksy, kursy Forex, surowce i krypto, wykresy 5-dniowe oraz konfigurowalny kalendarz ekonomiczny.
-  * **⚽ Centrum Piłkarskie (365Scores)**: Wyniki na żywo, mecze dnia, tabele, strzelcy, rozszerzona lista klubów/lig i szanse na wygraną.
-* **🖥️ Wygaszacz Ekranu z Panelami i Automatyczną Zmianą**: Wyświetlaj **Pogodę**, **Wiadomości**, **Ekonomię**, **Piłkę nożną** lub **Automatyczną zmianę** (**Wiadomości 60s → Pogoda 10s → Ekonomia 10s → Piłka 10s → powrót do Wiadomości w kolejnym dziale**). Samodzielny tryb Wiadomości również przechodzi automatycznie przez wszystkie 5 działów.
-* **📡 Wygaszacz Tekstowy Studio (`Broadcast Text Showcase`)**: Animowany pasek informacyjny na 60% przyciemnionym tle Aurora z naprzemiennymi **białymi i żółtymi** liniami, znacznikiem `ON AIR`, edytowalnym tekstem, czasem wyświetlania (`3–15s`) i opcjonalną muzyką w tle lub lokalnym MP3.
-* **🎨 Ustawienia UI na Żywo (`Live UI Settings HUD`)**: Pływający panel bezpośrednio na ekranie głównym pozwalający zmieniać tapety 4K, jasność, położenie aplikacji, siatkę, przezroczystość, zegar/datę/powitania, górny pasek, pogodę, tryb nocny, Material You i tryb lekki **z natychmiastowym podglądem na żywo bezpośrednio na ekranie głównym**.
-* **🧭 Elastyczny Górny Pasek & Silnik v2.1 60 FPS**: Ikony bez ucinania, mniejszy plik APK i pełna jakość 4K.
-* **🌍 Domyślne Portale & 21 Języków**: Zawiera **YouTube TV**, **Google (`google.com`)** oraz **4 portale gier** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**), w pełni przetłumaczone na **21 języków**.
+### 🆕 Nowości w wersji 3.0
+* **📡 Wygaszacz Tekstowy Broadcast (6 Animowanych Motywów, Ciemne Dynamiczne Tła i Lektor Głosowy)**: 6 odrębnych motywów studyjnych z unikalną animacją, układem oraz **dedykowanym ciemnym dynamicznym tłem z kontrastowymi cieniami dla każdego motywu** + podglądy na żywo w Ustawieniach, edytowalne wiersze (`3–15s`), **Lektor Głosowy (TTS)** czekający na zakończenie czytania przed zmianą oraz opcjonalna muzyka tła lub lokalny plik MP3.
+* **📺 Inteligentne Odzyskiwanie Błędów IPTV (`Następny Kanał` + Ponowienie po 15s)**: Gdy kanał IPTV nie działa, wyświetla przejrzysty ekran z jednym przyciskiem (**Następny Kanał**) oraz **15-sekundowym odliczaniem**, które automatycznie ponawia próbę odtworzenia tego samego kanału przy braku wyboru.
+* **🎨 Ustawienia UI na Żywo (`Live UI Settings`) — Bezpośredni Wybór Formatu Zegara**: Pływający pasek na ekranie głównym zawiera teraz osobny przełącznik **Formatu Zegara** (**`24h • 22:00`** / **`12h • AM/PM`**) obok rozmiaru zegara i formatu daty, wraz z podglądem na żywo tapet 4K, jasności, położenia aplikacji, siatki, przezroczystości, powitań, pogody, trybu nocnego, Material You i trybu lekkiego.
+* **🖥️ Wygaszacz Paneli i Lektor Wiadomości**: Wyświetlaj **Pogodę**, **Wiadomości**, **Ekonomię**, **Piłkę nożną** lub **Automatyczną zmianę**; wygaszacz Wiadomości wspiera **Lektora (TTS)** czytającego wszystkie 6 wiadomości przed przełączeniem oraz łagodną muzykę w tle.
+* **🌙 Domyślny Czas Wygaszacza 10 Minut**: Domyślny czas bezczynności zmieniono na **10 minut** (konfigurowalny: 2, 5, 10, 15, 30 min lub Wyłączony).
+* **🖱️ Wirtualna Mysz od Krawędzi do Krawędzi, Poprawki Pilota i Wersja na Ekranie Startowym**: Kursor w portalach webowych i grach HTML5 sięga samej górnej i dolnej krawędzi; niezawodne długie naciśnięcie na pilocie TV bez przypadkowego uruchomienia po puszczeniu; odświeżona kompaktowa ikona **Salsa Store**; subtelny napis `v3.0` na ekranie startowym i **automatyczne aktualizacje GitHub OTA**.
+* **🌐 Centrum 4 Paneli na Żywo, Portale Web i Silnik v3.0 w 21 Językach**: **Pogoda**, **Wiadomości** (21 języków, 5 działów), **Ekonomia i Rynki**, **Centrum Piłkarskie (365Scores)**, domyślne portale (**YouTube TV**, **Google**, **CrazyGames**, **Poki**, **Playhop**, **EasyGames**), elastyczny górny pasek i lekki silnik v3.0 60 FPS.
 
 ### 🖥️ 1. Kinowy i Dynamiczny Ekran Główny
 * **Inteligentny Fokus i Powiększenie:** Karty ożywają po najechaniu dzięki świecącym obramowaniom, miękkim cieniom i dynamicznemu skalowaniu.

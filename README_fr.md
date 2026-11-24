@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v2.1
+# 📺 Salsa TV Launcher v3.0
 
 ![Écran d'accueil](docs/screenshots/home.png)
 
@@ -10,7 +10,7 @@
 *La solution tout-en-un qui remplace des dizaines d'applications séparées sur votre téléviseur.*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-2.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -39,17 +39,14 @@ La plupart des lanceurs Android TV actuels sont saturés de publicités imposée
 
 ## 🌟 Nouvelles fonctionnalités et améliorations récentes
 
-### 🆕 Nouveautés de la version 2.1
-* **🌐 Centre d'informations à 4 tableaux de bord en direct** : Accès direct depuis la barre supérieure à quatre écrans animés en plein écran :
-  * **☀️ Tableau Météo** : Localisation automatique par **GPS** et recherche de ville, courbe 24h, humidité/vent/pression/UV et prévisions sur 5 jours.
-  * **📰 Centre d'Actualités** : Flux RSS dédiés et distincts pour chacune des **21 langues** sur 5 rubriques (**À la Une, Politique, Économie, Technologie, Monde**) sans doublons, avec défilement automatique toutes les 10s.
-  * **📈 Économie & Marchés** : Indices boursiers mondiaux, taux Forex, matières premières & crypto, courbes 5 jours et calendrier économique personnalisable.
-  * **⚽ Centre Football (365Scores)** : Scores en direct, matchs du jour, classements, buteurs, catalogue élargi de clubs/ligues et probabilités de victoire.
-* **🖥️ Économiseurs d'écran interactifs & rotation automatique** : Affichez **Météo**, **Actualités**, **Économie**, **Football** ou **Rotation auto** (**Actualités 60s → Météo 10s → Économie 10s → Football 10s → retour aux Actualités à la rubrique suivante**). Le mode Actualités seul passe aussi automatiquement d'une rubrique à l'autre.
-* **📡 Économiseur de texte d'information (`Broadcast Text Showcase`)** : Bandeau d'actualités cinématique ligne par ligne sur fond Aurora assombri à 60%, alternant textes **blancs et jaunes**, badge `ON AIR`, lignes personnalisables, durée réglable (`3–15s`) et musique d'ambiance ou MP3 local en option.
-* **🎨 Réglages UI en direct (`Live UI Settings HUD`)** : Panneau flottant directement sur l'écran d'accueil pour ajuster fonds 4K, luminosité, décalage des apps, grille, transparence, horloge/date/salutation, barre supérieure, météo, filtre nocturne, Material You et mode léger **tout en voyant chaque réglage s'appliquer en temps réel sous vos yeux**.
-* **🧭 Barre supérieure adaptative & moteur v2.1 60 FPS** : Icônes jamais coupées, APK plus compact et qualité 4K intacte.
-* **🌍 Portails web par défaut & 21 langues** : Inclut **YouTube TV**, **Google (`google.com`)** et **4 portails de jeux** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**), avec traduction complète en **21 langues**.
+### 🆕 Nouveautés de la version 3.0
+* **📡 Économiseur de Texte Broadcast (6 Thèmes Animés, Fonds Sombres Dynamiques & Lecteur Vocal)** : 6 thèmes studio distincts avec animations, mises en page, décors et **arrière-plans sombres dynamiques propres à chaque thème** aux ombres colorées contrastées + aperçus en direct dans les Paramètres, lignes personnalisables (`3–15s`), **Lecteur Vocal (TTS)** qui attend la fin de la lecture avant d'avancer, et musique d'ambiance ou MP3 local en option.
+* **📺 Récupération Intelligente d'Erreur IPTV (`Chaîne suivante` + Nouvelle tentative après 15s)** : Lorsqu'une chaîne IPTV échoue, affiche un écran épuré avec une seule action ciblée (**Chaîne suivante**) et un **compte à rebours de 15 secondes** qui relance automatiquement la même chaîne sans action de l'utilisateur.
+* **🎨 Réglages UI en Direct (`Live UI Settings`) — Format d'Heure Direct** : Le panneau flottant sur l'écran d'accueil intègre désormais un sélecteur direct de **Format d'Heure** (**`24h • 22:00`** ou **`12h • AM/PM`**) à côté de la taille d'horloge et du format de date, en plus de l'aperçu temps réel des fonds 4K, luminosité, décalage, grille, transparence, salutations, météo, filtre nocturne, Material You et mode léger.
+* **🖥️ Économiseurs Tableaux de Bord & Lecture Vocale des Actualités** : Affichez **Météo**, **Actualités**, **Économie**, **Football** ou **Rotation auto** ; le mode Actualités prend en charge la **lecture vocale (TTS)** des 6 titres avant de basculer, avec pistes d'ambiance douces au choix.
+* **🌙 Délai par Défaut de l'Économiseur à 10 Minutes** : Le délai d'inactivité par défaut passe à **10 minutes** (réglable : 2, 5, 10, 15, 30 min ou Désactivé).
+* **🖱️ Souris Virtuelle Bord à Bord, Correctifs Télécommande & Version au Démarrage** : Le curseur virtuel dans les portails web et jeux atteint les bords haut et bas sans limite ; appui long fiable sur la télécommande TV sans ouverture accidentelle au relâchement ; nouvelle icône compacte **Salsa Store** ; mention discrète `v3.0` sur l'écran de démarrage ; et **mises à jour automatiques OTA via GitHub**.
+* **🌐 Centre à 4 Tableaux en Direct, Portails Web & Moteur v3.0 en 21 Langues** : Accès rapide à **Météo**, **Actualités** (21 langues, 5 rubriques), **Économie & Marchés** et **Football (365Scores)**, portails web par défaut (**YouTube TV**, **Google**, **CrazyGames**, **Poki**, **Playhop**, **EasyGames**), barre supérieure adaptative et moteur v3.0 60 FPS.
 
 ### ⚡ Performances extrêmes et réactivité immédiate
 * **Préchargement parallèle des icônes et bannières** : Toutes les applications et leurs bannières sont décodées simultanément en arrière-plan dès le lancement, s'affichant immédiatement à l'écran.

@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v2.1
+# 📺 Salsa TV Launcher v3.0
 
 ![Pantalla Principal](docs/screenshots/home.png)
 
@@ -10,7 +10,7 @@
 *La solución todo en uno que reemplaza docenas de aplicaciones independientes en tu televisor.*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-2.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -39,17 +39,14 @@ La mayoría de los lanzadores de Smart TV actuales están llenos de anuncios for
 
 ## 🌟 Novedades y últimas mejoras destacadas
 
-### 🆕 Novedades en la Versión 2.1
-* **🌐 Centro de 4 Paneles en Vivo**: Acceso directo desde la barra superior a cuatro paneles en pantalla completa con animación suave:
-  * **☀️ Panel del Clima**: Detección automática por **GPS** y búsqueda manual de ciudad, curva de 24h, humedad/viento/presión/UV y pronóstico de 5 días.
-  * **📰 Centro de Noticias**: Fuentes RSS independientes para los **21 idiomas** en 5 secciones (**Destacadas, Política, Economía, Tecnología, Mundo**) sin titulares duplicados y con rotación cada 10s.
-  * **📈 Economía y Mercados**: Índices bursátiles globales, divisas Forex, materias primas y cripto, gráficos de 5 días y calendario económico personalizable.
-  * **⚽ Centro de Fútbol (365Scores)**: Resultados en vivo, partidos del día, tablas, goleadores, catálogo ampliado de clubes/ligas y probabilidades de victoria.
-* **🖥️ Salvapantallas de Paneles y Rotación Automática**: Configura **Clima**, **Noticias**, **Economía**, **Fútbol** o **Rotar Todo** (**Noticias 60s → Clima 10s → Economía 10s → Fútbol 10s → vuelve a Noticias avanzando automáticamente a la siguiente sección**). El modo Noticias individual también avanza entre todas las secciones.
-* **📡 Salvapantallas Informativo de Texto (`Broadcast Text Showcase`)**: Rótulo animado estilo estudio de TV sobre el fondo Aurora atenuado al 60%, alternando líneas en **blanco y amarillo**, insignia `ON AIR`, textos editables, duración configurable (`3–15s`) y música ambiental o MP3 local opcional.
-* **🎨 Ajustes UI en Vivo (`Live UI Settings HUD`)**: Barra flotante directamente en la pantalla de inicio para ajustar fondos 4K, brillo, posición de apps, cuadrícula, opacidad, reloj/fecha/saludos, barra superior, clima, filtro nocturno, Material You y modo ligero **viendo cada cambio al instante en tiempo real sobre el inicio**.
-* **🧭 Barra Superior Adaptativa y Motor v2.1 a 60 FPS**: Iconos siempre visibles sin recortes, APK más ligero y máxima fluidez 4K.
-* **🌍 Portales Web Predeterminados y 21 Idiomas**: Incluye **YouTube TV**, **Google (`google.com`)** y **4 portales de juegos** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**), traducido completamente a **21 idiomas**.
+### 🆕 Novedades en la Versión 3.0
+* **📡 Salvapantallas de Texto Informativo (6 Temas Animados, Fondos Oscuros Dinámicos y Lector de Voz)**: 6 temas estilo estudio de TV con diseños, animaciones, detalles y **fondos oscuros dinámicos propios para cada tema** con sombras de colores contrastantes + vistas previas en vivo en Ajustes, líneas editables (`3–15s`), **Lector de Voz (TTS)** que espera a terminar la narración antes de avanzar, y música ambiental o MP3 local opcional.
+* **📺 Recuperación Inteligente de Errores IPTV (`Siguiente Canal` + Reintento en 15s)**: Cuando un canal IPTV no carga, muestra un aviso limpio con una sola acción enfocada en **Siguiente Canal** y una **cuenta regresiva de 15 segundos** que reintenta automáticamente el mismo canal si no se elige otra opción.
+* **🎨 Ajustes UI en Vivo (`Live UI Settings`) — Selector Directo de Formato de Hora**: La barra flotante sobre el inicio añade ahora un control directo de **Formato de Hora** (**`24h • 22:00`** vs **`12h • AM/PM`**) junto al tamaño del reloj y formato de fecha, además de vista previa instantánea para fondos 4K, brillo, posición de apps, cuadrícula, opacidad, saludos, clima, filtro nocturno, Material You y modo ligero.
+* **🖥️ Salvapantallas de Paneles y Lector de Voz para Noticias**: Configura **Clima**, **Noticias**, **Economía**, **Fútbol** o **Rotar Todo**; el modo Noticias admite **Lector de Voz (TTS)** que lee las 6 noticias antes de cambiar de panel, junto con música ambiental suave seleccionable.
+* **🌙 Tiempo Predeterminado del Salvapantallas de 10 Minutos**: El tiempo de inactividad predeterminado ahora es de **10 minutos** (configurable: 2, 5, 10, 15, 30 min o Desactivado).
+* **🖱️ Ratón Virtual de Borde a Borde, Mejoras del Control Remoto y Versión en Inicio**: El cursor virtual en portales web y juegos HTML5 alcanza los bordes superior e inferior por completo; corrección de pulsación prolongada en el mando de TV sin abrir apps por error al soltar; icono compacto renovado de **Salsa Store**; sutil indicador `v3.0` en la pantalla de arranque; y **actualizaciones automáticas OTA desde GitHub**.
+* **🌐 Centro de 4 Paneles en Vivo, Portales Web y Motor v3.0 en 21 Idiomas**: Acceso directo a **Clima**, **Noticias** (21 idiomas, 5 secciones), **Economía y Mercados** y **Fútbol (365Scores)**, portales predeterminados (**YouTube TV**, **Google**, **CrazyGames**, **Poki**, **Playhop**, **EasyGames**), barra superior sin recortes y motor v3.0 ligero a 60 FPS.
 
 ### ⚡ Rendimiento extremo y respuesta inmediata
 * **Aparición instantánea de iconos y banners**: Todo el catálogo de apps se procesa en segundo plano en paralelo a través de los núcleos de la CPU, mostrándose de inmediato sin congelamientos.

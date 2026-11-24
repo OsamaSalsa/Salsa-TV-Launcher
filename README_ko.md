@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v2.1
+# 📺 Salsa TV Launcher v3.0
 
 ![홈 화면](docs/screenshots/home.png)
 
@@ -10,7 +10,7 @@
 *기기에 설치된 수십 개의 개별 앱을 하나로 대체하는 올인원 TV 솔루션입니다.*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-2.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -39,17 +39,14 @@
 
 ## 🌟 새로운 기능 및 최신 개선 사항
 
-### 🆕 버전 2.1 새로운 기능
-* **🌐 4대 실시간 정보 대시보드 허브**: 상단 바에서 부드러운 배경 모션이 적용된 4개의 전체 화면 대시보드에 바로 접근:
-  * **☀️ 날씨 대시보드**: **GPS** 자동 위치 감지 및 도시 검색, 24시간 기온 그래프, 습도/바람/기압/자외선 및 5일 예보.
-  * **📰 뉴스 센터**: **21개 모든 언어**별로 중복 없는 독립 RSS 피드(**주요 뉴스, 정치, 경제, 기술, 세계** 5개 섹션)를 제공하며 10초마다 자동 기사 전환.
-  * **📈 경제 및 시장**: 글로벌 주가지수, 환율(Forex), 원자재/암호화폐, 5일 추이 차트 및 맞춤형 경제 캘린더.
-  * **⚽ 축구 센터 (365Scores)**: 실시간 스코어, 오늘의 경기, 순위표, 득점 순위, 확장된 클럽/리그 목록 및 승리 확률.
-* **🖥️ 대시보드 화면보호기 및 자동 순환 모드**: **날씨**, **뉴스**, **경제**, **축구** 또는 **전체 자동 순환**(**뉴스 60초 → 날씨 10초 → 경제 10초 → 축구 10초 → 뉴스로 돌아올 때마다 다음 섹션으로 자동 전환**)을 지원하며, 단독 뉴스 모드도 5개 섹션을 자동 순회합니다.
-* **📡 방송 스타일 텍스트 뉴스 화면보호기 (`Broadcast Text Showcase`)**: 60% 어둡게 처리된 오로라 배경 위에서 **흰색과 노란색**이 번갈아 나타나는 스튜디오 모션 문구, `ON AIR` 배지, 사용자 문구 편집/추가/삭제, 줄별 표시 시간(`3~15초`), 배경 음악/로컬 MP3 재생을 지원합니다.
-* **🎨 실시간 UI 설정 HUD (즉시 라이브 미리보기)**: 홈 화면 위에 뜨는 투명 설정 바에서 4K 배경화면, 밝기, 앱 세로 위치, 행당 개수, 글래스 투명도, 시계/날짜/인사말, 상단 바, 날씨 표시, 야간 눈 보호 필터, Material You, 저사양 모드를 **홈 화면이 실시간으로 바뀌는 모습을 바로 보면서** 조절할 수 있습니다.
-* **🧭 잘림 없는 상단 바 & 가볍고 빠른 v2.1 엔진**: 상단 아이콘 잘림 현상을 해결하고 4K 화질 그대로 더 작은 APK 용량과 60FPS 부드러움을 제공합니다.
-* **🌍 기본 웹 포털 & 21개 언어 지원**: **YouTube TV**, **Google(`google.com`)**, **4개 게임 포털**(**CrazyGames**, **Poki**, **Playhop**, **EasyGames**)을 기본 제공하며 **21개 언어**를 100% 지원합니다.
+### 🆕 버전 3.0 새로운 기능
+* **📡 방송 텍스트 화면보호기 (6가지 애니메이션 테마, 어두운 동적 배경 & 음성 읽기)**: 각기 다른 모션·레이아웃과 대비되는 컬러 그림자가 살아 움직이는 **테마별 전용 어두운 동적 배경**을 갖춘 6종 스튜디오 테마 + 설정 내 실시간 미리보기, 문구 편집 및 표시 시간(`3~15초`), 낭독이 끝날 때까지 기다려 넘어가는 **음성 읽기(TTS)**, 부드러운 배경음 또는 로컬 MP3 지원.
+* **📺 IPTV 스마트 오류 복구 (`다음 채널` + 15초 자동 재시도)**: IPTV 채널 재생 실패 시 **다음 채널** 버튼 하나에만 포커스된 깔끔한 화면과 **15초 카운트다운**을 표시하며, 선택하지 않으면 같은 채널을 자동으로 다시 시도합니다.
+* **🎨 실시간 UI 설정 HUD (`Live UI Settings`) — 시계 형식 바로 전환**: 홈 화면 투명 설정 바의 시계 크기와 날짜 형식 바로 옆에 **시계 형식(`24시간 • 22:00` / `12시간 • AM/PM`)** 전환을 직접 추가했으며 4K 배경, 밝기, 앱 위치, 그리드, 투명도, 인사말, 날씨, 야간 필터, Material You, 저사양 모드를 실시간 미리보기로 조절할 수 있습니다.
+* **🖥️ 대시보드 화면보호기 & 뉴스 음성 읽기**: **날씨**, **뉴스**, **경제**, **축구** 또는 **전체 자동 순환**을 지원하며, 뉴스 모드는 6개 기사를 모두 읽어준 뒤 전환하는 **음성 읽기(TTS)**와 잔잔한 배경 음악을 제공합니다.
+* **🌙 기본 화면보호기 대기 시간 10분으로 변경**: 기본 비활성 대기 시간을 **10분**으로 변경했습니다 (2, 5, 10, 15, 30분 또는 사용 안 함으로 설정 가능).
+* **🖱️ 상하 끝까지 닿는 가상 마우스, 리모컨 수정 & 시작 화면 버전 표시**: 웹 포털과 HTML5 게임에서 가상 마우스가 화면 최상단·최하단까지 완벽하게 이동합니다. TV 리모컨 길게 누르기 해제 시 오작동 실행 방지, 깔끔한 새 **Salsa Store** 아이콘, 시작 스플래시 화면 하단의 세련된 `v3.0` 버전 표시 및 **GitHub OTA 자동 업데이트** 지원.
+* **🌐 4대 실시간 대시보드, 기본 웹 포털 & 21개 언어 v3.0 엔진**: **날씨**, **뉴스**(21개 언어 5개 섹션), **경제 및 시장**, **축구(365Scores)**, 기본 포털(**YouTube TV**, **Google**, **CrazyGames**, **Poki**, **Playhop**, **EasyGames**), 잘림 없는 상단 바 및 가볍고 빠른 60FPS v3.0 엔진.
 
 ### ⚡ 극강의 성능과 즉각적인 앱 실행
 * **아이콘 및 배너 병렬 프리로딩**: 앱 패키지, 아이콘 및 배너를 백그라운드 멀티코어 CPU에서 동시에 디코딩하여 실행 시 멈춤 없이 즉시 표시합니다.

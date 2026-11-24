@@ -7,7 +7,7 @@
 **Ervaar de toekomst van home-entertainment met een moderne, razendsnelle en filmische tv-interface.**
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-2.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
@@ -35,17 +35,14 @@ Speciaal ontworpen voor tv-afstandsbedieningen (D-Pad-navigatie), waarbij elke a
 
 ## 🚀 Belangrijkste Functies
 
-### 🆕 Nieuw in Versie 2.1
-* **🌐 Live 4-Dashboard Informatiecentrum**: Directe toegang vanaf de bovenbalk tot vier vloeiend geanimeerde schermen:
-  * **☀️ Weer-dashboard**: Automatische **GPS**-locatiedetectie en stadzoeken, 24-uurscurve, vochtigheid/wind/druk/UV en 5-daagse voorspelling.
-  * **📰 Nieuws-centrum**: Aparte RSS-feeds voor alle **21 talen** verdeeld over 5 rubrieken (**Hoofdpunten, Politiek, Economie, Technologie, Wereld**) zonder dubbele koppen en met automatische wissel elke 10s.
-  * **📈 Economie & Markten**: Wereldwijde beursindices, Forex, grondstoffen & crypto, 5-daagse grafieken en aanpasbare economische kalender.
-  * **⚽ Voetbalcentrum (365Scores)**: Live standen, wedstrijden van vandaag, ranglijsten, topscorers, uitgebreid club-/competitieoverzicht en winkansen.
-* **🖥️ Slimme Dashboard-screensavers & Automatisch Wisselen**: Toon **Weer**, **Nieuws**, **Economie**, **Voetbal** of **Alles automatisch wisselen** (**Nieuws 60s → Weer 10s → Economie 10s → Voetbal 10s → terug naar Nieuws in de volgende rubriek**). De losse Nieuws-screensaver wisselt ook automatisch tussen alle 5 rubrieken.
-* **📡 Nieuwsticker-tekstscreensaver (`Broadcast Text Showcase`)**: Dynamische tv-studioregels op een 60% gedimde Aurora-achtergrond met afwisselend **witte en gele** koppen, `ON AIR`-badge, bewerkbare regels, instelbare duur (`3–15s`) en optionele achtergrondmuziek of lokale MP3.
-* **🎨 Live UI-instellingen (`Live UI Settings HUD`)**: Zwevend menu direct op het startscherm om 4K-achtergronden, helderheid, rijhoogte, rasterdichtheid, glastransparantie, klok/datum/begroeting, bovenbalk, weer, nachtfilter, Material You en Lite-modus aan te passen **terwijl u elk resultaat direct live ziet**.
-* **🧭 Responsieve Bovenbalk & Snellere v2.1-engine**: Geen afgesneden pictogrammen, compactere APK en vloeiende 60 FPS met 4K-kwaliteit.
-* **🌍 Standaard Webportalen & 21 Talen**: Bevat **YouTube TV**, **Google (`google.com`)** en **4 gameportalen** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**), volledig vertaald in **21 talen**.
+### 🆕 Nieuw in Versie 3.0
+* **📡 Broadcast Tekst-screensaver (6 Geanimeerde Thema's, Donkere Dynamische Achtergronden & Voorleesfunctie)**: 6 unieke studiothema's met eigen animaties, lay-outs en **per thema een donkere dynamische achtergrond met wisselende gekleurde schaduwen** + live voorbeelden in Instellingen, bewerkbare regels (`3–15s`), **Spraaklezer (TTS)** die wacht tot het voorlezen klaar is en optionele achtergrondmuziek of lokale MP3.
+* **📺 IPTV Slim Foutbeheer (`Volgende Zender` + 15s Auto-Opnieuw)**: Wanneer een IPTV-zender niet laadt, verschijnt een overzichtelijke melding met één gefocuste knop (**Volgende Zender**) en een **afteltimer van 15 seconden** die dezelfde zender automatisch opnieuw probeert als er niets wordt gekozen.
+* **🎨 Live UI-instellingen (`Live UI Settings`) — Directe Kloknotatie**: Het zwevende menu op het startscherm bevat nu een directe keuze voor **Kloknotatie** (**`24u • 22:00`** / **`12u • AM/PM`**) naast klokgrootte en datumnotatie, plus live voorbeeld voor 4K-achtergronden, helderheid, rijhoogte, raster, transparantie, begroeting, weer, nachtfilter, Material You en Lite-modus.
+* **🖥️ Dashboard-screensavers & Nieuws-voorleesfunctie**: Toon **Weer**, **Nieuws**, **Economie**, **Voetbal** of **Alles automatisch wisselen**; de Nieuws-screensaver biedt **Spraaklezer (TTS)** voor alle 6 berichten vóór het wisselen en zachte achtergrondmuziek naar keuze.
+* **🌙 Standaard Screensaver-time-out van 10 Minuten**: Standaard inactiviteitstijd gewijzigd naar **10 minuten** (instelbaar: 2, 5, 10, 15, 30 min of Uitgeschakeld).
+* **🖱️ Virtuele Muis van Rand tot Rand, Afstandsbediening-fixes & Versie op Startscherm**: De virtuele cursor in webportalen en HTML5-games bereikt soepel de boven- en onderrand; betrouwbaar lang indrukken op de tv-afstandsbediening zonder per ongeluk openen bij loslaten; nieuw compact **Salsa Store**-icoon; subtiele `v3.0`-versie onderaan het opstartscherm en **automatische GitHub OTA-updates**.
+* **🌐 Live 4-Dashboard Centrum, Webportalen & v3.0-engine in 21 Talen**: **Weer**, **Nieuws** (21 talen, 5 rubrieken), **Economie & Markten**, **Voetbal (365Scores)**, standaard webportalen (**YouTube TV**, **Google**, **CrazyGames**, **Poki**, **Playhop**, **EasyGames**), responsieve bovenbalk en snelle 60 FPS v3.0-engine.
 
 ### 🖥️ 1. Filmisch en Dynamisch Startscherm
 * **Slimme Focus met Zoom:** Kaarten komen tot leven wanneer ze worden geselecteerd met oplichtende randen, zachte schaduwen en dynamische schaling.

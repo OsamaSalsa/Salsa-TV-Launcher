@@ -7,7 +7,7 @@
 **Trải nghiệm tương lai của giải trí gia đình với giao diện TV hiện đại, siêu mượt và đậm chất điện ảnh.**
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-2.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
@@ -35,17 +35,14 @@
 
 ## 🚀 Tính Năng Nổi Bật
 
-### 🆕 Tính Năng Mới ở Phiên Bản 2.1
-* **🌐 Trung Tâm 4 Bảng Thông Tin Trực Tiếp**: Truy cập nhanh từ thanh trên cùng vào bốn màn hình có hiệu ứng chuyển động mượt mà:
-  * **☀️ Bảng Thời Tiết**: Tự động định vị bằng **GPS** & tìm kiếm thành phố, biểu đồ 24 giờ, độ ẩm/gió/áp suất/UV và dự báo 5 ngày.
-  * **📰 Trung Tâm Tin Tức**: Nguồn RSS riêng biệt cho cả **21 ngôn ngữ** qua 5 chuyên mục (**Tin nổi bật, Chính trị, Kinh tế, Công nghệ, Thế giới**) không trùng lặp tiêu đề, tự động chuyển bài mỗi 10 giây.
-  * **📈 Kinh Tế & Thị Trường**: Chỉ số chứng khoán toàn cầu, tỷ giá Forex, hàng hóa & tiền số, biểu đồ 5 ngày và lịch kinh tế tùy chỉnh.
-  * **⚽ Trung Tâm Bóng Đá (365Scores)**: Tỷ số trực tiếp, lịch đấu hôm nay, bảng xếp hạng, vua phá lưới, danh sách CLB/giải đấu mở rộng và xác suất thắng.
-* **🖥️ Trình Bảo Vệ Màn Hình Bảng Trực Tiếp & Tự Động Luân Phiên**: Hiển thị **Thời tiết**, **Tin tức**, **Kinh tế**, **Bóng đá** hoặc **Luân phiên tất cả** (**Tin tức 60s → Thời tiết 10s → Kinh tế 10s → Bóng đá 10s → quay lại Tin tức và tự động chuyển sang chuyên mục tiếp theo**). Chế độ Tin tức riêng cũng tự động qua cả 5 chuyên mục.
-* **📡 Bảo Vệ Màn Hình Tin Chữ Phát Sóng (`Broadcast Text Showcase`)**: Dòng tin chuyển động kiểu trường quay trên nền Aurora tối 60%, luân phiên chữ **trắng & vàng**, nhãn `ON AIR`, tùy chỉnh từng dòng chữ, chỉnh thời lượng (`3–15s`) và nhạc nền hoặc MP3 tùy chọn.
-* **🎨 Cài Đặt Giao Diện Trực Tiếp (`Live UI Settings HUD`)**: Thanh nổi ngay trên màn hình chính để tùy chỉnh hình nền 4K, độ sáng, vị trí ứng dụng, số cột, độ mờ kính, đồng hồ/ngày/lời chào, thanh trên, thời tiết, lọc ban đêm, Material You và chế độ nhẹ **với xem trước thay đổi trực tiếp ngay lập tức trên màn hình chính**.
-* **🧭 Thanh Trên Không Bị Cắt & Động Cơ v2.1 60 FPS**: Biểu tượng luôn hiển thị đầy đủ, APK gọn hơn với chất lượng 4K nguyên vẹn.
-* **🌍 Cổng Web Mặc Định & 21 Ngôn Ngữ**: Bao gồm **YouTube TV**, **Google (`google.com`)** và **4 cổng game** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**), dịch đầy đủ **21 ngôn ngữ**.
+### 🆕 Tính Năng Mới ở Phiên Bản 3.0
+* **📡 Bảo Vệ Màn Hình Tin Chữ Broadcast (6 Chủ Đề Động, Nền Tối Động & Đọc Giọng Nói)**: 6 chủ đề trường quay riêng biệt với chuyển động, bố cục và **nền tối động riêng cho từng chủ đề** kèm đổ bóng đổi màu tương phản + ảnh xem trước trực tiếp trong Cài đặt, dòng chữ tùy chỉnh (`3–15s`), **Đọc Giọng Nói (TTS)** chờ đọc xong mới chuyển câu, cùng nhạc nền êm dịu hoặc MP3 cục bộ tùy chọn.
+* **📺 Khôi Phục Lỗi IPTV Thông Minh (`Kênh Tiếp Theo` + Tự Thử Lại Sau 15s)**: Khi kênh IPTV không phát được, hiển thị giao diện gọn gàng chỉ có nút **Kênh Tiếp Theo** kèm **đếm ngược 15 giây** tự động thử phát lại cùng kênh đó nếu người dùng không chọn.
+* **🎨 Cài Đặt Giao Diện Trực Tiếp (`Live UI Settings`) — Chuyển Định Dạng Giờ Trực Tiếp**: Thanh nổi ngay trên màn hình chính bổ sung nút chọn **Định Dạng Giờ** (**`24h • 22:00`** / **`12h • AM/PM`**) ngay cạnh kích thước đồng hồ và định dạng ngày, cùng xem trước thời gian thực hình nền 4K, độ sáng, vị trí ứng dụng, số cột, độ mờ kính, lời chào, thời tiết, lọc ban đêm, Material You và chế độ nhẹ.
+* **🖥️ Bảo Vệ Màn Hình Bảng Trực Tiếp & Đọc Tin Tức Bằng Giọng Nói**: Hiển thị **Thời tiết**, **Tin tức**, **Kinh tế**, **Bóng đá** hoặc **Luân phiên tất cả**; chế độ Tin tức hỗ trợ **Đọc Giọng Nói (TTS)** đọc xong cả 6 tin rồi mới chuyển bảng, kèm nhạc nền nhẹ tùy chọn.
+* **🌙 Thời Gian Chờ Bảo Vệ Màn Hình Mặc Định 10 Phút**: Thời gian chờ mặc định được nâng lên **10 phút** (tùy chỉnh: 2, 5, 10, 15, 30 phút hoặc Tắt).
+* **🖱️ Chuột Ảo Tràn Viền, Sửa Lỗi Remote TV & Số Phiên Bản Màn Hình Khởi Động**: Con trỏ chuột ảo trong cổng web và game HTML5 chạm tới trọn vẹn mép trên và mép dưới; nhấn giữ nút điều khiển TV chính xác không mở nhầm ứng dụng khi thả tay; biểu tượng **Salsa Store** gọn đẹp mới; dòng phiên bản `v3.0` tinh tế ở màn hình khởi động và **tự động cập nhật GitHub OTA**.
+* **🌐 Trung Tâm 4 Bảng Trực Tiếp, Cổng Web & Động Cơ v3.0 21 Ngôn Ngữ**: **Thời tiết**, **Tin tức** (21 ngôn ngữ, 5 chuyên mục), **Kinh tế & Thị trường**, **Bóng đá (365Scores)**, cổng mặc định (**YouTube TV**, **Google**, **CrazyGames**, **Poki**, **Playhop**, **EasyGames**), thanh trên không cắt mép và động cơ v3.0 60 FPS.
 
 ### 🖥️ 1. Màn Hình Chính Điện Ảnh & Sống Động
 * **Hiệu Ứng Tiêu Điểm Thông Minh:** Các thẻ ứng dụng trở nên sống động khi được chọn với viền phát sáng, đổ bóng mềm mại và phóng to mượt mà.

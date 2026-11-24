@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v2.1
+# 📺 Salsa TV Launcher v3.0
 
 ![主屏幕](docs/screenshots/home.png)
 
@@ -10,7 +10,7 @@
 *一体化的电视解决方案，取代设备上数十个独立的应用程序。*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-2.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -39,17 +39,14 @@
 
 ## 🌟 新特性与最新优化
 
-### 🆕 2.1 版本全新特性
-* **🌐 4 大实时信息看板中心**：通过顶部栏一键进入四个带柔和动态背景的全屏电视看板：
-  * **☀️ 天气看板**：支持 **GPS** 自动定位与城市搜索、24 小时气温曲线、湿度/风速/气压/UV 指标及 5 天预报。
-  * **📰 新闻中心**：为全部 **21 种语言**提供独立的原生 RSS 新闻源，覆盖 5 大栏目（**头条、政治、财经、科技、国际**），跨栏目零重复，每 10 秒自动切换新闻。
-  * **📈 财经与市场看板**：全球股市指数、外汇（Forex）、大宗商品与加密货币、5 日走势及可自定义财经日历。
-  * **⚽ 足球中心（365Scores）**：实时比分、今日赛程、积分榜、射手榜、扩展俱乐部与联赛列表及胜率预测。
-* **🖥️ 智能看板屏保与自动轮播模式**：支持将 **天气**、**新闻**、**财经**、**足球** 设为屏保，或开启 **自动轮播全部**（**新闻 60 秒 → 天气 10 秒 → 财经 10 秒 → 足球 10 秒 → 返回新闻时自动切换至下一个栏目**）；单独的新闻屏保也会自动轮播全部 5 个栏目。
-* **📡 广电级文字资讯屏保（`Broadcast Text Showcase`）**：在 60% 暗化的动态极光壁纸上以演播室动画逐行滚动播报多行标题，**白色与黄色**交替高亮显示，带 `ON AIR` 直播徽章，支持自定义编辑/增删行文、调节每行停留时长（`3–15 秒`）以及内置环境音乐或本地 MP3 背景音频。
-* **🎨 实时界面设置 HUD（所见即所得实时预览）**：直接在主屏幕弹出透明控制条，可随时调整 4K 壁纸、亮度、应用纵移位置、网格密度、毛玻璃透明度、时钟/日期/问候语、顶部栏图标、天气开关、夜间护眼滤镜、Material You 动态取色与低内存模式，**每一项调节都能立即在主屏幕上实时呈现**。
-* **🧭 防裁剪顶部栏与更轻快的 v2.1 引擎**：顶部图标永不遮挡裁剪，APK 更小巧且保持 4K 画质与 60 FPS 流畅度。
-* **🌍 默认网页门户与 21 种语言支持**：默认网页快捷方式涵盖 **YouTube TV**、**Google（`google.com`）** 与 **4 大游戏门户**（**CrazyGames**、**Poki**、**Playhop**、**EasyGames**），并支持自定义书签与 **21 种语言** 100% 本地化。
+### 🆕 3.0 版本全新特性
+* **📡 广电级文字资讯屏保（6 套动态主题、专属深色动态背景与语音朗读）**：6 套风格迥异的演播室动画主题，每套均配备**专属深色动态背景与对比色流动光影** + 设置页实时缩略图预览，支持自由编辑行文与时长（`3–15 秒`）、等待朗读完毕再切换的 **TTS 语音朗读**，以及柔和环境音乐或本地 MP3 背景音频。
+* **📺 IPTV 智能故障恢复（`下一频道` + 15 秒自动重试）**：当 IPTV 频道加载失败时，弹出简洁界面并仅聚焦 **下一频道** 按钮，同时显示 **15 秒倒计时**；若未选择，将自动重新尝试加载当前频道。
+* **🎨 实时界面设置 HUD（`Live UI Settings`）— 新增时间制式直选**：主屏浮动透明控制条现已在时钟大小与日期格式旁直接加入 **时间制式** 切换（**`24 小时 • 22:00`** / **`12 小时 • AM/PM`**），同时支持 4K 壁纸、亮度、纵移位置、网格密度、毛玻璃透明度、问候语、天气、夜间护眼、Material You 与低内存模式的实时预览。
+* **🖥️ 智能看板屏保与新闻语音播报**：支持 **天气**、**新闻**、**财经**、**足球** 或 **全部自动轮播**；新闻屏保支持 **语音朗读（TTS）** 完整播报全部 6 条新闻后再切换画面，并可选柔和环境背景音。
+* **🌙 默认屏保等待时间调整为 10 分钟**：默认无操作启动时长更新为 **10 分钟**（支持 2、5、10、15、30 分钟或关闭交由系统接管）。
+* **🖱️ 全屏边缘虚拟鼠标、电视遥控器修复与启动页版本号**：网页门户与 HTML5 游戏中的虚拟鼠标可顺畅触达屏幕最顶与最底边缘；修复遥控器长按松手后误启动应用的问题；焕新紧凑版 **Salsa Store** 图标；蓝色启动画面底部新增精致 `v3.0` 版本标识；支持旧版本通过 **GitHub OTA 自动升级**。
+* **🌐 4 大实时信息看板、默认网页门户与 21 种语言 v3.0 引擎**：全屏 **天气**、**新闻**（21 种语言 5 大栏目）、**财经与市场**、**足球（365Scores）**，默认包含 **YouTube TV**、**Google** 及 **4 大游戏门户**，防裁剪顶部栏与轻快 60 FPS v3.0 引擎。
 
 ### ⚡ 极致性能与秒级响应
 * **图标与横幅并行预加载**：后台利用多核 CPU 并发解码应用包、图标和横幅，启动时瞬间呈现在屏幕上。

@@ -7,7 +7,7 @@
 **Experimente o futuro do entretenimento doméstico com uma interface de TV moderna, ultrarrápida e cinematográfica.**
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-2.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
@@ -35,17 +35,14 @@ Projetado especificamente para controles remotos de TV (navegação D-Pad), cada
 
 ## 🚀 Principais Recursos
 
-### 🆕 Novidades na Versão 2.1
-* **🌐 Central com 4 Painéis ao Vivo**: Acesso direto pela barra superior a quatro painéis em tela cheia com animações suaves:
-  * **☀️ Painel do Clima**: Localização automática via **GPS** e busca manual de cidades, curva de 24h, umidade/vento/pressão/UV e previsão de 5 dias.
-  * **📰 Central de Notícias**: Feeds RSS independentes para todos os **21 idiomas** em 5 seções (**Destaques, Política, Economia, Tecnologia, Mundo**) sem manchetes repetidas e com rotação a cada 10s.
-  * **📈 Economia e Mercados**: Índices globais, Forex, commodities e cripto, gráficos de 5 dias e calendário econômico personalizável.
-  * **⚽ Centro de Futebol (365Scores)**: Placares ao vivo, jogos do dia, tabelas, artilheiros, catálogo ampliado de clubes/ligas e probabilidades de vitória.
-* **🖥️ Protetor de Tela com Painéis e Rotação Automática**: Exiba **Clima**, **Notícias**, **Economia**, **Futebol** ou **Alternar Tudo** (**Notícias 60s → Clima 10s → Economia 10s → Futebol 10s → volta para Notícias avançando automaticamente para a próxima seção**). O modo Notícias individual também avança entre todas as 5 seções.
-* **📡 Protetor de Tela Informativo em Texto (`Broadcast Text Showcase`)**: Letreiro animado estilo estúdio de TV sobre o fundo Aurora escurecido em 60%, alternando linhas em **branco e amarelo**, selo `ON AIR`, textos editáveis, tempo ajustável (`3–15s`) e música ambiente ou MP3 local opcional.
-* **🎨 Ajustes Visuais ao Vivo (`Live UI Settings HUD`)**: Barra flutuante diretamente na Tela Inicial para alterar papéis de parede 4K, brilho, altura dos apps, grade, transparência, relógio/data/saudações, barra superior, clima, filtro noturno, Material You e modo leve **com visualização imediata em tempo real na própria Tela Inicial**.
-* **🧭 Barra Superior Responsiva & Motor v2.1 60 FPS**: Ícones superiores sempre visíveis sem cortes, APK menor e qualidade 4K preservada.
-* **🌍 Portais Padrão & 21 Idiomas**: Inclui **YouTube TV**, **Google (`google.com`)** e **4 portais de jogos** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**), com tradução completa em **21 idiomas**.
+### 🆕 Novidades na Versão 3.0
+* **📡 Protetor de Tela de Texto Broadcast (6 Temas Animados, Fundos Escuros Dinâmicos e Leitor de Voz)**: 6 temas estilo estúdio com animações, layouts e **fundos escuros dinâmicos exclusivos para cada tema** com sombras coloridas contrastantes + pré-visualizações ao vivo nas Configurações, linhas editáveis (`3–15s`), **Leitor de Voz (TTS)** que aguarda o fim da narração antes de avançar e música ambiente ou MP3 local opcional.
+* **📺 Recuperação Inteligente de Erro IPTV (`Próximo Canal` + Nova Tentativa em 15s)**: Quando um canal IPTV falha, exibe um aviso limpo com apenas uma opção focada (**Próximo Canal**) e uma **contagem regressiva de 15 segundos** que tenta novamente o mesmo canal automaticamente se nada for selecionado.
+* **🎨 Ajustes Visuais ao Vivo (`Live UI Settings`) — Formato de Hora Direto**: Barra flutuante na Tela Inicial agora com seletor direto de **Formato de Hora** (**`24h • 22:00`** vs **`12h • AM/PM`**) ao lado do tamanho do relógio e formato da data, além de prévia em tempo real de papéis de parede 4K, brilho, altura dos apps, grade, transparência, saudações, clima, filtro noturno, Material You e modo leve.
+* **🖥️ Protetor de Tela com Painéis e Leitor de Voz nas Notícias**: Exiba **Clima**, **Notícias**, **Economia**, **Futebol** ou **Alternar Tudo**; o modo Notícias conta com **Leitor de Voz (TTS)** que conclui a leitura dos 6 itens antes de trocar de tela e trilhas ambientes suaves selecionáveis.
+* **🌙 Tempo Padrão do Protetor de Tela de 10 Minutos**: Tempo padrão de inatividade atualizado para **10 minutos** (ajustável: 2, 5, 10, 15, 30 min ou Desativado).
+* **🖱️ Mouse Virtual de Borda a Borda, Correções no Controle e Versão na Tela Inicial**: O cursor virtual em portais web e jogos HTML5 alcança perfeitamente as bordas superior e inferior; toque longo confiável no controle da TV sem abrir apps por engano ao soltar; novo ícone compacto da **Salsa Store**; indicador discreto `v3.0` na tela de abertura; e **atualizações automáticas OTA via GitHub**.
+* **🌐 Central com 4 Painéis ao Vivo, Portais Web & Motor v3.0 em 21 Idiomas**: Acesso direto a **Clima**, **Notícias** (21 idiomas, 5 seções), **Economia e Mercados** e **Futebol (365Scores)**, portais padrão (**YouTube TV**, **Google**, **CrazyGames**, **Poki**, **Playhop**, **EasyGames**), barra superior responsiva e motor v3.0 a 60 FPS.
 
 ### 🖥️ 1. Tela Inicial Cinematográfica e Dinâmica
 * **Foco Inteligente com Zoom:** Os cartões ganham vida ao receber foco com bordas iluminadas, elevação suave e escalonamento dinâmico.

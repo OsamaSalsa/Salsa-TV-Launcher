@@ -7,7 +7,7 @@
 **Rasakan masa depan hiburan rumah dengan antarmuka TV yang modern, super cepat, dan sinematik.**
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-2.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
@@ -35,17 +35,14 @@ Dirancang khusus untuk remote TV (navigasi D-Pad), setiap animasi, efek fokus, d
 
 ## 🚀 Fitur Utama
 
-### 🆕 Yang Baru di Versi 2.1
-* **🌐 Pusat 4 Dasbor Langsung**: Akses langsung dari bilah atas ke empat layar penuh dengan animasi halus:
-  * **☀️ Dasbor Cuaca**: Deteksi lokasi otomatis via **GPS** & pencarian kota, grafik 24 jam, kelembapan/angin/tekanan/UV, dan prakiraan 5 hari.
-  * **📰 Pusat Berita**: Umpan RSS terpisah untuk semua **21 bahasa** di 5 bagian (**Berita Utama, Politik, Ekonomi, Teknologi, Dunia**) tanpa berita duplikat dan berganti otomatis setiap 10 detik.
-  * **📈 Ekonomi & Pasar**: Indeks saham global, kurs Forex, komoditas & kripto, grafik 5 hari, dan kalender ekonomi yang dapat disesuaikan.
-  * **⚽ Pusat Sepak Bola (365Scores)**: Skor langsung, jadwal hari ini, klasemen, top skor, katalog klub/liga yang diperluas, dan peluang menang.
-* **🖥️ Mode Screensaver Dasbor & Putar Otomatis**: Tampilkan **Cuaca**, **Berita**, **Ekonomi**, **Sepak Bola**, atau **Putar Semua** (**Berita 60d → Cuaca 10d → Ekonomi 10d → Sepak Bola 10d → kembali ke Berita dengan otomatis berpindah ke kategori berikutnya**). Mode Berita tunggal juga berlanjut otomatis ke semua 5 kategori.
-* **📡 Screensaver Teks Siaran (`Broadcast Text Showcase`)**: Teks berita bergaya studio TV di atas latar Aurora redup 60%, bergantian warna **putih & kuning**, lencana `ON AIR`, baris teks dapat diedit, durasi tampil (`3–15d`), serta musik latar atau MP3 lokal opsional.
-* **🎨 Pengaturan UI Langsung (`Live UI Settings HUD`)**: Panel melayang langsung di layar utama untuk mengatur wallpaper 4K, kecerahan, posisi aplikasi, kepadatan kisi, transparansi kaca, jam/tanggal/sapaan, bilah atas, cuaca, mode malam, Material You, dan mode ringan **sambil melihat setiap perubahan secara langsung (real-time) di layar beranda**.
-* **🧭 Bilah Atas Responsif & Mesin v2.1 60 FPS**: Semua ikon tampil utuh tanpa terpotong, ukuran APK lebih kecil dengan kualitas 4K tetap terjaga.
-* **🌍 Portal Web Bawaan & 21 Bahasa**: Mencakup **YouTube TV**, **Google (`google.com`)**, dan **4 portal game** (**CrazyGames**, **Poki**, **Playhop**, **EasyGames**) dengan terjemahan penuh **21 bahasa**.
+### 🆕 Yang Baru di Versi 3.0
+* **📡 Screensaver Teks Siaran (6 Tema Animasi, Latar Gelap Dinamis & Pembaca Suara)**: 6 tema studio unik dengan gerakan, tata letak, dan **latar belakang gelap dinamis khusus untuk setiap tema** beserta bayangan warna kontras + pratinjau langsung di Pengaturan, baris teks dapat diedit (`3–15d`), **Pembaca Suara (TTS)** yang menunggu narasi selesai sebelum berpindah, serta musik latar lembut atau MP3 lokal opsional.
+* **📺 Pemulihan Error IPTV Cerdas (`Saluran Berikutnya` + Coba Lagi 15d)**: Saat saluran IPTV gagal dimuat, menampilkan layar bersih dengan satu tombol fokus (**Saluran Berikutnya**) dan **hitung mundur 15 detik** yang otomatis mencoba ulang saluran yang sama jika tidak dipilih.
+* **🎨 Pengaturan UI Langsung (`Live UI Settings`) — Format Jam Langsung**: Panel melayang di beranda kini memiliki pengalih langsung **Format Jam** (**`24j • 22:00`** / **`12j • AM/PM`**) di samping ukuran jam dan format tanggal, plus pratinjau real-time untuk wallpaper 4K, kecerahan, posisi aplikasi, kisi, transparansi, sapaan, cuaca, filter malam, Material You, dan mode ringan.
+* **🖥️ Screensaver Dasbor & Pembaca Suara Berita**: Tampilkan **Cuaca**, **Berita**, **Ekonomi**, **Sepak Bola**, atau **Putar Semua**; mode Berita mendukung **Pembaca Suara (TTS)** hingga 6 berita selesai dibacakan sebelum berganti, dengan pilihan musik latar lembut.
+* **🌙 Waktu Tunggu Default Screensaver 10 Menit**: Batas waktu tidak aktif default diperbarui ke **10 menit** (dapat diatur: 2, 5, 10, 15, 30 menit, atau Nonaktif).
+* **🖱️ Mouse Virtual Tepi-ke-Tepi, Perbaikan Remote TV & Versi Layar Awal**: Kursor virtual di portal web dan game HTML5 menjangkau penuh tepi atas dan bawah; tekan lama remote TV lebih andal tanpa membuka aplikasi tak sengaja saat dilepas; ikon ringkas baru **Salsa Store**; indikator `v3.0` di bagian bawah layar pembuka; serta **pembaruan otomatis GitHub OTA**.
+* **🌐 Pusat 4 Dasbor Langsung, Portal Web & Mesin v3.0 dalam 21 Bahasa**: **Cuaca**, **Berita** (21 bahasa, 5 kategori), **Ekonomi & Pasar**, **Sepak Bola (365Scores)**, portal bawaan (**YouTube TV**, **Google**, **CrazyGames**, **Poki**, **Playhop**, **EasyGames**), bilah atas responsif, dan mesin v3.0 60 FPS.
 
 ### 🖥️ 1. Layar Beranda Sinematik & Dinamis
 * **Fokus Cerdas dengan Efek Zoom:** Kartu aplikasi tampak hidup saat dipilih dengan tepi bercahaya, bayangan lembut, dan skala dinamis.
