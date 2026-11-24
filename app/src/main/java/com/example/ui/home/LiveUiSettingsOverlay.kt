@@ -637,7 +637,8 @@ fun LiveUiSettingsOverlay(
             )
         )
 
-        // 6. Clock Settings (Main: Clock Size | Secondary Window on OK: 12h/24h Format + Show Seconds)
+        // 6. Clock Size (Secondary Window on OK: 12h/24h Format + Show Seconds)
+        val clockFormatLabel = if (isClock24h) "24h • 22:00" else "12h • AM/PM"
         val clockSizeOptions = listOf(
             "large" to strClockLarge,
             "medium" to strClockMedium,
@@ -658,7 +659,7 @@ fun LiveUiSettingsOverlay(
                     LiveSecondaryOption(
                         id = "sub_clock_fmt",
                         title = strClockFormat,
-                        valueLabel = if (isClock24h) "24h" else "12h (AM/PM)",
+                        valueLabel = clockFormatLabel,
                         icon = Icons.Default.Schedule,
                         onStep = { _ ->
                             scope.launch { prefs.setClock24h(!isClock24h) }
@@ -683,7 +684,26 @@ fun LiveUiSettingsOverlay(
             )
         )
 
-        // 7. Date Format
+        // 7. Clock Format (12h AM/PM vs 24h / 22:00)
+        add(
+            LiveUiSettingSection(
+                id = "clock_format",
+                title = strClockFormat,
+                currentValueLabel = clockFormatLabel,
+                icon = Icons.Default.Schedule,
+                accentColor = Color(0xFF38BDF8),
+                currentStepIndex = if (isClock24h) 0 else 1,
+                totalSteps = 2,
+                scrollsHomeToTop = true,
+                onStep = { _ ->
+                    scope.launch {
+                        prefs.setClock24h(!isClock24h)
+                    }
+                }
+            )
+        )
+
+        // 8. Date Format
         val now = Date()
         val dateKeys = listOf(
             "full",

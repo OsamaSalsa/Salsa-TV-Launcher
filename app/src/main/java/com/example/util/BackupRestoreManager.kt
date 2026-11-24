@@ -42,7 +42,7 @@ object BackupRestoreManager {
         val root = JSONObject()
         root.put("app", "Salsa TV Launcher")
         root.put("schemaVersion", 1)
-        root.put("appVersion", "2.1")
+        root.put("appVersion", com.example.BuildConfig.VERSION_NAME)
         root.put("timestamp", System.currentTimeMillis())
 
         val prefsJson = JSONObject()

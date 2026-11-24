@@ -1525,7 +1525,7 @@ object EconomicRepository {
                 requestMethod = "GET"
                 connectTimeout = timeoutMs
                 readTimeout = timeoutMs
-                setRequestProperty("User-Agent", "Mozilla/5.0 (Android TV; SalsaTVLauncher/2.1)")
+                setRequestProperty("User-Agent", "Mozilla/5.0 (Android TV; SalsaTVLauncher/${com.example.BuildConfig.VERSION_NAME})")
                 setRequestProperty("Accept", "application/json")
             }
             if (conn.responseCode in 200..299) {

@@ -31,19 +31,19 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun `app build version is 2_1 with versionCode 7 and supports auto update checks`() {
-        assertEquals("2.1", BuildConfig.VERSION_NAME)
-        assertEquals(7, BuildConfig.VERSION_CODE)
+    fun `app build version is 3_0 with versionCode 8 and supports auto update checks`() {
+        assertEquals("3.0", BuildConfig.VERSION_NAME)
+        assertEquals(8, BuildConfig.VERSION_CODE)
         assertEquals("ps.salsa.tvlauncher", BuildConfig.APPLICATION_ID)
-        // Older v2.0 (code 6) upgrades to v2.1 (code 7)
-        assertTrue(AppUpdateManager.isRemoteNewer(7, "2.1", 6, "2.0"))
-        // Current v2.1 (code 7) upgrades to future v2.2 (code 8)
-        assertTrue(AppUpdateManager.isRemoteNewer(8, "2.2", 7, "2.1"))
+        // Older v2.1 (code 7) upgrades to v3.0 (code 8)
+        assertTrue(AppUpdateManager.isRemoteNewer(8, "3.0", 7, "2.1"))
+        // Current v3.0 (code 8) upgrades to future v3.1 (code 9)
+        assertTrue(AppUpdateManager.isRemoteNewer(9, "3.1", 8, "3.0"))
         // Same version does not trigger update
-        assertFalse(AppUpdateManager.isRemoteNewer(7, "2.1", 7, "2.1"))
+        assertFalse(AppUpdateManager.isRemoteNewer(8, "3.0", 8, "3.0"))
         // Lower versionCode never triggers downgrade
-        assertFalse(AppUpdateManager.isRemoteNewer(6, "2.0", 7, "2.1"))
-        assertFalse(AppUpdateManager.isRemoteNewer(6, "9.9", 7, "2.1"))
+        assertFalse(AppUpdateManager.isRemoteNewer(7, "2.1", 8, "3.0"))
+        assertFalse(AppUpdateManager.isRemoteNewer(7, "9.9", 8, "3.0"))
     }
 
     @Test

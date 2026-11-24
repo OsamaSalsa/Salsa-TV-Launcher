@@ -302,7 +302,7 @@ suspend fun searchOnlineWallpapers(rawQuery: String): List<UnsplashWallpaper> = 
                 requestMethod = "GET"
                 connectTimeout = 6000
                 readTimeout = 6000
-                setRequestProperty("User-Agent", "SalsaTVLauncher/2.1")
+                setRequestProperty("User-Agent", "SalsaTVLauncher/${com.example.BuildConfig.VERSION_NAME}")
             }
             if (conn.responseCode == 200) {
                 val body = conn.inputStream.bufferedReader().use { it.readText() }

@@ -1680,7 +1680,7 @@ object WeatherRepository {
                 requestMethod = "GET"
                 connectTimeout = timeoutMs
                 readTimeout = timeoutMs
-                setRequestProperty("User-Agent", "SalsaTVLauncher/2.1")
+                setRequestProperty("User-Agent", "SalsaTVLauncher/${com.example.BuildConfig.VERSION_NAME}")
                 setRequestProperty("Accept", "application/json")
             }
             if (conn.responseCode in 200..299) {
