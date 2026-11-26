@@ -10,7 +10,6 @@
 [![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
@@ -36,13 +35,16 @@ TV uzaktan kumandaları (D-Pad navigasyonu) için özel olarak optimize edilmiş
 ## 🚀 Temel Özellikler
 
 ### 🆕 Sürüm 3.0 Yenilikleri
+* **👤 Çoklu Kullanıcı Profilleri ve Kişisel İzolasyon (`Profiller / Kullanıcılar`)**: Her aile üyesi için ayrı profiller oluşturun — her profilin kendine özel **Görünüm ve Duvar Kağıdı**, **Ekran Koruyucu**, **Dil**, **IPTV Favorileri ve Kanal Sırası**, **Uygulamalar / Web / Oyunlar Sırası** bulunur; isteğe bağlı **4 haneli Profil PIN'i**, **Çocuk Profili** (Aile DNS Kalkanını otomatik etkinleştirir) ve bölüm başına **Göster / PIN Kilidi / Gizle** kontrolü (IPTV, Uygulamalar, Web, Oyunlar) sunar. Ana ekrandaki düz, çerçevesiz dairesel profil avatarı üst çubuğun en dış köşesine yerleşir (**LTR dillerde en sağda, RTL dillerde en solda**).
+* **🔢 Hızlı Sayısal Kanal Geçişi (`0–9`) ve Yüksek Kontrastlı Kanal Numara Rozetleri**: IPTV ekranında ve tam ekran oynatıcıda kumandadaki `0–9` rakam tuşlarına basarak doğrudan herhangi bir kanal numarasına atlayın; yarı saydam beyaz rozet üzerinde siyah rakamlarla her arka planda anında okunabilirlik sağlar.
+* **🎬 Yerel Cihaz / USB Video Ekran Koruyucusu (`Media3 / ExoPlayer`) ve Saf `m.youtube.com` Yayınları**: Sıfır depolama izni gerektiren Android SAF seçicisiyle cihazınızdan veya USB bellekten yerel video dosyalarını tam ekran koruyucu olarak oynatın ya da ekranda hiçbir yazı, HUD veya katman olmadan saf `m.youtube.com` tam ekran yayınlarını kullanın.
 * **📡 Canlı Metin Yayın Ekran Koruyucusu (12 Animasyonlu Tema, Koyu Dinamik Arka Planlar & Sesli Okuyucu)**: 6 klasik artı 6 yaratıcı yeni animasyonlu tema (**Aurora Silk**, **Synthwave 80s**, **Cosmic Orbit**, **Royal Arabesque**, **Audio Studio Equalizer**, **Crystal Prism Hologram**) olmak üzere 12 stüdyo teması; her birinde zıt renkli hareketli gölgelere sahip **temaya özel koyu dinamik arka plan** + Ayarlarda canlı önizleme, düzenlenebilir satırlar (`3–15sn`), anlatım bitene kadar bekleyen **Sesli Okuyucu (TTS)** ve arka plan müziği veya yerel MP3 desteği.
 * **📺 IPTV Akıllı Hata Kurtarma (`Sonraki Kanal` + 15sn) & Gizli 3× OK Hediye Kilidi**: Bir IPTV kanalı açılamadığında yalnızca **Sonraki Kanal** düğmesine odaklanan sade bir ekran ve otomatik yeniden deneme için **15 saniyelik geri sayım** gösterir. Ayrıca boş IPTV kartında `OK` tuşuna 3 kez basmak kutlama hediye animasyonuyla yerleşik listeleri açar.
-* **🛒 Salsa Store Üst Kategorileri & Saf `m.youtube.com` Video Ekran Koruyucusu**: **Salsa Store** 9 kategorilik kataloğunun (çevrimdışı destekli 240+ TV uygulaması) en üstünde **Web Tarayıcıları** ve **Sosyal Medya** kategorilerini önceliklendirir; video ekran koruyucusu ekranda hiç yazı veya katman olmadan her zaman `m.youtube.com` üzerinden tam ekran oynatılır.
+* **🛒 Seçilmiş Salsa Store Kataloğu**: **Salsa Store**, 9 kategorilik kataloğunun en üstünde **Web Tarayıcıları** ve **Sosyal Medya** kategorilerini önceliklendirerek meşru Android TV araçlarını ve medya oynatıcılarını düzenli bir arayüzde sunar.
 * **🎨 Canlı Arayüz Ayarları (`Live UI Settings`) — Doğrudan Saat Formatı Değiştirici**: Ana ekrandaki şeffaf panel artık Saat Boyutu ve Tarih Formatının hemen yanında doğrudan **Saat Formatı** (**`24s • 22:00`** / **`12s • AM/PM`**) seçicisi sunar; 4K duvar kağıtları, parlaklık, uygulama konumu, ızgara, cam saydamlığı, karşılama, hava durumu, gece filtresi, Material You ve hafif mod değişiklikleri anında canlı görünür.
 * **🖥️ Panel Ekran Koruyucuları, Haber Sesli Okuyucusu & Birleştirilmiş Net Müzikler**: **Hava Durumu**, **Haberler**, **Ekonomi**, **Futbol** veya **Hepsini Sırayla Göster**; Haberler ekran koruyucusu geçiş yapmadan önce 6 haberi de okuyan **Sesli Okuyucu (TTS)** sunar ve tüm bilgi panelleri Slayt Gösterisi ile aynı kristal netliğindeki müzikleri (**Bossa Nova**, **Smooth Jazz**, **Calm Ocean Waves**, **Classic Chillout**, ortam sesleri & MP3) paylaşır (konuşma sırasında otomatik ses kısma ile).
 * **🌙 Varsayılan Ekran Koruyucu Süresi 10 Dakika**: Varsayılan hareketsizlik süresi **10 dakika** olarak güncellendi (2, 5, 10, 15, 30 dk veya Devre Dışı olarak ayarlanabilir).
-* **🖱️ Kenardan Kenara Sanal Fare, Bağlama Duyarlı Menü Tuşu (`☰`) & Başlangıç Sürümü**: Web portalları ve HTML5 oyunlarındaki sanal imleç ekranın en üst ve en alt kenarlarına ulaşır; **Menü (`☰` Üç Çizgi)** tuşu Ana Ekranda **Ayarlar**'ı, IPTV'de **IPTV Ayarları**'nı açar ve Web Portalları/Oyunlarda **Sanal Fare**yi değiştirir; güvenilir uzun `OK` basışı; yeni **Salsa Store** simgesi; `v3.0` etiketi ve **GitHub OTA otomatik güncellemeleri**.
+* **🖱️ Kenardan Kenara Sanal Fare, Bağlama Duyarlı Menü Tuşu (`☰`) & Doğrulanmış OTA Güncellemeleri**: Web portalları ve HTML5 oyunlarındaki sanal imleç ekranın en üst ve en alt kenarlarına ulaşır; **Menü (`☰` Üç Çizgi)** tuşu Ana Ekranda **Ayarlar**'ı, IPTV'de **IPTV Ayarları**'nı açar ve Web Portalları/Oyunlarda **Sanal Fare**yi değiştirir; güvenilir uzun `OK` basışı; yeni **Salsa Store** simgesi; `v3.0` etiketi ve SHA-256 + imza doğrulamalı **GitHub OTA otomatik güncellemeleri**.
 * **🌐 4 Canlı Bilgi Paneli, Web Portalları & 21 Dilde v3.0 Motoru**: **Hava Durumu**, **Haberler** (21 dil, 5 kategori), **Ekonomi ve Piyasalar** ve **Futbol (365Scores)** panelleri, varsayılan web portalları (**YouTube TV**, **Google**, **CrazyGames**, **Poki**, **Playhop**, **EasyGames**), kırpılmayan üst çubuk ve 60 FPS v3.0 motoru.
 
 ### 🖥️ 1. Sinematik ve Dinamik Ana Ekran
@@ -123,9 +125,27 @@ Salsa TV Launcher, standart herhangi bir Android TV kumandasıyla zahmetsizce ko
 | **Menü Tuşu (☰ Üç Çizgi)** | Ekrana göre değişir | **Ana Ekranda** **Ayarlar**'ı açar, **IPTV**'de (liste ve oynatıcı) **IPTV Ayarları**'nı açar (`INFO`/`GUIDE` bilgi çubuğunu açar/kapatır), **Web Portalları / Oyunlarda** ise **Sanal Fare**yi açıp kapatır. |
 | **Ses / Google Asistan Tuşu (🎤)** | Başlatıcının herhangi bir yerinde | Uygulamaları, IPTV kanallarını aramak veya sesli komut çalıştırmak için **Evrensel Sesli Aramayı** açar. |
 | **Yön Tuşları (D-Pad)** | Tüm uygulama genelinde | Kategoriler, uygulamalar, kanallar ve oynatıcı kontrolleri arasında akıcı geçiş yapar. |
+| **0–9 Rakam Tuşları** | IPTV Kanal Listesi / Oynatıcı | Herhangi bir kanal numarasına anında atlamak için **Hızlı Sayısal Geçiş (Quick Zap)** özelliğini kullanır. |
 | **Geri Tuşu (Back)** | Pencereler / oynatıcı içinde | Açık menüleri kapatır, tam ekran oynatıcıdan çıkar veya ana ekranın en üstüne döner. |
 
 > 💡 **İpucu:** Bu kılavuzun tamamına uygulama içinden **Ayarlar > Kumanda Kılavuzu** bölümünden de istediğiniz zaman ulaşabilirsiniz.
+
+---
+
+## 🔒 Güvenlik, Gizlilik ve İzin Şeffaflığı
+
+* **Varsayılan HTTPS & WebView Güvenli Tarama:** Tüm ağ bağlantıları `network_security_config.xml` (`cleartextTrafficPermitted="false"`) üzerinden HTTPS öncelikli çalışır; dahili WebView'de **Safe Browsing** (`EnableSafeBrowsing=true`) etkinleştirilmiş ve telemetri (`MetricsOptOut=true`) devre dışı bırakılmıştır.
+* **Doğrulanmış OTA Otomatik Güncellemeleri:** Kurulum başlatılmadan önce indirilen her APK; `version.json` içindeki **SHA-256 özeti**, paket adı ve **APK imza sertifikası** kontrol edilerek doğrulanır.
+* **Geniş Depolama İzni Yok (`MANAGE_EXTERNAL_STORAGE` Kullanılmaz):** Tüm duvar kağıdı, fotoğraf slayt gösterisi, yerel MP3 ve yerel video seçimleri sıfır izinli Android **Depolama Erişim Çerçevesi (SAF)** ile gerçekleştirilir.
+* **İzinlerin Açıklaması:**
+  * `INTERNET` & `ACCESS_NETWORK_STATE`: Hava durumu, canlı bilgi panelleri, IPTV yayınları, web portalları ve OTA güncellemeleri için gereklidir.
+  * `ACCESS_COARSE_LOCATION` *(İsteğe bağlı)*: Yalnızca otomatik yerel hava durumu konumu için kullanılır (manuel şehir seçimi de desteklenir).
+  * `RECORD_AUDIO` *(İsteğe bağlı)*: Yalnızca kullanıcı Evrensel Sesli Arama özelliğini başlattığında kullanılır.
+  * `REQUEST_INSTALL_PACKAGES` & `REQUEST_DELETE_PACKAGES`: Salsa Store, Mini İndirici, OTA güncellemeleri ve Uygulama Depolama Yöneticisi için gereklidir.
+  * `BIND_VPN_SERVICE`: Yalnızca yerel DNS Kalkanı (AdBlock / Aile Koruması) için cihaz içi VPN tüneli oluşturur; hiçbir trafik harici sunucuya yönlendirilmez.
+  * `RECEIVE_BOOT_COMPLETED`: Cihaz açıldığında seçilen DNS Kalkanını otomatik olarak geri yükler.
+* **PIN Korumalı Aile Modu ve Başlatıcı Sınırlaması:** Aile Koruma Modundan veya Çocuk Profilinden çıkış **4 haneli PIN** gerektirir. *Not:* Tek başına bir Android başlatıcısı, çocukların başka bir uygulama veya sistemin **Home** tuşu üzerinden çıkmasını engelleyemez; en güçlü koruma için Salsa TV'yi **Varsayılan Ana Ekran Başlatıcısı** olarak ayarlayın ve **Sistem Ayarları**'nı PIN ile kilitleyin.
+* **Platform Notu (Mobil / Küçük Dokunmatik Ekranlar):** Salsa TV Launcher öncelikle **Android TV ve Akıllı TV Kutuları** için tasarlanmıştır. Küçük telefon/dokunmatik ekran düzenleri şu anda **deneysel / aktif geliştirme aşamasındadır**.
 
 ---
 
@@ -149,18 +169,19 @@ Salsa TV Launcher, standart herhangi bir Android TV kumandasıyla zahmetsizce ko
 3. APK dosyasını kurun ve istenen izinleri onaylayın.
 4. Kumandanızdaki **Home (Ana Ekran)** tuşuna basın ve varsayılan başlatıcı olarak **Salsa TV Launcher**'ı (**"Her Zaman"**) seçin.
 
-### Yöntem 2: Kaynak Koddan Derleme
+### Yöntem 2: ADB Üzerinden Kurulum
 ```bash
-git clone https://github.com/OsamaSalsa/Salsa-TV-Launcher.git
-cd Salsa-TV-Launcher
-./gradlew assembleDebug
+# Android TV IP adresinize bağlanın
+adb connect <TV_IP_ADRESINIZ>:5555
+
+# APK dosyasını kurun
+adb install -r salsa-tv-launcher.apk
 ```
-Derlenen APK dosyası `app/build/outputs/apk/debug/app-debug.apk` dizininde oluşturulacaktır.
 
 ---
 
-## 🤝 Katkıda Bulunma ve Lisans
+## 📄 Lisans ve Telif Hakkı
 
-Katkılarınız, hata bildirimleriniz ve yeni özellik önerileriniz her zaman memnuniyetle karşılanır! Bir *Issue* açabilir veya *Pull Request* gönderebilirsiniz.
+Bu depo yalnızca derlenmiş kurulum paketlerini (`salsa-tv-launcher.apk`), sürüm doğrulama meta verilerini (`version.json`) ve belgeleri dağıtır; kaynak kodu kamuya açık değildir.
 
-**MIT** Lisansı altında dağıtılmaktadır. Daha fazla bilgi için `LICENSE` dosyasına göz atın.
+**© Osama Salsa** tarafından tasarlandı ve geliştirildi. Tüm hakları saklıdır.

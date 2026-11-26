@@ -10,7 +10,6 @@
 [![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
@@ -36,13 +35,16 @@
 ## 🚀 Tính Năng Nổi Bật
 
 ### 🆕 Tính Năng Mới ở Phiên Bản 3.0
+* **👤 Hệ Thống Đa Hồ Sơ Người Dùng & Cách Ly Cài Đặt (`Hồ sơ / Người dùng`)**: Tạo hồ sơ riêng cho từng thành viên gia đình với **Giao diện & Hình nền**, **Bảo vệ màn hình**, **Ngôn ngữ**, **Kênh IPTV Yêu thích & Thứ tự kênh**, và **Thứ tự Ứng dụng / Web / Trò chơi** hoàn toàn độc lập; hỗ trợ **Mã PIN Hồ sơ 4 chữ số** tùy chọn, **Hồ sơ Trẻ em (Kids Profile)** tự động bật Lá chắn DNS Gia đình, cùng tùy chọn **Hiển thị / Khóa PIN / Ẩn** cho từng mục (IPTV, Ứng dụng, Web, Trò chơi). Ảnh đại diện tròn phẳng không viền trên màn hình chính được neo ở mép ngoài cùng thanh trên (**ngoài cùng bên phải với ngôn ngữ LTR, ngoài cùng bên trái với ngôn ngữ RTL**).
+* **🔢 Chuyển Kênh Nhanh Bằng Phím Số (`0–9`) & Huy Hiệu Số Kênh Tương Phản Cao**: Nhấn các phím số `0–9` trên điều khiển trong danh sách IPTV hoặc trình phát toàn màn hình để nhảy thẳng đến số kênh mong muốn; huy hiệu chữ đen trên nền trắng bán trong suốt giúp đọc rõ trên mọi nền.
+* **🎬 Video Bảo Vệ Màn Hình Cục Bộ / USB (`Media3 / ExoPlayer`) & Luồng `m.youtube.com` Thuần Khiết**: Phát tệp video từ bộ nhớ thiết bị hoặc USB qua trình chọn SAF không cần cấp quyền bộ nhớ rộng, bên cạnh luồng `m.youtube.com` toàn màn hình sạch sẽ không chữ hay lớp phủ.
 * **📡 Bảo Vệ Màn Hình Tin Chữ Broadcast (12 Chủ Đề Động, Nền Tối Động & Đọc Giọng Nói)**: 12 chủ đề trường quay riêng biệt — 6 chủ đề cổ điển cùng 6 chủ đề sáng tạo mới (**Aurora Silk**, **Synthwave 80s**, **Cosmic Orbit**, **Royal Arabesque**, **Audio Studio Equalizer**, **Crystal Prism Hologram**) — mỗi chủ đề có chuyển động, bố cục và **nền tối động riêng** kèm đổ bóng đổi màu tương phản + ảnh xem trước trực tiếp trong Cài đặt, dòng chữ tùy chỉnh (`3–15s`), **Đọc Giọng Nói (TTS)** chờ đọc xong mới chuyển câu, cùng nhạc nền êm dịu hoặc MP3 cục bộ tùy chọn.
 * **📺 Khôi Phục Lỗi IPTV Thông Minh (`Kênh Tiếp Theo` + Tự Thử Lại Sau 15s) & Mở Khóa Quà Bí Mật (`3× OK`)**: Khi kênh IPTV không phát được, hiển thị giao diện gọn gàng chỉ có nút **Kênh Tiếp Theo** kèm **đếm ngược 15 giây** tự động thử phát lại cùng kênh đó nếu người dùng không chọn. Ngoài ra, nhấn `OK` 3 lần trên thẻ IPTV khi chưa có danh sách phát sẽ mở khóa bộ kênh IPTV tuyển chọn tích hợp kèm hiệu ứng hộp quà mừng.
-* **🛒 Danh Mục Hàng Đầu Salsa Store & Video Chờ `m.youtube.com` Thuần Khiết**: **Salsa Store** ưu tiên **Trình Duyệt Web** và **Mạng Xã Hội** ở đầu danh mục 9 nhóm (240+ ứng dụng TV kèm dữ liệu dự phòng ngoại tuyến); và trình bảo vệ màn hình video điện ảnh luôn phát toàn màn hình qua `m.youtube.com` hoàn toàn sạch sẽ, không có bất kỳ chữ, thanh HUD hay lớp phủ trình phát nào trên màn hình.
+* **🛒 Danh Mục Salsa Store Tuyển Chọn**: **Salsa Store** ưu tiên **Trình Duyệt Web** và **Mạng Xã Hội** ở đầu danh mục 9 nhóm gồm các tiện ích và trình phát đa phương tiện hợp pháp cho Android TV.
 * **🎨 Cài Đặt Giao Diện Trực Tiếp (`Live UI Settings`) — Chuyển Định Dạng Giờ Trực Tiếp**: Thanh nổi ngay trên màn hình chính bổ sung nút chọn **Định Dạng Giờ** (**`24h • 22:00`** / **`12h • AM/PM`**) ngay cạnh kích thước đồng hồ và định dạng ngày, cùng xem trước thời gian thực hình nền 4K, độ sáng, vị trí ứng dụng, số cột, độ mờ kính, lời chào, thời tiết, lọc ban đêm, Material You và chế độ nhẹ.
 * **🖥️ Bảo Vệ Màn Hình Bảng Trực Tiếp, Đọc Tin Tức & Nhạc Nền Đồng Nhất Siêu Rõ**: Hiển thị **Thời tiết**, **Tin tức**, **Kinh tế**, **Bóng đá** hoặc **Luân phiên tất cả** (**Tin tức 60s → Thời tiết 10s → Kinh tế 10s → Bóng đá 10s → quay lại Tin tức tự chuyển sang chuyên mục tiếp theo**); chế độ Tin tức hỗ trợ **Đọc Giọng Nói (TTS)** đọc xong cả 6 tin rồi mới chuyển bảng, và tất cả bảng thông tin dùng chung bộ nhạc nền trong trẻo (**Bossa Nova**, **Smooth Jazz**, **Calm Ocean Waves**, **Classic Chillout**, âm thanh thiên nhiên và MP3 tùy chọn) tự động giảm âm lượng khi TTS đọc.
 * **🌙 Thời Gian Chờ Bảo Vệ Màn Hình Mặc Định 10 Phút**: Thời gian chờ mặc định được nâng lên **10 phút** (tùy chỉnh: 2, 5, 10, 15, 30 phút hoặc Tắt).
-* **🖱️ Chuột Ảo Tràn Viền, Phím Menu 3 Gạch (`☰`) Theo Ngữ Cảnh & Số Phiên Bản Màn Hình Khởi Động**: Con trỏ chuột ảo trong cổng web và game HTML5 chạm tới trọn vẹn mép trên và mép dưới; phím **Menu (`☰` Ba Gạch)** tự động thích ứng theo màn hình (Màn hình chính → **Cài đặt**, trong IPTV → **Cài đặt IPTV**, trong Cổng Web/Game → bật tắt **Chuột Ảo**); nhấn giữ `OK` chính xác không mở nhầm ứng dụng khi thả tay; biểu tượng **Salsa Store** gọn đẹp mới; dòng phiên bản `v3.0` tinh tế ở màn hình khởi động và **tự động cập nhật GitHub OTA**.
+* **🖱️ Chuột Ảo Tràn Viền, Phím Menu 3 Gạch (`☰`) Theo Ngữ Cảnh & Cập Nhật OTA Xác Thực**: Con trỏ chuột ảo trong cổng web và game HTML5 chạm tới trọn vẹn mép trên và mép dưới; phím **Menu (`☰` Ba Gạch)** tự động thích ứng theo màn hình (Màn hình chính → **Cài đặt**, trong IPTV → **Cài đặt IPTV**, trong Cổng Web/Game → bật tắt **Chuột Ảo**); nhấn giữ `OK` chính xác không mở nhầm ứng dụng khi thả tay; biểu tượng **Salsa Store** gọn đẹp mới; dòng phiên bản `v3.0` tinh tế ở màn hình khởi động và **tự động cập nhật GitHub OTA** kèm xác thực SHA-256 & chữ ký APK.
 * **🌐 Trung Tâm 4 Bảng Trực Tiếp, Cổng Web & Động Cơ v3.0 21 Ngôn Ngữ**: **Thời tiết**, **Tin tức** (21 ngôn ngữ, 5 chuyên mục), **Kinh tế & Thị trường**, **Bóng đá (365Scores)**, cổng mặc định (**YouTube TV**, **Google**, **CrazyGames**, **Poki**, **Playhop**, **EasyGames**), thanh trên không cắt mép và động cơ v3.0 60 FPS.
 
 ### 🖥️ 1. Màn Hình Chính Điện Ảnh & Sống Động
@@ -123,9 +125,27 @@ Salsa TV Launcher được thiết kế để điều khiển dễ dàng bằng 
 | **Nút Menu (☰ Ba Gạch)** | Theo ngữ cảnh màn hình | Mở **Cài đặt** khi ở Màn hình chính, mở **Cài đặt IPTV** khi ở trong IPTV (trình duyệt kênh & trình phát; phím `INFO`/`GUIDE` bật tắt thanh kênh), và bật tắt **Chế độ Chuột Ảo** trong Cổng Web & Trò chơi. |
 | **Nút Giọng Nói / Google Assistant (🎤)** | Bất kỳ đâu trong Launcher | Mở **Tìm Kiếm Giọng Nói Toàn Diện** của Salsa để tìm ứng dụng, kênh IPTV hoặc thực hiện lệnh thoại. |
 | **Phím Điều Hướng (D-Pad)** | Trên toàn bộ ứng dụng | Di chuyển mượt mà giữa các danh mục, ứng dụng, kênh và nút điều khiển phát. |
+| **Phím Số (`0–9`)** | Danh sách kênh / Trình phát IPTV | **Chuyển Kênh Nhanh (Quick Zap)** nhảy trực tiếp tới bất kỳ số kênh nào. |
 | **Nút Quay Lại (Back)** | Trong cửa sổ / trình phát | Đóng các menu đang mở, thoát toàn màn hình hoặc quay lại đầu màn hình chính. |
 
 > 💡 **Mẹo:** Bạn cũng có thể xem toàn bộ hướng dẫn nút bấm này ngay trong ứng dụng tại mục **Cài đặt > Hướng dẫn điều khiển**.
+
+---
+
+## 🔒 Bảo Mật, Quyền Riêng Tư & Minh Bạch Quyền Hệ Thống
+
+* **HTTPS Mặc Định & WebView Duyệt Web An Toàn:** Toàn bộ kết nối mạng áp dụng HTTPS qua `network_security_config.xml` (`cleartextTrafficPermitted="false"`); WebView tích hợp bật **Safe Browsing** (`EnableSafeBrowsing=true`) và tắt đo lường (`MetricsOptOut=true`).
+* **Cập Nhật OTA Có Xác Thực:** Trước khi cài đặt bản cập nhật, ứng dụng luôn kiểm tra mã băm **SHA-256** trong `version.json`, tên gói và **chứng chỉ ký số APK**.
+* **Không Yêu Cầu Quyền Bộ Nhớ Rộng (`Không dùng MANAGE_EXTERNAL_STORAGE`):** Mọi thao tác chọn hình nền, trình chiếu ảnh, tệp MP3 hoặc video cục bộ đều sử dụng **Storage Access Framework (SAF)** không cần quyền truy cập toàn bộ bộ nhớ.
+* **Giải Thích Từng Quyền:**
+  * `INTERNET` & `ACCESS_NETWORK_STATE`: Dùng cho thời tiết, bảng thông tin trực tiếp, phát IPTV, cổng web và cập nhật OTA.
+  * `ACCESS_COARSE_LOCATION` *(Tùy chọn)*: Chỉ dùng để tự động xác định thời tiết địa phương (có thể chọn thành phố thủ công).
+  * `RECORD_AUDIO` *(Tùy chọn)*: Chỉ kích hoạt khi người dùng chủ động mở Tìm kiếm bằng giọng nói.
+  * `REQUEST_INSTALL_PACKAGES` & `REQUEST_DELETE_PACKAGES`: Dùng cho Salsa Store, Mini Downloader, cập nhật OTA và Trình quản lý dung lượng ứng dụng.
+  * `BIND_VPN_SERVICE`: Chỉ tạo đường hầm VPN cục bộ trên thiết bị cho Lá chắn DNS (AdBlock / Bảo vệ Gia đình), không gửi lưu lượng ra máy chủ ngoài.
+  * `RECEIVE_BOOT_COMPLETED`: Tự động khôi phục Lá chắn DNS đã chọn sau khi khởi động lại TV.
+* **Chế Độ Bảo Vệ Gia Đình Khóa PIN & Giới Hạn Của Launcher:** Thoát khỏi Chế độ Bảo vệ Gia Đình hoặc Hồ sơ Trẻ em yêu cầu **mã PIN 4 chữ số**. *Lưu ý:* Riêng một ứng dụng Launcher không thể ngăn trẻ thoát ra qua ứng dụng khác hoặc nút **Home** hệ thống; để bảo vệ tốt nhất, hãy đặt Salsa TV làm **Launcher Màn Hình Chính Mặc Định** và khóa PIN đối với **Cài đặt Hệ thống**.
+* **Ghi Chú Nền Tảng (Điện Thoại / Màn Hình Cảm Ứng Nhỏ):** Salsa TV Launcher được tối ưu hóa cho **Android TV và Smart TV Box**. Bố cục cho điện thoại/màn hình cảm ứng nhỏ hiện đang ở giai đoạn **thử nghiệm / đang phát triển tích cực**.
 
 ---
 
@@ -149,18 +169,19 @@ Salsa TV Launcher được thiết kế để điều khiển dễ dàng bằng 
 3. Cài đặt APK và cấp các quyền được yêu cầu.
 4. Nhấn nút **Home** trên điều khiển và chọn **Salsa TV Launcher** làm màn hình chính mặc định (**"Luôn luôn"**).
 
-### Cách 2: Biên Dịch Từ Mã Nguồn
+### Cách 2: Cài Đặt Qua ADB
 ```bash
-git clone https://github.com/OsamaSalsa/Salsa-TV-Launcher.git
-cd Salsa-TV-Launcher
-./gradlew assembleDebug
+# Kết nối tới địa chỉ IP của Android TV
+adb connect <DIA_CHI_IP_TV>:5555
+
+# Cài đặt tệp APK
+adb install -r salsa-tv-launcher.apk
 ```
-Tệp APK sau khi biên dịch sẽ nằm tại `app/build/outputs/apk/debug/app-debug.apk`.
 
 ---
 
-## 🤝 Đóng Góp & Giấy Phép
+## 📄 Giấy Phép & Bản Quyền
 
-Mọi đóng góp, báo lỗi và đề xuất tính năng mới đều được hoan nghênh! Hãy thoải mái mở *Issue* hoặc gửi *Pull Request*.
+Kho lưu trữ này chỉ phân phối bản phát hành APK đã biên dịch (`salsa-tv-launcher.apk`), siêu dữ liệu cập nhật (`version.json`) và tài liệu hướng dẫn; mã nguồn không được công khai.
 
-Được phân phối theo Giấy phép **MIT**. Xem tệp `LICENSE` để biết thêm chi tiết.
+Thiết kế và phát triển bởi **© Osama Salsa**. Bảo lưu mọi quyền.

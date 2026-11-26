@@ -10,7 +10,7 @@
 [![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
@@ -36,9 +36,12 @@ Speciaal ontworpen voor tv-afstandsbedieningen (D-Pad-navigatie), waarbij elke a
 ## 🚀 Belangrijkste Functies
 
 ### 🆕 Nieuw in Versie 3.0
+* **👤 Meerdere Gebruikersprofielen & Isolatie per Gebruiker (`Profiles / Users`)**: Maak meerdere onafhankelijke gezinsprofielen — elk met eigen **Uiterlijk & Achtergrond**, **Screensaver**, **Taal**, **IPTV-favorieten & Zendervolgorde**, **Volgorde van Apps / Web / Games**, optionele **4-cijferige Profiel-PIN**, **Kinderprofiel-voorinstelling** (activeert automatisch Gezins-DNS-bescherming) en **sectiebeheer per gebruiker** (**IPTV**, **Apps**, **Web** of **Games** tonen, vergrendelen met PIN of verbergen). Snel toegankelijk via een plat, randloos rond avatarpictogram aan de uiterste rand van de bovenbalk (**uiterst rechts in LTR, uiterst links in RTL**).
+* **🔢 Snel Zappen met Cijfertoetsen (`0–9`) & Hoog-Contrast Zenderbadges**: Druk op cijfertoetsen (`0–9`) op uw afstandsbediening vanuit het Startscherm, de IPTV-zenderlijst of de live speler om direct naar een zendernummer te springen — voorzien van duidelijke hoog-contrast zendernummerbadges (zwarte cijfers op een halftransparante witte achtergrond).
+* **🎞️ Lokale Video-screensaver vanaf Apparaat / USB (`Media3 / ExoPlayer`)**: Kies naast schone `m.youtube.com`-streams op volledig scherm zonder overlays elk lokaal videobestand vanaf uw TV-opslag of USB-stick via het veilige **Storage Access Framework (SAF)** zonder opslagrechten.
 * **📡 Broadcast Tekst-screensaver (12 Geanimeerde Thema's, Donkere Dynamische Achtergronden & Voorleesfunctie)**: 12 unieke studiothema's — 6 klassiekers plus 6 creatieve nieuwe thema's (**Aurora Silk**, **Synthwave 80s**, **Cosmic Orbit**, **Royal Arabesque**, **Audio Studio Equalizer**, **Crystal Prism Hologram**) — met eigen animaties, lay-outs en **per thema een donkere dynamische achtergrond met wisselende gekleurde schaduwen** + live voorbeelden in Instellingen, bewerkbare regels (`3–15s`), **Spraaklezer (TTS)** die wacht tot het voorlezen klaar is en optionele achtergrondmuziek of lokale MP3.
 * **📺 IPTV Slim Foutbeheer (`Volgende Zender` + 15s) & Geheim 3× OK Cadeau**: Wanneer een IPTV-zender niet laadt, verschijnt een overzichtelijke melding met één gefocuste knop (**Volgende Zender**) en een **afteltimer van 15 seconden** die automatisch opnieuw probeert. Daarnaast ontgrendelt 3× drukken op `OK` op de lege IPTV-kaart ingebouwde afspeellijsten met een feestelijke cadeau-animatie.
-* **🛒 Salsa Store Topcategorieën & Schone `m.youtube.com` Video-screensaver**: **Salsa Store** plaatst **Webbrowsers** en **Sociale Media** bovenaan de catalogus van 9 categorieën (240+ TV-apps met offline fallback); de video-screensaver speelt altijd schoon schermvullend via `m.youtube.com` zonder tekst of overlays op het beeld.
+* **🛒 Salsa Store Topcategorieën & Schone `m.youtube.com` Video-screensaver**: **Salsa Store** plaatst **Webbrowsers** en **Sociale Media** bovenaan de catalogus van 9 categorieën met samengestelde Android TV-hulpprogramma's en spelers (met offline fallback); de video-screensaver speelt altijd schoon schermvullend via `m.youtube.com` zonder tekst of overlays op het beeld.
 * **🎨 Live UI-instellingen (`Live UI Settings`) — Directe Kloknotatie**: Het zwevende menu op het startscherm bevat nu een directe keuze voor **Kloknotatie** (**`24u • 22:00`** / **`12u • AM/PM`**) naast klokgrootte en datumnotatie, plus live voorbeeld voor 4K-achtergronden, helderheid, rijhoogte, raster, transparantie, begroeting, weer, nachtfilter, Material You en Lite-modus.
 * **🖥️ Dashboard-screensavers, Nieuws-voorleesfunctie & Geünificeerde Heldere Muziek**: Toon **Weer**, **Nieuws**, **Economie**, **Voetbal** of **Alles automatisch wisselen**; de Nieuws-screensaver biedt **Spraaklezer (TTS)** voor alle 6 berichten vóór het wisselen, en alle dashboards delen dezelfde kristalheldere muzieknummers (**Bossa Nova**, **Smooth Jazz**, **Calm Ocean Waves**, **Classic Chillout**, ambient & MP3) met automatische volumeverlaging bij spraak.
 * **🌙 Standaard Screensaver-time-out van 10 Minuten**: Standaard inactiviteitstijd gewijzigd naar **10 minuten** (instelbaar: 2, 5, 10, 15, 30 min of Uitgeschakeld).
@@ -107,8 +110,20 @@ Speciaal ontworpen voor tv-afstandsbedieningen (D-Pad-navigatie), waarbij elke a
 * **UI-schaling, Dynamische Kleuren (Material You) & Alle Android-apps (Sideloaded APKs):** Pas het aantal kolommen en de kaarttransparantie (10%–100%) aan, activeer **Material You Dynamische Kleuren**, en schakel tussen alleen TV-apps of **alle geïnstalleerde Android-apps (inclusief mobiele APK's)**.
 * **Filmische Screensaver (`m.youtube.com`), Eigen YouTube-video's & Fotodiavoorstelling (`Slideshow`):** Speel schermvullende video's schoon af via `m.youtube.com` zonder tekst of overlays, voeg uw eigen YouTube-video's toe met **directe live voorvertoning**, of speel foto's af vanuit een map (geheugen/USB) of 4K-galerijen met instelbare duur (`5s`–`5m`), **Ken Burns / Zachte Zoom / Statisch**, 6 overgangen, 7 sfeereffecten (**Sneeuw ❄️**, **Vuurvliegjes ✨**, **Regen 🌧️**, **Herfstbladeren 🍂**, **Sakura 🌸**, **Sterren ⭐**, **Bokeh 🔮**), hoekklok en heldere achtergrondmuziek (**Bossa Nova**, **Smooth Jazz**, **Calm Ocean Waves**, **Classic Chillout**) of eigen MP3.
 * **Ingebouwde App-opslagbeheerder & 8 Systeemsnelkoppelingen:** Bekijk alle geïnstalleerde apps gesorteerd op grootte (`MB`), open systeeminfo of **verwijder apps direct** om ruimte vrij te maken, plus 8 snelle systeemsnelkoppelingen (Wi-Fi, Ethernet, Scherm, Geluid, Datum/Tijd, Alle instellingen, App-info, Opslagbeheer).
-* **Dual-Mode DNS-schild (AdBlock + Gezinsbescherming) & Pincode-slot:** Kies tussen **Advertentie- & Trackerblokkering** of **Gezinsbeschermingsmodus** (blokkeert ook websites voor volwassenen) en beveilig apps en IPTV-categorieën met een 4-cijferige pincode.
-* **Universeel Spraakzoeken (`🎤`), Standaard Systeem-spraakassistent, Slimme Webbladwijzers & Multi-Playlist IPTV:** Stel **Salsa TV** in als standaard spraakassistent van uw TV zodat de microfoonknop op de afstandsbediening direct werkt; beheer **meerdere M3U-afspeellijsten**; gebruik slimme webbladwijzers met automatische HD-pictogrammen en **YouTube TV Leanback**-modus; rij met recente apps en GitHub OTA-updater.
+* **Dual-Mode DNS-schild (AdBlock + Gezinsbescherming met PIN) & Pincode-slot:** Kies tussen **Advertentie- & Trackerblokkering** of **Gezinsbeschermingsmodus** (**uitschakelen vereist strikt uw 4-cijferige pincode**) en beveilig apps en IPTV-categorieën met een pincode.
+* **Universeel Spraakzoeken (`🎤`), Slimme Webbladwijzers & Multi-Playlist IPTV:** Geïntegreerd spraakzoeken, beheer van **meerdere M3U-afspeellijsten**, slimme webbladwijzers met automatische HD-pictogrammen en **YouTube TV Leanback**-modus, rij met recente apps en geverifieerde GitHub OTA-updates.
+
+> ⚠️ **Belangrijke Opmerking over Kinder- / Gezinsbescherming:** Het verlaten van deze modus in de launcher is beveiligd met PIN. **Een launcher alleen kan echter niet voorkomen dat een kind vertrekt via een andere app of de `Home`-knop**, tenzij u **Salsa TV Launcher** instelt als **Standaard Startscherm** en **Systeeminstellingen** vergrendelt met een PIN.
+
+---
+
+## 🛡️ Beveiliging & Transparantie van Machtigingen
+
+* **Standaard HTTPS (`network_security_config.xml`)**: Niet-versleuteld HTTP-verkeer is globaal uitgeschakeld (`cleartextTrafficPermitted="false"`), met gerichte uitzonderingen alleen waar nodig.
+* **WebView Safe Browsing Actief**: Google Safe Browsing is ingeschakeld (`EnableSafeBrowsing=true`) zonder telemetrie (`MetricsOptOut=true`).
+* **Geverifieerde OTA-updates**: Vóór installatie controleert `AppUpdateManager` de **SHA-256-hash** (`version.json`), de **pakketnaam** en het **APK-handtekeningcertificaat**.
+* **Geen brede opslagmachtigingen (`Geen MANAGE_EXTERNAL_STORAGE`)**: Alle lokale bestanden worden veilig geselecteerd via **Storage Access Framework (SAF)**.
+* **Uitleg van machtigingen**: `INTERNET`/`ACCESS_NETWORK_STATE` (IPTV, dashboards, Store, OTA), optioneel `ACCESS_COARSE_LOCATION` (grof stadsweer), optioneel `RECORD_AUDIO` (alleen voor Spraakzoeken `🎤`), `REQUEST_INSTALL_PACKAGES`/`REQUEST_DELETE_PACKAGES` (alleen op directe gebruikersactie), `BIND_VPN_SERVICE` (lokaal AdGuard DNS-schild) en `RECEIVE_BOOT_COMPLETED`.
 
 ---
 
@@ -120,6 +135,7 @@ Salsa TV Launcher is ontworpen om moeiteloos te worden bediend met elke standaar
 | :--- | :--- | :--- |
 | **OK / Selecteren (Kort indrukken)** | Elke app of kaart | Opent de geselecteerde app, zender of portal. |
 | **OK / Selecteren (Lang indrukken)** | Op een app- of zendericoon | Opent het **Snelle Opties-menu** (Verplaatsen, Verbergen, Pincode-slot, Spelcategorie, App-info, Verwijderen). |
+| **Cijfertoetsen (`0–9`)** | Startscherm • IPTV-lijst • Speler | **Snel Zappen**: typ een zendernummer om er direct naartoe te springen (`OK` bevestigen, `Terug` wijzigen). |
 | **Menu-knop (☰ Drie Lijnen)** | Afhankelijk van het scherm | Opent **Instellingen** op het **Startscherm**, opent **IPTV-instellingen** in **IPTV** (zenders & speler; `INFO`/`GUIDE` voor de infobalk) en schakelt de **Virtuele Muis** in **Webportalen & Games**. |
 | **Spraak / Google Assistent-knop (🎤)** | Overal in de Launcher | Opent **Universeel Spraakzoeken** van Salsa om apps en IPTV-zenders te zoeken of spraakopdrachten uit te voeren. |
 | **Navigatietoetsen (D-Pad)** | Door de hele app | Navigeert soepel tussen categorieën, apps, zenders en afspeelknoppen. |
@@ -142,25 +158,24 @@ Salsa TV Launcher is ontworpen om moeiteloos te worden bediend met elke standaar
 
 ## 📦 Installatie
 
+> ℹ️ **Platformopmerking**: Salsa TV Launcher is primair ontworpen voor **Android TV, Google TV en TV Boxen** met afstandsbediening (`D-Pad`). *(Ondersteuning voor kleine mobiele/touchscreens is momenteel **experimenteel / in ontwikkeling**).*
+
 ### Methode 1: Directe APK Download (Aanbevolen)
-1. Download het bestand [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk) bij Releases.
+1. Download het bestand [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk).
    👉 **[Downloader Korte Code / Directe Link: aftv.news/5157967](http://aftv.news/5157967)**
 2. Zet het bestand over naar uw Android TV via een USB-stick, *Send Files to TV* of de *Downloader*-app.
 3. Installeer de APK en verleen de gevraagde machtigingen.
 4. Druk op de **Home-knop** op uw afstandsbediening en selecteer **Salsa TV Launcher** als uw standaard startscherm (**"Altijd"**).
 
-### Methode 2: Zelf Bouwen vanuit Broncode
+### Methode 2: Installatie via ADB
 ```bash
-git clone https://github.com/OsamaSalsa/Salsa-TV-Launcher.git
-cd Salsa-TV-Launcher
-./gradlew assembleDebug
+adb connect <IP_VAN_UW_TV>:5555
+adb install -r salsa-tv-launcher.apk
 ```
-Het gecompileerde APK-bestand is beschikbaar in `app/build/outputs/apk/debug/app-debug.apk`.
 
 ---
 
-## 🤝 Bijdragen & Licentie
+## 📄 Licentie & Auteursrecht
 
-Bijdragen, bugrapporten en suggesties voor nieuwe functies zijn van harte welkom! Open gerust een *Issue* of dien een *Pull Request* in.
-
-Gedistribueerd onder de **MIT-licentie**. Zie het bestand `LICENSE` voor meer informatie.
+Ontworpen en ontwikkeld door **© Osama Salsa**.  
+Deze repository host de officieel gecompileerde release-APK, meertalige documentatie, screenshots en geverifieerde OTA-updatemanifesten (`version.json`).

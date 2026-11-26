@@ -2,6 +2,7 @@
   "versionCode": 8,
   "versionName": "3.0",
   "apkUrl": "https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk",
-  "changelog": "Salsa TV Launcher v3.0 - 12 Broadcast Text Themes with Voice Reader, Unified High-Clarity Ambient Music Tracks (Dashboards, Slideshow & Text), Clean m.youtube.com Video Screensaver, Context-Aware 3-Lines Menu Key (Home -> Settings, IPTV -> IPTV Settings, Web -> Virtual Mouse), Salsa Store Web Browsers & Social Media Top Categories, Secret 3x-OK IPTV Gift Unlock, 12h/24h Clock Toggle, and IPTV 15s Auto-Retry",
+  "sha256": "3fa0aed43b145b3616516041c0773064197b1c22083806cd4c015eb050390292",
+  "changelog": "Salsa TV Launcher v3.0 - Multi-User Profiles & Accounts System (Per-User Appearance, Screensaver, Language, IPTV Favorites/Order, Apps/Web/Games Order, Section Hide/PIN Lock), SHA-256 & APK Signature Verification for OTA Updates, PIN-Protected Family/Kids Mode, and Mobile/Small-Screen Responsive IPTV Layout",
   "mandatory": false
 }

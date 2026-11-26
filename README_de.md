@@ -40,9 +40,12 @@ Die meisten Smart-TV-Launcher sind heute mit erzwungener Werbung, schweren Video
 ## 🌟 Neue Funktionen & aktuelle Verbesserungen
 
 ### 🆕 Neu in Version 3.0
+* **👤 Mehrbenutzer-Profile & Benutzer-Isolation (`Profiles / Users`)**: Erstellen Sie mehrere unabhängige Familienprofile — jedes mit eigenem **Design & Hintergrundbild**, **Bildschirmschoner**, **Sprache**, **IPTV-Favoriten & Senderreihenfolge**, **Apps-/Web-/Spiele-Reihenfolge**, optionaler **4-stelliger Profil-PIN**, **Kinderprofil-Voreinstellung** (aktiviert automatisch den Familien-DNS-Schutz) und individueller **Bereichssteuerung pro Benutzer** (**IPTV**, **Apps**, **Web** oder **Spiele** anzeigen, mit PIN sperren oder ausblenden). Schnell erreichbar über ein flaches, rahmenloses rundes Profilsymbol ganz außen in der oberen Leiste (**ganz rechts bei LTR, ganz links bei RTL**).
+* **🔢 Schnelle Senderwahl per Zifferntasten (`0–9`) & kontrastreiche Sendernummern**: Geben Sie auf dem Startbildschirm, in der IPTV-Senderliste oder im Live-Player einfach eine Sendernummer über die Fernbedienung ein, um direkt dorthin zu springen — kombiniert mit kontrastreichen Sendernummern-Abzeichen (schwarze Ziffern auf halbtransparentem weißem Hintergrund).
+* **🎞️ Lokaler Video-Bildschirmschoner vom Gerät / USB (`Media3 / ExoPlayer`)**: Wählen Sie neben den reinen Vollbild-Streams über `m.youtube.com` ohne Texteinblendungen beliebige lokale Videodateien vom TV-Speicher oder USB-Stick über den sicheren System-Dateiauswahldialog (`SAF`) für nahtlose Vollbild-Endlosschleifen.
 * **📡 Broadcast Text Showcase (12 animierte Themen, dunkle dynamische Hintergründe & Sprachausgabe)**: 12 eigenständige Studio-Themes — 6 Klassiker plus 6 kreative neue Themen (**Aurora Silk**, **Synthwave 80s**, **Cosmic Orbit**, **Royal Arabesque**, **Audio Studio Equalizer**, **Crystal Prism Hologram**) — jeweils mit eigenem dunklem, dynamischem Hintergrund samt wechselnden Farbschatten + Live-Vorschau in den Einstellungen, editierbaren Textzeilen (`3–15s`), **Vorlesefunktion (TTS)** (wartet bis zum Ende des Vorlesens) sowie optionaler Hintergrundmusik oder lokalem MP3.
 * **📺 IPTV Intelligente Fehlerbehebung (`Nächster Sender` + 15s Auto-Wiederholung) & Geheimes 3× OK IPTV-Geschenk**: Wenn ein IPTV-Sender nicht lädt, erscheint ein fokussierter Bildschirm mit nur einer Schaltfläche (**Nächster Sender**) und einem **15-Sekunden-Countdown**, der denselben Sender automatisch erneut versucht, falls nichts gewählt wird. Zudem schaltet 3× `OK` auf der leeren IPTV-Kachel integrierte IPTV-Playlists mit einer Geschenk-Animation frei.
-* **🛒 Salsa Store Top-Kategorien & Reiner `m.youtube.com`-Video-Bildschirmschoner**: Der **Salsa Store** priorisiert **Webbrowser** und **Social Media** ganz oben im 9-Kategorien-Katalog (240+ TV-Apps inkl. Offline-Fallback); der Video-Bildschirmschoner streamt stets sauber im Vollbild über `m.youtube.com` ganz ohne Text-, HUD- oder Player-Einblendungen.
+* **🛒 Salsa Store Top-Kategorien & Reiner `m.youtube.com`-Video-Bildschirmschoner**: Der **Salsa Store** priorisiert **Webbrowser** und **Social Media** ganz oben in seinem 9-Kategorien-Katalog kuratierter Android-TV-Dienstprogramme und Player (inkl. Offline-Fallback); der Video-Bildschirmschoner streamt stets sauber im Vollbild über `m.youtube.com` ganz ohne Text-, HUD- oder Player-Einblendungen.
 * **🎨 Live-UI-Einstellungen HUD — Direkte Uhrformat-Umschaltung**: Schwebendes Einstellungsmenü direkt auf dem Startbildschirm jetzt mit eigenem **Uhrformat**-Umschalter (**`24h • 22:00`** vs. **`12h • AM/PM`**) direkt neben Uhrgröße und Datumsformat sowie Live-Vorschau für 4K-Hintergründe, Helligkeit, App-Abstand, Rasterdichte, Glas-Transparenz, Begrüßung, Wetter, Nachtfilter, Material You und Lite-Modus.
 * **🖥️ Dashboard-Bildschirmschoner, Nachrichten-Sprachausgabe & Einheitliche Klar-Musik**: Zeigen Sie **Wetter**, **Nachrichten**, **Wirtschaft**, **Fußball** oder **Alle im Wechsel** an; der Nachrichten-Bildschirmschoner unterstützt **Vorlesen (TTS)** für alle 6 Meldungen vor dem Wechsel, und alle Info-Dashboards nutzen dieselben kristallklaren Musiktitel wie Diashow & Broadcast Text (**Bossa Nova**, **Smooth Jazz**, **Calm Ocean Waves**, **Classic Chillout**, Ambient-Klänge & eigenes MP3) mit automatischer Absenkung beim Vorlesen.
 * **🌙 Standard-Timeout für Bildschirmschoner auf 10 Minuten erhöht**: Der Standardwert für Inaktivität beträgt nun **10 Minuten** (anpassbar: 2, 5, 10, 15, 30 Min. oder Deaktiviert für Systemübergabe).
@@ -94,10 +97,22 @@ Die meisten Smart-TV-Launcher sind heute mit erzwungener Werbung, schweren Video
 ### 🔒 Datenschutz, App-Speichermanager, Familien-DNS & Organisation
 * **Integrierter App-Speichermanager**: Zeigt alle installierten Apps sortiert nach Größe (`MB`) an, öffnet die System-App-Infos oder **deinstalliert Apps direkt** zur Speicherfreigabe.
 * **8 Schnellzugriffe auf Systemeinstellungen**: Direkter Zugriff auf **WLAN**, **Ethernet**, **Anzeige**, **Ton**, **Datum & Uhrzeit**, **Alle Systemeinstellungen**, **App-Info** und **Speichermanager**.
-* **Dual-Modus DNS-Schutz (Werbeblocker & Familienschutz)**: Wählen Sie zwischen **Werbung & Tracker blockieren** oder dem **Familienschutz-Modus** (blockiert zusätzlich jugendgefährdende Webseiten systemweit).
+* **Dual-Modus DNS-Schutz (Werbeblocker & PIN-geschützter Familienschutz)**: Wählen Sie zwischen **Werbung & Tracker blockieren** oder dem **Familienschutz-Modus** (blockiert zusätzlich jugendgefährdende Webseiten systemweit). **Das Beenden des Familienschutzes oder Ändern der PIN erfordert zwingend die 4-stellige PIN.**
 * **PIN-geschützte App-Sperre**: Schützen Sie sensible Apps und IPTV-Kategorien mit einem 4-stelligen PIN-Code.
 * **Apps neu anordnen & ausblenden**: Verschieben, kategorisieren (Apps vs. Spiele) oder verstecken Sie unerwünschte System-Apps.
 * **Sichere Zurück-Navigation**: Verhindert versehentliches Beenden auf den System-Desktop beim Drücken der Zurück-Taste auf dem Startbildschirm.
+
+> ⚠️ **Wichtiger Hinweis zum Kinder- / Familienschutz-Modus**: Das Beenden des Familienschutzes innerhalb des Launchers ist durch Ihre 4-stellige PIN geschützt. Bitte beachten Sie jedoch, dass **ein Launcher allein ein Kind nicht daran hindern kann, über eine andere installierte App oder die System-Taste `Home` auszuweichen**, sofern **Salsa TV Launcher** nicht als **Standard-Start-App** festgelegt ist und **Systemeinstellungen** (sowie andere Launcher/Browser) zusätzlich per App-PIN gesperrt wurden.
+
+---
+
+## 🛡️ Sicherheit & Transparenz der Berechtigungen
+
+* **HTTPS standardmäßig (`network_security_config.xml`)**: Unverschlüsselter HTTP-Verkehr ist global deaktiviert (`cleartextTrafficPermitted="false"`), mit gezielten Ausnahmen nur für Dienste ohne HTTPS.
+* **WebView Safe Browsing aktiv**: Google Safe Browsing ist für alle eingebetteten WebViews aktiviert (`EnableSafeBrowsing=true`) bei deaktivierter Telemetrie (`MetricsOptOut=true`).
+* **Verifizierte OTA-Updates**: Vor der Installation überprüft `AppUpdateManager` die **SHA-256-Prüfsumme** (`version.json`), den **Paketnamen** sowie das **APK-Signaturzertifikat**.
+* **Keine breiten Speicherberechtigungen (`Kein MANAGE_EXTERNAL_STORAGE`)**: Alle Hintergründe, lokalen Videos, MP3s, Fotoordner und Backups nutzen Androids berechtigungsfreies **Storage Access Framework (SAF)**.
+* **Erklärte Berechtigungen**: `INTERNET`/`ACCESS_NETWORK_STATE` (IPTV, Dashboards, Store, OTA), optional `ACCESS_COARSE_LOCATION` (grobe Stadt-Wetterdaten), optional `RECORD_AUDIO` (nur bei Sprachsuche `🎤`), `REQUEST_INSTALL_PACKAGES`/`REQUEST_DELETE_PACKAGES` (nur bei expliziter App-Installation/Deinstallation), `BIND_VPN_SERVICE` (lokaler AdGuard-DNS-Schutz) und `RECEIVE_BOOT_COMPLETED` (Autostart).
 
 ---
 
@@ -123,8 +138,10 @@ Die meisten Smart-TV-Launcher sind heute mit erzwungener Werbung, schweren Video
 
 ## 📥 APK-Download & Installation
 
+> ℹ️ **Plattform-Hinweis**: Salsa TV Launcher wurde primär für **Android TV, Google TV und TV-Boxen** mit Fernbedienung (`D-Pad`) entwickelt. *(Die Unterstützung für kleine Mobil-/Touchscreens befindet sich derzeit im **experimentellen Entwicklungsstadium**).*
+
 ### Option 1: Direkter APK-Download
-Laden Sie das aktuell kompilierte APK direkt auf Ihren Fernseher oder Ihr Smartphone herunter:
+Laden Sie das aktuell kompilierte Release-APK direkt auf Ihr Android-TV-Gerät herunter:
 
 👉 **[Neuestes Salsa TV Launcher APK herunterladen](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)**  
 👉 **[Downloader-Kurzcode / Direktlink: aftv.news/5157967](http://aftv.news/5157967)**
@@ -152,6 +169,7 @@ adb install -r salsa-tv-launcher.apk
 | **Steuerkreuz (D-Pad)** | Flüssige Hochgeschwindigkeits-Navigation durch Apps, Sender und Einstellungen. |
 | **OK / D-Pad-Mitte** | Ausgewählte App starten oder IPTV-Sender abspielen. |
 | **OK gedrückt halten** | App-/Sender-Verwaltungsmenü öffnen (Sortieren, PIN-Sperre, Ausblenden, Spiele-Kategorie, App-Info/Deinstallieren). |
+| **Zifferntasten (`0–9`)** | **Schnelle Senderwahl**: Sendernummer auf dem Startbildschirm, in der IPTV-Liste oder im Player eingeben, um direkt zum Sender zu springen (`OK` zum Bestätigen, `Zurück` zum Bearbeiten). |
 | **Menü (`☰` Drei Linien)** | Kontextabhängig: Öffnet **Einstellungen** auf dem Startbildschirm, **IPTV-Einstellungen** im IPTV-Bereich (Senderliste & Player; `INFO`/`GUIDE` schalten die Infoleiste um) und schaltet die **Virtuelle Maus** in Webportalen & Spielen um. |
 | **Sprach- / Google Assistant-Taste (`🎤`)** | Öffnet die integrierte Sprachsuche für Apps, IPTV-Sender oder Websuchen. |
 | **Einstellungen-Taste (`KEYCODE_SETTINGS`)** | Öffnet das Kontrollzentrum oder direkt die Einstellungen (je nach gewähltem Kopfzeilen-Modus). |
@@ -172,7 +190,7 @@ adb install -r salsa-tv-launcher.apk
 ## 📄 Lizenz & Urheberrecht
 
 Entworfen und entwickelt von **© Osama Salsa**.  
-Alle Rechte vorbehalten.
+Dieses Repository enthält die offiziell kompilierte Release-APK, mehrsprachige Dokumentation, Screenshots und verifizierte OTA-Update-Manifeste (`version.json`).
 
 <div align="center">
   <sub>Mit ❤️ entwickelt für ein sauberes, schnelles und werbefreies Android-TV-Erlebnis weltweit.</sub>

@@ -10,7 +10,7 @@
 [![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
@@ -36,9 +36,12 @@ Zaprojektowany specjalnie pod obsługę pilotem telewizyjnym (nawigacja D-Pad), 
 ## 🚀 Główne Funkcje
 
 ### 🆕 Nowości w wersji 3.0
+* **👤 Profile Wielu Użytkowników i Izolacja Ustawień (`Profiles / Users`)**: Twórz niezależne profile dla domowników — każdy z własnym **Wyglądem i Tapetą**, **Wygaszaczem Ekranu**, **Językiem**, **Ulubionymi i Kolejnością IPTV**, **Kolejnością Aplikacji / Web / Gier**, opcjonalnym **4-cyfrowym PIN-em Profilu**, **Profilem Dziecięcym** (automatycznie włącza Rodzinną Ochronę DNS) oraz **kontrolą widoczności sekcji** (Pokaż, Zablokuj PIN-em lub Ukryj **IPTV**, **Aplikacje**, **Web** lub **Gry**). Szybki dostęp przez płaską, bezramkową okrągłą ikonę awatara na skrajnej krawędzi górnego paska (**skrajnie po prawej w LTR, skrajnie po lewej w RTL**).
+* **🔢 Szybkie Przełączanie Kanałów Cyframi (`0–9`) i Kontrastowe Numery Kanałów**: Wpisz numer kanału z pilota na Ekranie Głównym, w liście IPTV lub w odtwarzaczu, aby natychmiast przełączyć kanał — wspierane czytelnymi, kontrastowymi plakietkami numerów (czarne cyfry na półprzezroczystym białym tle).
+* **🎞️ Lokalny Wygaszacz Wideo z Urządzenia / USB (`Media3 / ExoPlayer`)**: Oprócz czystych strumieni pełnoekranowych `m.youtube.com` bez żadnych nakładek, wybierz dowolny lokalny plik wideo z pamięci TV lub pendrive'a USB przez bezpieczny selektor bez uprawnień (`SAF`) dla płynnego zapętlania na pełnym ekranie.
 * **📡 Wygaszacz Tekstowy Broadcast (12 Animowanych Motywów, Ciemne Dynamiczne Tła i Lektor Głosowy)**: 12 motywów studyjnych — 6 klasycznych oraz 6 nowych motywów kreatywnych (**Aurora Silk**, **Synthwave 80s**, **Cosmic Orbit**, **Royal Arabesque**, **Audio Studio Equalizer**, **Crystal Prism Hologram**) — z unikalną animacją, układem oraz **dedykowanym ciemnym dynamicznym tłem z kontrastowymi cieniami** + podglądy na żywo w Ustawieniach, edytowalne wiersze (`3–15s`), **Lektor Głosowy (TTS)** czekający na zakończenie czytania przed zmianą oraz opcjonalna muzyka tła lub lokalny plik MP3.
 * **📺 Inteligentne Odzyskiwanie Błędów IPTV (`Następny Kanał` + 15s) i Sekretny Prezent 3× OK**: Gdy kanał IPTV nie działa, wyświetla przejrzysty ekran z jednym przyciskiem (**Następny Kanał**) oraz **15-sekundowym odliczaniem**, które automatycznie ponawia próbę. Dodatkowo 3× `OK` na pustej karcie IPTV odblokowuje wbudowane listy z animacją prezentu.
-* **🛒 Top Kategorie Salsa Store i Czysty Wygaszacz Wideo `m.youtube.com`**: **Salsa Store** umieszcza **Przeglądarki WWW** i **Media Społecznościowe** na początku katalogu 9 kategorii (240+ aplikacji TV z trybem offline); wygaszacz wideo odtwarza płynnie na pełnym ekranie przez `m.youtube.com` bez żadnych napisów ani nakładek.
+* **🛒 Top Kategorie Salsa Store i Czysty Wygaszacz Wideo `m.youtube.com`**: **Salsa Store** umieszcza **Przeglądarki WWW** i **Media Społecznościowe** na początku katalogu 9 kategorii sprawdzonych narzędzi i odtwarzaczy Android TV (z trybem offline); wygaszacz wideo odtwarza płynnie na pełnym ekranie przez `m.youtube.com` bez żadnych napisów ani nakładek.
 * **🎨 Ustawienia UI na Żywo (`Live UI Settings`) — Bezpośredni Wybór Formatu Zegara**: Pływający pasek na ekranie głównym zawiera teraz osobny przełącznik **Formatu Zegara** (**`24h • 22:00`** / **`12h • AM/PM`**) obok rozmiaru zegara i formatu daty, wraz z podglądem na żywo tapet 4K, jasności, położenia aplikacji, siatki, przezroczystości, powitań, pogody, trybu nocnego, Material You i trybu lekkiego.
 * **🖥️ Wygaszacz Paneli, Lektor Wiadomości i Ujednolicona Czysta Muzyka**: Wyświetlaj **Pogodę**, **Wiadomości**, **Ekonomię**, **Piłkę nożną** lub **Automatyczną zmianę**; wygaszacz Wiadomości wspiera **Lektora (TTS)** czytającego wszystkie 6 wiadomości przed przełączeniem, a wszystkie panele korzystają z tych samych krystalicznie czystych utworów (**Bossa Nova**, **Smooth Jazz**, **Calm Ocean Waves**, **Classic Chillout**, ambient i MP3) z automatycznym ściszaniem podczas czytania.
 * **🌙 Domyślny Czas Wygaszacza 10 Minut**: Domyślny czas bezczynności zmieniono na **10 minut** (konfigurowalny: 2, 5, 10, 15, 30 min lub Wyłączony).
@@ -107,8 +110,20 @@ Zaprojektowany specjalnie pod obsługę pilotem telewizyjnym (nawigacja D-Pad), 
 * **Skalowanie Interfejsu, Dynamiczne Kolory (Material You) i Aplikacje Spoza TV (Sideloaded APKs):** Dostosuj liczbę kolumn, przezroczystość kart (10%–100%), włącz **Dynamiczne Kolory Material You** oraz przełączaj między wyświetlaniem tylko aplikacji TV a **wszystkimi zainstalowanymi aplikacjami Android (w tym mobilnymi APK)**.
 * **Kinowy Wygaszacz Ekranu (`m.youtube.com`), Własne Filmy YouTube i Pokaz Slajdów (`Slideshow`):** Odtwarza wideo na pełnym ekranie przez `m.youtube.com` bez napisów ani nakładek, umożliwia dodawanie własnych filmów YouTube z **natychmiastowym podglądem**, lub wyświetlanie zdjęć z folderu (Pamięć/USB) bądź galerii 4K z regulowanym czasem (`5s`–`5m`), ruchem **Ken Burns / Łagodny Zoom / Statyczny**, 6 przejściami, 7 efektami cząsteczkowymi (**Śnieg ❄️**, **Świetliki ✨**, **Deszcz 🌧️**, **Jesienne Liście 🍂**, **Sakura 🌸**, **Gwiazdy ⭐**, **Bokeh 🔮**), zegarem w rogu oraz czystą muzyką w tle (**Bossa Nova**, **Smooth Jazz**, **Calm Ocean Waves**, **Classic Chillout**) lub własnym MP3.
 * **Wbudowany Menedżer Pamięci Aplikacji i 8 Skrótów Systemowych:** Przeglądaj zainstalowane aplikacje posortowane według rozmiaru (`MB`), otwieraj informacje systemowe lub **odinstalowuj aplikacje bezpośrednio**, aby zwolnić miejsce; korzystaj z 8 szybkich skrótów (Wi-Fi, Ethernet, Ekran, Dźwięk, Data i czas, Ustawienia, O aplikacji, Pamięć).
-* **Dwutrybowy Filtr DNS (AdBlock + Ochrona Rodzinna) i Blokada PIN:** Wybierz między **blokowaniem reklam i elementów śledzących** a **Trybem Ochrony Rodzinnej** (blokuje strony dla dorosłych w całym systemie) i chroń aplikacje oraz kategorie IPTV 4-cyfrowym kodem PIN.
-* **Wyszukiwanie Głosowe (`🎤`), Domyślny Asystent Głosowy Systemu, Inteligentne Zakładki Web i Multi-Lista IPTV:** Ustaw **Salsa TV** jako domyślnego asystenta głosowego telewizora, aby natywnie używać przycisku mikrofonu na pilocie; zarządzaj **wieloma listami M3U**; korzystaj z zakładek webowych z automatycznym pobieraniem ikon HD i trybem **YouTube TV Leanback**; pasek ostatnich aplikacji i aktualizacje OTA z GitHub.
+* **Dwutrybowy Filtr DNS (AdBlock + Ochrona Rodzinna z PIN) i Blokada PIN:** Wybierz między **blokowaniem reklam i elementów śledzących** a **Trybem Ochrony Rodzinnej** (**wyjście z Trybu Rodzinnego wymaga podania 4-cyfrowego kodu PIN**) i chroń aplikacje oraz kategorie IPTV kodem PIN.
+* **Wyszukiwanie Głosowe (`🎤`), Inteligentne Zakładki Web i Multi-Lista IPTV:** Zintegrowane wyszukiwanie głosowe, zarządzanie **wieloma listami M3U**, zakładki webowe z ikonami HD i trybem **YouTube TV Leanback**, pasek ostatnich aplikacji oraz zweryfikowane aktualizacje OTA z GitHub.
+
+> ⚠️ **Ważna Uwaga o Trybie Dziecięcym / Ochrony Rodzinnej:** Wyłączenie trybu w launcherze chroni kod PIN. **Sam launcher nie zapobiegnie jednak wyjściu dziecka przez inną aplikację lub przycisk `Home`**, o ile nie ustawisz **Salsa TV Launcher** jako **Domyślnego Ekranu Głównego** oraz nie zablokujesz **Ustawień Systemowych** kodem PIN.
+
+---
+
+## 🛡️ Bezpieczeństwo i Przejrzystość Uprawnień
+
+* **Domyślnie HTTPS (`network_security_config.xml`)**: Nieszyfrowany ruch HTTP jest globalnie wyłączony (`cleartextTrafficPermitted="false"`), z minimalnymi wyjątkami wyłącznie dla niezbędnych usług.
+* **Aktywne Bezpieczne Przeglądanie WebView**: Włączona ochrona Google Safe Browsing (`EnableSafeBrowsing=true`) bez wysyłania telemetrii (`MetricsOptOut=true`).
+* **Zweryfikowane Aktualizacje OTA**: Przed instalacją aktualizacji z GitHub `AppUpdateManager` weryfikuje sumę **SHA-256** (`version.json`), **nazwę pakietu** oraz **certyfikat podpisu APK**.
+* **Brak szerokich uprawnień pamięci (`Brak MANAGE_EXTERNAL_STORAGE`)**: Wszystkie lokalne pliki są wybierane przez bezpieczny selektor **Storage Access Framework (SAF)**.
+* **Wyjaśnienie uprawnień**: `INTERNET`/`ACCESS_NETWORK_STATE` (IPTV, panele, Store, OTA), opcjonalne `ACCESS_COARSE_LOCATION` (przybliżona pogoda miasta), opcjonalne `RECORD_AUDIO` (tylko Wyszukiwanie Głosowe `🎤`), `REQUEST_INSTALL_PACKAGES`/`REQUEST_DELETE_PACKAGES` (wyłącznie na wyraźne polecenie użytkownika), `BIND_VPN_SERVICE` (lokalna tarcza AdGuard DNS) oraz `RECEIVE_BOOT_COMPLETED`.
 
 ---
 
@@ -120,6 +135,7 @@ Salsa TV Launcher został zaprojektowany do intuicyjnej obsługi dowolnym standa
 | :--- | :--- | :--- |
 | **Przycisk OK / Wybierz (Krótkie naciśnięcie)** | Dowolna aplikacja lub karta | Otwiera wybraną aplikację, kanał lub portal. |
 | **Przycisk OK / Wybierz (Długie przytrzymanie)** | Na ikonie aplikacji lub kanału | Otwiera **Menu Szybkich Opcji** (Przenieś, Ukryj, Zablokuj PIN-em, Kategoria gier, Informacje, Odinstaluj). |
+| **Klawisze Cyfrowe (`0–9`)** | Ekran Główny • Lista IPTV • Odtwarzacz | **Szybkie Przełączanie Kanałów**: wpisz numer kanału, aby przejść do niego bezpośrednio (`OK` zatwierdza, `Wstecz` poprawia). |
 | **Przycisk Menu (☰ Trzy Linie)** | Zależnie od ekranu | Na **Ekranie Głównym** otwiera **Ustawienia**, w **IPTV** (lista i odtwarzacz) otwiera **Ustawienia IPTV** (`INFO`/`GUIDE` przełącza pasek informacji), a w **Portalach Web / Grach** przełącza **Wirtualną Mysz**. |
 | **Przycisk Głosu / Asystent Google (🎤)** | W dowolnym miejscu Launchera | Otwiera **Uniwersalne Wyszukiwanie Głosowe** Salsa do szukania aplikacji, kanałów IPTV lub wydawania poleceń głosowych. |
 | **Przyciski Kierunkowe (D-Pad)** | W całej aplikacji | Płynna nawigacja między kategoriami, aplikacjami, kanałami i elementami sterowania. |
@@ -142,25 +158,24 @@ Salsa TV Launcher został zaprojektowany do intuicyjnej obsługi dowolnym standa
 
 ## 📦 Instalacja
 
+> ℹ️ **Uwaga o Platformie**: Salsa TV Launcher jest zaprojektowany przede wszystkim dla **Android TV, Google TV i TV Boxów** z pilotem (`D-Pad`). *(Obsługa małych ekranów mobilnych/dotykowych ma obecnie status **eksperymentalny / w trakcie rozwoju**).*
+
 ### Metoda 1: Bezpośrednie Pobranie APK (Zalecane)
-1. Pobierz plik [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk) z sekcji Releases.
+1. Pobierz plik [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk).
    👉 **[Krótki kod aplikacji Downloader / Bezpośredni link: aftv.news/5157967](http://aftv.news/5157967)**
 2. Prześlij plik na swój telewizor Android TV za pomocą pamięci USB, aplikacji *Send Files to TV* lub *Downloader*.
 3. Zainstaluj plik APK i przyznaj wymagane uprawnienia.
 4. Naciśnij przycisk **Home** na pilocie i wybierz **Salsa TV Launcher** jako domyślny ekran główny (**„Zawsze”**).
 
-### Metoda 2: Kompilacja ze Źródeł
+### Metoda 2: Instalacja przez ADB
 ```bash
-git clone https://github.com/OsamaSalsa/Salsa-TV-Launcher.git
-cd Salsa-TV-Launcher
-./gradlew assembleDebug
+adb connect <ADRES_IP_TV>:5555
+adb install -r salsa-tv-launcher.apk
 ```
-Skompilowany plik APK znajdziesz w `app/build/outputs/apk/debug/app-debug.apk`.
 
 ---
 
-## 🤝 Współpraca i Licencja
+## 📄 Licencja i Prawa Autorskie
 
-Zgłoszenia błędów, propozycje nowych funkcji oraz *Pull Requesty* są mile widziane!
-
-Projekt udostępniany na licencji **MIT**. Szczegóły znajdują się w pliku `LICENSE`.
+Zaprojektowany i stworzony przez **© Osama Salsa**.  
+To repozytorium zawiera oficjalnie skompilowany plik APK, wielojęzyczną dokumentację, zrzuty ekranu oraz zweryfikowane manifesty automatycznych aktualizacji OTA (`version.json`).

@@ -10,7 +10,7 @@
 [![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
 
 <br>
@@ -36,9 +36,12 @@ Dirancang khusus untuk remote TV (navigasi D-Pad), setiap animasi, efek fokus, d
 ## 🚀 Fitur Utama
 
 ### 🆕 Yang Baru di Versi 3.0
+* **👤 Profil Multi-Pengguna & Isolasi Per Pengguna (`Profiles / Users`)**: Buat beberapa profil keluarga independen — masing-masing dengan **Tampilan & Wallpaper**, **Screensaver**, **Bahasa**, **Favorit & Urutan IPTV**, **Urutan Aplikasi/Web/Game**, **PIN Profil 4 digit opsional**, **Prasetel Profil Anak** (otomatis mengaktifkan Perisai DNS Keluarga), serta **kontrol per bagian** (Tampilkan, Kunci PIN, atau Sembunyikan **IPTV**, **Aplikasi**, **Web**, atau **Game**). Dapat diakses lewat ikon avatar lingkaran datar tanpa bingkai di ujung paling luar bilah atas (**paling kanan di LTR, paling kiri di RTL**).
+* **🔢 Pindah Saluran Cepat dengan Angka (`0–9`) & Lencana Nomor Kontras Tinggi**: Tekan tombol angka (`0–9`) pada remote dari Layar Beranda, Daftar IPTV, atau Pemutar Langsung untuk langsung melompat ke nomor saluran — dilengkapi lencana nomor saluran kontras tinggi (angka hitam di atas latar putih transparan).
+* **🎞️ Screensaver Video Lokal dari Perangkat / USB (`Media3 / ExoPlayer`)**: Selain aliran layar penuh bersih via `m.youtube.com` tanpa overlay teks, pilih file video lokal dari penyimpanan TV atau USB lewat pemilih sistem tanpa izin (`SAF`) untuk pemutaran berulang layar penuh yang mulus.
 * **📡 Screensaver Teks Siaran (12 Tema Animasi, Latar Gelap Dinamis & Pembaca Suara)**: 12 tema studio unik — 6 klasik plus 6 tema animasi kreatif baru (**Aurora Silk**, **Synthwave 80s**, **Cosmic Orbit**, **Royal Arabesque**, **Audio Studio Equalizer**, **Crystal Prism Hologram**) — dengan gerakan, tata letak, dan **latar belakang gelap dinamis khusus untuk setiap tema** beserta bayangan warna kontras + pratinjau langsung di Pengaturan, baris teks dapat diedit (`3–15d`), **Pembaca Suara (TTS)** yang menunggu narasi selesai sebelum berpindah, serta musik latar lembut atau MP3 lokal opsional.
 * **📺 Pemulihan Error IPTV Cerdas (`Saluran Berikutnya` + 15d) & Hadiah Rahasia 3× OK**: Saat saluran IPTV gagal dimuat, menampilkan layar bersih dengan satu tombol fokus (**Saluran Berikutnya**) dan **hitung mundur 15 detik** yang otomatis mencoba ulang saluran yang sama. Selain itu, menekan `OK` 3 kali pada kartu IPTV kosong membuka daftar putar bawaan dengan animasi kotak hadiah.
-* **🛒 Kategori Teratas Salsa Store & Video Screensaver Bersih `m.youtube.com`**: **Salsa Store** memprioritaskan **Browser Web** dan **Media Sosial** di urutan teratas katalog 9 kategori (240+ aplikasi TV dengan cadangan offline); screensaver video selalu memutar layar penuh melalui `m.youtube.com` tanpa teks atau overlay apa pun di layar.
+* **🛒 Kategori Teratas Salsa Store & Video Screensaver Bersih `m.youtube.com`**: **Salsa Store** memprioritaskan **Browser Web** dan **Media Sosial** di urutan teratas katalog 9 kategori utilitas & pemutar Android TV resmi (dengan cadangan offline); screensaver video selalu memutar layar penuh melalui `m.youtube.com` tanpa teks atau overlay apa pun di layar.
 * **🎨 Pengaturan UI Langsung (`Live UI Settings`) — Format Jam Langsung**: Panel melayang di beranda kini memiliki pengalih langsung **Format Jam** (**`24j • 22:00`** / **`12j • AM/PM`**) di samping ukuran jam dan format tanggal, plus pratinjau real-time untuk wallpaper 4K, kecerahan, posisi aplikasi, kisi, transparansi, sapaan, cuaca, filter malam, Material You, dan mode ringan.
 * **🖥️ Screensaver Dasbor, Pembaca Suara Berita & Musik Jernih Terpadu**: Tampilkan **Cuaca**, **Berita**, **Ekonomi**, **Sepak Bola**, atau **Putar Semua**; mode Berita mendukung **Pembaca Suara (TTS)** hingga 6 berita selesai dibacakan sebelum berganti, dan semua dasbor memakai trek musik latar jernih yang sama (**Bossa Nova**, **Smooth Jazz**, **Calm Ocean Waves**, **Classic Chillout**, ambien & MP3) dengan peredupan otomatis saat TTS berbicara.
 * **🌙 Waktu Tunggu Default Screensaver 10 Menit**: Batas waktu tidak aktif default diperbarui ke **10 menit** (dapat diatur: 2, 5, 10, 15, 30 menit, atau Nonaktif).
@@ -107,8 +110,20 @@ Dirancang khusus untuk remote TV (navigasi D-Pad), setiap animasi, efek fokus, d
 * **Skala Antarmuka, Warna Dinamis (Material You) & Semua Aplikasi Android (Sideloaded APKs):** Sesuaikan jumlah kolom, transparansi kartu (10%–100%), aktifkan **Warna Dinamis Material You**, serta beralih antara menampilkan aplikasi TV saja atau **semua aplikasi Android yang terpasang (termasuk APK ponsel)**.
 * **Screensaver Sinematik (`m.youtube.com`), Video YouTube Kustom & Slideshow Foto (`Slideshow`):** Putar video layar penuh secara bersih via `m.youtube.com` tanpa teks atau overlay, tambahkan video YouTube kustom dengan tombol **pratinjau langsung**, atau tampilkan slideshow foto dari folder perangkat/USB atau galeri 4K dengan durasi per foto (`5d`–`5m`), gerakan **Ken Burns / Zoom Halus / Statis**, 6 transisi masuk, 7 efek partikel (**Salju ❄️**, **Kunang-kunang ✨**, **Hujan 🌧️**, **Daun Musim Gugur 🍂**, **Sakura 🌸**, **Bintang ⭐**, **Bokeh 🔮**), jam sudut, serta musik jernih (**Bossa Nova**, **Smooth Jazz**, **Calm Ocean Waves**, **Classic Chillout**) atau MP3 kustom.
 * **Manajer Penyimpanan Aplikasi Bawaan & 8 Pintasan Sistem Cepat:** Lihat semua aplikasi yang terpasang berdasarkan ukuran (`MB`), buka info sistem, atau **copot pemasangan aplikasi secara langsung** untuk mengosongkan ruang TV, ditambah 8 pintasan cepat (Wi-Fi, Ethernet, Layar, Suara, Tanggal/Waktu, Semua Pengaturan, Info Aplikasi, Manajer Penyimpanan).
-* **Perisai DNS Mode Ganda (AdBlock + Perlindungan Keluarga) & Kunci PIN:** Pilih antara **Blokir Iklan & Pelacak** atau **Mode Perlindungan Keluarga** (memblokir situs dewasa di seluruh sistem), dan lindungi aplikasi atau kategori IPTV dengan kode PIN 4 digit.
-* **Pencarian Suara Universal (`🎤`), Asisten Suara Default Sistem, Bookmark Web Cerdas & Multi-Playlist IPTV:** Jadikan **Salsa TV** sebagai asisten suara default sistem agar tombol mikrofon remote bekerja langsung; kelola **beberapa playlist M3U**; bookmark web cerdas dengan pengambilan ikon HD otomatis dan mode **YouTube TV Leanback**; baris aplikasi terbaru dan pembaru OTA GitHub.
+* **Perisai DNS Mode Ganda (AdBlock + Perlindungan Keluarga dengan PIN) & Kunci PIN:** Pilih antara **Blokir Iklan & Pelacak** atau **Mode Perlindungan Keluarga** (**keluar dari Mode Keluarga wajib memasukkan PIN 4 digit**), serta lindungi aplikasi atau kategori IPTV dengan kode PIN 4 digit.
+* **Pencarian Suara Universal (`🎤`), Bookmark Web Cerdas & Multi-Playlist IPTV:** Pencarian suara terintegrasi, kelola **beberapa playlist M3U**, bookmark web cerdas dengan ikon HD otomatis & mode **YouTube TV Leanback**, baris aplikasi terbaru, serta pembaruan OTA GitHub yang terverifikasi.
+
+> ⚠️ **Catatan Penting Mode Anak / Perlindungan Keluarga:** Menonaktifkan mode di dalam peluncur dilindungi oleh PIN 4 digit. Namun **peluncur saja tidak dapat mencegah anak keluar melalui aplikasi lain atau tombol `Home`**, kecuali **Salsa TV Launcher** ditetapkan sebagai **Beranda Default** dan **Pengaturan Sistem** ikut dikunci dengan PIN.
+
+---
+
+## 🛡️ Keamanan & Transparansi Izin
+
+* **HTTPS Secara Default (`network_security_config.xml`)**: Lalu lintas HTTP tidak terenkripsi dinonaktifkan secara global (`cleartextTrafficPermitted="false"`), dengan pengecualian terbatas hanya bila diperlukan.
+* **WebView Safe Browsing Aktif**: Google Safe Browsing diaktifkan (`EnableSafeBrowsing=true`) tanpa pelaporan telemetri (`MetricsOptOut=true`).
+* **Pembaruan OTA Terverifikasi**: Sebelum memasang pembaruan dari GitHub, `AppUpdateManager` memverifikasi hash **SHA-256** (`version.json`), **nama paket**, serta **sertifikat tanda tangan APK**.
+* **Tanpa Izin Penyimpanan Luas (`Tanpa MANAGE_EXTERNAL_STORAGE`)**: Semua file lokal dipilih melalui **Storage Access Framework (SAF)** tanpa izin luas.
+* **Penjelasan Izin**: `INTERNET`/`ACCESS_NETWORK_STATE` (IPTV, dasbor, toko, OTA), `ACCESS_COARSE_LOCATION` opsional (cuaca kota), `RECORD_AUDIO` opsional (khusus Pencarian Suara `🎤`), `REQUEST_INSTALL_PACKAGES`/`REQUEST_DELETE_PACKAGES` (hanya atas tindakan langsung pengguna), `BIND_VPN_SERVICE` (perisai DNS lokal AdGuard), dan `RECEIVE_BOOT_COMPLETED`.
 
 ---
 
@@ -120,6 +135,7 @@ Salsa TV Launcher dirancang agar mudah dikendalikan dengan remote standar Androi
 | :--- | :--- | :--- |
 | **Tombol OK / Pilih (Tekan Singkat)** | Aplikasi atau kartu apa pun | Membuka aplikasi, saluran, atau portal yang dipilih. |
 | **Tombol OK / Pilih (Tekan Lama)** | Di atas ikon aplikasi atau saluran | Membuka **Menu Opsi Cepat** (Pindahkan, Sembunyikan, Kunci PIN, Kategori Game, Info Aplikasi, Copot Pemasangan). |
+| **Tombol Angka (`0–9`)** | Beranda • Daftar IPTV • Pemutar IPTV | **Pindah Saluran Cepat**: ketik nomor saluran untuk langsung melompat (`OK` konfirmasi, `Back` ubah). |
 | **Tombol Menu (☰ Tiga Garis)** | Sesuai layar aktif | Di **Layar Beranda** membuka **Pengaturan**, di **IPTV** (daftar saluran & pemutar) membuka **Pengaturan IPTV** (`INFO`/`GUIDE` untuk bilah saluran), dan di **Portal Web / Game** mengaktifkan/menonaktifkan **Mouse Virtual**. |
 | **Tombol Suara / Google Assistant (🎤)** | Di mana saja dalam Launcher | Membuka **Pencarian Suara Universal** Salsa untuk mencari aplikasi, saluran IPTV, atau menjalankan perintah suara. |
 | **Tombol Arah (D-Pad)** | Di seluruh aplikasi | Navigasi mulus antar kategori, aplikasi, saluran, dan kontrol pemutar. |
@@ -142,25 +158,24 @@ Salsa TV Launcher dirancang agar mudah dikendalikan dengan remote standar Androi
 
 ## 📦 Cara Pemasangan
 
+> ℹ️ **Catatan Platform**: Salsa TV Launcher dirancang terutama untuk **Android TV, Google TV, dan TV Box** dengan remote control (`D-Pad`). *(Dukungan untuk layar sentuh/ponsel kecil saat ini bersifat **eksperimental / sedang dikembangkan**).*
+
 ### Metode 1: Unduh APK Langsung (Disarankan)
-1. Unduh file [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk) dari bagian Releases.
+1. Unduh file [`salsa-tv-launcher.apk`](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk).
    👉 **[Kode Singkat Downloader / Tautan Langsung: aftv.news/5157967](http://aftv.news/5157967)**
 2. Kirim ke Android TV Anda melalui flashdisk USB, aplikasi *Send Files to TV*, atau *Downloader*.
 3. Pasang APK dan berikan izin yang diminta.
 4. Tekan tombol **Home** pada remote Anda dan pilih **Salsa TV Launcher** sebagai aplikasi beranda bawaan (**"Selalu"**).
 
-### Metode 2: Kompilasi dari Kode Sumber
+### Metode 2: Pemasangan via ADB
 ```bash
-git clone https://github.com/OsamaSalsa/Salsa-TV-Launcher.git
-cd Salsa-TV-Launcher
-./gradlew assembleDebug
+adb connect <IP_ANDROID_TV>:5555
+adb install -r salsa-tv-launcher.apk
 ```
-File APK hasil kompilasi akan tersedia di `app/build/outputs/apk/debug/app-debug.apk`.
 
 ---
 
-## 🤝 Kontribusi & Lisensi
+## 📄 Lisensi & Hak Cipta
 
-Kontribusi, laporan bug, dan saran fitur baru sangat kami sambut! Silakan buka *Issue* atau kirimkan *Pull Request*.
-
-Didistribusikan di bawah Lisensi **MIT**. Lihat file `LICENSE` untuk informasi lebih lanjut.
+Dirancang dan dikembangkan oleh **© Osama Salsa**.  
+Repositori ini menyediakan APK rilis resmi yang telah dikompilasi, dokumentasi multibahasa, tangkapan layar, serta manifes pembaruan OTA terverifikasi (`version.json`).

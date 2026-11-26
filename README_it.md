@@ -40,9 +40,12 @@ La maggior parte dei launcher TV attuali è piena di annunci forzati, pesanti an
 ## 🌟 Nuove funzionalità e ultimi miglioramenti
 
 ### 🆕 Novità della Versione 3.0
+* **👤 Profili Multi-Utente & Isolamento per Utente (`Profiles / Users`)**: Crea più profili familiari indipendenti — ciascuno con il proprio **Aspetto e Sfondo**, **Salvaschermo**, **Lingua**, **Preferiti e Ordine IPTV**, **Ordine App / Web / Giochi**, **PIN Profilo opzionale a 4 cifre**, **Profilo Bambini** (attiva automaticamente lo Scudo DNS Famiglia) e **controllo per sezione** (Mostra, Blocca con PIN o Nascondi **IPTV**, **App**, **Web** o **Giochi**). Accessibile da un'icona avatar circolare piatta e senza bordi posizionata all'estremità superiore (**estrema destra in LTR, estrema sinistra in RTL**).
+* **🔢 Cambio Rapido Canale con Tasti Numerici (`0–9`) e Badge ad Alto Contrasto**: Digita un numero di canale sul telecomando dalla Home, dalla lista IPTV o dal player live per passare subito al canale desiderato, con badge numerici nitidi ad alto contrasto (cifre nere su sfondo bianco traslucido).
+* **🎞️ Salvaschermo Video Locale da Dispositivo / USB (`Media3 / ExoPlayer`)**: Oltre agli streaming puliti a schermo intero via `m.youtube.com` senza sovrapposizioni, seleziona qualsiasi video locale dalla memoria TV o da chiavetta USB tramite il selettore sicuro senza permessi (`SAF`) per la riproduzione fluida in loop.
 * **📡 Salvaschermo Testo Broadcast (12 Temi Animati, Sfondi Scuri Dinamici e Lettore Vocale)**: 12 temi studio unici — 6 classici più 6 nuovi temi creativi (**Aurora Silk**, **Synthwave 80s**, **Cosmic Orbit**, **Royal Arabesque**, **Audio Studio Equalizer**, **Crystal Prism Hologram**) — con animazioni, layout e **sfondi scuri dinamici dedicati a ogni tema** con ombre colorate cangianti + anteprime live nelle Impostazioni, righe modificabili (`3–15s`), **Lettore Vocale (TTS)** che attende la fine della lettura prima di avanzare, e musica ambientale o MP3 locale opzionale.
 * **📺 Ripristino Intelligente Errori IPTV (`Canale Successivo` + 15s) & Regalo Segreto 3× OK**: Quando un canale IPTV non si avvia, mostra una schermata essenziale con un solo pulsante (**Canale Successivo**) e un **conto alla rovescia di 15 secondi** che ritenta automaticamente lo stesso canale. Inoltre, premendo `OK` 3 volte sulla scheda IPTV vuota si sbloccano le playlist integrate con un'animazione celebrativa.
-* **🛒 Categorie Top Salsa Store & Salvaschermo Video Pulito `m.youtube.com`**: **Salsa Store** posiziona **Browser Web** e **Social Media** in cima al catalogo da 9 categorie (240+ app TV con fallback offline); il salvaschermo video riproduce sempre a schermo intero via `m.youtube.com` senza testi né overlay sullo schermo.
+* **🛒 Categorie Top Salsa Store & Salvaschermo Video Pulito `m.youtube.com`**: **Salsa Store** posiziona **Browser Web** e **Social Media** in cima al catalogo da 9 categorie di utilità e player Android TV verificati (con fallback offline); il salvaschermo video riproduce sempre a schermo intero via `m.youtube.com` senza testi né overlay sullo schermo.
 * **🎨 Impostazioni UI Live (`Live UI Settings`) — Formato Ora Diretto**: La barra trasparente sulla Home ora include un selettore diretto del **Formato Ora** (**`24h • 22:00`** vs **`12h • AM/PM`**) accanto a dimensione orologio e formato data, insieme all'anteprima in tempo reale per sfondi 4K, luminosità, offset app, griglia, opacità, saluti, meteo, filtro notte, Material You e modalità leggera.
 * **🖥️ Salvaschermo Pannelli Live, Lettore Vocale & Musica Unificata Cristallina**: Imposta **Meteo**, **Notizie**, **Economia**, **Calcio** o **Rotazione automatica**; il salvaschermo Notizie supporta la **lettura vocale (TTS)** completa dei 6 titoli prima di cambiare schermata, e tutti i pannelli condividono gli stessi brani musicali nitidi (**Bossa Nova**, **Smooth Jazz**, **Calm Ocean Waves**, **Classic Chillout**, ambient e MP3) con riduzione automatica durante il parlato.
 * **🌙 Timeout Predefinito Salvaschermo di 10 Minuti**: L'inattività predefinita è ora di **10 minuti** (configurabile: 2, 5, 10, 15, 30 min o Disattivato).
@@ -89,17 +92,31 @@ La maggior parte dei launcher TV attuali è piena di annunci forzati, pesanti an
 ### 🔒 Privacy, Gestione Archiviazione, DNS Famiglia e Gestione App
 * **Gestore archiviazione e app integrato**: Visualizza tutte le app installate ordinate per dimensione (`MB`), apri le informazioni di sistema o **disinstalla le app direttamente** per liberare spazio sul TV.
 * **Griglia con 8 scorciatoie di sistema**: Accesso rapido a **Wi-Fi**, **Ethernet**, **Schermo**, **Audio**, **Data e ora**, **Tutte le impostazioni**, **Info app** e **Gestione archiviazione**.
-* **Scudo DNS a doppia modalità (AdBlock e Protezione Famiglia)**: Scegli tra **Blocco pubblicità e tracker** o **Modalità Protezione Famiglia** (blocca anche i siti per adulti su tutto il sistema).
+* **Scudo DNS a doppia modalità (AdBlock e Protezione Famiglia con PIN)**: Scegli tra **Blocco pubblicità e tracker** o **Modalità Protezione Famiglia** (blocca anche i siti per adulti su tutto il sistema). **Uscire dalla Protezione Famiglia o cambiare il PIN richiede tassativamente il PIN a 4 cifre.**
 * **Blocco app con codice PIN a 4 cifre**: Protezione sicura per le applicazioni riservate e categorie IPTV.
 * **Gestione app**: Sposta, classifica (App vs Giochi) o nascondi le app di sistema non necessarie.
 * **Pulsante Indietro sicuro**: Previene l'uscita involontaria alla schermata di sistema del televisore.
+
+> ⚠️ **Nota importante sulla Modalità Bambini / Protezione Famiglia**: L'uscita nel launcher è protetta da PIN. Tuttavia, **un launcher da solo non può impedire a un bambino di uscire tramite un'altra app o il tasto `Home`**, a meno che **Salsa TV Launcher** non sia impostato come **Launcher predefinito** e le **Impostazioni di sistema** siano bloccate con PIN.
+
+---
+
+## 🛡️ Sicurezza e Trasparenza dei Permessi
+
+* **HTTPS predefinito (`network_security_config.xml`)**: Il traffico HTTP non crittografato è disattivato globalmente (`cleartextTrafficPermitted="false"`), con eccezioni mirate solo dove necessario.
+* **Navigazione Sicura WebView attiva**: Google Safe Browsing abilitato (`EnableSafeBrowsing=true`) con telemetria disattivata (`MetricsOptOut=true`).
+* **Aggiornamenti OTA Verificati**: Prima di installare aggiornamenti da GitHub, `AppUpdateManager` verifica l'hash **SHA-256** (`version.json`), il **nome del pacchetto** e il **certificato di firma APK**.
+* **Nessun permesso di archiviazione esteso (`No MANAGE_EXTERNAL_STORAGE`)**: Sfondi, video locali, MP3, foto e backup utilizzano il selettore sicuro **Storage Access Framework (SAF)**.
+* **Motivo dei permessi**: `INTERNET`/`ACCESS_NETWORK_STATE` (IPTV, pannelli, store, OTA), `ACCESS_COARSE_LOCATION` opzionale (meteo cittadino approssimativo), `RECORD_AUDIO` opzionale (solo per Ricerca Vocale `🎤`), `REQUEST_INSTALL_PACKAGES`/`REQUEST_DELETE_PACKAGES` (solo su azione esplicita dell'utente), `BIND_VPN_SERVICE` (scudo locale AdGuard DNS) e `RECEIVE_BOOT_COMPLETED`.
 
 ---
 
 ## 📥 Download e installazione APK
 
+> ℹ️ **Nota sulla Piattaforma**: Salsa TV Launcher è progettato principalmente per **Android TV, Google TV e TV Box** con telecomando (`D-Pad`). *(Il supporto per piccoli schermi mobile/touch è attualmente **sperimentale / in fase di sviluppo**).*
+
 ### Opzione 1: Download diretto APK
-Scarica il file APK pronto all'uso direttamente sul televisore o telefono:
+Scarica il file APK ufficiale pronto all'uso direttamente sul tuo dispositivo Android TV:
 
 👉 **[Scarica l'ultimo APK di Salsa TV Launcher](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)**  
 👉 **[Codice breve per app Downloader: aftv.news/5157967](http://aftv.news/5157967)**
@@ -119,6 +136,7 @@ adb install -r salsa-tv-launcher.apk
 | **Frecce direzionali (D-Pad)** | Navigazione rapida e fluida tra applicazioni, canali e impostazioni. |
 | **Tasto OK / Centro** | Avvia l'applicazione o riproduce il canale selezionato. |
 | **Pressione prolungata OK** | Apre le opzioni dell'app/canale (Sposta, Blocca con PIN, Nascondi, Giochi, Info/Disinstalla). |
+| **Tasti Numerici (`0–9`)** | **Cambio Rapido Canale**: digita il numero del canale dalla Home, dalla lista IPTV o dal player per passare subito a quel canale (`OK` per confermare, `Indietro` per modificare). |
 | **Tasto Menu (`☰` Tre linee)** | Contestuale: apre le **Impostazioni** nella Home, apre le **Impostazioni IPTV** in IPTV (`INFO`/`GUIDE` mostrano la barra info del player) e attiva/disattiva il **Mouse Virtuale** nei portali web e giochi. |
 | **Tasto Voce / Google Assistant (`🎤`)** | Apre la ricerca vocale integrata per trovare app o canali IPTV. |
 | **Tasto Indietro** | Torna alla schermata precedente o alla home in sicurezza. |
@@ -128,7 +146,7 @@ adb install -r salsa-tv-launcher.apk
 ## 📄 Licenza e copyright
 
 Progettato e sviluppato da **© Osama Salsa**.  
-Tutti i diritti riservati.
+Questo repository ospita l'APK ufficiale compilato, la documentazione multilingue, gli screenshot e i manifesti di aggiornamento OTA verificati (`version.json`).
 
 <div align="center">
   <sub>Creato con ❤️ per un'esperienza Android TV veloce, pulita e senza pubblicità in tutto il mondo.</sub>

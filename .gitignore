@@ -1,35 +1,48 @@
-*.iml
-.gradle
-.kotlin
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
-.env
-debug.keystore
+# ==============================================================================
+# GitHub Export Filter — Release, Screenshots, README & OTA Auto-Update Only
+# Excludes all internal source code, Gradle files, configs, and build artifacts.
+# ==============================================================================
 
-# Exclude source code, build config, and internal files from GitHub sync
-# (keeps README*.md, docs/screenshots/, salsa-tv-launcher.apk, and version.json only)
+# Ignore everything in root by default
+/*
+
+# Explicitly ignore all internal source code, Gradle, config, and build paths
 /app/
-app/
 /gradle/
-gradle/
-/workspace/
-workspace/
+/public/
+/.aistudio/
+/.gradle/
+/.kotlin/
+/.idea/
+/build/
+/captures/
+/.externalNativeBuild/
+/.cxx/
 /.build-outputs/
-.build-outputs/
+/workspace/
 /build.gradle.kts
 /settings.gradle.kts
 /gradle.properties
+/local.properties
 /metadata.json
+/.env
 /.env.example
+/debug.keystore
 /debug.keystore.base64
+*.iml
+
+# Allow ONLY README files, screenshots, release APK, and OTA auto-update files
+!/.gitignore
+!/README.md
+!/README_*.md
+!/docs/
+/docs/*
+!/docs/screenshots/
+!/docs/screenshots/**
+!/screenshots/
+!/screenshots/**
+!/salsa-tv-launcher.apk
+!/version.json
+
+# Always ignore OS junk files anywhere
+.DS_Store
