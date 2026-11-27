@@ -2,7 +2,7 @@
   "versionCode": 10,
   "versionName": "3.1",
   "apkUrl": "https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk",
-  "sha256": "b9372707d120423408e782624f2303540f323f06178828ca9541d00c85c13ad2",
-  "changelog": "Salsa TV Launcher v3.1 - 100% Live Salsa Store Catalog Loaded Directly from https://auratv.freedev.app/index.html on Every Open (Zero Locally Stored App Names, Categorized TV Layout with Web Browsers First, Social Media Second, then Remaining Categories), Automatic Default System Soft Keyboard on Web Input & Search Fields Across All Web Sites & Web Apps (Except YouTube), Enhanced Launcher Manager ADB Default HOME Enforcement (Auto-Disables Overriding Stock TV Launchers & Direct Strong Mode), and 21-Language Localization & README Updates",
+  "sha256": "aeb00692ab838b03ac3c3c1ace8bcc5e0c563d50391dde31171a308c5d50f472",
+  "changelog": "Salsa TV Launcher v3.1 - 100% Live Salsa Store Catalog Loaded Directly from https://auratv.freedev.app/index.html on Every Open (Zero Locally Stored App Names, Categorized TV Layout with Web Browsers First, Social Media Second, then Remaining Categories), Automatic Default System Soft Keyboard on Web Input & Search Fields Across All Web Sites & Web Apps (Except YouTube), Enhanced Launcher Manager ADB Default HOME Enforcement, New Neon SalsaTV TV Banner/Launcher Icon & Fullscreen Dark Cosmic Splash Screen, Verified m.youtube.com Mobile Video Screensaver, and 21-Language Localization & README Updates",
   "mandatory": false
 }
