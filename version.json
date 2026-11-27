@@ -1,8 +1,8 @@
 {
-  "versionCode": 9,
-  "versionName": "3.01",
+  "versionCode": 10,
+  "versionName": "3.1",
   "apkUrl": "https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk",
-  "sha256": "bed3f11ac1e66b8a8caa60f03e5d5cb60bc66a537f87d7dd52e7ae036ea112b8",
-  "changelog": "Salsa TV Launcher v3.01 - Per-Profile Independent PIN Protection (No Default 1234, Double-Entry Confirmation, Masked PIN Status, Old-PIN Verification to Change/Remove, Profile Entry Lock on Switch, and Main Admin Master PIN Override), Enhanced Android TV Voice Search Reliability, and 21-Language Localization & README Updates",
+  "sha256": "b9372707d120423408e782624f2303540f323f06178828ca9541d00c85c13ad2",
+  "changelog": "Salsa TV Launcher v3.1 - 100% Live Salsa Store Catalog Loaded Directly from https://auratv.freedev.app/index.html on Every Open (Zero Locally Stored App Names, Categorized TV Layout with Web Browsers First, Social Media Second, then Remaining Categories), Automatic Default System Soft Keyboard on Web Input & Search Fields Across All Web Sites & Web Apps (Except YouTube), Enhanced Launcher Manager ADB Default HOME Enforcement (Auto-Disables Overriding Stock TV Launchers & Direct Strong Mode), and 21-Language Localization & README Updates",
   "mandatory": false
 }
