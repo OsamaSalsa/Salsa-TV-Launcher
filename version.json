@@ -2,7 +2,7 @@
   "versionCode": 8,
   "versionName": "3.0",
   "apkUrl": "https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk",
-  "sha256": "3fa0aed43b145b3616516041c0773064197b1c22083806cd4c015eb050390292",
+  "sha256": "40993aadcda7f4418b0e679a5b9f461c4e48384d6394a7fe443975819b5f7d04",
   "changelog": "Salsa TV Launcher v3.0 - Multi-User Profiles & Accounts System (Per-User Appearance, Screensaver, Language, IPTV Favorites/Order, Apps/Web/Games Order, Section Hide/PIN Lock), SHA-256 & APK Signature Verification for OTA Updates, PIN-Protected Family/Kids Mode, and Mobile/Small-Screen Responsive IPTV Layout",
   "mandatory": false
 }
