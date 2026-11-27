@@ -40,7 +40,8 @@ Die meisten Smart-TV-Launcher sind heute mit erzwungener Werbung, schweren Video
 ## 🌟 Neue Funktionen & aktuelle Verbesserungen
 
 ### 🆕 Neu in Version 3.0
-* **👤 Mehrbenutzer-Profile & Benutzer-Isolation (`Profiles / Users`)**: Erstellen Sie mehrere unabhängige Familienprofile — jedes mit eigenem **Design & Hintergrundbild**, **Bildschirmschoner**, **Sprache**, **IPTV-Favoriten & Senderreihenfolge**, **Apps-/Web-/Spiele-Reihenfolge**, optionaler **4-stelliger Profil-PIN**, **Kinderprofil-Voreinstellung** (aktiviert automatisch den Familien-DNS-Schutz) und individueller **Bereichssteuerung pro Benutzer** (**IPTV**, **Apps**, **Web** oder **Spiele** anzeigen, mit PIN sperren oder ausblenden). Schnell erreichbar über ein flaches, rahmenloses rundes Profilsymbol ganz außen in der oberen Leiste (**ganz rechts bei LTR, ganz links bei RTL**).
+* **🏠 Integrierter `Launcher Manager` (Standard-HOME per lokalem ADB — ohne PC oder Smartphone)**: Legen Sie Salsa TV Launcher direkt aus der App heraus über lokales ADB (`127.0.0.1:5555`) dauerhaft als Ihren Standard-HOME-Launcher fest — mit lokal gespeichertem RSA-Schlüsselpaar, 3-Schritte-Assistent (`cmd package set-home-activity` mit `pm`-Fallback), Sofort-Verifizierung, optionaler Deaktivierung des Werks-Launchers, 1-Klick-Wiederherstellung des Werks-Launchers und Android-Startbildschirm-Auswahl als Fallback (**Einstellungen > System & TV-Kurzbefehle > Launcher Manager**).
+* **👤 Mehrbenutzer-Profile, Dynamische Benutzer-Akzentfarbe & Benutzer-Isolation (`Profiles / Users`)**: Erstellen Sie mehrere unabhängige Familienprofile — jedes mit eigener **Dynamischer Design-Akzentfarbe** (8 speziell für TV abgestimmte, kontrastreiche Farbtöne, die das klassische Gold/Gelb in der Begrüßung, den Startbildschirm-Symbolen [Apps, Spiele, Web, IPTV], den Einstellungen, IPTV und allen Fokus-Rahmen dynamisch ersetzen), eigenem **Design & Hintergrundbild**, **Bildschirmschoner**, **Sprache**, **IPTV-Favoriten & Senderreihenfolge**, **Apps-/Web-/Spiele-Reihenfolge**, optionaler **4-stelliger Profil-PIN** und individueller **Bereichssteuerung pro Benutzer** (**IPTV**, **Apps**, **Web** oder **Spiele** anzeigen, mit PIN sperren oder ausblenden).
 * **🔢 Schnelle Senderwahl per Zifferntasten (`0–9`) & kontrastreiche Sendernummern**: Geben Sie auf dem Startbildschirm, in der IPTV-Senderliste oder im Live-Player einfach eine Sendernummer über die Fernbedienung ein, um direkt dorthin zu springen — kombiniert mit kontrastreichen Sendernummern-Abzeichen (schwarze Ziffern auf halbtransparentem weißem Hintergrund).
 * **🎞️ Lokaler Video-Bildschirmschoner vom Gerät / USB (`Media3 / ExoPlayer`)**: Wählen Sie neben den reinen Vollbild-Streams über `m.youtube.com` ohne Texteinblendungen beliebige lokale Videodateien vom TV-Speicher oder USB-Stick über den sicheren System-Dateiauswahldialog (`SAF`) für nahtlose Vollbild-Endlosschleifen.
 * **📡 Broadcast Text Showcase (12 animierte Themen, dunkle dynamische Hintergründe & Sprachausgabe)**: 12 eigenständige Studio-Themes — 6 Klassiker plus 6 kreative neue Themen (**Aurora Silk**, **Synthwave 80s**, **Cosmic Orbit**, **Royal Arabesque**, **Audio Studio Equalizer**, **Crystal Prism Hologram**) — jeweils mit eigenem dunklem, dynamischem Hintergrund samt wechselnden Farbschatten + Live-Vorschau in den Einstellungen, editierbaren Textzeilen (`3–15s`), **Vorlesefunktion (TTS)** (wartet bis zum Ende des Vorlesens) sowie optionaler Hintergrundmusik oder lokalem MP3.
@@ -96,7 +97,7 @@ Die meisten Smart-TV-Launcher sind heute mit erzwungener Werbung, schweren Video
 
 ### 🔒 Datenschutz, App-Speichermanager, Familien-DNS & Organisation
 * **Integrierter App-Speichermanager**: Zeigt alle installierten Apps sortiert nach Größe (`MB`) an, öffnet die System-App-Infos oder **deinstalliert Apps direkt** zur Speicherfreigabe.
-* **8 Schnellzugriffe auf Systemeinstellungen**: Direkter Zugriff auf **WLAN**, **Ethernet**, **Anzeige**, **Ton**, **Datum & Uhrzeit**, **Alle Systemeinstellungen**, **App-Info** und **Speichermanager**.
+* **10 Schnellzugriffe auf Systemeinstellungen (inkl. `Launcher Manager`)**: Direkter Zugriff auf **Launcher Manager (Standard-HOME per lokalem ADB)**, **Entwickleroptionen**, **WLAN**, **Ethernet**, **Anzeige**, **Ton**, **Datum & Uhrzeit**, **Alle Systemeinstellungen**, **App-Info** und **Speichermanager**.
 * **Dual-Modus DNS-Schutz (Werbeblocker & PIN-geschützter Familienschutz)**: Wählen Sie zwischen **Werbung & Tracker blockieren** oder dem **Familienschutz-Modus** (blockiert zusätzlich jugendgefährdende Webseiten systemweit). **Das Beenden des Familienschutzes oder Ändern der PIN erfordert zwingend die 4-stellige PIN.**
 * **PIN-geschützte App-Sperre**: Schützen Sie sensible Apps und IPTV-Kategorien mit einem 4-stelligen PIN-Code.
 * **Apps neu anordnen & ausblenden**: Verschieben, kategorisieren (Apps vs. Spiele) oder verstecken Sie unerwünschte System-Apps.
@@ -155,10 +156,9 @@ adb connect <IHRE_TV_IP_ADRESSE>:5555
 adb install -r salsa-tv-launcher.apk
 ```
 
-### Option 3: Als Standard-Launcher festlegen
-1. Öffnen Sie die **Einstellungen** im Salsa TV Launcher.
-2. Wählen Sie **Als Standard-Launcher festlegen**.
-3. Wählen Sie **Salsa TV Launcher** und klicken Sie auf **Immer**.
+### Option 3: Als Standard-Launcher festlegen (Integrierter `Launcher Manager` per lokalem ADB)
+1. Öffnen Sie **Einstellungen > System & TV-Kurzbefehle** im Salsa TV Launcher und wählen Sie **Launcher Manager**.
+2. Folgen Sie dem 3-Schritte-Assistenten: Aktivieren Sie **Entwickleroptionen & USB-/Netzwerk-Debugging**, drücken Sie auf **Verbinden** (bestätigen Sie einmalig *„Immer zulassen“* am TV) und wählen Sie **Als HOME festlegen**, um Salsa TV ohne externen PC dauerhaft als Standard-HOME-Launcher einzurichten (inkl. 1-Klick-**Werks-Launcher wiederherstellen**).
 
 ---
 

@@ -40,7 +40,8 @@ Most smart TV launchers today are cluttered with forced ads, heavy video preview
 ## 🌟 New Features & Latest Enhancements
 
 ### 🆕 What's New in Version 3.0
-* **👤 Multi-User Profiles & Per-User Isolation (`Profiles / Users`)**: Create multiple independent family profiles — each with its own **Appearance & Wallpaper**, **Screensaver**, **Language**, **IPTV Favorites & Channel Order**, **Apps / Web / Games Order**, optional **4-digit Profile PIN**, **Kids Profile Preset** (auto-enabling Family DNS Shield), and granular **Per-User Section Controls** (Show, PIN-Lock, or Hide **IPTV**, **Apps**, **Web**, or **Games**). Accessible via a sleek flat, borderless circular avatar icon anchored at the outermost top edge (**far-right in LTR, far-left in RTL**).
+* **🏠 Built-in `Launcher Manager` (Local ADB Default HOME Setup — No External PC/Phone Needed)**: Set Salsa TV Launcher as your persistent default HOME launcher directly from inside the app over local ADB (`127.0.0.1:5555`) with persistent RSA key pair authentication, step-by-step wizard (`cmd package set-home-activity` with `pm` fallback), live verification, optional stock launcher disable, one-click stock launcher restoration, and standard HOME chooser fallback — available directly inside **Settings > System & TV Shortcuts > Launcher Manager**.
+* **👤 Multi-User Profiles, Per-User Dynamic Theme Accent Color & Isolation (`Profiles / Users`)**: Create multiple independent family profiles — each with its own **Dynamic Theme Accent Color** (8 TV-tuned high-contrast shades that dynamically replace the signature gold/yellow accent across the greeting, Home section icons [Apps, Games, Web, IPTV], Settings, IPTV, and all focus highlights), **Appearance & Wallpaper**, **Screensaver**, **Language**, **IPTV Favorites & Channel Order**, **Apps / Web / Games Order**, optional **4-digit Profile PIN**, and granular **Per-User Section Controls** (Show, PIN-Lock, or Hide **IPTV**, **Apps**, **Web**, or **Games**). Accessible via a sleek flat, borderless circular avatar icon anchored at the outermost top edge (**far-right in LTR, far-left in RTL**).
 * **🔢 Quick Numeric Channel Zap (`0–9`) & High-Contrast Channel Badges**: Press any number keys (`0–9`) on your TV remote from the Home Screen, IPTV Channel Browser, or live IPTV Player to jump directly to a channel by number — paired with crisp, high-contrast channel number badges (black digits on a translucent white badge).
 * **🎞️ Local Device / USB Video Screensaver (`Media3 / ExoPlayer`)**: In addition to clean fullscreen `m.youtube.com` streams with zero overlays, pick any local video file directly from your TV storage or USB drive via Android's zero-permission Storage Access Framework (SAF) for seamless looping fullscreen playback.
 * **📡 Broadcast Text Showcase (12 Animated Themes, Dynamic Dark Backdrops & Voice Reader)**: 12 distinct studio presentation themes — 6 classics plus 6 creative animated themes (**Aurora Silk**, **Synthwave 80s**, **Cosmic Orbit**, **Royal Arabesque**, **Audio Studio Equalizer**, **Crystal Prism Hologram**) — each with unique motion, layouts, and per-theme dark dynamic backdrops with shifting contrasting colored shadows + live preview thumbnails in Settings, editable custom lines, adjustable duration (`3s–15s`), **Voice Reader (TTS)** that waits for narration to finish before advancing, and ambient/MP3 music.
@@ -95,7 +96,7 @@ Most smart TV launchers today are cluttered with forced ads, heavy video preview
 
 ### 🔒 Privacy, App Storage Manager, Family Protection (PIN-Gated) & Organization
 * **Built-in App Storage Manager**: Inspect all installed user apps sorted by APK size (`MB`), open system App Info, or **uninstall apps directly** from Settings to free up TV storage.
-* **8 Quick System Shortcuts Grid**: One-click access to **Wi-Fi**, **Ethernet**, **Display**, **Sound**, **Date & Time**, **All System Settings**, **App Info**, and **App Storage Manager**.
+* **10 Quick System Shortcuts Grid (with Built-in `Launcher Manager`)**: One-click access to **Launcher Manager (Local ADB Default HOME Setup)**, **Developer Options**, **Wi-Fi**, **Ethernet**, **Display**, **Sound**, **Date & Time**, **All System Settings**, **App Info**, and **App Storage Manager**.
 * **Dual-Mode DNS Shield (AdBlock & PIN-Protected Family Mode)**: Choose between **Ads & Trackers Blocking** or **Family Protection Mode** (blocks ads, trackers, and adult websites system-wide). **Exiting Family Protection Mode or changing the PIN while Family Mode is active strictly requires entering the 4-digit PIN code.**
 * **PIN-Protected App & IPTV Category Lock**: Lock sensitive apps and IPTV categories with a 4-digit PIN code.
 * **App Reordering & Hiding**: Move, categorize (Apps vs. Games), or hide pre-installed system apps from the launcher grid.
@@ -164,10 +165,9 @@ adb connect <YOUR_TV_IP_ADDRESS>:5555
 adb install -r salsa-tv-launcher.apk
 ```
 
-### Option 3: Setting as Default Home Launcher
-1. Open **Settings** inside Salsa TV Launcher.
-2. Select **Set as Default Launcher**.
-3. Choose **Salsa TV Launcher** and click **Always**.
+### Option 3: Setting as Default Home Launcher (Built-in `Launcher Manager` via Local ADB)
+1. Open **Settings > System & TV Shortcuts** inside Salsa TV Launcher and select **Launcher Manager**.
+2. Follow the 3-step wizard: enable **Developer Options & USB/Network Debugging**, press **Connect** (approve *"Always allow"* once on your TV), and press **Set as HOME** to make Salsa TV Launcher your persistent default HOME launcher without needing an external PC or phone (with one-click **Restore stock launcher** anytime, plus standard Android Home chooser fallback).
 
 ---
 
