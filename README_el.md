@@ -7,7 +7,7 @@
 **Ζήστε το μέλλον της οικιακής ψυχαγωγίας με ένα σύγχρονο, εξαιρετικά γρήγορο και κινηματογραφικό περιβάλλον τηλεόρασης.**
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
@@ -36,6 +36,7 @@
 ## 🚀 Κύρια Χαρακτηριστικά
 
 ### 🆕 Νέα στην Έκδοση 3.1
+* **🧸 Παιδική Λειτουργία (`Kids Mode`) & 4 Παιδικά Θέματα στο GitHub (`Ουράνιος Μονόκερος`, `Μαγικός Κήπος`, `Εξερευνητής Διαστήματος`, `Ζούγκλα Δεινοσαύρων`)**: Δημιουργήστε ειδικά παιδικά προφίλ με **υποχρεωτικό 4ψήφιο PIN** κατά τη δημιουργία για την προστασία των Ρυθμίσεων και των μενού επεξεργασίας. Περιλαμβάνει επάνω μπάρα **μόνο με τις Ρυθμίσεις** (Ρολόι, Καιρός, Ημερομηνία και κουμπί Ρυθμίσεων), γραμματοσειρές **Playpen Sans Arabic** / **Comic Relief**, αυθεντικά εικονίδια εφαρμογών & TV banners, αυτόματη ενεργοποίηση **Οικογενειακής Προστασίας DNS** και **4 παιδικά θέματα** με ταπετσαρίες `1920×1080` που λαμβάνονται αυτόματα από το GitHub (`/kids_themes/`).
 * **🛒 100% Ζωντανή Φόρτωση `Salsa Store` από `https://auratv.freedev.app/index.html` & Εγγενείς Κατηγορίες TV**: Κανένα όνομα εφαρμογής δεν αποθηκεύεται τοπικά — κάθε φορά το **Salsa Store** φορτώνει ζωντανά τα ονόματα και τις πληροφορίες από το `https://auratv.freedev.app/index.html` στην εγγενή εμφάνιση κατηγοριών TV, με πρώτη κατηγορία τα **Προγράμματα περιήγησης (Web Browsers)**, δεύτερη τα **Κοινωνικά δίκτυα (Social Media)** και έπειτα τις υπόλοιπες.
 * **⌨️ Αυτόματο Πληκτρολόγιο Οθόνης σε Πεδία Αναζήτησης & Κειμένου Web (Εκτός YouTube)**: Πατώντας σε οποιοδήποτε πεδίο αναζήτησης ή κειμένου μέσα σε ιστοσελίδες εμφανίζεται αμέσως το προεπιλεγμένο πληκτρολόγιο συστήματος (με εξαίρεση το **YouTube** που διαθέτει δικό του πληκτρολόγιο).
 * **🔐 Σύστημα PIN ανά Προφίλ, Διπλή Επιβεβαίωση, Κλείδωμα Εισόδου & `Master PIN` Διαχειριστή**: Καταργήθηκε κάθε προεπιλεγμένο PIN (`1234`). Πριν από το κλείδωμα εφαρμογών ή ενοτήτων απαιτείται δημιουργία 4ψήφιου PIN με **διπλή εισαγωγή επιβεβαίωσης**. Το PIN εμφανίζεται πάντα κρυφό (`••••`), η αλλαγή/κατάργηση απαιτεί το παλιό PIN, κάθε προφίλ διαθέτει προαιρετικό **Κλείδωμα εισόδου με PIN**, ενώ το προφίλ **`Main` είναι ο Διαχειριστής (`Admin`)** (δεν διαγράφεται) και το PIN του λειτουργεί ως **`Master PIN`** για είσοδο ή επεξεργασία οποιουδήποτε προφίλ σε περίπτωση απώλειας κωδικού.

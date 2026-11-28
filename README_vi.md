@@ -7,7 +7,7 @@
 **Trải nghiệm tương lai của giải trí gia đình với giao diện TV hiện đại, siêu mượt và đậm chất điện ảnh.**
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
@@ -35,6 +35,7 @@
 ## 🚀 Tính Năng Nổi Bật
 
 ### 🆕 Tính Năng Mới ở Phiên Bản 3.1
+* **🧸 Chế độ Trẻ em (`Kids Mode`) & 4 Chủ đề lưu trữ trên GitHub (`Kỳ lân Cầu vồng`, `Khu vườn Kỳ diệu`, `Nhà thám hiểm Vũ trụ`, `Rừng Khủng long`)**: Tạo hồ sơ riêng cho trẻ em được bảo vệ bằng **mã PIN 4 chữ số bắt buộc** (thiết lập khi tạo) để mở Cài đặt hoặc menu chỉnh sửa. Giao diện vui tươi với thanh trên cùng **chỉ gồm Cài đặt** (chỉ có Đồng hồ, Thời tiết, Ngày và nút Cài đặt), phông chữ **Playpen Sans Arabic** / **Comic Relief**, giữ nguyên biểu tượng ứng dụng & biểu ngữ TV gốc, tự động bật **Bảo vệ Gia đình DNS**, cùng **4 chủ đề trẻ em** có hình nền `1920×1080` tự động tải về từ GitHub (`/kids_themes/`).
 * **🛒 Salsa Store Trực Tuyến 100% Từ `auratv.freedev.app` (Không Lưu Sẵn Tên Ứng Dụng Trong Máy)**: Đã xóa toàn bộ danh sách ứng dụng lưu cục bộ — mỗi lần mở **Salsa Store**, ứng dụng sẽ tải trực tiếp tên, biểu tượng, mô tả và liên kết tải về từ `https://auratv.freedev.app/index.html` và hiển thị theo giao diện phân loại TV gốc: mục đầu tiên là **Trình duyệt Internet**, tiếp theo là **Mạng xã hội**, sau đó là các danh mục còn lại.
 * **⌨️ Tự Động Hiện Bàn Phím Ảo Mặc Định Khi Nhấn Vào Ô Tìm Kiếm / Nhập Chữ Trên Web (Trừ YouTube)**: Khi nhấn vào bất kỳ ô nhập văn bản hoặc ô tìm kiếm nào (`<input>`, `<textarea>`, `contenteditable` hoặc hộp tìm kiếm) trong các trang web và ứng dụng web, hệ thống sẽ mở thanh nhập liệu gốc cùng bàn phím ảo mặc định của Android TV và điền trực tiếp văn bản vào trang web (ngoại trừ **YouTube** vì đã có bàn phím riêng).
 * **🔐 Mã PIN Độc Lập Cho Từng Hồ Sơ (Không Có Mã Mặc Định `1234`), Xác Nhận 2 Lần, Khóa Vào Hồ Sơ & `Master PIN` Quản Trị Viên (`Main`)**: Loại bỏ hoàn toàn mã PIN mặc định `1234` — người dùng phải tạo mã PIN 4 chữ số mới và nhập hai lần để xác nhận trước khi dùng tính năng khóa. Mã PIN luôn được ẩn (`••••`) trong Cài đặt, yêu cầu nhập mã PIN cũ khi đổi hoặc xóa mã PIN; mỗi hồ sơ có mã PIN riêng cùng tùy chọn **Khóa chuyển đổi/đăng nhập hồ sơ bằng mã PIN**. Hồ sơ **`Main` (Admin)** không thể bị xóa và mã PIN của `Main` đóng vai trò là **Master PIN** giúp mở khóa, chỉnh sửa hoặc đặt lại mã PIN cho bất kỳ hồ sơ nào khi quên mã.

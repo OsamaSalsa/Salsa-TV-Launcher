@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v3.0
+# 📺 Salsa TV Launcher v3.1
 
 ![홈 화면](docs/screenshots/home.png)
 
@@ -10,7 +10,7 @@
 *기기에 설치된 수십 개의 개별 앱을 하나로 대체하는 올인원 TV 솔루션입니다.*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -40,6 +40,7 @@
 ## 🌟 새로운 기능 및 최신 개선 사항
 
 ### 🆕 버전 3.1 새로운 기능
+* **🧸 키즈 모드(`Kids Mode`) & GitHub 호스팅 4종 키즈 테마(`무지개 유니콘`, `마법의 정원`, `우주 탐험가`, `공룡 정글`)**: 설정 및 편집 메뉴 접근 시 필수로 요구되는 **4자리 PIN**(생성 시 설정)으로 보호되는 어린이 전용 프로필을 만드세요. **설정 버튼만 있는 상단 바**(시계, 날씨, 날짜 및 설정 아바타 버튼만 표시), **Playpen Sans Arabic** / **Comic Relief** 글꼴, 원본 앱 아이콘 및 TV 배너 그대로 유지, 자동 **가족 보호 DNS** 활성화, 그리고 GitHub(`/kids_themes/`)에서 `1920×1080` 배경화면을 자동 다운로드·캐시하는 **4가지 키즈 테마**를 제공합니다.
 * **🛒 `Salsa Store` 100% 실시간 데이터베이스 로드 (`https://auratv.freedev.app/index.html`) 및 네이티브 TV 카테고리 뷰**: 앱 내부에 앱 이름을 저장하지 않고 **Salsa Store**를 열 때마다 `https://auratv.freedev.app/index.html`에서 최신 앱 이름과 정보를 실시간으로 불러오며, 네이티브 TV 카테고리 레이아웃에서 첫 번째로 **웹 브라우저(`Web Browsers`)**, 두 번째로 **소셜 미디어(`Social Media`)**, 이어서 나머지 카테고리를 표시합니다.
 * **⌨️ 웹 및 포털 내 텍스트/검색 입력창 클릭 시 기본 키보드 자동 표시 (YouTube 제외)**: 웹 사이트나 브라우저 내부의 검색창 또는 텍스트 입력란을 클릭하면 즉시 시스템 기본 화상 키보드가 나타나 텍스트를 입력할 수 있습니다(자체 키보드를 사용하는 **YouTube** 페이지는 제외).
 * **🔐 프로필별 독립 PIN, 2회 입력 확인, 프로필 진입 잠금 및 관리자 `Master PIN`**: 기본 PIN(`1234`)을 완전히 제거하여 잠금 기능 사용 전 4자리 PIN을 **두 번 입력해 확인**한 후 생성합니다. 설정에서 PIN은 항상 마스킹(`••••`) 처리되며 변경/해제 시 기존 PIN 확인이 필요합니다. 각 프로필마다 **프로필 전환 시 PIN 진입 잠금**을 설정할 수 있으며, 삭제할 수 없는 관리자 프로필 **`Main`(Admin)**의 PIN은 비밀번호를 잊은 모든 프로필에 진입하거나 수정할 수 있는 **`Master PIN Code`**로 작동합니다.

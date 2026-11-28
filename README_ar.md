@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v3.0
+# 📺 Salsa TV Launcher v3.1
 
 ![الشاشة الرئيسية](docs/screenshots/home_ar.png)
 
@@ -10,7 +10,7 @@
 *الحل الشامل الذي يغنيك عن عشرات التطبيقات المنفصلة على تلفازك الذكي.*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -42,6 +42,7 @@
 ## 🌟 أحدث الميزات والإضافات المطوّرة
 
 ### 🆕 أبرز إضافات وتحديثات الإصدار 3.1
+* **🧸 وضع الأطفال (`Kids Mode`) مع 4 ثيمات مستضافة على GitHub (`يونيكورن قوس قزح`، `حديقة الأزهار السحرية`، `مغامرة الفضاء`، `غابة الديناصورات`)**: أنشئ بروفايلات مخصصة للأطفال محمية برمز **PIN إجباري من 4 أرقام** عند الإنشاء يُطلب لدخول الإعدادات أو قوائم التعديل. يعرض وضع الأطفال واجهة ممتعة مع شريط علوي يقتصر على **الإعدادات فقط** (الساعة والطقس والتاريخ وزر الإعدادات)، وخطوط مخصصة للأطفال (**Playpen Sans Arabic** و**Comic Relief**)، مع الحفاظ على أيقونات التطبيقات وشعارات التلفاز والقنوات الأصلية كما هي، وتفعيل **وضع الحماية العائلية (Family DNS)** تلقائياً، وتحميل خلفيات الثيمات الأربعة (`1920×1080`) وتخزينها مؤقتاً مباشرة من GitHub (`/kids_themes/`).
 * **🛒 تحميل حي ومباشر لمتجر `Salsa Store` من `https://auratv.freedev.app/index.html` بدون تخزين أسماء تطبيقات داخل التطبيق**: تم إزالة أي قوائم أو أسماء تطبيقات مخزنة مسبقاً داخل التطبيق — في كل مرة تفتح فيها **Salsa Store** يقوم بتحميل الأسماء والشعارات والمعلومات مباشرة من `https://auratv.freedev.app/index.html` مع عرضها بنفس تصميم الأقسام المدمج في التطبيق (وليس كصفحة ويب)، بحيث يظهر قسم **متصفحات الإنترنت (`Web Browsers`)** كأول قسم، يليه قسم **برامج التواصل الاجتماعي (`Social Media`)**، ثم بقية الأقسام.
 * **⌨️ إظهار الكيبورد الافتراضي تلقائياً عند الضغط على أي خانة كتابة أو بحث داخل مواقع الويب والبرامج (باستثناء YouTube)**: عند الضغط بمؤشر الماوس أو زر `OK` على أي حقل إدخال نص أو شريط بحث داخل مواقع الويب أو المتصفح، يظهر فوراً حقل الكتابة مع الكيبورد الافتراضي للنظام لإدخال النص وإرساله بسهولة، مع استثناء صفحة **YouTube** لأنها تمتلك لوحة المفاتيح الخاصة بها.
 * **🔐 نظام الحماية الذكي بـ PIN لكل بروفايل + التأكيد المزدوج + قفل الدخول + `Master PIN` للمسؤول (`Main`)**: لا يوجد أي كود افتراضي مثل `1234`؛ يجب في البداية إضافة كود خاص وإدخاله **مرتين متتاليتين للتأكيد** قبل استخدام خدمة القفل. لا يظهر الكود بشكل مكشوف أبداً داخل الإعدادات أو إعدادات البروفايل (يُعرض مخفياً `••••`)، وعند تغييره أو إلغائه يُطلب إدخال الكود القديم أولاً. لكل بروفايل الكود المستقل الخاص به مع خيار **قفل الدخول للبروفايل برمز PIN** لمنع الدخول أو التحول إليه بدون الكود. أما البروفايل الأساسي **`Main` فهو المسؤول (`Admin`)** لا يمكن حذفه، ويمكنه تعديل إعدادات أو تغيير/إلغاء كود أي بروفايل آخر، ويعمل كوده كـ **`Master PIN Code`** للدخول على أي بروفايل أو فتحه وتعديله في حال نسيان كوده الخاص.

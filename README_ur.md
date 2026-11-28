@@ -9,7 +9,7 @@
 **جدید، تیز رفتار اور سنیما طرز کے ٹی وی انٹرفیس کے ساتھ گھریلو تفریح کے مستقبل کا تجربہ کریں۔**
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![Download APK](https://img.shields.io/badge/Download-APK%20Release-FF0055?style=for-the-badge&logo=github)](https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk)
@@ -37,6 +37,7 @@
 ## 🚀 نمایاں خصوصیات
 
 ### 🆕 ورژن 3.1 کی نئی خصوصیات
+* **🧸 بچوں کا موڈ (`Kids Mode`) اور GitHub پر میزبان 4 تھیمز (`قوسِ قزح یونیکورن`، `جادوئی باغ`، `خلائی مہم جو`، `ڈائنو جنگل`)**: بچوں کے لیے مخصوص پروفائلز بنائیں جو ترتیبات اور ترمیم کے مینوز کی حفاظت کے لیے بناتے وقت **لازمی 4 ہندسوں کے PIN** سے محفوظ ہوں۔ اس میں **صرف ترتیبات** والا اوپری بار (گھڑی، موسم، تاریخ اور صرف ترتیبات کا بٹن)، **Playpen Sans Arabic** / **Comic Relief** فونٹس، اصل ایپ آئیکنز اور ٹی وی بینرز کی مکمل حفاظت، خودکار **فیملی پروٹیکشن DNS**، اور **4 بچوں کی تھیمز** شامل ہیں جن کے `1920×1080` پس منظر براہِ راست GitHub (`/kids_themes/`) سے ڈاؤن لوڈ اور کیش ہوتے ہیں۔
 * **🛒 `auratv.freedev.app` سے 100% لائیو Salsa Store (ایپ کے اندر کوئی محفوظ شدہ نام نہیں)**: ایپ کے اندر موجود تمام پہلے سے محفوظ شدہ ایپ لسٹیں ختم کر دی گئی ہیں — اب **Salsa Store** ہر بار کھلنے پر ایپس کے نام، آئیکنز، تفصیل اور ڈاؤن لوڈ لنکس براہِ راست `https://auratv.freedev.app/index.html` سے لائیو حاصل کرتا ہے اور انہیں مقامی ٹی وی کیٹیگری ڈیزائن میں دکھاتا ہے: سب سے پہلے **انٹرنیٹ براؤزرز**، اس کے بعد **سوشل میڈیا ایپس**، اور پھر باقی تمام اقسام۔
 * **⌨️ ویب سائٹس میں سرچ اور ٹیکسٹ خانوں پر کلک کرنے سے خودکار ڈیفالٹ کی بورڈ (سوائے YouTube کے)**: ویب سائٹس اور ویب ایپس کے اندر کسی بھی لکھنے یا تلاش کرنے کے خانے (`<input>`، `<textarea>`، `contenteditable` یا سرچ باکس) پر کلک کرنے سے فوری طور پر ٹیکسٹ بار اور اینڈرائیڈ ٹی وی کا ڈیفالٹ آن اسکرین کی بورڈ کھل جاتا ہے اور لکھا گیا متن براہِ راست ویب صفحے میں درج ہو جاتا ہے (**YouTube** کے علاوہ، کیونکہ اس کا اپنا کی بورڈ موجود ہے)۔
 * **🔐 ہر پروفائل کا الگ PIN کوڈ (کوئی ڈیفالٹ `1234` نہیں)، دو بار تصدیق، پروفائل انٹری لاک اور `Main` ایڈمن `Master PIN`**: کوئی پہلے سے موجود ڈیفالٹ کوڈ جیسے `1234` نہیں ہے — ایپ لاک استعمال کرنے سے پہلے نیا 4 ہندسوں کا PIN دو بار درج کر کے تصدیق کرنا لازمی ہے۔ ترتیبات میں PIN ہمیشہ مخفی (`••••`) رہتا ہے، کوڈ تبدیل کرنے یا ختم کرنے کے لیے پرانا کوڈ درکار ہوتا ہے، اور ہر پروفائل کا اپنا الگ PIN اور **پروفائل میں داخلے/تبدیلی پر PIN لاک** ہوتا ہے۔ بنیادی پروفائل **`Main` (ایڈمن)** کو حذف نہیں کیا جا سکتا اور اس کا کوڈ بطور **Master PIN** کام کرتا ہے جس سے کسی بھی پروفائل کا کوڈ بھولنے کی صورت میں اس میں داخل ہو کر ترمیم کی جا سکتی ہے۔

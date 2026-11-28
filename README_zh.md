@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v3.0
+# 📺 Salsa TV Launcher v3.1
 
 ![主屏幕](docs/screenshots/home.png)
 
@@ -10,7 +10,7 @@
 *一体化的电视解决方案，取代设备上数十个独立的应用程序。*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -40,6 +40,7 @@
 ## 🌟 新特性与最新优化
 
 ### 🆕 3.1 版本全新特性
+* **🧸 儿童模式 (`Kids Mode`) 与 4 套 GitHub 托管主题 (`彩虹独角兽`、`奇幻花园`、`太空探险家`、`恐龙丛林`)**：创建专属儿童配置，并在创建时强制设置 **4 位 PIN 码**以保护“设置”和编辑菜单。顶部栏**仅保留设置入口**（仅显示时钟、天气、日期和设置按钮），内置 **Playpen Sans Arabic** / **Comic Relief** 童趣字体，完整保留原版应用图标与 TV 横幅，自动开启并锁定 **家庭保护 DNS**，并提供 **4 套儿童主题**，其 `1920×1080` 高清壁纸直接从 GitHub (`/kids_themes/`) 自动下载缓存。
 * **🛒 Salsa Store 100% 实时在线加载自 `auratv.freedev.app`（本地不内置存储任何应用名称）**：彻底移除应用内预存或缓存的应用列表——每次打开 **Salsa Store** 时均实时从 `https://auratv.freedev.app/index.html` 获取最新的应用名称、图标、简介和下载链接，并以原生电视分类界面呈现：**网络浏览器** 固定为第一分类，**社交媒体** 为第二分类，随后展示其余分类。
 * **⌨️ 网页与网页应用内点击输入框/搜索框自动弹出默认软键盘（YouTube 除外）**：在网页门户和浏览器中点击任何文本输入框或搜索框（`<input>`、`<textarea>`、`contenteditable` 或搜索框）时，自动呼出原生输入栏与 Android TV 系统默认软键盘，并将输入内容实时填入网页并提交（**YouTube** 页面除外，保留其自带的专属电视键盘）。
 * **🔐 独立配置文件 PIN 码保护（无默认 `1234` 密码）、双重输入确认、配置文件进入锁与 `Main` 管理员主 PIN 码（`Master PIN`）**：彻底移除 `1234` 等默认密码——首次使用锁定功能前必须新建 4 位 PIN 码并输入两次确认；设置与资料编辑页全程以掩码（`••••`）隐藏显示，修改或取消 PIN 码需先验证旧密码；每个配置文件拥有各自独立的 PIN 码并支持开启**切换/进入该配置文件时强制验证 PIN 码**；主配置文件 **`Main`（管理员 Admin）** 不可删除，其 PIN 码作为全局 **主 PIN 码（Master PIN）** 可在忘记其他配置文件密码时解锁、进入并修改任何配置文件的设置或密码。

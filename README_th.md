@@ -7,7 +7,7 @@
 **สัมผัสอนาคตแห่งความบันเทิงภายในบ้านด้วยอินเทอร์เฟซทีวีที่ทันสมัย รวดเร็วเป็นพิเศษ และงดงามระดับภาพยนตร์**
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
@@ -36,6 +36,7 @@
 ## 🚀 คุณสมบัติหลัก
 
 ### 🆕 มีอะไรใหม่ในเวอร์ชัน 3.1
+* **🧸 โหมดเด็ก (`Kids Mode`) & 4 ธีมสำหรับเด็กบน GitHub (`ยูนิคอร์นสายรุ้ง`, `สวนดอกไม้มหัศจรรย์`, `นักสำรวจอวกาศ`, `ป่าไดโนเสาร์`)**: สร้างโปรไฟล์เฉพาะสำหรับเด็กที่ป้องกันด้วย **รหัส PIN 4 หลักแบบบังคับ** (ตั้งค่าตอนสร้าง) เพื่อใช้เข้าสู่การตั้งค่าและเมนูแก้ไข แถบด้านบนแสดง **เฉพาะการตั้งค่า** (นาฬิกา สภาพอากาศ วันที่ และปุ่มตั้งค่าเท่านั้น) ใช้ฟอนต์ **Playpen Sans Arabic** / **Comic Relief** คงไอคอนแอปและแบนเนอร์ทีวีต้นฉบับไว้ครบถ้วน เปิดใช้ **การป้องกัน DNS สำหรับครอบครัว** อัตโนมัติ พร้อม **4 ธีมสำหรับเด็ก** ที่ดาวน์โหลดภาพพื้นหลัง `1920×1080` จาก GitHub (`/kids_themes/`) โดยอัตโนมัติ
 * **🛒 Salsa Store โหลดข้อมูลสด 100% จาก `auratv.freedev.app` (ไม่มีรายชื่อแอปเก็บไว้ในตัวแอป)**: ลบรายชื่อแอปที่เก็บไว้ในเครื่องทั้งหมด — ทุกครั้งที่เปิด **Salsa Store** ระบบจะดึงชื่อแอป โลโก้ คำอธิบาย และลิงก์ดาวน์โหลดสดโดยตรงจาก `https://auratv.freedev.app/index.html` โดยแสดงผลในหน้าจอหมวดหมู่ทีวีแบบเนทีฟ: หมวดแรกคือ **เว็บเบราว์เซอร์** ตามด้วย **โซเชียลมีเดีย** และหมวดหมู่อื่นๆ ตามลำดับ
 * **⌨️ แสดงแป้นพิมพ์ระบบอัตโนมัติเมื่อคลิกช่องค้นหาหรือช่องพิมพ์ข้อความในเว็บไซต์ (ยกเว้น YouTube)**: เมื่อคลิกช่องพิมพ์ข้อความหรือช่องค้นหา (`<input>`, `<textarea>`, `contenteditable` หรือกล่องค้นหา) ภายในเว็บไซต์และเว็บแอป ระบบจะเปิดแถบป้อนข้อความและแป้นพิมพ์เริ่มต้นของ Android TV ทันที พร้อมส่งข้อความกลับไปยังหน้าเว็บโดยตรง (ยกเว้นหน้า **YouTube** ซึ่งมีแป้นพิมพ์ในตัวอยู่แล้ว)
 * **🔐 รหัส PIN อิสระแยกตามโปรไฟล์ (ไม่มีรหัสเริ่มต้น `1234`), ยืนยัน 2 ครั้ง, ล็อกการเข้าโปรไฟล์ & รหัส `Master PIN` ของผู้ดูแลระบบ (`Main`)**: ยกเลิกรหัสเริ่มต้น `1234` — ต้องตั้งรหัส PIN 4 หลักใหม่พร้อมยืนยัน 2 ครั้งก่อนเปิดใช้งานการล็อกแอป/หมวดหมู่ ซ่อนรหัสเป็น `••••` ในการตั้งค่า ต้องใส่รหัสเดิมก่อนเปลี่ยนหรือยกเลิก แต่ละโปรไฟล์มีรหัส PIN และตัวเลือก **ล็อกการเข้า/สลับโปรไฟล์ด้วย PIN** ของตนเอง ขณะที่โปรไฟล์หลัก **`Main` (Admin)** ไม่สามารถลบได้และรหัสของ `Main` ทำหน้าที่เป็น **Master PIN** สำหรับปลดล็อกหรือแก้ไขทุกโปรไฟล์หากลืมรหัส

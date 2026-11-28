@@ -7,7 +7,7 @@
 **Rasakan masa depan hiburan rumah dengan antarmuka TV yang modern, super cepat, dan sinematik.**
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
@@ -36,6 +36,7 @@ Dirancang khusus untuk remote TV (navigasi D-Pad), setiap animasi, efek fokus, d
 ## 🚀 Fitur Utama
 
 ### 🆕 Yang Baru di Versi 3.1
+* **🧸 Mode Anak (`Kids Mode`) & 4 Tema Anak di GitHub (`Unicorn Pelangi`, `Taman Ajaib`, `Penjelajah Luar Angkasa`, `Hutan Dinosaurus`)**: Buat profil khusus anak yang dilindungi **PIN 4 digit wajib** saat pembuatan untuk membuka Pengaturan atau menu edit. Menghadirkan tata letak ceria dengan bilah atas **khusus Pengaturan** (Jam, Cuaca, Tanggal, dan tombol Pengaturan saja), font **Playpen Sans Arabic** / **Comic Relief**, ikon aplikasi & banner TV asli tetap utuh, **Perlindungan DNS Keluarga** aktif otomatis, serta **4 tema anak** dengan wallpaper `1920×1080` yang diunduh langsung dari GitHub (`/kids_themes/`).
 * **🛒 Katalog `Salsa Store` 100% Live (`https://auratv.freedev.app/index.html`) & Kategori TV Native**: Tidak ada nama aplikasi yang disimpan di dalam aplikasi — setiap kali membuka **Salsa Store**, daftar nama dan informasi aplikasi dimuat langsung dari `https://auratv.freedev.app/index.html` dalam tampilan kategori TV native, dimulai dengan **Peramban Web (`Web Browsers`)** di urutan pertama, diikuti **Media Sosial (`Social Media`)**, lalu kategori lainnya.
 * **⌨️ Keyboard Otomatis Saat Mengklik Kolom Teks & Pencarian di Web (Kecuali YouTube)**: Mengklik kolom pencarian atau input teks di dalam situs web langsung memunculkan keyboard default sistem untuk mengetik (kecuali halaman **YouTube** yang memiliki keyboard bawaannya sendiri).
 * **🔐 Sistem PIN Per Profil, Konfirmasi Dua Kali Tersembunyi, Kunci Masuk Profil & `Master PIN` Admin**: Tanpa PIN bawaan (`1234` dihapus). Sebelum mengunci aplikasi, bagian, atau kategori IPTV, pengguna harus membuat PIN 4 digit dengan **memasukkannya dua kali untuk konfirmasi**. PIN selalu disembunyikan (`••••`), mengubah atau menghapus PIN memerlukan PIN lama, setiap profil memiliki opsi **Kunci Masuk Profil dengan PIN**, dan profil **`Main` adalah Admin** (tidak dapat dihapus) yang PIN-nya berfungsi sebagai **`Master PIN Code`** untuk membuka atau mengedit profil mana pun jika lupa PIN.

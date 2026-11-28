@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v3.0
+# 📺 Salsa TV Launcher v3.1
 
 ![Home Screen](docs/screenshots/home.png)
 
@@ -10,7 +10,7 @@
 *The All-in-One TV solution that replaces dozens of separate apps on your device.*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -40,6 +40,7 @@ Most smart TV launchers today are cluttered with forced ads, heavy video preview
 ## 🌟 New Features & Latest Enhancements
 
 ### 🆕 What's New in Version 3.1
+* **🧸 Kids Mode Profiles & 4 GitHub-Hosted Kids Themes (`Rainbow Unicorn`, `Magic Garden`, `Space Explorer`, `Dino Jungle`)**: Create dedicated **Kids Mode** user profiles protected by a mandatory **4-digit PIN** (entered on profile creation) required to open Settings or edit menus. Kids Mode presents a playful child-friendly layout with a **Settings-only top bar** (Clock, Weather, Date, and Settings avatar button only), **Playpen Sans Arabic** / **Comic Relief** typography, original app icons & Android TV banners preserved as-is, automatic **Family Protection DNS** enabled and locked, and **4 selectable Kids Themes** whose `1920×1080` wallpapers are dynamically fetched and cached from GitHub (`/kids_themes/`).
 * **🛒 100% Live `Salsa Store` Database (`https://auratv.freedev.app/index.html`) & Native TV Category Sidebar**: Zero app names or catalog snapshots are bundled or cached inside the APK — every time you open **Salsa Store**, it fetches the latest live app names, icons, descriptions, and download links directly from `https://auratv.freedev.app/index.html` and presents them in the native Android TV categorized interface, starting with **Web Browsers** as the first section, followed by **Social Media**, and then all remaining categories.
 * **⌨️ Automatic Soft Keyboard for Web & App Input/Search Fields (Except YouTube)**: Clicking any text box or search input inside web sites, portals, or Mini Downloader pages with the virtual mouse or remote immediately opens a native Android TV text input bar and triggers the default system keyboard (`IME`) — while leaving **YouTube TV** untouched so it uses its own built-in on-screen keyboard.
 * **🔐 Per-Profile PIN System, Masked Double-Entry Setup, Profile Entry Lock & Admin `Master PIN` Recovery**: Removed any hardcoded default PIN (`1234` no longer exists). Before locking any app, home section, IPTV category, or family DNS mode, the user must first create a 4-digit PIN by **entering it twice to confirm**. PINs are never displayed in plain text inside Settings or Profile Editor (shown only as masked `••••`), and changing or removing a PIN requires verifying the current PIN first. Each user profile has its own independent PIN and an optional **Lock Profile Entry with PIN** toggle so nobody can switch into that profile without its PIN. The **`Main` profile is the undeletable Admin (`Master`)**: it can edit or reset any other profile's settings/PIN, and its PIN works everywhere as the **`Master PIN Code`** to enter, unlock, or edit any profile if a user forgets their PIN.

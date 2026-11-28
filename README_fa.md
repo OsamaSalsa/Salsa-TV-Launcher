@@ -9,7 +9,7 @@
 **آینده سرگرمی‌های خانگی را با یک رابط کاربری مدرن، فوق‌سریع و سینمایی برای تلویزیون تجربه کنید.**
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
@@ -38,6 +38,7 @@
 ## 🚀 ویژگی‌های کلیدی
 
 ### 🆕 ویژگی‌های جدید در نسخه 3.1
+* **🧸 حالت کودک (`Kids Mode`) و ۴ تم میزبانی‌شده روی GitHub (`تک‌شاخ رنگین‌کمان`، `باغ جادویی`، `ماجراجوی فضا`، `جنگل دایناسورها`)**: پروفایل‌های مخصوص کودکان را با **کد پین اجباری ۴ رقمی** (تعیین‌شده هنگام ساخت) برای ورود به تنظیمات و منوهای ویرایش بسازید. دارای نوار بالای **فقط تنظیمات** (ساعت، آب‌وهوا، تاریخ و دکمه تنظیمات)، فونت‌های کودکانه **Playpen Sans Arabic** / **Comic Relief**، حفظ کامل آیکون‌ها و بنرهای اصلی اپلیکیشن‌ها و کانال‌ها، فعال‌سازی خودکار **حالت حفاظت خانواده (Family DNS)** و **۴ تم کودکانه** با دانلود خودکار پس‌زمینه‌های `1920×1080` از GitHub (`/kids_themes/`).
 * **🛒 بارگذاری ۱۰۰٪ زنده `Salsa Store` از `https://auratv.freedev.app/index.html` با دسته‌بندی بومی تلویزیون**: هیچ نام برنامه‌ای در داخل برنامه ذخیره نمی‌شود — هر بار با باز کردن **Salsa Store**، نام‌ها و اطلاعات برنامه‌ها مستقیماً از `https://auratv.freedev.app/index.html` دریافت شده و در رابط دسته‌بندی بومی برنامه نمایش داده می‌شوند: ابتدا **مرورگرهای وب (`Web Browsers`)**، سپس **شبکه‌های اجتماعی (`Social Media`)** و پس از آن سایر دسته‌ها.
 * **⌨️ نمایش خودکار کیبورد پیش‌فرض هنگام کلیک روی کادرهای نوشتن و جستجو در وب (به‌جز YouTube)**: با کلیک روی هر کادر جستجو یا ورود متن در وب‌سایت‌ها و پورتال‌ها، کیبورد پیش‌فرض سیستم بلافاصله برای تایپ باز می‌شود (به‌استثنای صفحه **YouTube** که کیبورد اختصاصی خود را دارد).
 * **🔐 سیستم پین مستقل برای هر پروفایل، تأیید دوبار ورود، قفل ورود به پروفایل و `Master PIN` مدیر (`Main`)**: هیچ کد پیش‌فرضی مانند `1234` وجود ندارد؛ پیش از قفل کردن برنامه‌ها یا بخش‌ها ابتدا باید یک کد ۴ رقمی با **دوبار وارد کردن برای تأیید** ساخته شود. کد پین هرگز به‌صورت آشکار در تنظیمات نمایش داده نمی‌شود (`••••`) و تغییر یا حذف آن نیازمند وارد کردن کد قبلی است. هر پروفایل دارای گزینه **قفل ورود به پروفایل با پین** است و پروفایل **`Main` به‌عنوان مدیر (`Admin`)** غیرقابل حذف بوده و کد آن به‌عنوان **`Master PIN Code`** برای ورود و ویرایش هر پروفایل در صورت فراموشی رمز عمل می‌کند.

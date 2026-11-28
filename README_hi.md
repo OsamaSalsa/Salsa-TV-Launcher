@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v3.0
+# 📺 Salsa TV Launcher v3.1
 
 ![होम स्क्रीन](docs/screenshots/home.png)
 
@@ -10,7 +10,7 @@
 *एक ऑल-इन-वन टीवी समाधान जो आपके डिवाइस पर दर्जनों अलग-अलग ऐप्स की जगह लेता है।*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -40,6 +40,7 @@
 ## 🌟 नई सुविधाएँ और नवीनतम सुधार
 
 ### 🆕 संस्करण 3.1 की नई विशेषताएँ
+* **🧸 किड्स मोड (`Kids Mode`) और GitHub पर होस्ट की गई 4 थीम (`रेनबो यूनिकॉर्न`, `जादुई बगीचा`, `स्पेस एक्सप्लोरर`, `डायनो जंगल`)**: सेटिंग्स और संपादन मेनू को सुरक्षित रखने के लिए निर्माण के समय **अनिवार्य 4-अंकीय PIN** के साथ बच्चों के प्रोफ़ाइल बनाएँ। इसमें **केवल सेटिंग्स** वाला शीर्ष बार (घड़ी, मौसम, तारीख और सेटिंग्स बटन), बच्चों के लिए **Playpen Sans Arabic** / **Comic Relief** फ़ॉन्ट, मूल ऐप आइकन और टीवी बैनर सुरक्षित, स्वचालित **फ़ैमिली DNS सुरक्षा**, और GitHub (`/kids_themes/`) से सीधे डाउनलोड व कैश होने वाली `1920×1080` पृष्ठभूमि वाली **4 किड्स थीम** शामिल हैं।
 * **🛒 100% लाइव `Salsa Store` डेटाबेस (`https://auratv.freedev.app/index.html`) और नेटिव टीवी श्रेणियाँ**: ऐप के भीतर कोई भी ऐप नाम संग्रहीत नहीं किया जाता — हर बार **Salsa Store** खोलने पर यह `https://auratv.freedev.app/index.html` से लाइव नाम और जानकारी लोड करता है और नेटिव टीवी श्रेणी दृश्य में सबसे पहले **वेब ब्राउज़र (`Web Browsers`)**, फिर **सोशल मीडिया (`Social Media`)** और उसके बाद बाकी श्रेणियाँ दिखाता है।
 * **⌨️ वेब और ऐप्स के टेक्स्ट/खोज बॉक्स पर क्लिक करने पर डिफ़ॉल्ट कीबोर्ड (YouTube को छोड़कर)**: वेब पोर्टल या ब्राउज़र के भीतर किसी भी खोज या टेक्स्ट इनपुट बॉक्स पर क्लिक करने पर टाइपिंग के लिए तुरंत डिफ़ॉल्ट सिस्टम कीबोर्ड खुलता है (**YouTube** को छोड़कर, क्योंकि उसका अपना इन-ऐप कीबोर्ड है)।
 * **🔐 प्रति-प्रोफ़ाइल PIN प्रणाली, दोहरी पुष्टि, प्रोफ़ाइल प्रवेश लॉक और एडमिन `Master PIN`**: कोई डिफ़ॉल्ट PIN (`1234`) नहीं है — किसी भी ऐप या अनुभाग को लॉक करने से पहले **दो बार दर्ज करके** 4-अंकीय PIN बनाना आवश्यक है। सेटिंग्स में PIN हमेशा छिपा (`••••`) रहता है, बदलने या हटाने के लिए पुराना PIN आवश्यक है, हर प्रोफ़ाइल में **प्रोफ़ाइल प्रवेश PIN लॉक** उपलब्ध है, और **`Main` प्रोफ़ाइल एडमिन (`Admin`)** है (हटाया नहीं जा सकता) जिसका PIN किसी भी भूले हुए प्रोफ़ाइल को खोलने या संपादित करने के लिए **`Master PIN Code`** के रूप में काम करता है।

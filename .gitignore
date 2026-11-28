@@ -39,6 +39,8 @@
 /docs/*
 !/docs/screenshots/
 !/docs/screenshots/**
+!/kids_themes/
+!/kids_themes/**
 !/screenshots/
 !/screenshots/**
 !/salsa-tv-launcher.apk

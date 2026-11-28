@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v3.0
+# 📺 Salsa TV Launcher v3.1
 
 ![Startbildschirm](docs/screenshots/home.png)
 
@@ -10,7 +10,7 @@
 *Die All-in-One-TV-Lösung, die Dutzende einzelner Apps auf Ihrem Gerät ersetzt.*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -40,6 +40,7 @@ Die meisten Smart-TV-Launcher sind heute mit erzwungener Werbung, schweren Video
 ## 🌟 Neue Funktionen & aktuelle Verbesserungen
 
 ### 🆕 Neu in Version 3.1
+* **🧸 Kindermodus (`Kids Mode`) & 4 auf GitHub gehostete Kinder-Designs (`Regenbogen-Einhorn`, `Zaubergarten`, `Weltraum-Abenteuer`, `Dino-Dschungel`)**: Erstellen Sie eigene Kinderprofile mit **obligatorischer 4-stelliger PIN** (beim Anlegen festgelegt) zum Schutz der Einstellungen und Bearbeitungsmenüs. Der Kindermodus bietet eine verspielte Oberfläche mit **Nur-Einstellungen-Topbar** (nur Uhr, Wetter, Datum und Einstellungen-Button), **Playpen Sans Arabic** / **Comic Relief**-Schriftarten, unveränderten Original-App-Icons & TV-Bannern, automatisch aktiviertem **Familienschutz-DNS** sowie **4 Kinder-Designs**, deren `1920×1080`-Hintergründe automatisch von GitHub (`/kids_themes/`) geladen werden.
 * **🛒 100 % Live-Datenbank im `Salsa Store` (`https://auratv.freedev.app/index.html`) & Native TV-Kategorien**: Keine App-Namen oder Kataloge mehr lokal in der App gespeichert — bei jedem Öffnen lädt der **Salsa Store** alle App-Namen und Informationen live von `https://auratv.freedev.app/index.html` in der nativen TV-Kategorienansicht, beginnend mit **Webbrowser** als erster Kategorie, gefolgt von **Soziale Medien** und den übrigen Kategorien.
 * **⌨️ Automatische Bildschirmtastatur für Text- & Suchfelder in Webseiten (außer YouTube)**: Beim Anklicken eines Such- oder Eingabefelds in Webportalen oder im Browser öffnet sich sofort die Standard-Bildschirmtastatur zum Tippen (ausgenommen **YouTube TV**, das seine eigene TV-Tastatur nutzt).
 * **🔐 Profil-PIN-System, verdeckte Doppel-Eingabe, Profil-Zugangssperre & Admin `Master PIN`**: Kein voreingestellter Standard-PIN (`1234`) mehr — vor dem Sperren von Apps, Bereichen oder IPTV-Kategorien muss zuerst eine 4-stellige PIN durch **zweimalige Eingabe** festgelegt werden. PINs werden in den Einstellungen nie im Klartext angezeigt (`••••`), Änderungen/Entfernen erfordern die alte PIN. Jedes Profil besitzt eine eigene PIN samt optionaler **Profil-Zugangssperre beim Wechsel**. Das **`Main`-Profil ist der nicht löschbare Administrator (`Admin`)**, dessen PIN als **`Master PIN Code`** jedes Profil entsperren oder bearbeiten kann, falls eine PIN vergessen wurde.

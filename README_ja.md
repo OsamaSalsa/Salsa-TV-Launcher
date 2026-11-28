@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v3.0
+# 📺 Salsa TV Launcher v3.1
 
 ![ホーム画面](docs/screenshots/home.png)
 
@@ -10,7 +10,7 @@
 *テレビ上の数十もの個別アプリをひとつに統合するオールインワン TV ソリューション。*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -40,6 +40,7 @@
 ## 🌟 新機能と最新の強化点
 
 ### 🆕 バージョン 3.1 の新機能
+* **🧸 キッズモード（`Kids Mode`）＆ GitHub ホストの4つのキッズテーマ（`レインボーユニコーン`・`マジカルガーデン`・`スペースエクスプローラー`・`恐竜ジャングル`）**：設定や編集メニューを開く際に必須となる **4桁の PIN**（作成時に設定）で保護された子供専用プロフィールを作成できます。**設定のみの上部バー**（時計・天気・日付・設定ボタンのみ）、**Playpen Sans Arabic** / **Comic Relief** フォント、元のアプリアイコン＆TVバナーの忠実な表示、自動 **ファミリー保護 DNS** の有効化、さらに GitHub（`/kids_themes/`）から `1920×1080` 壁紙を自動ダウンロード＆キャッシュする **4種類のキッズテーマ** を搭載。
 * **🛒 `Salsa Store` 100% ライブ読み込み（`https://auratv.freedev.app/index.html`）＆ ネイティブ TV カテゴリ表示**：アプリ内にアプリ名を一切保存せず、**Salsa Store** を開くたびに `https://auratv.freedev.app/index.html` から最新のアプリ名と情報をライブ取得します。ネイティブのカテゴリ画面で最初に **ウェブブラウザ（Web Browsers）**、次に **ソーシャルメディア（Social Media）**、その後に残りのカテゴリを表示します。
 * **⌨️ Webサイト内の検索・テキスト入力欄クリックで標準キーボードを自動表示（YouTubeを除く）**：Webページやブラウザ内の入力欄・検索ボックスをクリックすると、即座にシステムの標準キーボードが表示され文字入力が可能です（独自キーボードを持つ **YouTube** ページは除外）。
 * **🔐 プロフィール別PINシステム、2回入力確認、プロフィール入室ロック＆管理者 `Master PIN`**：初期PIN（`1234`）を完全廃止し、ロック機能を使う前に4桁のPINを**確認のため2回入力して新規登録**する方式に刷新。設定画面ではPINを常に伏せ字（`••••`）で表示し、変更・解除には現在のPINが必要です。各プロフィールには**切り替え時のPIN入室ロック**を設定でき、削除不可の管理者プロフィール **`Main`（Admin）** のPINは、他のプロフィールのPINを忘れた際にも入室・編集できる **`Master PIN Code`** として機能します。

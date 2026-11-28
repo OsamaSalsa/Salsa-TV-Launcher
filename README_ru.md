@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 📺 Salsa TV Launcher v3.0
+# 📺 Salsa TV Launcher v3.1
 
 ![Главный экран](docs/screenshots/home.png)
 
@@ -10,7 +10,7 @@
 *Универсальное решение «Всё в одном», заменяющее десятки отдельных приложений на вашем телевизоре.*
 
 [![Android](https://img.shields.io/badge/Platform-Android%20TV-green.svg?style=for-the-badge&logo=android)](https://developer.android.com/tv)
-[![Version](https://img.shields.io/badge/Version-3.0-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
+[![Version](https://img.shields.io/badge/Version-3.1-0EA5E9.svg?style=for-the-badge)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Clean & Fast](https://img.shields.io/badge/Performance-Blazing%20Fast%20%26%20Lightweight-FFD700.svg?style=for-the-badge&logo=speedtest)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Ad-Free](https://img.shields.io/badge/Experience-100%25%20Ad--Free-10B981.svg?style=for-the-badge&logo=adguard)](https://github.com/OsamaSalsa/Salsa-TV-Launcher)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg?style=for-the-badge&logo=kotlin)](https://kotlinlang.org/)
@@ -40,6 +40,7 @@
 ## 🌟 Новые возможности и последние улучшения
 
 ### 🆕 Что нового в версии 3.1
+* **🧸 Детский режим (`Kids Mode`) и 4 темы с GitHub (`Радужный единорог`, `Волшебный сад`, `Космонавт`, `Джунгли динозавров`)**: Создавайте детские профили с **обязательным 4-значным PIN-кодом** (задаётся при создании) для входа в Настройки и меню редактирования. Интерфейс включает верхнюю панель **только с Настройками** (часы, погода, дата и кнопка Настроек), шрифты **Playpen Sans Arabic** / **Comic Relief**, оригинальные иконки приложений и ТВ-баннеры без изменений, автоматически включённую **Семейную защиту DNS** и **4 детские темы**, фоны `1920×1080` которых загружаются напрямую с GitHub (`/kids_themes/`).
 * **🛒 100% живой каталог Salsa Store из `auratv.freedev.app` (без встроенных списков приложений)**: Из приложения удалены все локально сохранённые списки — при каждом открытии **Salsa Store** загружает названия, иконки, описания и ссылки напрямую с `https://auratv.freedev.app/index.html`, отображая их в нативном ТВ-интерфейсе по категориям: **Интернет-браузеры** на первом месте, затем **Социальные сети**, а после них все остальные разделы.
 * **⌨️ Автоматическая экранная клавиатура при нажатии на поля ввода и поиска на сайтах (кроме YouTube)**: Нажатие на любое текстовое поле или строку поиска (`<input>`, `<textarea>`, `contenteditable` или поисковое поле) внутри веб-сайтов и веб-приложений автоматически открывает нативную панель ввода и системную клавиатуру Android TV и передаёт введённый текст прямо на страницу (за исключением **YouTube**, использующего собственную встроенную клавиатуру).
 * **🔐 Независимый PIN для каждого профиля, двойное подтверждение, блокировка входа и `Master PIN` администратора**: Удалён стандартный PIN-код (`1234`). Перед блокировкой приложений или разделов необходимо создать 4-значный PIN, **введя его дважды для подтверждения**. PIN всегда скрыт (`••••`), для его смены или удаления требуется текущий код, у каждого профиля есть опция **Блокировать вход в профиль PIN-кодом**, а основной профиль **`Main` является неудаляемым Администратором (`Admin`)**, чей PIN работает как **`Master PIN Code`** для входа и редактирования любого профиля, если его код забыт.
