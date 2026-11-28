@@ -2,7 +2,7 @@
   "versionCode": 10,
   "versionName": "3.1",
   "apkUrl": "https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk",
-  "sha256": "8bfed811cd8b13e0de92e6522ed4e7e5824a3ae186351d2cfed9ce30da829316",
-  "changelog": "Salsa TV Launcher v3.1 - Added YouTube Kids TV (https://www.youtubekids.com/tv) with Full Remote D-Pad Control (No Virtual Mouse), Revamped Kids Mode (4 Girls & Boys Themes with Dedicated GitHub /kids_themes/ Default Wallpapers, Theme-Matched Suggested Galleries, Dynamic Aurora Glow & Device Photo Picker; Profile-Only Top Bar; Scroll-Shrinking Clock; Playpen Sans Arabic Font; Toggleable Gentle Remote Click Sounds; Mandatory 4-Digit Kids PIN), Fullscreen Profile Switcher & Editor with Per-Profile Accent Color & Wallpaper, 100% Live Salsa Store Catalog, Automatic Soft Keyboard on Non-YouTube Web Inputs, and 21-Language Localization",
+  "sha256": "f1146ebaadeac1836e11dc9f93407b8e1d13fe56f1d8c4444ae1daca19fcd490",
+  "changelog": "Salsa TV Launcher v3.1 - Standard Home Top Bar now stacks Weather above Date beside the Clock in default view (while keeping compact single-line scrolled view), Profile Editor puts Standard/Kids Mode selector at the top, Kids Mode automatically binds Accent Color to the chosen Kids Theme and embeds Add Channels, Web Sites & Web Games pickers directly inside Theme Settings, YouTube Kids TV with Remote-Only D-Pad Control, 4 Kids Themes with GitHub /kids_themes/ Default Wallpapers & Playpen Sans Arabic Font, Mandatory 4-Digit Kids PIN, and 21-Language Localization",
   "mandatory": false
 }
