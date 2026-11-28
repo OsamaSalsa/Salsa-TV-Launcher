@@ -1,8 +1,8 @@
 {
-  "versionCode": 10,
-  "versionName": "3.1",
+  "versionCode": 11,
+  "versionName": "3.11",
   "apkUrl": "https://github.com/OsamaSalsa/Salsa-TV-Launcher/raw/refs/heads/main/salsa-tv-launcher.apk",
-  "sha256": "f1146ebaadeac1836e11dc9f93407b8e1d13fe56f1d8c4444ae1daca19fcd490",
-  "changelog": "Salsa TV Launcher v3.1 - Standard Home Top Bar now stacks Weather above Date beside the Clock in default view (while keeping compact single-line scrolled view), Profile Editor puts Standard/Kids Mode selector at the top, Kids Mode automatically binds Accent Color to the chosen Kids Theme and embeds Add Channels, Web Sites & Web Games pickers directly inside Theme Settings, YouTube Kids TV with Remote-Only D-Pad Control, 4 Kids Themes with GitHub /kids_themes/ Default Wallpapers & Playpen Sans Arabic Font, Mandatory 4-Digit Kids PIN, and 21-Language Localization",
+  "sha256": "2c7c38c3f7824b84345827ae2b8fd8edf9e3c01150d262a775ea6fd8a0ff1512",
+  "changelog": "Salsa TV Launcher v3.11 - Flat borderless Apple Weather-inspired live animated sky (day/night/golden hour, clouds, rain, snow, fog, lightning) with selected city local clock, 24-hour temperature & rain chart, 5-day forecast, AQI/Sun-Arc/Visibility/Dew Point, manual city search & DataStore preferences; customizable single-row live Device Info strip; Kids Mode PIN-protected TV icon & restricted IPTV player; Standard profile wallpaper editor",
   "mandatory": false
 }
